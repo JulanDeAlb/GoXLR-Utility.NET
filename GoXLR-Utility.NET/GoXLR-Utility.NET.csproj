@@ -36,4 +36,9 @@
       <Folder Include="Old\SERIALNUMBER\MicStatus\NoiseGate" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Ressources\Status.json" />
+      <EmbeddedResource Include="Ressources\Status.json" />
+    </ItemGroup>
+
 </Project>

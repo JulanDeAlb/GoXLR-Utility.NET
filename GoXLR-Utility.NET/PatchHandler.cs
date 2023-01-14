@@ -30,8 +30,8 @@ namespace GoXLR_Utility.NET
 {
     public class PatchHandler
     {
-        private Events.Events _events;
-        private PatchCache _patchCache = new PatchCache();
+        private readonly Events.Events _events;
+        private readonly PatchCache _patchCache = new PatchCache();
         private static JsonSerializerOptions _serializerOptions;
         private readonly Stopwatch _s = new Stopwatch();
         
@@ -214,7 +214,7 @@ namespace GoXLR_Utility.NET
             }
             catch
             {
-                throw new NotImplementedException($"Couldn't deserialize '{patch.Value}' to {patchCacheItem.PropType.Name} ({patch.Path}).");
+                throw new JsonException($"Couldn't deserialize '{patch.Value}' to {patchCacheItem.PropType.Name} ({patch.Path}).");
             }
             patchCacheItem.PropInfo.SetValue(patchCacheItem.ParentClass, value);
         }
@@ -253,7 +253,7 @@ namespace GoXLR_Utility.NET
                     break;
 
                 default:
-                    throw new NotImplementedException(
+                    throw new ArgumentOutOfRangeException(
                         $"{patch.Op} not implemented for {patchCacheItem.PropType.BaseType}");
             }
         }
@@ -261,7 +261,7 @@ namespace GoXLR_Utility.NET
         private void PatchGenericDictionary(Patch patch, PatchCacheItem patchCacheItem, string filePath, out object value)
         {
             if (patchCacheItem.PropType.GetGenericArguments().FirstOrDefault() != typeof(string))
-                throw new NotImplementedException($"{patchCacheItem.PropType.Name} is a Dictionary<T, S> but T, S maybe isn't implemented");
+                throw new ArgumentOutOfRangeException($"{patchCacheItem.PropType.Name} is a Dictionary<T, S> but T, S maybe isn't implemented");
                 
             //Since we know the Generic Type is a Dictionary, use it to cast to Dictionary and manipulate it.
             var dictionary = (IDictionary)patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
@@ -293,7 +293,7 @@ namespace GoXLR_Utility.NET
                     break;
                     
                 default:
-                    throw new NotImplementedException($"{patch.Op} not implemented for {patchCacheItem.PropType.BaseType}"); 
+                    throw new ArgumentOutOfRangeException($"{patch.Op} not implemented for {patchCacheItem.PropType.BaseType}"); 
             }
         }
         
@@ -308,7 +308,7 @@ namespace GoXLR_Utility.NET
 
             var dictionary = (IDictionary) patchCacheItem.ParentClass;
             if (dictionary is null)
-                throw new ArgumentNullException("HandleDeviceConnection | Dictionary is null");
+                throw new ArgumentNullException(nameof(patch), "HandleDeviceConnection | Dictionary is null");
 
             switch (patch.Op)
             {
@@ -329,7 +329,7 @@ namespace GoXLR_Utility.NET
 
                 case OpPatchEnum.Replace:
                 default:
-                    throw new NotImplementedException($"{patch.Op} not implemented for manipulating the Device Dictionary");
+                    throw new ArgumentOutOfRangeException($"{patch.Op} not implemented for manipulating the Device Dictionary");
             }
             return true;
         }
