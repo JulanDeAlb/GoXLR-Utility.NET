@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET", "GoXLR-Utility.NET\GoXLR-Utility.NET.csproj", "{E685C2CD-C17B-4918-858A-EDC45B641920}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.ConsoleTests", "GoXLR-Utility.NET.ConsoleTests\GoXLR-Utility.NET.ConsoleTests.csproj", "{196BF859-BC7F-4F25-A80C-8896CBD2D0D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E685C2CD-C17B-4918-858A-EDC45B641920}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E685C2CD-C17B-4918-858A-EDC45B641920}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E685C2CD-C17B-4918-858A-EDC45B641920}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E685C2CD-C17B-4918-858A-EDC45B641920}.Release|Any CPU.Build.0 = Release|Any CPU
+		{196BF859-BC7F-4F25-A80C-8896CBD2D0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{196BF859-BC7F-4F25-A80C-8896CBD2D0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{196BF859-BC7F-4F25-A80C-8896CBD2D0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{196BF859-BC7F-4F25-A80C-8896CBD2D0D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
