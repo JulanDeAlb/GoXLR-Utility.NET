@@ -1,40 +1,46 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels.Volumes;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Volumes
 {
+    //Path: mixer/SERIAL-NUMBER/levels/volumes/...
+    
+    /// <summary>
+    /// <seealso cref="VolumeEvents"/>
+    /// </summary>
     public class Volume
     {
         [JsonPropertyName("Chat")]
-        public int Chat { get; set; }
+        public byte Chat { get; set; }
         
         [JsonPropertyName("Console")]
-        public int Console { get; set; }
+        public byte Console { get; set; }
         
         [JsonPropertyName("Game")]
-        public int Game { get; set; }
+        public byte Game { get; set; }
         
         [JsonPropertyName("Headphones")]
-        public int Headphones { get; set; }
+        public byte Headphones { get; set; }
         
         [JsonPropertyName("LineIn")]
-        public int LineIn { get; set; }
+        public byte LineIn { get; set; }
         
         [JsonPropertyName("LineOut")]
-        public int LineOut { get; set; }
+        public byte LineOut { get; set; }
         
         [JsonPropertyName("Mic")]
-        public int Mic { get; set; }
+        public byte Mic { get; set; }
         
         [JsonPropertyName("MicMonitor")]
-        public int MicMonitor { get; set; }
+        public byte MicMonitor { get; set; }
         
         [JsonPropertyName("Music")]
-        public int Music { get; set; }
+        public byte Music { get; set; }
         
         [JsonPropertyName("Sample")]
-        public int Sample { get; set; }
+        public byte Sample { get; set; }
         
         [JsonPropertyName("System")]
-        public int System { get; set; }
+        public byte System { get; set; }
     }
 }

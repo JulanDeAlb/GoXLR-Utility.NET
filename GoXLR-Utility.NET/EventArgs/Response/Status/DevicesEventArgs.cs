@@ -1,6 +1,6 @@
 using GoXLR_Utility.NET.Models.Response.Status.Mixer;
 
-namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer
+namespace GoXLR_Utility.NET.EventArgs.Response.Status
 {
     public class DevicesEventArgs : System.EventArgs
     {

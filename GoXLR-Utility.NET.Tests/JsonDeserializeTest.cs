@@ -7,9 +7,12 @@ namespace GoXLR_Utility.NET.Tests
 {
     public class JsonDeserializeTest
     {
-        public string StatusString;
-        public Status? Status;
-        public JsonSerializerOptions SerializerOptions = new() { Converters = { new JsonStringEnumConverter() }};
+        private readonly string _statusString;
+        private readonly JsonSerializerOptions _serializerOptions = new()
+        {
+            Converters = { new JsonStringEnumConverter() },
+            WriteIndented = true
+        };
         
         public JsonDeserializeTest()
         {
@@ -18,29 +21,24 @@ namespace GoXLR_Utility.NET.Tests
 
             using var stream = assembly.GetManifestResourceStream(resourceName);
             using var reader = new StreamReader(stream!);
-            StatusString = reader.ReadToEnd();
+            _statusString = reader.ReadToEnd();
         }
 
         [Fact]
         public void DeserializeStatus()
         {
+            Status? status = null;
             var exception = Record.Exception(() =>
             {
-                Status = JsonSerializer.Deserialize<Status>(StatusString);
+                status = JsonSerializer.Deserialize<Status>(_statusString, _serializerOptions);
             });
-            
-            Assert.Null(exception);
-        }
 
-        [Fact]
-        public void CheckForNullStatus()
-        {
-            Assert.NotNull(Status);
-            
-            Assert.NotNull(Status.Config);
-            Console.WriteLine(Status.Config.AutostartEnabled);
-            Console.WriteLine(Status.Config.DaemonVersion);
-            Console.WriteLine(Status.Config.ShowTrayIcon);
+            Assert.Null(exception);
+            Assert.NotNull(status);
+            Assert.NotNull(status.Config);
+            Assert.NotNull(status.Files);
+            Assert.NotNull(status.Mixers);
+            Assert.NotNull(status.Paths);
         }
     }
 }

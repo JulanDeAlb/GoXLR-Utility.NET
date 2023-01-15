@@ -1,26 +1,40 @@
 using System;
 using System.Reflection;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
 
 namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
 {
     public class FaderBaseEvent
     {
-        public event EventHandler<FaderBaseChannelEventArgs> OnChannelChanged;
+        public FaderScribbleEvents Scribble = new FaderScribbleEvents();
         
-        public event EventHandler<FaderBaseMuteTypeEventArgs> OnMuteTypeChanged;
-        
-        public event EventHandler<FaderBaseMuteStateEventArgs> OnMuteStateChanged;
-        
-        public event EventHandler<FaderBaseScribbleEventArgs> OnScribbleChanged;
+        public event EventHandler<FaderSettingsEventArgs> OnFaderSettingsChanged; 
 
-        protected internal void HandleEvents(string serialNumber, FaderBase faderBase, MemberInfo memInfo)
+        public event EventHandler<FaderChannelEventArgs> OnChannelChanged;
+        
+        public event EventHandler<FaderMuteTypeEventArgs> OnMuteTypeChanged;
+        
+        public event EventHandler<FaderMuteStateEventArgs> OnMuteStateChanged;
+
+        protected internal void HandleEvents(string serialNumber, FaderBase faderBase, MemberInfo memInfo,
+            EventHandler<FadersEventArgs> faderChangedEvent, FadersEventArgs fadersEventArgs)
         {
+            var faderSettingsEventArgs = new FaderSettingsEventArgs
+            {
+                SerialNumber = serialNumber
+            };
+            
             switch (memInfo.Name)
             {
                 case "Channel":
-                    OnChannelChanged?.Invoke(this, new FaderBaseChannelEventArgs
+                    fadersEventArgs.FaderSettingsEnum = faderSettingsEventArgs.FaderSettingsEnum = FaderSettingsEnum.Channel;
+                    faderSettingsEventArgs.Fader = faderBase;
+                    faderChangedEvent?.Invoke(this, fadersEventArgs);
+                    OnFaderSettingsChanged?.Invoke(this, faderSettingsEventArgs);
+                    OnChannelChanged?.Invoke(this, new FaderChannelEventArgs
                     {
                         SerialNumber = serialNumber,
                         Channel = faderBase.Channel
@@ -28,7 +42,11 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
                     break;
                 
                 case "MuteType":
-                    OnMuteTypeChanged?.Invoke(this, new FaderBaseMuteTypeEventArgs
+                    fadersEventArgs.FaderSettingsEnum = faderSettingsEventArgs.FaderSettingsEnum = FaderSettingsEnum.MuteType;
+                    faderSettingsEventArgs.Fader = faderBase;
+                    faderChangedEvent?.Invoke(this, fadersEventArgs);
+                    OnFaderSettingsChanged?.Invoke(this, faderSettingsEventArgs);
+                    OnMuteTypeChanged?.Invoke(this, new FaderMuteTypeEventArgs
                     {
                         SerialNumber = serialNumber,
                         MuteType = faderBase.MuteType
@@ -36,18 +54,14 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
                     break;
                 
                 case "MuteState":
-                    OnMuteStateChanged?.Invoke(this, new FaderBaseMuteStateEventArgs
+                    fadersEventArgs.FaderSettingsEnum = faderSettingsEventArgs.FaderSettingsEnum = FaderSettingsEnum.MuteState;
+                    faderSettingsEventArgs.Fader = faderBase;
+                    faderChangedEvent?.Invoke(this, fadersEventArgs);
+                    OnFaderSettingsChanged?.Invoke(this, faderSettingsEventArgs);
+                    OnMuteStateChanged?.Invoke(this, new FaderMuteStateEventArgs
                     {
                         SerialNumber = serialNumber,
                         MuteState = faderBase.MuteState
-                    });
-                    break;
-                
-                case "Scribble":
-                    OnScribbleChanged?.Invoke(this, new FaderBaseScribbleEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Scribble = faderBase.Scribble
                     });
                     break;
                 

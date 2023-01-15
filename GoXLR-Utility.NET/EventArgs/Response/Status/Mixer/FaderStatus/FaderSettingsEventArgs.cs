@@ -3,15 +3,15 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
 
 namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
-    public class FaderStatusEventArgs : System.EventArgs
+    public class FaderSettingsEventArgs : System.EventArgs
     {
         public FaderBase Fader { get; set; }
         
         /// <summary>
-        /// Indicating which of the Faders has been changed
+        /// Indicating which of the FaderSettings has been changed
         /// </summary>
-        public FaderEnum FaderEnum { get; set; }
-        
+        public FaderSettingsEnum FaderSettingsEnum { get; set; }
+
         public string SerialNumber { get; set; }
     }
 }

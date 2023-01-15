@@ -1,6 +1,6 @@
 namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
-    public class FaderBaseMuteTypeEventArgs : System.EventArgs
+    public class FaderMuteTypeEventArgs : System.EventArgs
     {
         public MuteFunction MuteType { get; set; }
         

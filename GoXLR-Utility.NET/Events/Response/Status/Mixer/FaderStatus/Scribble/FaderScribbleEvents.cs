@@ -1,7 +1,9 @@
 using System;
+using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus.Scribble;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus.Scribble;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
 
 namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
@@ -11,65 +13,74 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
     /// </summary>
     public class FaderScribbleEvents
     {
-        public event EventHandler<FaderScribbleEventArgs> OnFaderScribbleChanged;
-
-        public event EventHandler<SpecificFaderScribbleEventArgs> OnFaderScribbleAChanged;
+        public event EventHandler<FaderBaseScribbleEventArgs> OnScribbleChanged;
         
-        public event EventHandler<SpecificFaderScribbleEventArgs> OnFaderScribbleBChanged;
+        public event EventHandler<ScribbleBottomTextEventArgs> OnBottomTextChanged;
         
-        public event EventHandler<SpecificFaderScribbleEventArgs> OnFaderScribbleCChanged;
+        public event EventHandler<ScribbleFileNameEventArgs> OnFileNameChanged;
         
-        public event EventHandler<SpecificFaderScribbleEventArgs> OnFaderScribbleDChanged;
+        public event EventHandler<ScribbleInvertedEventArgs> OnInvertedChanged;
         
-        protected internal void HandleEvents(string serialNumber, FaderBase faderBase, FaderScribble scribble)
+        public event EventHandler<ScribbleLeftTextEventArgs> OnLeftTextChanged;
+        
+        protected internal void HandleEvents(string serialNumber, FaderScribble scribble, MemberInfo memInfo,
+            EventHandler<FaderScribbleEventArgs> faderChangedEvent, FaderScribbleEventArgs scribbleEventArgs)
         {
-            var faderScribbleEventArgs = new FaderScribbleEventArgs
+            var faderBaseScribbleEventArgs = new FaderBaseScribbleEventArgs
             {
                 SerialNumber = serialNumber,
-                BottomText = scribble.BottomText,
-                FileName = scribble.FileName,
-                Inverted = scribble.Inverted,
-                LeftText = scribble.LeftText
+                Scribble = scribble
             };
 
-            var specFaderScribbleEventArgs = new SpecificFaderScribbleEventArgs
+            switch (memInfo.Name)
             {
-                SerialNumber = serialNumber,
-                BottomText = scribble.BottomText,
-                FileName = scribble.FileName,
-                Inverted = scribble.Inverted,
-                LeftText = scribble.LeftText
-            };
-            
-            switch (faderBase)
-            {
-                case FaderA faderA:
-                    faderScribbleEventArgs.FaderName = FaderName.A;
-                    OnFaderScribbleChanged?.Invoke(this, faderScribbleEventArgs);
-                    OnFaderScribbleAChanged?.Invoke(this, specFaderScribbleEventArgs);
+                case "BottomText":
+                    scribbleEventArgs.ScribbleEnum = faderBaseScribbleEventArgs.ScribbleEnum = ScribbleEnum.BottomText;
+                    faderChangedEvent?.Invoke(this, scribbleEventArgs);
+                    OnScribbleChanged?.Invoke(this, faderBaseScribbleEventArgs);
+                    OnBottomTextChanged?.Invoke(this, new ScribbleBottomTextEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        BottomText = scribble.BottomText
+                    });
                     break;
-                    
-                case FaderB faderB:
-                    faderScribbleEventArgs.FaderName = FaderName.B;
-                    OnFaderScribbleChanged?.Invoke(this, faderScribbleEventArgs);
-                    OnFaderScribbleBChanged?.Invoke(this, specFaderScribbleEventArgs);
+
+                case "FileName":
+                    scribbleEventArgs.ScribbleEnum = faderBaseScribbleEventArgs.ScribbleEnum = ScribbleEnum.BottomText;
+                    faderChangedEvent?.Invoke(this, scribbleEventArgs);
+                    OnScribbleChanged?.Invoke(this, faderBaseScribbleEventArgs);
+                    OnFileNameChanged?.Invoke(this, new ScribbleFileNameEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        FileName = scribble.FileName
+                    });
                     break;
-                    
-                case FaderC faderC:
-                    faderScribbleEventArgs.FaderName = FaderName.C;
-                    OnFaderScribbleChanged?.Invoke(this, faderScribbleEventArgs);
-                    OnFaderScribbleCChanged?.Invoke(this, specFaderScribbleEventArgs);
+
+                case "Inverted":
+                    scribbleEventArgs.ScribbleEnum = faderBaseScribbleEventArgs.ScribbleEnum = ScribbleEnum.BottomText;
+                    faderChangedEvent?.Invoke(this, scribbleEventArgs);
+                    OnScribbleChanged?.Invoke(this, faderBaseScribbleEventArgs);
+                    OnInvertedChanged?.Invoke(this, new ScribbleInvertedEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Inverted = scribble.Inverted
+                    });
                     break;
-                    
-                case FaderD faderD:
-                    faderScribbleEventArgs.FaderName = FaderName.D;
-                    OnFaderScribbleChanged?.Invoke(this, faderScribbleEventArgs);
-                    OnFaderScribbleDChanged?.Invoke(this, specFaderScribbleEventArgs);
+
+                case "LeftText":
+                    scribbleEventArgs.ScribbleEnum = faderBaseScribbleEventArgs.ScribbleEnum = ScribbleEnum.BottomText;
+                    faderChangedEvent?.Invoke(this, scribbleEventArgs);
+                    OnScribbleChanged?.Invoke(this, faderBaseScribbleEventArgs);
+                    OnLeftTextChanged?.Invoke(this, new ScribbleLeftTextEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        LeftText = scribble.LeftText
+                    });
                     break;
-                
+
                 default:
-                    var type = faderBase.GetType();
-                    throw new ArgumentOutOfRangeException($"Type out of Range in Scribble: {type.Name} | Path: {type.FullName}");
+                    throw new ArgumentOutOfRangeException(
+                        $"The Property Name ({memInfo.Name}) is not implemented in FaderScribbleEvents");
             }
         }
     }

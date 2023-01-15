@@ -7,16 +7,16 @@ namespace GoXLR_Utility.NET.Models.Response.Status
     public class Status
     {
         [JsonPropertyName("config")]
-        public Config.Config Config { get; set; }
+        public Config.Config Config { get; set; } //TODO
 
         [JsonPropertyName("files")]
-        public Files.Files Files { get; set; }
+        public Files.Files Files { get; set; } //TODO
         
         [JsonPropertyName("mixers")]
-        public Dictionary<string, Device> Mixers { get; set; }
+        public Dictionary<string, Device> Mixers { get; set; } //TODO
         
         [JsonPropertyName("paths")]
-        public Paths.Paths Paths { get; set; }
+        public Paths.Paths Paths { get; set; } //TODO
     }
 
     /*public class CommonEvents

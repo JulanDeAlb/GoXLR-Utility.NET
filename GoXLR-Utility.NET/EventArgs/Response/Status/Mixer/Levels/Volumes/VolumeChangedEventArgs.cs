@@ -1,4 +1,4 @@
-using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Common;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 
 namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Levels.Volumes
 {
@@ -9,7 +9,7 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Levels.Volumes
         /// <summary>
         /// Indicating which Channel Volume has been changed
         /// </summary>
-        public ChannelEnum Channel { get; internal set; }
+        public FaderChannelEnum Channel { get; internal set; }
         
         public int Volume { get; internal set; }
     }

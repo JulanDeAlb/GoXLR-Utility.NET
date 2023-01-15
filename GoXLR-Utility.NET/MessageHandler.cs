@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text.Json;
-using GoXLR_Utility.NET.Models.DaemonResponse;
+using GoXLR_Utility.NET.Models.Response;
 using GoXLR_Utility.NET.Models.Response.Status;
 
 namespace GoXLR_Utility.NET

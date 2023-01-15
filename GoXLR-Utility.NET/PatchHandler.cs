@@ -19,6 +19,8 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Volumes;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Router;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample;
@@ -170,7 +172,7 @@ namespace GoXLR_Utility.NET
                     patchCacheItem.ParentClass = GetPropertyInfo(type, path)?.GetValue(patchCacheItem.ParentClass);
                 }
 
-                pathAsClasses.Add(parentClass);
+                pathAsClasses.Add(patchCacheItem.ParentClass);
                 type = patchCacheItem.ParentClass?.GetType();
             }
 
@@ -400,7 +402,11 @@ namespace GoXLR_Utility.NET
                     break;
                 
                 case Dictionary<string, Device> _:
-                    _events.Device.HandleEvents(serialNumber, (Device)value);
+                    _events.HandleEvents(serialNumber, (Device)value);
+                    break;
+                
+                case Equaliser equaliser:
+                    _events.Device.Mic.HandleEqualiserEvents(serialNumber, equaliser, memInfo);
                     break;
                 
                 case FaderBase faderBase:
@@ -408,7 +414,7 @@ namespace GoXLR_Utility.NET
                     break;
                 
                 case FaderScribble scribble:
-                    _events.Device.FaderStatus.Scribble.HandleEvents(serialNumber, (FaderBase)pathAsClasses[pathAsClasses.Count - 2], scribble);
+                    _events.Device.FaderStatus.HandleScribbleEvents(serialNumber, (FaderBase)pathAsClasses[pathAsClasses.Count - 2], scribble, memInfo);
                     break;
                 
                 case Files files:
@@ -419,8 +425,12 @@ namespace GoXLR_Utility.NET
                     _events.Device.Settings.GuiDisplay.HandleEvents(serialNumber, guiDisplay, memInfo);
                     break;
                 
-                case Levels levels when memInfo.Name == "Bleep":
-                    _events.Device.Volume.HandleEvents(serialNumber, null, levels, memInfo);
+                case Levels levels:
+                    _events.Device.Levels.HandleEvents(serialNumber, levels, memInfo);
+                    break;
+                
+                case MicStatus micStatus:
+                    _events.Device.Mic.HandleMicTypeEvents(serialNumber, micStatus, memInfo);
                     break;
                 
                 case Paths paths:
@@ -436,7 +446,7 @@ namespace GoXLR_Utility.NET
                     break;
                 
                 case Volume volumes:
-                    _events.Device.Volume.HandleEvents(serialNumber, volumes, null, memInfo);
+                    _events.Device.Levels.Volume.HandleEvents(serialNumber, volumes, null, memInfo);
                     break;
 
                 default:
