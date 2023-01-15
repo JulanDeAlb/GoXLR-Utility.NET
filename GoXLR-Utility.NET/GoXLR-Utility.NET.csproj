@@ -17,7 +17,6 @@
     <ItemGroup>
       <Folder Include="Enums\Response\Status\Mixer\Levels\Volumes" />
       <Folder Include="Enums\Response\Status\Mixer\MicStatus\Compressor" />
-      <Folder Include="Enums\Response\Status\Mixer\MicStatus\Equaliser" />
       <Folder Include="Enums\Response\Status\Mixer\MicStatus\EqualiserMini" />
       <Folder Include="Enums\Response\Status\Mixer\MicStatus\MicGains" />
       <Folder Include="Enums\Response\Status\Mixer\MicStatus\NoiseGate" />

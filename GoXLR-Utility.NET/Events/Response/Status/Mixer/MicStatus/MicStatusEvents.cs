@@ -14,7 +14,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus
     {
         public event EventHandler<MicStatusEventArgs> OnMicStatusChanged;
         
-        public event EventHandler<> OnEqualiserChanged;
+        public event EventHandler<MicEqualiserEventArgs> OnEqualiserChanged;
         
         public event EventHandler<> OnMiniEqualiserChanged;
         
@@ -47,6 +47,11 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus
                 SerialNumber = serialNumber,
                 MicStatusEnum = MicStatusEnum.Equaliser
             });
+
+            var micEqualiserEventArgs = new MicEqualiserEventArgs
+            {
+                SerialNumber = serialNumber,
+            };
         }
     }
 }
