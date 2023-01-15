@@ -1,8 +1,13 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini.Gain;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Gain
 {
-    public class MiniGain
+    
+    /// <summary>
+    /// <seealso cref="EqualiserMiniGainEvents"/>
+    /// </summary>
+    public class GainMini
     {
         [JsonPropertyName("Equalizer90Hz")]
         public int Equalizer90Hz { get; set; }

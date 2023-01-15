@@ -5,27 +5,29 @@ using GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
 {
-    public class Banks
+    /// <summary>
+    /// <seealso cref="SamplerBankEvents"/>
+    /// </summary>
+    public class SamplerBanks
     {
         [JsonPropertyName("A")]
-        public SampleBankA SamplerBankA { get; set; }
+        public SamplerBankA SamplerBankA { get; set; }
         
         [JsonPropertyName("B")]
         public SamplerBankB SamplerBankB { get; set; }
         
         [JsonPropertyName("C")]
         public SamplerBankC SamplerBankC { get; set; }
-        
-        [JsonPropertyName("D")]
-        public SamplerBankD SamplerBankD { get; set; }
     }
     
-    public class SampleBankA : BanksBase { }
-    public class SamplerBankB : BanksBase { }
-    public class SamplerBankC : BanksBase { }
-    public class SamplerBankD : BanksBase { }
+    public class SamplerBankA : SamplerBankBase { }
+    public class SamplerBankB : SamplerBankBase { }
+    public class SamplerBankC : SamplerBankBase { }
     
-    public class BanksBase
+    /// <summary>
+    /// <seealso cref="SamplerBankBaseEvents"/>
+    /// </summary>
+    public class SamplerBankBase
     { 
         [JsonPropertyName("BottomLeft")]
         public BottomLeftBank BottomLeft { get; set; }
@@ -46,7 +48,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
     public class TopRightBank : BankBaseButton { }
     
     /// <summary>
-    /// <seealso cref="BankEvents"/>
+    /// <seealso cref="SamplerBankBaseButtonEvents"/>
     /// </summary>
     public class BankBaseButton
     {

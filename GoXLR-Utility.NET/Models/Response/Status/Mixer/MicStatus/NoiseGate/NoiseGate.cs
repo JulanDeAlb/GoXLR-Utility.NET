@@ -1,8 +1,12 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.NoiseGate;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate
 {
-    public class MicNoiseGate
+    /// <summary>
+    /// <seealso cref="NoiseGateEvents"/>
+    /// </summary>
+    public class NoiseGate
     {
         [JsonPropertyName("attack")]
         public int Attack { get; set; }

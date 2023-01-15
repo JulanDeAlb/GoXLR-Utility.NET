@@ -4,8 +4,11 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
     public class FaderChannelEventArgs : System.EventArgs
     {
-        public FaderChannelEnum Channel { get; set; }
-        
         public string SerialNumber { get; set; }
+        
+        /// <summary>
+        /// Indicating which type of the FaderSettings has been changed
+        /// </summary>
+        public FaderChannelEnum Value { get; set; }
     }
 }

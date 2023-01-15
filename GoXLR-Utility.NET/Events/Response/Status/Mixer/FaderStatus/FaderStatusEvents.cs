@@ -3,6 +3,7 @@ using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus.Scribble;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
 
@@ -19,84 +20,121 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
         public FaderBaseEvent FaderD = new FaderBaseEvent();
 
         public event EventHandler<FadersEventArgs> OnFadersChanged;
-        public event EventHandler<FaderScribbleEventArgs> OnFaderScribbleChanged; 
 
-        protected internal void HandleEvents(string serialNumber, FaderBase faderBase, MemberInfo memInfo)
+        protected internal void HandleEvents(string serialNumber, FaderBase faderBase, MemberInfo memInfo,
+            FaderScribble scribble)
         {
             var eventArgs = new FadersEventArgs
             {
                 SerialNumber = serialNumber
             };
-            
+
             switch (faderBase)
             {
                 case FaderA faderA:
-                    eventArgs.FaderEnum = FaderEnum.A;
-                    eventArgs.Fader = faderA;
-                    FaderA.HandleEvents(serialNumber, faderA, memInfo, OnFadersChanged, eventArgs);
+                    eventArgs.TypeChanged = FaderEnum.A;
+
+                    FaderA.HandleEvents(serialNumber, faderA, memInfo, OnFadersChanged, eventArgs, scribble);
                     break;
-                    
+
                 case FaderB faderB:
-                    eventArgs.FaderEnum = FaderEnum.B;
-                    eventArgs.Fader = faderB;
-                    FaderB.HandleEvents(serialNumber, faderB, memInfo, OnFadersChanged, eventArgs);
+                    eventArgs.TypeChanged = FaderEnum.B;
+
+                    FaderB.HandleEvents(serialNumber, faderB, memInfo, OnFadersChanged, eventArgs, scribble);
                     break;
-                    
+
                 case FaderC faderC:
-                    eventArgs.FaderEnum = FaderEnum.C;
-                    eventArgs.Fader = faderC;
-                    FaderC.HandleEvents(serialNumber, faderC, memInfo, OnFadersChanged, eventArgs);
+                    eventArgs.TypeChanged = FaderEnum.C;
+
+                    FaderC.HandleEvents(serialNumber, faderC, memInfo, OnFadersChanged, eventArgs, scribble);
                     break;
-                    
+
                 case FaderD faderD:
-                    eventArgs.FaderEnum = FaderEnum.D;
-                    eventArgs.Fader = faderD;
-                    FaderD.HandleEvents(serialNumber, faderD, memInfo, OnFadersChanged, eventArgs);
+                    eventArgs.TypeChanged = FaderEnum.D;
+
+                    FaderD.HandleEvents(serialNumber, faderD, memInfo, OnFadersChanged, eventArgs, scribble);
                     break;
-                
+
                 default:
                     var type = faderBase.GetType();
-                    throw new ArgumentOutOfRangeException($"Type out of Range in FaderStatus: {type.Name} | Path: {type.FullName}");
+                    throw new ArgumentOutOfRangeException(
+                        $"Type out of Range in FaderStatus: {type.Name} | Path: {type.FullName}");
             }
         }
+    }
 
-        public void HandleScribbleEvents(string serialNumber, FaderBase faderBase, FaderScribble scribble, MemberInfo memInfo)
+    /// <summary>
+    /// <seealso cref="FaderBase"/>
+    /// </summary>
+    public class FaderBaseEvent
+    {
+        public FaderScribbleEvents Scribble = new FaderScribbleEvents();
+
+        public event EventHandler<FaderSettingsEventArgs> OnFaderSettingsChanged; 
+
+        public event EventHandler<FaderChannelEventArgs> OnChannelChanged;
+        
+        public event EventHandler<FaderMuteTypeEventArgs> OnMuteTypeChanged;
+        
+        public event EventHandler<FaderMuteStateEventArgs> OnMuteStateChanged;
+        
+        public event EventHandler<FaderScribbleEventArgs> OnScribbleChanged;
+
+        protected internal void HandleEvents(string serialNumber, FaderBase faderBase, MemberInfo memInfo,
+            EventHandler<FadersEventArgs> faderChangedEvent, FadersEventArgs fadersEventArgs, FaderScribble scribble)
         {
-            var scribbleEventArgs = new FaderScribbleEventArgs
+            fadersEventArgs.Fader = new FaderSettingsEventArgs
             {
-                SerialNumber = serialNumber,
-                Scribble = scribble
+                SerialNumber = serialNumber
             };
             
-            switch (faderBase)
+            switch (memInfo.Name)
             {
-                case FaderA _:
-                    scribbleEventArgs.FaderEnum = FaderEnum.A;
-                    OnFaderScribbleChanged?.Invoke(this, scribbleEventArgs);
-                    FaderA.Scribble.HandleEvents(serialNumber, scribble, memInfo, OnFaderScribbleChanged, scribbleEventArgs);
+                case "Channel":
+                    fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.Channel;
+                    fadersEventArgs.Fader.Channel = new FaderChannelEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = faderBase.Channel
+                    };
+
+                    faderChangedEvent?.Invoke(this, fadersEventArgs);
+                    OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
+                    OnChannelChanged?.Invoke(this, fadersEventArgs.Fader.Channel);
                     break;
+                
+                case "MuteType":
+                    fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.MuteType;
+                    fadersEventArgs.Fader.MuteType = new FaderMuteTypeEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = faderBase.MuteType
+                    };
                     
-                case FaderB _:
-                    scribbleEventArgs.FaderEnum = FaderEnum.A;
-                    OnFaderScribbleChanged?.Invoke(this, scribbleEventArgs);
-                    FaderB.Scribble.HandleEvents(serialNumber, scribble, memInfo, OnFaderScribbleChanged, scribbleEventArgs);
+                    faderChangedEvent?.Invoke(this, fadersEventArgs);
+                    OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
+                    OnMuteTypeChanged?.Invoke(this, fadersEventArgs.Fader.MuteType);
                     break;
+                
+                case "MuteState":
+                    fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.MuteState;
+                    fadersEventArgs.Fader.MuteState = new FaderMuteStateEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = faderBase.MuteState
+                    };
                     
-                case FaderC _:
-                    scribbleEventArgs.FaderEnum = FaderEnum.A;
-                    OnFaderScribbleChanged?.Invoke(this, scribbleEventArgs);
-                    FaderC.Scribble.HandleEvents(serialNumber, scribble, memInfo, OnFaderScribbleChanged, scribbleEventArgs);
-                    break;
-                    
-                case FaderD _:
-                    scribbleEventArgs.FaderEnum = FaderEnum.A;
-                    OnFaderScribbleChanged?.Invoke(this, scribbleEventArgs);
-                    FaderD.Scribble.HandleEvents(serialNumber, scribble, memInfo, OnFaderScribbleChanged, scribbleEventArgs);
+                    faderChangedEvent?.Invoke(this, fadersEventArgs);
+                    OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
+                    OnMuteStateChanged?.Invoke(this, fadersEventArgs.Fader.MuteState);
                     break;
                 
                 default:
-                    var type = faderBase.GetType();
-                    throw new ArgumentOutOfRangeException($"Type out of Range in FaderStatus: {type.Name} | Path: {type.FullName}");
+                    if (scribble == null)
+                        throw new ArgumentOutOfRangeException($"The Property Name ({memInfo.Name}) is not implemented in FaderBaseEvent");
+
+                    Scribble.HandleEvents(serialNumber, scribble, memInfo, faderChangedEvent, OnScribbleChanged, fadersEventArgs);
+                    break;
             }
         }
     }

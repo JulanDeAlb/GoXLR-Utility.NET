@@ -1,7 +1,11 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.MicGains;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.MicGains
 {
+    /// <summary>
+    /// <seealso cref="MicGainEvents"/>
+    /// </summary>
     public class MicGains
     {
         [JsonPropertyName("Condenser")]

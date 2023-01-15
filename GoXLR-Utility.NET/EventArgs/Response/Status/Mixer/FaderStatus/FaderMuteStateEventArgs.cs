@@ -4,7 +4,7 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
     public class FaderMuteStateEventArgs : System.EventArgs
     {
-        public MuteState MuteState { get; set; }
+        public MuteState Value { get; set; }
 
         public string SerialNumber { get; set; }
     }

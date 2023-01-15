@@ -30,7 +30,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         public string MicProfileName { get; set; }
         
         [JsonPropertyName("mic_status")]
-        public MicStatus.MicStatus MicStatus { get; set; } //TODO
+        public MicStatus.MicStatus MicStatus { get; set; } //New Event Structure TODO InProgress
         
         [JsonPropertyName("profile_name")]
         public string ProfileName { get; set; }

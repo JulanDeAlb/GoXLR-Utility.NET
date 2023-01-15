@@ -4,7 +4,7 @@ namespace GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus
     {
         Equaliser,
         EqualiserMini,
-        MicCompressor,
+        Compressor,
         MicGains,
         MicNoiseGate,
         MicType

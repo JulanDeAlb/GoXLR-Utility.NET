@@ -1,8 +1,12 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Compressor;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Compressor
 {
-    public class MicCompressor
+    /// <summary>
+    /// <seealso cref="CompressorEvents"/>
+    /// </summary>
+    public class Compressor
     { 
         [JsonPropertyName("attack")]
         public int Attack { get; set; }

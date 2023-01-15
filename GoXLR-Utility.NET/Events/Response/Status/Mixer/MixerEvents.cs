@@ -1,12 +1,10 @@
 using System;
 using System.Reflection;
-using GoXLR_Utility.NET.EventArgs.Response.Status;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels;
-using GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels.Volumes;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Router;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler;
@@ -17,14 +15,14 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
 {
     public class MixerEvents
     {
-        public ButtonDownEvents ButtonDown;
-        public CoughButtonEvents CoughButton;
-        public FaderStatusEvents FaderStatus;
-        public MicStatusEvents Mic;
-        public RouterEvents Router;
-        public SamplerEvents Sampler;
-        public SettingEvents Settings;
-        public LevelEvents Levels;
+        public ButtonDownEvents ButtonDown; //TODO DONE
+        public CoughButtonEvents CoughButton; //TODO DONE
+        public FaderStatusEvents FaderStatus; //TODO DONE
+        public MicStatusEvents Mic; //TODO DONE
+        public RouterEvents Router; //TODO DONE
+        public SamplerEvents Sampler; //TODO DONE
+        public SettingEvents Settings; //TODO DONE
+        public LevelEvents Levels; //TODO DONE
 
         public MixerEvents()
         {
@@ -39,6 +37,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
         }
         
         public event EventHandler<ProfileEventArgs> OnMicProfileChanged;
+        
         public event EventHandler<ProfileEventArgs> OnProfileChanged;
         
         protected internal void HandleEvents(string serialNumber, Device device, MemberInfo memInfo)

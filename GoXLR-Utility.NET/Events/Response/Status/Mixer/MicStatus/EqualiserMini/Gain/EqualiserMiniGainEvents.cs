@@ -1,0 +1,106 @@
+using System;
+using System.Reflection;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.EqualiserMini;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.EqualiserMini;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.EqualiserMini.Gain;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Gain;
+
+namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini.Gain
+{
+    /// <summary>
+    /// <seealso cref="GainMini"/>
+    /// </summary>
+    public class EqualiserMiniGainEvents
+    {
+        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer90HzChanged;
+        
+        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer250HzChanged;
+        
+        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer500HzChanged;
+        
+        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer1KHzChanged;
+        
+        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer3KHzChanged;
+        
+        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer8KHzChanged;
+        
+        public void HandleEvents(string serialNumber, GainMini gainMini,
+            MemberInfo memInfo,
+            MicStatusEventArgs micStatusEventArgs,
+            EventHandler<MicStatusEventArgs> micStatusChanged, EventHandler<EqualiserMiniEventArgs> equaliserChanged,
+            EventHandler<EqualiserMiniGainEventArgs> gainChanged)
+        {
+            var specEqualiserEventArgs = new SpecificEqualiserMiniGainEventArgs
+            {
+                SerialNumber = serialNumber
+            };
+            
+            switch (memInfo.Name)
+            {
+                case "Equalizer90Hz":
+                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer90Hz;
+                    micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer90Hz;
+                    
+                    micStatusChanged?.Invoke(this, micStatusEventArgs);
+                    equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
+                    gainChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.GainMini);
+                    OnEqualizer90HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    break;
+        
+                case "Equalizer250Hz":
+                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer250Hz;
+                    micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer250Hz;
+                    
+                    micStatusChanged?.Invoke(this, micStatusEventArgs);
+                    equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
+                    gainChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.GainMini);
+                    OnEqualizer250HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    break;
+        
+                case "Equalizer500Hz":
+                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer500Hz;
+                    micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer500Hz;
+                    
+                    micStatusChanged?.Invoke(this, micStatusEventArgs);
+                    equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
+                    gainChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.GainMini);
+                    OnEqualizer500HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    break;
+        
+                case "Equalizer1KHz":
+                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer1KHz;
+                    micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer1KHz;
+                    
+                    micStatusChanged?.Invoke(this, micStatusEventArgs);
+                    equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
+                    gainChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.GainMini);
+                    OnEqualizer1KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    break;
+        
+                case "Equalizer3KHz":
+                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer3KHz;
+                    micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer3KHz;
+                    
+                    micStatusChanged?.Invoke(this, micStatusEventArgs);
+                    equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
+                    gainChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.GainMini);
+                    OnEqualizer3KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    break;
+        
+                case "Equalizer8KHz":
+                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer8KHz;
+                    micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer8KHz;
+                    
+                    micStatusChanged?.Invoke(this, micStatusEventArgs);
+                    equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
+                    gainChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.GainMini);
+                    OnEqualizer8KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    break;
+
+                default:
+                    throw new ArgumentOutOfRangeException($"The Property Name ({memInfo.Name}) is not implemented in EqualiserMinigainEvents");
+            }
+        }
+    }
+}

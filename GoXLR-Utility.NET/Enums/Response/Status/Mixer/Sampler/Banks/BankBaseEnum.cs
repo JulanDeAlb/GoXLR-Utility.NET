@@ -1,10 +1,11 @@
 namespace GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks
 {
-    public enum BankEnum
+    public enum BankBaseEnum
     {
         Function,
         IsPlaying,
         Order,
-        Samples
+        SampleList,
+        SampleValue
     }
 }

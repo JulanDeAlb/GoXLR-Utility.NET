@@ -1,7 +1,11 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Equaliser.Frequency;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser.Frequency
 {
+    /// <summary>
+    /// <seealso cref="EqualiserFrequencyEvents"/>
+    /// </summary>
     public class Frequency
     {
         [JsonPropertyName("Equalizer31Hz")]

@@ -28,6 +28,9 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
     public class FaderC : FaderBase {}
     public class FaderD : FaderBase {}
     
+    /// <summary>
+    /// <seealso cref="FaderBaseEvent"/>
+    /// </summary>
     public class FaderBase
     {
         [JsonPropertyName("channel")]

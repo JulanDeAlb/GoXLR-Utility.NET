@@ -16,40 +16,14 @@
 
     <ItemGroup>
       <Folder Include="Enums\Response\Status\Mixer\Levels\Volumes" />
-      <Folder Include="Enums\Response\Status\Mixer\MicStatus\Compressor" />
-      <Folder Include="Enums\Response\Status\Mixer\MicStatus\EqualiserMini" />
-      <Folder Include="Enums\Response\Status\Mixer\MicStatus\MicGains" />
-      <Folder Include="Enums\Response\Status\Mixer\MicStatus\NoiseGate" />
-      <Folder Include="Enums\Response\Status\Mixer\Sampler\Banks\Sample" />
-      <Folder Include="EventArgs\Response\Status\Mixer\MicStatus\Compressor" />
-      <Folder Include="EventArgs\Response\Status\Mixer\MicStatus\Equaliser" />
-      <Folder Include="EventArgs\Response\Status\Mixer\MicStatus\EqualiserMini" />
-      <Folder Include="EventArgs\Response\Status\Mixer\MicStatus\MicGains" />
-      <Folder Include="EventArgs\Response\Status\Mixer\MicStatus\NoiseGate" />
-      <Folder Include="EventArgs\Response\Status\Mixer\Sampler\Banks\Sample" />
-      <Folder Include="Events\Response\Status\Mixer\MicStatus\Compressor" />
-      <Folder Include="Events\Response\Status\Mixer\MicStatus\Equaliser" />
-      <Folder Include="Events\Response\Status\Mixer\MicStatus\EqualiserMini" />
-      <Folder Include="Events\Response\Status\Mixer\MicStatus\MicGains" />
-      <Folder Include="Events\Response\Status\Mixer\MicStatus\NoiseGate" />
-      <Folder Include="Events\Response\Status\Mixer\Sampler\Banks\Sample" />
       <Folder Include="Old" />
       <Folder Include="Old\SERIALNUMBER\Effects\Current\EffectTypes" />
       <Folder Include="Old\SERIALNUMBER\Effects\PresetNames" />
-      <Folder Include="Old\SERIALNUMBER\Hardware\UsbDeveice" />
-      <Folder Include="Old\SERIALNUMBER\Hardware\Versions" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Buttons" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Encoders" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Faders" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Sampler" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Simple" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\Compressor" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\EqualiserMini\Frequency" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\EqualiserMini\Gain" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\Equaliser\Frequency" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\Equaliser\Gain" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\MicGains" />
-      <Folder Include="Old\SERIALNUMBER\MicStatus\NoiseGate" />
     </ItemGroup>
 
     <ItemGroup>

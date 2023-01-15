@@ -30,7 +30,7 @@
         Reverb
     }
 
-    public enum InputDevice
+    public enum InputDevice //!DONE
     {
         Microphone,
         Chat,
@@ -42,7 +42,7 @@
         Sampler
     }
 
-    public enum OutputDevice
+    public enum OutputDevice //!DONE
     {
         Headphones,
         BroadcastMix,
@@ -158,14 +158,14 @@
         Preset6
     }
 
-    public enum SampleBank
+    public enum SampleBank //!DONE
     {
         A,
         B,
         C
     }
 
-    public enum MiniEqFrequencies
+    public enum MiniEqFrequencies //!DONE
     {
         Equalizer31Hz,
         Equalizer63Hz,
@@ -245,7 +245,7 @@
         System,
     }
     
-    public enum SampleButtons { 
+    public enum SampleButtons {  //!DONE
         TopLeft,
         TopRight,
         BottomLeft,
@@ -278,7 +278,7 @@
         EqFineTune,
     }
     
-    public enum MuteStates {
+    public enum MuteStates { //!DONE
         Unmuted,
         MutedToX,
         MutedToAll,

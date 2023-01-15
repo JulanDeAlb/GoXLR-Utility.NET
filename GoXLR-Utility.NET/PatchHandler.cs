@@ -20,7 +20,13 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Volumes;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Compressor;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser.Frequency;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser.Gain;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Frequency;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Gain;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.MicGains;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Router;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample;
@@ -110,7 +116,7 @@ namespace GoXLR_Utility.NET
             }
             
             InvokeEvents:
-            InvokeEvent(patchCacheItem.SerialNumber, patchCacheItem.PathAsClasses, patchCacheItem.ParentClass, patchCacheItem.PropInfo, patch, value);
+            InvokeEvent(patchCacheItem.SerialNumber, patchCacheItem.PathAsClasses, patchCacheItem.ParentClass, patchCacheItem.PropInfo, patch, value, lastIndex);
         }
         
         private void CreatePathSegments(string path, out string[] pathSegments,out int lastIndex, out string filePath)
@@ -381,16 +387,21 @@ namespace GoXLR_Utility.NET
             return null;
         }
 
-        private void InvokeEvent(string serialNumber, IReadOnlyList<object> pathAsClasses, object parentClass, MemberInfo memInfo, Patch patch, object value)
+        private void InvokeEvent(string serialNumber, IReadOnlyList<object> pathAsClasses, object parentClass, MemberInfo memInfo, Patch patch, object value, int lastIndex)
         {
             switch (parentClass)
             {
                 case BankBaseButton bankBaseButton:
-                    _events.Device.Sampler.Bank.HandleEvents(serialNumber, bankBaseButton, memInfo);
+                    _events.Device.Sampler.SamplerBank.HandleEvents(serialNumber, (SamplerBankBase)pathAsClasses[pathAsClasses.Count - 2],
+                        bankBaseButton, memInfo, patch.Op, lastIndex, null);
                    break;
                 
                 case ButtonDown buttonDown:
                     _events.Device.ButtonDown.HandleEvents(serialNumber, buttonDown, memInfo);
+                    break;
+                
+                case Compressor compressor:
+                    _events.Device.Mic.HandleCompressorEvents(serialNumber, compressor, memInfo);
                     break;
                 
                 case CoughButton coughButton:
@@ -405,20 +416,32 @@ namespace GoXLR_Utility.NET
                     _events.HandleEvents(serialNumber, (Device)value);
                     break;
                 
-                case Equaliser equaliser:
-                    _events.Device.Mic.HandleEqualiserEvents(serialNumber, equaliser, memInfo);
-                    break;
-                
                 case FaderBase faderBase:
-                    _events.Device.FaderStatus.HandleEvents(serialNumber, faderBase, memInfo);
+                    _events.Device.FaderStatus.HandleEvents(serialNumber, faderBase, memInfo, null);
                     break;
                 
                 case FaderScribble scribble:
-                    _events.Device.FaderStatus.HandleScribbleEvents(serialNumber, (FaderBase)pathAsClasses[pathAsClasses.Count - 2], scribble, memInfo);
+                    _events.Device.FaderStatus.HandleEvents(serialNumber, (FaderBase)pathAsClasses[pathAsClasses.Count - 2], memInfo, scribble);
                     break;
                 
                 case Files files:
                     _events.File.HandleEvents(files, memInfo, patch.Op, value);
+                    break;
+                
+                case Frequency frequency:
+                    _events.Device.Mic.HandleEqualiserEvents(serialNumber, frequency, memInfo);
+                    break;
+                
+                case FrequencyMini frequencyMini:
+                    _events.Device.Mic.HandleEqualiserMiniEvents(serialNumber, frequencyMini, memInfo);
+                    break;
+                
+                case Gain gain:
+                    _events.Device.Mic.HandleEqualiserEvents(serialNumber, gain, memInfo);
+                    break;
+                
+                case GainMini gainMini:
+                    _events.Device.Mic.HandleEqualiserMiniEvents(serialNumber, gainMini, memInfo);
                     break;
                 
                 case GuiDisplay guiDisplay:
@@ -429,8 +452,16 @@ namespace GoXLR_Utility.NET
                     _events.Device.Levels.HandleEvents(serialNumber, levels, memInfo);
                     break;
                 
+                case MicGains micGains:
+                    _events.Device.Mic.HandleMicGainEvents(serialNumber, micGains, memInfo);
+                    break;
+                
                 case MicStatus micStatus:
-                    _events.Device.Mic.HandleMicTypeEvents(serialNumber, micStatus, memInfo);
+                    _events.Device.Mic.HandleMicTypeEvents(serialNumber, micStatus);
+                    break;;
+                
+                case NoiseGate noiseGate:
+                    _events.Device.Mic.HandleNoiseGateEvents(serialNumber, noiseGate, memInfo);
                     break;
                 
                 case Paths paths:
@@ -439,6 +470,11 @@ namespace GoXLR_Utility.NET
                 
                 case RouterBase routerBase:
                     _events.Device.Router.HandleEvents(serialNumber, routerBase, memInfo, (bool)value);
+                    break;
+                
+                case Sample sample:
+                    _events.Device.Sampler.SamplerBank.HandleEvents(serialNumber, (SamplerBankBase)pathAsClasses[pathAsClasses.Count - 4],
+                        (BankBaseButton)pathAsClasses[pathAsClasses.Count - 3], memInfo, patch.Op, lastIndex, sample);
                     break;
                 
                 case Settings settings:

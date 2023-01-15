@@ -1,8 +1,12 @@
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini.Frequency;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Frequency
 {
-    public class MiniFrequency
+    /// <summary>
+    /// <seealso cref="EqualiserMiniFrequencyEvents"/>
+    /// </summary>
+    public class FrequencyMini
     {
         [JsonPropertyName("Equalizer90Hz")]
         public double Equalizer90Hz { get; set; }

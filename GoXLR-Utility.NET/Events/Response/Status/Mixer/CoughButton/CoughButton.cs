@@ -20,7 +20,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton
         public event EventHandler<CoughMuteStateEventArgs> OnMuteStateChanged;
 
         protected internal void HandleEvents(string serialNumber,
-            Models.Response.Status.Mixer.CoughButton.CoughButton myClass, MemberInfo memInfo)
+            Models.Response.Status.Mixer.CoughButton.CoughButton coughButton, MemberInfo memInfo)
         {
             var coughButtonArgs = new CoughButtonEventArgs
             {
@@ -31,34 +31,37 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton
             {
                 case "IsToggle":
                     coughButtonArgs.ValueChanged = CoughButtonEnum.IsToggle;
-                    coughButtonArgs.IsToggled = myClass.IsToggle;
+                    coughButtonArgs.IsToggled = coughButton.IsToggle;
+                    
                     OnCoughButtonChanged?.Invoke(this, coughButtonArgs);
                     OnIsToggledChanged?.Invoke(this, new CoughIsToggledEventArgs
                     {
                         SerialNumber = serialNumber,
-                        IsToggle = myClass.IsToggle
+                        IsToggle = coughButton.IsToggle
                     });
                     break;
 
                 case "MuteFunction":
                     coughButtonArgs.ValueChanged = CoughButtonEnum.MuteFunction;
-                    coughButtonArgs.MuteFunction = myClass.MuteFunction;
+                    coughButtonArgs.MuteFunction = coughButton.MuteFunction;
+                    
                     OnCoughButtonChanged?.Invoke(this, coughButtonArgs);
                     OnMuteFunctionChanged?.Invoke(this, new CoughMuteFunctionEventArgs
                     {
                         SerialNumber = serialNumber,
-                        MuteFunction = myClass.MuteFunction
+                        MuteFunction = coughButton.MuteFunction
                     });
                     break;
 
                 case "MuteState":
                     coughButtonArgs.ValueChanged = CoughButtonEnum.MuteState;
-                    coughButtonArgs.MuteState = myClass.MuteState;
+                    coughButtonArgs.MuteState = coughButton.MuteState;
+                    
                     OnCoughButtonChanged?.Invoke(this, coughButtonArgs);
                     OnMuteStateChanged?.Invoke(this, new CoughMuteStateEventArgs
                     {
                         SerialNumber = serialNumber,
-                        MuteState = myClass.MuteState
+                        MuteState = coughButton.MuteState
                     });
                     break;
 

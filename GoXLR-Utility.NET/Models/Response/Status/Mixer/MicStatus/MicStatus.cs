@@ -1,9 +1,6 @@
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Compressor;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus
 {
@@ -12,20 +9,20 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus
     /// </summary>
     public class MicStatus
     {
+        [JsonPropertyName("compressor")]
+        public Compressor.Compressor Compressor { get; set; }
+        
         [JsonPropertyName("equaliser")]
         public Equaliser.Equaliser Equaliser { get; set; }
         
         [JsonPropertyName("equaliser_mini")]
-        public MiniEqualiser EqualiserMini { get; set; }
-        
-        [JsonPropertyName("compressor")]
-        public MicCompressor MicCompressor { get; set; }
+        public EqualiserMini.EqualiserMini EqualiserMini { get; set; }
         
         [JsonPropertyName("mic_gains")]
         public MicGains.MicGains MicGains { get; set; }
         
         [JsonPropertyName("noise_gate")]
-        public MicNoiseGate MicNoiseGate { get; set; }
+        public NoiseGate.NoiseGate NoiseGate { get; set; }
         
         [JsonPropertyName("mic_type")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
