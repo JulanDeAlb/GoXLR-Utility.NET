@@ -17,8 +17,6 @@
     <ItemGroup>
       <Folder Include="Enums\Response\Status\Mixer\Levels\Volumes" />
       <Folder Include="Old" />
-      <Folder Include="Old\SERIALNUMBER\Effects\Current\EffectTypes" />
-      <Folder Include="Old\SERIALNUMBER\Effects\PresetNames" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Buttons" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Encoders" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Faders" />

@@ -9,8 +9,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.ButtonDown
         /// <summary>
         /// Indicating which type of the Config has been changed
         /// </summary>
-        public ButtonEnum Button { get; internal set; }
+        public ButtonEnum TypeChanged { get; internal set; }
         
-        public bool IsButtonDown { get; internal set; }
+        public bool Value { get; internal set; }
     }
 }

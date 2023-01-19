@@ -4,15 +4,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Settings
 {
     public class SettingEventArgs : System.EventArgs
     {
-        public int MuteHoldDuration { get; set; }
+        public bool BoolValue { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public int IntValue { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
 
         /// <summary>
         /// Indicating which type of the Setting has been changed
         /// </summary>
-        public SettingsEnum SettingsEnum { get; set; }
-        
-        public bool VcMuteAlsoMuteCm { get; set; }
+        public SettingsEnum TypeChanged { get; internal set; }
     }
 }

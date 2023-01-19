@@ -12,16 +12,16 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Paths
     public class PathEvents
     {
         public event EventHandler<PathEventArgs> OnPathsChanged;
-        public event EventHandler<SpecificPathEventArgs> OnIconsDirectoryChanged;
-        public event EventHandler<SpecificPathEventArgs> OnMicProfileDirectoryChanged;
-        public event EventHandler<SpecificPathEventArgs> OnPresetsDirectoryChanged;
-        public event EventHandler<SpecificPathEventArgs> OnProfileDirectoryChanged;
-        public event EventHandler<SpecificPathEventArgs> OnSamplesDirectoryChanged;
+        public event EventHandler<StringPathEventArgs> OnIconsDirectoryChanged;
+        public event EventHandler<StringPathEventArgs> OnMicProfileDirectoryChanged;
+        public event EventHandler<StringPathEventArgs> OnPresetsDirectoryChanged;
+        public event EventHandler<StringPathEventArgs> OnProfileDirectoryChanged;
+        public event EventHandler<StringPathEventArgs> OnSamplesDirectoryChanged;
 
         protected internal void HandleEvents(Models.Response.Status.Paths.Paths paths, MemberInfo memInfo)
         {
             var pathEventArgs = new PathEventArgs();
-            var specPathEventArgs = new SpecificPathEventArgs();
+            var specPathEventArgs = new StringPathEventArgs();
             
             switch (memInfo.Name)
             {

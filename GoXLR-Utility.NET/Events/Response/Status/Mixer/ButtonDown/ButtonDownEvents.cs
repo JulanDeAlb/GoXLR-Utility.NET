@@ -13,51 +13,51 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown
     {
         public event EventHandler<ButtonEventArgs> OnButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnBleepButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnBleepButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnCoughButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnCoughButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectFxButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectFxButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectHardTuneButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectHardTuneButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectMegaphoneButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectMegaphoneButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectRobotButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectRobotButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectSelect1ButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectSelect1ButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectSelect2ButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectSelect2ButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectSelect3ButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectSelect3ButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectSelect4ButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectSelect4ButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectSelect5ButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectSelect5ButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnEffectSelect6ButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnEffectSelect6ButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnFader1MuteButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnFader1MuteButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnFader2MuteButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnFader2MuteButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnFader3MuteButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnFader3MuteButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnFader4MuteButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnFader4MuteButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerSelectAButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerSelectAButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerSelectBButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerSelectBButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerSelectCButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerSelectCButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerBottomLeftButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerBottomLeftButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerBottomRightButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerBottomRightButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerTopLeftButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerTopLeftButtonDown;
         
-        public event EventHandler<SpecificButtonEventArgs> OnSamplerTopRightButtonDown;
+        public event EventHandler<BoolButtonEventArgs> OnSamplerTopRightButtonDown;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.ButtonDown.ButtonDown buttonDown, MemberInfo memInfo)
         {
@@ -65,7 +65,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown
             {
                 SerialNumber = serialNumber,
             };
-            var specButtonArgs = new SpecificButtonEventArgs()
+            var specButtonArgs = new BoolButtonEventArgs()
             {
                 SerialNumber = serialNumber,
             };

@@ -4,13 +4,13 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.Compressor
 {
     public class CompressorEventArgs : System.EventArgs
     {
+        public string SerialNumber { get; internal set; }
+        
         /// <summary>
         /// Indicating which type of the Compressor has been changed
         /// </summary>
-        public CompressorEnum TypeChanged { get; set; }
+        public CompressorEnum TypeChanged { get; internal set; }
         
-        public string SerialNumber { get; set; }
-        
-        public int Value { get; set; }
+        public int Value { get; internal set; }
     }
 }

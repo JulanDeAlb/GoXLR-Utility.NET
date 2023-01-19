@@ -13,17 +13,17 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
     /// </summary>
     public class EqualiserMiniGainEvents
     {
-        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer90HzChanged;
+        public event EventHandler<IntEqualiserMiniGainEventArgs> OnEqualizer90HzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer250HzChanged;
+        public event EventHandler<IntEqualiserMiniGainEventArgs> OnEqualizer250HzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer500HzChanged;
+        public event EventHandler<IntEqualiserMiniGainEventArgs> OnEqualizer500HzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer1KHzChanged;
+        public event EventHandler<IntEqualiserMiniGainEventArgs> OnEqualizer1KHzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer3KHzChanged;
+        public event EventHandler<IntEqualiserMiniGainEventArgs> OnEqualizer3KHzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniGainEventArgs> OnEqualizer8KHzChanged;
+        public event EventHandler<IntEqualiserMiniGainEventArgs> OnEqualizer8KHzChanged;
         
         public void HandleEvents(string serialNumber, GainMini gainMini,
             MemberInfo memInfo,
@@ -31,7 +31,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
             EventHandler<MicStatusEventArgs> micStatusChanged, EventHandler<EqualiserMiniEventArgs> equaliserChanged,
             EventHandler<EqualiserMiniGainEventArgs> gainChanged)
         {
-            var specEqualiserEventArgs = new SpecificEqualiserMiniGainEventArgs
+            var specEqualiserEventArgs = new IntEqualiserMiniGainEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -39,7 +39,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
             switch (memInfo.Name)
             {
                 case "Equalizer90Hz":
-                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer90Hz;
+                    micStatusEventArgs.EqualiserMini.GainMini.TypeChanged = EqualiserMiniEnum.Equalizer90Hz;
                     micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer90Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
@@ -49,7 +49,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
                     break;
         
                 case "Equalizer250Hz":
-                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer250Hz;
+                    micStatusEventArgs.EqualiserMini.GainMini.TypeChanged = EqualiserMiniEnum.Equalizer250Hz;
                     micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer250Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
@@ -59,7 +59,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
                     break;
         
                 case "Equalizer500Hz":
-                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer500Hz;
+                    micStatusEventArgs.EqualiserMini.GainMini.TypeChanged = EqualiserMiniEnum.Equalizer500Hz;
                     micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer500Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
@@ -69,7 +69,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
                     break;
         
                 case "Equalizer1KHz":
-                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer1KHz;
+                    micStatusEventArgs.EqualiserMini.GainMini.TypeChanged = EqualiserMiniEnum.Equalizer1KHz;
                     micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer1KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
@@ -79,7 +79,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
                     break;
         
                 case "Equalizer3KHz":
-                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer3KHz;
+                    micStatusEventArgs.EqualiserMini.GainMini.TypeChanged = EqualiserMiniEnum.Equalizer3KHz;
                     micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer3KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
@@ -89,7 +89,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
                     break;
         
                 case "Equalizer8KHz":
-                    micStatusEventArgs.EqualiserMini.GainMini.ValueChanged = EqualiserMiniEnum.Equalizer8KHz;
+                    micStatusEventArgs.EqualiserMini.GainMini.TypeChanged = EqualiserMiniEnum.Equalizer8KHz;
                     micStatusEventArgs.EqualiserMini.GainMini.Value = specEqualiserEventArgs.Value = gainMini.Equalizer8KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);

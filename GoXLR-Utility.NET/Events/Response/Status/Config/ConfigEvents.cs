@@ -12,8 +12,8 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Config
     public class ConfigEvents
     {
         public event EventHandler<ConfigEventArgs> OnConfigChanged; 
-        public event EventHandler<AutoStartEnabledEventArgs> OnAutoStartEnabledChanged;
-        public event EventHandler<DaemonVersionEventArgs> OnDaemonVersionChanged;
+        public event EventHandler<BoolConfigEventArgs> OnAutoStartEnabledChanged;
+        public event EventHandler<StringConfigEventArgs> OnDaemonVersionChanged;
         public event EventHandler<ShowTrayIconEventArgs> OnShowTrayIconChanged;
 
         protected internal void HandleEvents(Models.Response.Status.Config.Config config, MemberInfo memInfo, object value)
@@ -26,7 +26,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Config
                         ConfigEnum = ConfigEnum.AutostartEnabled,
                         AutostartEnabled = (bool) value
                     });
-                    OnAutoStartEnabledChanged?.Invoke(this, new AutoStartEnabledEventArgs
+                    OnAutoStartEnabledChanged?.Invoke(this, new BoolConfigEventArgs
                     {
                         AutoStartEnabled = (bool) value
                     });
@@ -38,7 +38,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Config
                         ConfigEnum = ConfigEnum.DaemonVersion,
                         DaemonVersion = (string) value
                     });
-                    OnDaemonVersionChanged?.Invoke(this, new DaemonVersionEventArgs
+                    OnDaemonVersionChanged?.Invoke(this, new StringConfigEventArgs
                     {
                         DaemonVersion = (string) value
                     });

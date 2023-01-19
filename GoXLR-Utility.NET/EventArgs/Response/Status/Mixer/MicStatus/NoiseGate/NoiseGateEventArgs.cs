@@ -7,12 +7,12 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.NoiseGate
         /// <summary>
         /// Indicating which type of the NoiseGate has been changed
         /// </summary>
-        public NoiseGateEnum TypeChanged { get; set; }
+        public NoiseGateEnum TypeChanged { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public int Value { get; set; }
+        public int Value { get; internal set; }
         
-        public bool BoolValue { get; set; }
+        public bool BoolValue { get; internal set; }
     }
 }

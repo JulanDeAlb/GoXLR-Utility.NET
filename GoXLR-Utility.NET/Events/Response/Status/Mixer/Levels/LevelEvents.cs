@@ -16,9 +16,9 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
 
         public event EventHandler<LevelEventArgs> OnLevelChanged;
 
-        public event EventHandler<SpecificLevelEventArgs> OnBleepLevelChanged;
+        public event EventHandler<SByteLevelEventArgs> OnBleepLevelChanged;
 
-        public event EventHandler<SpecificLevelEventArgs> OnDeEsserLevelChanged;
+        public event EventHandler<SByteLevelEventArgs> OnDeEsserLevelChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.Levels.Levels levels, MemberInfo memInfo)
         {
@@ -27,7 +27,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
                 SerialNumber = serialNumber
             };
 
-            var specLevelEventArgs = new SpecificLevelEventArgs
+            var specLevelEventArgs = new SByteLevelEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -35,15 +35,15 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
             switch (memInfo.Name)
             {
                 case "Bleep":
-                    levelEventArgs.LevelEnum = LevelEnum.Bleep;
-                    levelEventArgs.Volume = specLevelEventArgs.Volume = levels.Bleep;
+                    levelEventArgs.TypeChanged = LevelEnum.Bleep;
+                    levelEventArgs.Volume = specLevelEventArgs.Value = levels.Bleep;
                     OnLevelChanged?.Invoke(this, levelEventArgs);
                     OnBleepLevelChanged?.Invoke(this, specLevelEventArgs);
                     break;
                 
                 case "DeEsser":
-                    levelEventArgs.LevelEnum = LevelEnum.DeEsser;
-                    levelEventArgs.Volume = specLevelEventArgs.Volume = levels.DeEsser;
+                    levelEventArgs.TypeChanged = LevelEnum.DeEsser;
+                    levelEventArgs.Volume = specLevelEventArgs.Value = levels.DeEsser;
                     OnLevelChanged?.Invoke(this, levelEventArgs);
                     OnDeEsserLevelChanged?.Invoke(this, specLevelEventArgs);
                     break;

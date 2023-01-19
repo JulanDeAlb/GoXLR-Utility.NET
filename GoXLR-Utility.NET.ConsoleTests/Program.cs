@@ -7,7 +7,7 @@ public class Program
     public static void Main(string[] args)
     {
         _utility.Connect();
-        AllEvents();
+        //AllEvents();
         Console.ReadKey();
         Console.ReadKey();
     }

@@ -15,11 +15,11 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
     {
         public event EventHandler<SampleEventArgs> OnSampleChanged;
         
-        public event EventHandler<SpecificStringSampleEventArgs> OnNameChanged;
+        public event EventHandler<StringSampleEventArgs> OnNameChanged;
         
-        public event EventHandler<SpecificDoubleSampleEventArgs> OnStartPctChanged;
+        public event EventHandler<DoubleSampleEventArgs> OnStartPctChanged;
         
-        public event EventHandler<SpecificDoubleSampleEventArgs> OnStopPctChanged;
+        public event EventHandler<DoubleSampleEventArgs> OnStopPctChanged;
 
         protected internal void HandleEvents(string serialNumber, MemberInfo memInfo,
             EventHandler<SamplerBanksEventArgs> samplerBanksChanged,
@@ -40,7 +40,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                 case "Name":
                     samplerBanksEventArgs.BankButton.BankBase.TypeChanged = BankBaseEnum.SampleValue;
                     samplerBanksEventArgs.BankButton.BankBase.SampleValue.TypeChanged = SampleEnum.Name;
-                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Name = new SpecificStringSampleEventArgs
+                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Name = new StringSampleEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = sample.Name
@@ -57,7 +57,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                 case "StartPct":
                     samplerBanksEventArgs.BankButton.BankBase.TypeChanged = BankBaseEnum.SampleValue;
                     samplerBanksEventArgs.BankButton.BankBase.SampleValue.TypeChanged = SampleEnum.StartPct;
-                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct = new SpecificDoubleSampleEventArgs
+                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct = new DoubleSampleEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = sample.StartPct
@@ -74,7 +74,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                 case "StopPct":
                     samplerBanksEventArgs.BankButton.BankBase.TypeChanged = BankBaseEnum.SampleValue;
                     samplerBanksEventArgs.BankButton.BankBase.SampleValue.TypeChanged = SampleEnum.StopPct;
-                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct = new SpecificDoubleSampleEventArgs
+                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct = new DoubleSampleEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = sample.StopPct

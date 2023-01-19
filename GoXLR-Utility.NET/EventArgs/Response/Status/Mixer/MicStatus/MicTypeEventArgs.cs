@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus
 {
     public class MicTypeEventArgs : System.EventArgs
     {
-        public MicrophoneType MicrophoneType { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public MicrophoneType Value { get; internal set; }
     }
 }

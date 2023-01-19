@@ -2,12 +2,12 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Router
 {
     public class RouterEventArgs : System.EventArgs
     {
-        public InputDevice Input { get; set; }
+        public InputDevice Input { get; internal set; }
         
-        public bool IsEnabled { get; set; }
+        public OutputDevice Output { get; internal set; }
         
-        public OutputDevice Output { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public bool Value { get; internal set; }
     }
 }

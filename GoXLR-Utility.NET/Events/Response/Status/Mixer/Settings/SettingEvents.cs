@@ -16,9 +16,9 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
 
         public event EventHandler<SettingEventArgs> OnSettingsChanged;
         
-        public event EventHandler<MuteHoldDurationEventArgs> OnMuteHoldDurationChanged;
+        public event EventHandler<IntSettingsEventArgs> OnMuteHoldDurationChanged;
         
-        public event EventHandler<VcMuteAlsoMuteCmEventArgs> OnVcMuteAlsoMuteCmChanged;
+        public event EventHandler<BoolSettingsEventArgs> OnVcMuteAlsoMuteCmChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.Settings.Settings settings, MemberInfo memInfo)
         {
@@ -33,7 +33,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
                     settingEventArgs.SettingsEnum = SettingsEnum.MuteHoldDuration;
                     settingEventArgs.MuteHoldDuration = settings.MuteHoldDuration;
                     OnSettingsChanged?.Invoke(this, settingEventArgs);
-                    OnMuteHoldDurationChanged?.Invoke(this, new MuteHoldDurationEventArgs
+                    OnMuteHoldDurationChanged?.Invoke(this, new IntSettingsEventArgs
                     {
                         SerialNumber = serialNumber,
                         MuteHoldDuration = settings.MuteHoldDuration
@@ -44,7 +44,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
                     settingEventArgs.SettingsEnum = SettingsEnum.VcMuteAlsoMuteCm;
                     settingEventArgs.VcMuteAlsoMuteCm = settings.VcMuteAlsoMuteCm;
                     OnSettingsChanged?.Invoke(this, settingEventArgs);
-                    OnVcMuteAlsoMuteCmChanged?.Invoke(this, new VcMuteAlsoMuteCmEventArgs
+                    OnVcMuteAlsoMuteCmChanged?.Invoke(this, new BoolSettingsEventArgs
                     {
                         SerialNumber = serialNumber,
                         VcMuteAlsoMuteCm = settings.VcMuteAlsoMuteCm

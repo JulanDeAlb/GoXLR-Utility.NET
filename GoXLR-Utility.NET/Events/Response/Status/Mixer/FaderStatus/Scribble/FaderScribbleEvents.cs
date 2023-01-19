@@ -14,11 +14,11 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
     {
         public event EventHandler<FaderBaseScribbleEventArgs> OnScribbleChanged;
         
-        public event EventHandler<ScribbleBottomTextEventArgs> OnBottomTextChanged;
+        public event EventHandler<StringScribbleEventArgs> OnBottomTextChanged;
         
         public event EventHandler<ScribbleFileNameEventArgs> OnFileNameChanged;
         
-        public event EventHandler<ScribbleInvertedEventArgs> OnInvertedChanged;
+        public event EventHandler<BoolScribbleEventArgs> OnInvertedChanged;
         
         public event EventHandler<ScribbleLeftTextEventArgs> OnLeftTextChanged;
         
@@ -40,10 +40,10 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
             {
                 case "BottomText":
                     fadersEventArgs.Fader.Scribble.FaderBase.TypeChanged = ScribbleEnum.BottomText;
-                    fadersEventArgs.Fader.Scribble.FaderBase.BottomText = new ScribbleBottomTextEventArgs
+                    fadersEventArgs.Fader.Scribble.FaderBase.BottomText = new StringScribbleEventArgs
                     {
                         SerialNumber = serialNumber,
-                        BottomText = scribble.BottomText
+                        Value = scribble.BottomText
                     };
                     
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
@@ -68,7 +68,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
 
                 case "Inverted":
                     fadersEventArgs.Fader.Scribble.FaderBase.TypeChanged = ScribbleEnum.Inverted;
-                    fadersEventArgs.Fader.Scribble.FaderBase.Inverted = new ScribbleInvertedEventArgs
+                    fadersEventArgs.Fader.Scribble.FaderBase.Inverted = new BoolScribbleEventArgs
                     {
                         SerialNumber = serialNumber,
                         Inverted = scribble.Inverted

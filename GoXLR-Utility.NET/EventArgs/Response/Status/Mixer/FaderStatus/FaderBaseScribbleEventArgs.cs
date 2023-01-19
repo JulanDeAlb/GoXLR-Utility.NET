@@ -6,19 +6,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
     public class FaderBaseScribbleEventArgs : System.EventArgs
     {
-        public ScribbleBottomTextEventArgs BottomText { get; set; }
+        public string StringValue { get; internal set; }
         
-        public ScribbleFileNameEventArgs FileName { get; set; }
+        public bool BoolValue { get; internal set; }
         
-        public ScribbleInvertedEventArgs Inverted { get; set; }
-        
-        public ScribbleLeftTextEventArgs LeftText { get; set; }
-        
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the Scribble has been changed
         /// </summary>
-        public ScribbleEnum TypeChanged { get; set; }
+        public ScribbleEnum TypeChanged { get; internal set; }
     }
 }

@@ -11,20 +11,20 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Compressor
     /// </summary>
     public class CompressorEvents
     {
-        public event EventHandler<SpecificCompressorEventArgs> OnAttackChanged;
+        public event EventHandler<IntCompressorEventArgs> OnAttackChanged;
         
-        public event EventHandler<SpecificCompressorEventArgs> OnMakeUpGainChanged;
+        public event EventHandler<IntCompressorEventArgs> OnMakeUpGainChanged;
 
-        public event EventHandler<SpecificCompressorEventArgs> OnRatioChanged;
+        public event EventHandler<IntCompressorEventArgs> OnRatioChanged;
         
-        public event EventHandler<SpecificCompressorEventArgs> OnReleaseChanged;
+        public event EventHandler<IntCompressorEventArgs> OnReleaseChanged;
         
-        public event EventHandler<SpecificCompressorEventArgs> OnThresholdChanged;
+        public event EventHandler<IntCompressorEventArgs> OnThresholdChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.MicStatus.Compressor.Compressor compressor, MemberInfo memInfo,
             EventHandler<CompressorEventArgs> compressorChanged, CompressorEventArgs compressorEventArgs)
         {
-            var specMicGainEventArgs = new SpecificCompressorEventArgs
+            var specMicGainEventArgs = new IntCompressorEventArgs
             {
                 SerialNumber = serialNumber
             };

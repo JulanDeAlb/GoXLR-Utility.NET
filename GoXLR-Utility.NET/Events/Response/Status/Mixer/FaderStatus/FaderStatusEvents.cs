@@ -74,7 +74,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
 
         public event EventHandler<FaderChannelEventArgs> OnChannelChanged;
         
-        public event EventHandler<FaderMuteTypeEventArgs> OnMuteTypeChanged;
+        public event EventHandler<FaderFunctionEventArgs> OnMuteTypeChanged;
         
         public event EventHandler<FaderMuteStateEventArgs> OnMuteStateChanged;
         
@@ -105,7 +105,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
                 
                 case "MuteType":
                     fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.MuteType;
-                    fadersEventArgs.Fader.MuteType = new FaderMuteTypeEventArgs
+                    fadersEventArgs.Fader.Function = new FaderFunctionEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = faderBase.MuteType
@@ -113,7 +113,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
                     
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
-                    OnMuteTypeChanged?.Invoke(this, fadersEventArgs.Fader.MuteType);
+                    OnMuteTypeChanged?.Invoke(this, fadersEventArgs.Fader.Function);
                     break;
                 
                 case "MuteState":

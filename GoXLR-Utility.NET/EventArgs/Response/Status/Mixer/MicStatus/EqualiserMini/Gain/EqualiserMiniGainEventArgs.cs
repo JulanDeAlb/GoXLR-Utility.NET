@@ -4,13 +4,13 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.EqualiserM
 {
     public class EqualiserMiniGainEventArgs : System.EventArgs
     {
+        public string SerialNumber { get; internal set; }
+        
         /// <summary>
         /// Indicating which value of the EqualiserMini has been changed
         /// </summary>
-        public EqualiserMiniEnum ValueChanged { get; set; }
+        public EqualiserMiniEnum TypeChanged { get; internal set; }
         
-        public string SerialNumber { get; set; }
-        
-        public int Value { get; set; }
+        public int Value { get; internal set; }
     }
 }

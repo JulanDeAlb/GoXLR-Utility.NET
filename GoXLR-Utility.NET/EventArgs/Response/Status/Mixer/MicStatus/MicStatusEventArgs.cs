@@ -9,23 +9,23 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus
 {
     public class MicStatusEventArgs : System.EventArgs
     {
-        public CompressorEventArgs Compressor { get; set; }
+        public CompressorEventArgs Compressor { get; internal set; }
         
-        public EqualiserEventArgs Equaliser { get; set; }
+        public EqualiserEventArgs Equaliser { get; internal set; }
     
-        public EqualiserMiniEventArgs EqualiserMini { get; set; }
+        public EqualiserMiniEventArgs EqualiserMini { get; internal set; }
         
-        public MicGainEventArgs MicGains { get; set; }
+        public MicGainEventArgs MicGains { get; internal set; }
         
-        public MicTypeEventArgs MicType { get; set; }
+        public MicTypeEventArgs MicType { get; internal set; }
         
-        public NoiseGateEventArgs NoiseGate { get; set; }
+        public NoiseGateEventArgs NoiseGate { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the MicStatus has been changed
         /// </summary>
-        public MicStatusEnum TypeChanged { get; set; }
+        public MicStatusEnum TypeChanged { get; internal set; }
     }
 }

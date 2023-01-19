@@ -5,8 +5,10 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Files
 {
     public class ListFileEventArgs : System.EventArgs
     {
-        public OpPatchEnum PatchType { get; set; }
-        public List<string> List { get; set; }
-        public string Item { get; set; }
+        public string Item { get; internal set; }
+        
+        public List<string> List { get; internal set; }
+        
+        public OpPatchEnum PatchType { get; internal set; }
     }
 }

@@ -11,20 +11,20 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.NoiseGate
     /// </summary>
     public class NoiseGateEvents
     {
-        public event EventHandler<SpecificNoiseGateEventArgs> OnAttackChanged;
+        public event EventHandler<IntNoiseGateEventArgs> OnAttackChanged;
         
-        public event EventHandler<SpecificNoiseGateEventArgs> OnAttenuationChanged;
+        public event EventHandler<IntNoiseGateEventArgs> OnAttenuationChanged;
         
-        public event EventHandler<SpecificBoolNoiseGateEventArgs> OnEnabledChanged;
+        public event EventHandler<BoolNoiseGateEventArgs> OnEnabledChanged;
         
-        public event EventHandler<SpecificNoiseGateEventArgs> OnReleaseChanged;
+        public event EventHandler<IntNoiseGateEventArgs> OnReleaseChanged;
         
-        public event EventHandler<SpecificNoiseGateEventArgs> OnThresholdChanged;
+        public event EventHandler<IntNoiseGateEventArgs> OnThresholdChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.MicStatus.NoiseGate.NoiseGate noiseGate, MemberInfo memInfo,
             EventHandler<NoiseGateEventArgs> noiseGateChanged, NoiseGateEventArgs noiseGateEventArgs)
         {
-            var specNoiseGateEventArgs = new SpecificNoiseGateEventArgs
+            var specNoiseGateEventArgs = new IntNoiseGateEventArgs
             {
                 SerialNumber = serialNumber,
             };
@@ -48,7 +48,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.NoiseGate
                     break;
                 
                 case "Enabled":
-                    var specBoolNoiseGateEventArgs = new SpecificBoolNoiseGateEventArgs
+                    var specBoolNoiseGateEventArgs = new BoolNoiseGateEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = noiseGate.Enabled

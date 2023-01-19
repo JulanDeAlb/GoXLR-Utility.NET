@@ -7,8 +7,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Paths
         /// <summary>
         /// Indicating which type of the Path has been changed
         /// </summary>
-        public PathEnum PathEnum { get; set; }
+        public PathEnum TypeChanged { get; internal set; }
 
-        public string Value { get; set; }
+        public string Value { get; internal set; }
     }
 }

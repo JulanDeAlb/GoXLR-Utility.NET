@@ -16,7 +16,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         [JsonPropertyName("fader_status")]
         public FaderStatus.FaderStatus FaderStatus { get; set; }
         
-        //Will not change since it could only happen once Daemon is not running
+        //Will not change since it could only happen once the Daemon is not running
         [JsonPropertyName("hardware")]
         public Hardware.Hardware Hardware { get; set; }
         
@@ -30,7 +30,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         public string MicProfileName { get; set; }
         
         [JsonPropertyName("mic_status")]
-        public MicStatus.MicStatus MicStatus { get; set; } //New Event Structure TODO InProgress
+        public MicStatus.MicStatus MicStatus { get; set; }
         
         [JsonPropertyName("profile_name")]
         public string ProfileName { get; set; }
@@ -39,7 +39,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         public Router.Router Router { get; set; }
         
         [JsonPropertyName("sampler")]
-        public Sampler.Sampler Sampler { get; set; } //TODO
+        public Sampler.Sampler Sampler { get; set; }
         
         [JsonPropertyName("settings")]
         public Settings.Settings Settings { get; set; }

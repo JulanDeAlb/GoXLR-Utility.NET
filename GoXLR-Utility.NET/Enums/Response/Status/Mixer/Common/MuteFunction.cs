@@ -3,9 +3,9 @@ namespace GoXLR_Utility.NET.Enums.Response.Status.Mixer.Common
     public enum MuteFunction
     {
         All,
-        ToStream,
-        ToVoiceChat,
+        ToLineOut,
         ToPhones,
-        ToLineOut
+        ToStream,
+        ToVoiceChat
     }
 }

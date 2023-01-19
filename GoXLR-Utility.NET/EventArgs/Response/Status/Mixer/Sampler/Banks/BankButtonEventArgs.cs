@@ -4,13 +4,13 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Sampler.Banks
 {
     public class BankButtonEventArgs : System.EventArgs
     {
-        public BankBaseEventArgs BankBase { get; set; }
+        public BankBaseEventArgs BankBase { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the Button has been changed
         /// </summary>
-        public BankButtonEnum TypeChanged { get; set; }
+        public BankButtonEnum TypeChanged { get; internal set; }
     }
 }

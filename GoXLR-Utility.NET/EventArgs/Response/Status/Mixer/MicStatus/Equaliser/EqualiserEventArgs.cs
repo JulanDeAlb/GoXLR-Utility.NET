@@ -6,15 +6,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.Equaliser
 {
     public class EqualiserEventArgs : System.EventArgs
     {
+        public EqualiserFrequencyEventArgs Frequency { get; internal set; }
+        
+        public EqualiserGainEventArgs Gain { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
+        
         /// <summary>
         /// Indicating which type of the Equaliser has been changed
         /// </summary>
-        public EqualiserTypeEnum TypeChanged { get; set; }
-        
-        public EqualiserGainEventArgs Gain { get; set; }
-        
-        public EqualiserFrequencyEventArgs Frequency { get; set; }
-        
-        public string SerialNumber { get; set; }
+        public EqualiserTypeEnum TypeChanged { get; internal set; }
     }
 }

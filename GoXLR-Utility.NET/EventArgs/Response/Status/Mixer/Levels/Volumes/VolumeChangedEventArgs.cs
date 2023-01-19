@@ -9,8 +9,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Levels.Volumes
         /// <summary>
         /// Indicating which Channel Volume has been changed
         /// </summary>
-        public FaderChannelEnum Channel { get; internal set; }
+        public FaderChannelEnum TypeChanged { get; internal set; }
         
-        public int Volume { get; internal set; }
+        public int Value { get; internal set; }
     }
 }

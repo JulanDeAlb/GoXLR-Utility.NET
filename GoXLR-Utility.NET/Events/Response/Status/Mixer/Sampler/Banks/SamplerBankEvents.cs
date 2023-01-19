@@ -135,11 +135,11 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
         
         public event EventHandler<BankBaseEventArgs> OnBankBaseChanged;
         
-        public event EventHandler<BankFunctionEventArgs> OnFunctionChanged;
+        public event EventHandler<BankPlaybackEventArgs> OnFunctionChanged;
         
-        public event EventHandler<BankIsPlayingEventArgs> OnIsPlayingChanged;
+        public event EventHandler<BoolBankEventArgs> OnIsPlayingChanged;
         
-        public event EventHandler<BankOrderEventArgs> OnOrderChanged;
+        public event EventHandler<PlayOrderBankEventArgs> OnOrderChanged;
         
         public event EventHandler<BankSampleEventArgs> OnSamplesChanged;
 
@@ -165,7 +165,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     OnBankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
-                    OnFunctionChanged?.Invoke(this, new BankFunctionEventArgs
+                    OnFunctionChanged?.Invoke(this, new BankPlaybackEventArgs
                     {
                         SerialNumber = serialNumber,
                         Function = bankBaseButton.Function
@@ -180,7 +180,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     OnBankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
-                    OnIsPlayingChanged?.Invoke(this, new BankIsPlayingEventArgs
+                    OnIsPlayingChanged?.Invoke(this, new BoolBankEventArgs
                     {
                         SerialNumber = serialNumber,
                         IsPlaying = bankBaseButton.IsPlaying
@@ -195,7 +195,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     OnBankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
-                    OnOrderChanged?.Invoke(this, new BankOrderEventArgs
+                    OnOrderChanged?.Invoke(this, new PlayOrderBankEventArgs
                     {
                         SerialNumber = serialNumber,
                         Order = bankBaseButton.Order

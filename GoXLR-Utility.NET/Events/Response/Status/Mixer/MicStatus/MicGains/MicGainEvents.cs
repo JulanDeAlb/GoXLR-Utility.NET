@@ -12,17 +12,17 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.MicGains
     /// </summary>
     public class MicGainEvents
     {
-        public event EventHandler<SpecificMicGainEventArgs> OnCondenserGainChanged;
+        public event EventHandler<IntMicGainEventArgs> OnCondenserGainChanged;
         
-        public event EventHandler<SpecificMicGainEventArgs> OnDynamicGainChanged;
+        public event EventHandler<IntMicGainEventArgs> OnDynamicGainChanged;
         
-        public event EventHandler<SpecificMicGainEventArgs> OnJackGainChanged;
+        public event EventHandler<IntMicGainEventArgs> OnJackGainChanged;
 
         protected internal void HandleEvents(string serialNumber,
             Models.Response.Status.Mixer.MicStatus.MicGains.MicGains micGain, MemberInfo memInfo,
             EventHandler<MicGainEventArgs> gainsChanged, MicGainEventArgs micGainEventArgs)
         {
-            var specMicGainEventArgs = new SpecificMicGainEventArgs
+            var specMicGainEventArgs = new IntMicGainEventArgs
             {
                 SerialNumber = serialNumber
             };

@@ -13,13 +13,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings.Display
     {
         public event EventHandler<DisplayEventArgs> OnDisplayChanged;
 
-        public event EventHandler<SpecificDisplayEventArgs> OnCompressorChanged;
+        public event EventHandler<DisplayModeEventArgs> OnCompressorChanged;
 
-        public event EventHandler<SpecificDisplayEventArgs> OnEqualiserChanged;
+        public event EventHandler<DisplayModeEventArgs> OnEqualiserChanged;
 
-        public event EventHandler<SpecificDisplayEventArgs> OnEqualiserFineChanged;
+        public event EventHandler<DisplayModeEventArgs> OnEqualiserFineChanged;
 
-        public event EventHandler<SpecificDisplayEventArgs> OnGateChanged;
+        public event EventHandler<DisplayModeEventArgs> OnGateChanged;
 
         protected internal void HandleEvents(string serialNumber, GuiDisplay guiDisplay, MemberInfo memInfo)
         {
@@ -28,7 +28,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings.Display
                 SerialNumber = serialNumber
             };
             
-            var specDisplayEventArgs = new SpecificDisplayEventArgs
+            var specDisplayEventArgs = new DisplayModeEventArgs
             {
                 SerialNumber = serialNumber
             };

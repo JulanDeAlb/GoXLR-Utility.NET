@@ -14,27 +14,27 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels.Volumes
     {
         public event EventHandler<VolumeChangedEventArgs> OnVolumeChanged;
             
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnChatVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnChatVolumeChanged;
 
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnConsoleVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnConsoleVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnGameVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnGameVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnHeadphonesVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnHeadphonesVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnLineInVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnLineInVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnLineOutVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnLineOutVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnMicVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnMicVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnMicMonitorVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnMicMonitorVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnMusicVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnMusicVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnSampleVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnSampleVolumeChanged;
         
-        public event EventHandler<SpecificVolumeChangedEventArgs> OnSystemVolumeChanged;
+        public event EventHandler<ByteVolumeChangedEventArgs> OnSystemVolumeChanged;
         
         protected internal void HandleEvents(string serialNumber, Volume volumes, Models.Response.Status.Mixer.Levels.Levels levels, MemberInfo memInfo)
         {
@@ -43,7 +43,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels.Volumes
                 SerialNumber = serialNumber
             };
 
-            var specVolumeEventArgs = new SpecificVolumeChangedEventArgs
+            var specVolumeEventArgs = new ByteVolumeChangedEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -51,78 +51,78 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels.Volumes
             switch (memInfo.Name)
             {
                 case "Chat":
-                    volumeEventArgs.Channel = FaderChannelEnum.Chat;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Chat;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Chat;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Chat;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnChatVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "Console":
-                    volumeEventArgs.Channel = FaderChannelEnum.Console;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Console;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Console;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Console;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnConsoleVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "Game":
-                    volumeEventArgs.Channel = FaderChannelEnum.Game;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Game;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Game;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Game;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnGameVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "Headphones":
-                    volumeEventArgs.Channel = FaderChannelEnum.Headphones;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Headphones;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Headphones;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Headphones;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnHeadphonesVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "LineIn":
-                    volumeEventArgs.Channel = FaderChannelEnum.LineIn;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.LineIn;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.LineIn;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.LineIn;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnLineInVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "LineOut":
-                    volumeEventArgs.Channel = FaderChannelEnum.LineOut;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.LineOut;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.LineOut;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.LineOut;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnLineOutVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "Mic":
-                    volumeEventArgs.Channel = FaderChannelEnum.Mic;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Mic;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Mic;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Mic;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnMicVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "MicMonitor":
-                    volumeEventArgs.Channel = FaderChannelEnum.MicMonitor;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.MicMonitor;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.MicMonitor;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.MicMonitor;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnMicMonitorVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "Music":
-                    volumeEventArgs.Channel = FaderChannelEnum.Music;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Music;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Music;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Music;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnMusicVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "Sample":
-                    volumeEventArgs.Channel = FaderChannelEnum.Sample;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.Sample;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.Sample;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.Sample;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnSampleVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;
                 
                 case "System":
-                    volumeEventArgs.Channel = FaderChannelEnum.System;
-                    volumeEventArgs.Volume = specVolumeEventArgs.Volume = volumes.System;
+                    volumeEventArgs.TypeChanged = FaderChannelEnum.System;
+                    volumeEventArgs.Value = specVolumeEventArgs.Value = volumes.System;
                     OnVolumeChanged?.Invoke(this, volumeEventArgs);
                     OnSystemVolumeChanged?.Invoke(this, specVolumeEventArgs);
                     break;

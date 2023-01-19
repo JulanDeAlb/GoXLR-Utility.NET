@@ -4,13 +4,13 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
     public class FadersEventArgs : System.EventArgs
     {
-        public FaderSettingsEventArgs Fader { get; set; }
+        public FaderSettingsEventArgs Fader { get; internal set; }
         
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
         /// <summary>
         /// Indicating which of the Faders has been changed
         /// </summary>
-        public FaderEnum TypeChanged { get; set; }
+        public FaderEnum TypeChanged { get; internal set; }
     }
 }

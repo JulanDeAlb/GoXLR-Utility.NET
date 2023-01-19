@@ -13,17 +13,17 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
     /// </summary>
     public class EqualiserMiniFrequencyEvents
     {
-        public event EventHandler<SpecificEqualiserMiniFrequencyEventArgs> OnEqualizer90HzChanged;
+        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer90HzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniFrequencyEventArgs> OnEqualizer250HzChanged;
+        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer250HzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniFrequencyEventArgs> OnEqualizer500HzChanged;
+        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer500HzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniFrequencyEventArgs> OnEqualizer1KHzChanged;
+        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer1KHzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniFrequencyEventArgs> OnEqualizer3KHzChanged;
+        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer3KHzChanged;
         
-        public event EventHandler<SpecificEqualiserMiniFrequencyEventArgs> OnEqualizer8KHzChanged;
+        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer8KHzChanged;
         
         public void HandleEvents(string serialNumber,
             FrequencyMini frequency,
@@ -31,7 +31,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
             EventHandler<MicStatusEventArgs> micStatusChanged, EventHandler<EqualiserMiniEventArgs> equaliserChanged,
             EventHandler<EqualiserMiniFrequencyEventArgs> frequencyChanged)
         {
-            var specEqualiserEventArgs = new SpecificEqualiserMiniFrequencyEventArgs
+            var specEqualiserEventArgs = new DoubleEqualiserMiniFrequencyEventArgs
             {
                 SerialNumber = serialNumber
             };
