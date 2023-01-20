@@ -12,7 +12,8 @@ namespace GoXLR_Utility.NET
         private static PatchHandler _patchHandler;
         private static JsonSerializerOptions _serializerOptions;
         private static Status _status;
-        
+
+        public bool ShouldInvokeEvents = _patchHandler.ShouldInvokeEvents;
         public static List<string> AvailableSerialNumbers = new List<string>();
 
         public MessageHandler(Events.Events events, Status status, JsonSerializerOptions serializerOptions)

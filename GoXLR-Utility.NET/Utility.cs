@@ -12,7 +12,7 @@ namespace GoXLR_Utility.NET
     public class Utility
     {
         private static MessageHandler _messageHandler;
-        private long _id;
+        private static long _id;
         private static WebSocket _websocket;
         private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
         {
@@ -23,6 +23,7 @@ namespace GoXLR_Utility.NET
         public CancellationTokenSource TokenSource;
         public Events.Events Events = new Events.Events();
         public List<string> AvailableSerialNumbers => MessageHandler.AvailableSerialNumbers;
+        public bool ShouldInvokeEvents = _messageHandler.ShouldInvokeEvents;
         
         public Utility(CancellationTokenSource cToken = null)
         {
@@ -53,7 +54,7 @@ namespace GoXLR_Utility.NET
             _websocket.Send(message);
         }
 
-        private static void OnWsConnected(object sender, System.EventArgs eventArgs)
+        private void OnWsConnected(object sender, System.EventArgs eventArgs)
         {
             Console.WriteLine("Connected");
             

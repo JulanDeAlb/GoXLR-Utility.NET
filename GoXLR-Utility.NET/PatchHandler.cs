@@ -16,7 +16,6 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.ButtonDown;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
@@ -46,6 +45,8 @@ namespace GoXLR_Utility.NET
         private readonly PatchCache _patchCache = new PatchCache();
         private static JsonSerializerOptions _serializerOptions;
         private readonly Stopwatch _s = new Stopwatch();
+
+        public bool ShouldInvokeEvents = true;
         
         public PatchHandler(Events.Events events, JsonSerializerOptions serializerOptions)
         {
@@ -120,7 +121,8 @@ namespace GoXLR_Utility.NET
             }
             
             InvokeEvents:
-            InvokeEvent(patchCacheItem.SerialNumber, patchCacheItem.PathAsClasses, patchCacheItem.ParentClass, patchCacheItem.PropInfo, patch, value, lastIndex);
+            if (ShouldInvokeEvents)
+                InvokeEvent(patchCacheItem.SerialNumber, patchCacheItem.PathAsClasses, patchCacheItem.ParentClass, patchCacheItem.PropInfo, patch, value, lastIndex);
         }
         
         private void CreatePathSegments(string path, out string[] pathSegments,out int lastIndex, out string filePath)
@@ -416,6 +418,10 @@ namespace GoXLR_Utility.NET
                     _events.Config.HandleEvents(config, memInfo);
                     break;
                 
+                case Device device:
+                    _events.HandleEvents(serialNumber, device);
+                    break;
+                
                 case Dictionary<string, Device> _:
                     _events.HandleEvents(serialNumber, (Device)value);
                     break;
@@ -476,7 +482,7 @@ namespace GoXLR_Utility.NET
                 
                 case MicStatus micStatus:
                     _events.Device.Mic.HandleMicTypeEvents(serialNumber, micStatus);
-                    break;;
+                    break;
                 
                 case NoiseGate noiseGate:
                     _events.Device.Mic.HandleNoiseGateEvents(serialNumber, noiseGate, memInfo);
