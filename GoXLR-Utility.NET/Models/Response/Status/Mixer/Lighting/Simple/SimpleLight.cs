@@ -23,26 +23,10 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple
         public Global Global { get; set; }
     }
 
-    public enum SimpleLightEnum
-    {
-        Accent,
-        SribbleA,
-        ScribbleB,
-        ScribbleC,
-        ScribbleD,
-        Global
-    }
-    
-    public class Accent : SimpleBase { }
-    public class Scribble1 : SimpleBase { }
-    public class Scribble2 : SimpleBase { }
-    public class Scribble3 : SimpleBase { }
-    public class Scribble4 : SimpleBase { }
-    public class Global : SimpleBase { }
-    
-    public class SimpleBase
-    {
-        [JsonPropertyName("colour_one")]
-        public string ColourOne { get; set; }
-    }
+    public class Accent : OneColour { }
+    public class Scribble1 : OneColour { }
+    public class Scribble2 : OneColour { }
+    public class Scribble3 : OneColour { }
+    public class Scribble4 : OneColour { }
+    public class Global : OneColour { }
 }

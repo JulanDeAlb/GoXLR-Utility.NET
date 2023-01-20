@@ -515,7 +515,7 @@ namespace GoXLR_Utility.NET
 
                 default:
                     var type = parentClass.GetType();
-                    throw new ArgumentOutOfRangeException($"Type out of Range: {type.Name} | Path: {type.FullName}");
+                    throw new ArgumentOutOfRangeException($"Type out of Range in PatchHandler: {type.Name} | Path: {type.FullName}");
             }
         }
     }

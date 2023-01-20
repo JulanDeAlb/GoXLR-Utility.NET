@@ -10,16 +10,16 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
     public class Lighting
     {
         [JsonPropertyName("buttons")]
-        public ButtonsLight Buttons { get; set; }
+        public ButtonsLight Buttons { get; set; } //TODO
         
         [JsonPropertyName("encoders")]
-        public EncodersLight Encoders { get; set; }
+        public EncodersLight Encoders { get; set; } //TODO
         
         [JsonPropertyName("faders")]
-        public FadersLight Faders { get; set; }
+        public FadersLight Faders { get; set; } //TODO
         
         [JsonPropertyName("sampler")]
-        public SamplerLight Sampler { get; set; }
+        public SamplerLight Sampler { get; set; } //TODO
         
         [JsonPropertyName("simple")]
         public SimpleLight Simple { get; set; }

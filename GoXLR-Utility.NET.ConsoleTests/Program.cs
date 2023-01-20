@@ -57,7 +57,120 @@ public class Program
         
         #region Effects
 
-        //TODO Effect Events Insert
+        _utility.Events.Device.Effect.OnEffectsChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.OnActivePresetChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.OnCurrentEffectChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.OnPresetNamesChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.OnEffectEnabledChanged += (sender, args) => Console.WriteLine("");
+
+        #region Effects.Current
+
+        _utility.Events.Device.Effect.Current.OnEchoChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.Current.OnGenderChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.Current.OnHardTuneChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.Current.OnMegaphoneChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.Current.OnPitchChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.Current.OnRobotChanged += (sender, args) => Console.WriteLine("");
+
+        #region Effects.Current.Echo
+
+        _utility.Events.Device.Effect.Current.Echo.OnAmountChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnAmountChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnDelayLeftChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnDelayLeftChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnDelayRightChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnDelayRightChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnFeedbackChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnFeedbackChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnFeedbackLeftChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnFeedbackLeftChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnFeedbackRightChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnFeedbackRightChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnFeedbackXfbRtLChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnFeedbackXfbRtLChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnFeedbackXfbLtRChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnFeedbackXfbLtRChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnStyleChanged");
+        _utility.Events.Device.Effect.Current.Echo.OnTempoChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Echo.OnTempoChanged");
+
+        #endregion
+
+        #region Effects.Current.Gender
+
+        _utility.Events.Device.Effect.Current.Gender.OnAmountChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Gender.OnAmountChanged");
+        _utility.Events.Device.Effect.Current.Gender.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Gender.OnStyleChanged");
+
+        #endregion
+
+        #region Effects.Current.HardTune
+
+        _utility.Events.Device.Effect.Current.HardTune.OnAmountChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.HardTune.OnAmountChanged");
+        _utility.Events.Device.Effect.Current.HardTune.OnIsEnabledChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.HardTune.OnIsEnabledChanged");
+        _utility.Events.Device.Effect.Current.HardTune.OnRateChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.HardTune.OnRateChanged");
+        _utility.Events.Device.Effect.Current.HardTune.OnSourceChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.HardTune.OnSourceChanged");
+        _utility.Events.Device.Effect.Current.HardTune.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.HardTune.OnStyleChanged");
+        _utility.Events.Device.Effect.Current.HardTune.OnWindowChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.HardTune.OnWindowChanged");
+
+        #endregion
+
+        #region Effects.Current.Megaphone
+
+        _utility.Events.Device.Effect.Current.Megaphone.OnAmountChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Megaphone.OnAmountChanged");
+        _utility.Events.Device.Effect.Current.Megaphone.OnIsEnabledChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Megaphone.OnIsEnabledChanged");
+        _utility.Events.Device.Effect.Current.Megaphone.OnRateChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Megaphone.OnRateChanged");
+        _utility.Events.Device.Effect.Current.Megaphone.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Megaphone.OnStyleChanged");
+
+        #endregion
+
+        #region Effects.Current.Pitch
+
+        _utility.Events.Device.Effect.Current.Pitch.OnAmountChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Pitch.OnAmountChanged");
+        _utility.Events.Device.Effect.Current.Pitch.OnCharacterChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Pitch.OnCharacterChanged");
+        _utility.Events.Device.Effect.Current.Pitch.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Pitch.OnStyleChanged");
+
+        #endregion
+
+        #region Effects.Current.Reverb
+
+        _utility.Events.Device.Effect.Current.Reverb.OnAmountChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnAmountChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnDecayChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnDecayChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnDiffuseChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnDiffuseChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnEarlyLevelChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnEarlyLevelChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnHiColourChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnHiColourChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnHiFactorChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnHiFactorChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnLoColourChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnLoColourChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnModDepthChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnModDepthChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnModSpeedChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnModSpeedChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnPreDelayChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnPreDelayChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnStyleChanged");
+        _utility.Events.Device.Effect.Current.Reverb.OnTailLevelChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Reverb.OnTailLevelChanged");
+
+        #endregion
+
+        #region Effects.Current.Robot
+
+        _utility.Events.Device.Effect.Current.Robot.OnDryMixChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnDryMixChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnIsEnabledChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnIsEnabledChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnHighFreqChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnHighFreqChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnHighGainChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnHighGainChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnHighWidthChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnHighWidthChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnLowFreqChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnLowFreqChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnLowGainChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnLowGainChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnLowWidthChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnLowWidthChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnMidFreqChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnMidFreqChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnMidGainChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnMidGainChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnMidWidthChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnMidWidthChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnPulseWidthChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnPulseWidthChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnStyleChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnThresholdChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnThresholdChanged");
+        _utility.Events.Device.Effect.Current.Robot.OnWaveFromChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.Robot.OnWaveFromChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Effects.PresetNames
+
+        _utility.Events.Device.Effect.PresetNames.OnPreset1Changed += (sender, args) => Console.WriteLine("Events.Device.Effect.PresetNames.OnPreset1Changed");
+        _utility.Events.Device.Effect.PresetNames.OnPreset2Changed += (sender, args) => Console.WriteLine("Events.Device.Effect.PresetNames.OnPreset2Changed");
+        _utility.Events.Device.Effect.PresetNames.OnPreset3Changed += (sender, args) => Console.WriteLine("Events.Device.Effect.PresetNames.OnPreset3Changed");
+        _utility.Events.Device.Effect.PresetNames.OnPreset4Changed += (sender, args) => Console.WriteLine("Events.Device.Effect.PresetNames.OnPreset4Changed");
+        _utility.Events.Device.Effect.PresetNames.OnPreset5Changed += (sender, args) => Console.WriteLine("Events.Device.Effect.PresetNames.OnPreset5Changed");
+        _utility.Events.Device.Effect.PresetNames.OnPreset6Changed += (sender, args) => Console.WriteLine("Events.Device.Effect.PresetNames.OnPreset6Changed");
+
+        #endregion
 
         #endregion
         

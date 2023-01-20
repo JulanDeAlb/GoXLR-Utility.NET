@@ -22,4 +22,10 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
         [JsonPropertyName("colour_three")]
         public string ColourThree { get; set; }
     }
+    
+    public class OneColour
+    {
+        [JsonPropertyName("colour_one")]
+        public string ColourOne { get; set; }
+    }
 }

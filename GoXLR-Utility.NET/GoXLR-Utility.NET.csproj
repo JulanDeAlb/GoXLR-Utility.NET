@@ -16,6 +16,16 @@
 
     <ItemGroup>
       <Folder Include="Enums\Response\Status\Mixer\Levels\Volumes" />
+      <Folder Include="Enums\Response\Status\Mixer\Lighting\Buttons" />
+      <Folder Include="Enums\Response\Status\Mixer\Lighting\Encoders" />
+      <Folder Include="Enums\Response\Status\Mixer\Lighting\Faders" />
+      <Folder Include="EventArgs\Response\Status\Mixer\Lighting\Buttons" />
+      <Folder Include="EventArgs\Response\Status\Mixer\Lighting\Encoders" />
+      <Folder Include="EventArgs\Response\Status\Mixer\Lighting\Faders" />
+      <Folder Include="Events\Response\Status\Mixer\Lighting\Buttons" />
+      <Folder Include="Events\Response\Status\Mixer\Lighting\Encoders" />
+      <Folder Include="Events\Response\Status\Mixer\Lighting\Faders" />
+      <Folder Include="Events\Response\Status\Mixer\Lighting\Samplers" />
       <Folder Include="Old" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Buttons" />
       <Folder Include="Old\SERIALNUMBER\Lighting\Encoders" />
