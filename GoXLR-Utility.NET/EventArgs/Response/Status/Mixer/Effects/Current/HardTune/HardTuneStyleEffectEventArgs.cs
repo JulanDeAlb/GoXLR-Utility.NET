@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Hard
 {
     public class HardTuneStyleEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public HardTuneStyle Value { get; set; }
+        public HardTuneStyle Value { get; internal set; }
     }
 }

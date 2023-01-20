@@ -30,24 +30,24 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
             switch (memInfo.Name)
             {
                 case "MuteHoldDuration":
-                    settingEventArgs.SettingsEnum = SettingsEnum.MuteHoldDuration;
-                    settingEventArgs.MuteHoldDuration = settings.MuteHoldDuration;
+                    settingEventArgs.TypeChanged = SettingsEnum.MuteHoldDuration;
+                    settingEventArgs.IntValue = settings.MuteHoldDuration;
                     OnSettingsChanged?.Invoke(this, settingEventArgs);
                     OnMuteHoldDurationChanged?.Invoke(this, new IntSettingsEventArgs
                     {
                         SerialNumber = serialNumber,
-                        MuteHoldDuration = settings.MuteHoldDuration
+                        Value = settings.MuteHoldDuration
                     });
                     break;
                 
                 case "VcMuteAlsoMuteCm":
-                    settingEventArgs.SettingsEnum = SettingsEnum.VcMuteAlsoMuteCm;
-                    settingEventArgs.VcMuteAlsoMuteCm = settings.VcMuteAlsoMuteCm;
+                    settingEventArgs.TypeChanged = SettingsEnum.VcMuteAlsoMuteCm;
+                    settingEventArgs.BoolValue = settings.VcMuteAlsoMuteCm;
                     OnSettingsChanged?.Invoke(this, settingEventArgs);
                     OnVcMuteAlsoMuteCmChanged?.Invoke(this, new BoolSettingsEventArgs
                     {
                         SerialNumber = serialNumber,
-                        VcMuteAlsoMuteCm = settings.VcMuteAlsoMuteCm
+                        Value = settings.VcMuteAlsoMuteCm
                     });
                     break;
                 

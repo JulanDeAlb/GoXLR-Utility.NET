@@ -58,6 +58,9 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.ButtonDown
         [JsonPropertyName("Fader4Mute")]
         public bool Fader4Mute { get; set; }
 
+        [JsonPropertyName("SamplerClear")]
+        public bool SamplerClear { get; set; }
+
         [JsonPropertyName("SamplerSelectA")]
         public bool SamplerSelectA { get; set; }
         

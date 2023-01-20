@@ -24,7 +24,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Router
                 SerialNumber = serialNumber,
                 Input = input,
                 Output = output,
-                IsEnabled = value
+                Value = value
             });
         }
     }

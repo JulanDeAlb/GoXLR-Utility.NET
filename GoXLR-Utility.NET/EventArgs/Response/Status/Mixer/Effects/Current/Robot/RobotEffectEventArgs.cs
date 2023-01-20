@@ -4,17 +4,17 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Robo
 {
     public class RobotEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public bool BoolValue { get; internal set; }
+        
+        public int IntValue { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
+        
+        public RobotStyle StyleValue { get; internal set; }
         
         /// <summary>
-        /// Indicating which type of the Config has been changed
+        /// Indicating which type of the Robot has been changed
         /// </summary>
-        public RobotEnum TypeChanged { get; set; }
-        
-        public int IntValue { get; set; }
-        
-        public bool BoolValue { get; set; }
-        
-        public RobotStyle StyleValue { get; set; }
+        public RobotEnum TypeChanged { get; internal set; }
     }
 }

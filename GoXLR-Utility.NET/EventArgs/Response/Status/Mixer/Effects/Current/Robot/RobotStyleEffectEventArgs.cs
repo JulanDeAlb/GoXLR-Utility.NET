@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Robo
 {
     public class RobotStyleEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public RobotStyle Value { get; set; }
+        public RobotStyle Value { get; internal set; }
     }
 }

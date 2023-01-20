@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Gend
 {
     public class GenderEffectStyleEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public GenderStyle Value { get; set; }
+        public GenderStyle Value { get; internal set; }
     }
 }

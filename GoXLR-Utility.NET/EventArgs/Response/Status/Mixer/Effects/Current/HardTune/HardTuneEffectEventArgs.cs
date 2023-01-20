@@ -4,19 +4,19 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Hard
 {
     public class HardTuneEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public bool? BoolValue { get; internal set; }
+        
+        public int IntValue { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
+        
+        public HardTuneSource SourceValue { get; internal set; }
+        
+        public HardTuneStyle StyleValue { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the HardTune has been changed
         /// </summary>
-        public HardTuneEnum TypeChanged { get; set; }
-        
-        public int IntValue { get; set; }
-        
-        public bool? BoolValue { get; set; }
-        
-        public HardTuneSource SourceValue { get; set; }
-        
-        public HardTuneStyle StyleValue { get; set; }
+        public HardTuneEnum TypeChanged { get; internal set; }
     }
 }

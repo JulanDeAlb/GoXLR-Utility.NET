@@ -11,7 +11,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         public CoughButton.CoughButton CoughButton { get; set; }
         
         [JsonPropertyName("effects")]
-        public Effects.Effects Effects { get; set; } //TODO
+        public Effects.Effects Effects { get; set; }
         
         [JsonPropertyName("fader_status")]
         public FaderStatus.FaderStatus FaderStatus { get; set; }
@@ -24,7 +24,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         public Levels.Levels Levels { get; set; }
         
         [JsonPropertyName("lighting")]
-        public Lighting.Lighting Lighting { get; set; } //TODO
+        public Lighting.Lighting Lighting { get; set; } //TODO rewrite and implement Lighting
         
         [JsonPropertyName("mic_profile_name")]
         public string MicProfileName { get; set; }

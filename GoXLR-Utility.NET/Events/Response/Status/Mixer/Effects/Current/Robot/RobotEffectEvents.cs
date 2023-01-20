@@ -1,14 +1,15 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Robot;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 
 namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
 {
-    public class ReverbEffectEvents
+    public class RobotEffectEvents
     {
-        public event EventHandler<RobotEffectEventArgs>OnReverbEffectChanged;
         public event EventHandler<IntRobotEffectEventArgs> OnDryMixChanged;
         public event EventHandler<BoolRobotEffectEventArgs> OnIsEnabledChanged;
         public event EventHandler<IntRobotEffectEventArgs> OnHighFreqChanged;
@@ -25,9 +26,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
         public event EventHandler<IntRobotEffectEventArgs> OnThresholdChanged;
         public event EventHandler<IntRobotEffectEventArgs> OnWaveFromChanged;
 
-        protected internal void HandleEvents(string serialNumber, RobotEffect effect, MemberInfo memInfo)
+        protected internal void HandleEvents(string serialNumber, RobotEffect effect, MemberInfo memInfo,
+            EventHandler<EffectEventArgs> effectsChanged,
+            EventHandler<CurrentEffectEventArgs> currentEffectChanged,
+            EventHandler<RobotEffectEventArgs> robotChanged,
+            EffectEventArgs effectEventArgs)
         {
-            var robotEffectEventArgs = new RobotEffectEventArgs
+            effectEventArgs.Current.Robot = new RobotEffectEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -35,10 +40,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
             switch (memInfo.Name)
             {
                 case "DryMix":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.DryMix;
-                    robotEffectEventArgs.IntValue = effect.DryMix;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.DryMix;
+                    effectEventArgs.Current.Robot.IntValue = effect.DryMix;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnDryMixChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -47,10 +54,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "IsEnabled":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.IsEnabled;
-                    robotEffectEventArgs.IntValue = effect.IsEnabled;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.IsEnabled;
+                    effectEventArgs.Current.Robot.BoolValue = effect.IsEnabled;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnIsEnabledChanged?.Invoke(this, new BoolRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -59,10 +68,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "HighFreq":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.HighFreq;
-                    robotEffectEventArgs.IntValue = effect.HighFreq;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.HighFreq;
+                    effectEventArgs.Current.Robot.IntValue = effect.HighFreq;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnHighFreqChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -71,10 +82,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "HighGain":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.HighGain;
-                    robotEffectEventArgs.IntValue = effect.HighGain;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.HighGain;
+                    effectEventArgs.Current.Robot.IntValue = effect.HighGain;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnHighGainChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -83,10 +96,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "HighWidth":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.HighWidth;
-                    robotEffectEventArgs.IntValue = effect.HighWidth;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.HighWidth;
+                    effectEventArgs.Current.Robot.IntValue = effect.HighWidth;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnHighWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -95,10 +110,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "LowFreq":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.LowFreq;
-                    robotEffectEventArgs.IntValue = effect.LowFreq;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.LowFreq;
+                    effectEventArgs.Current.Robot.IntValue = effect.LowFreq;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnLowFreqChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -107,10 +124,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "LowGain":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.LowGain;
-                    robotEffectEventArgs.IntValue = effect.LowGain;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.LowGain;
+                    effectEventArgs.Current.Robot.IntValue = effect.LowGain;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnLowGainChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -119,10 +138,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "LowWidth":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.LowWidth;
-                    robotEffectEventArgs.IntValue = effect.LowWidth;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.LowWidth;
+                    effectEventArgs.Current.Robot.IntValue = effect.LowWidth;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnLowWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -131,10 +152,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "MidFreq":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.MidFreq;
-                    robotEffectEventArgs.IntValue = effect.MidFreq;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.MidFreq;
+                    effectEventArgs.Current.Robot.IntValue = effect.MidFreq;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnMidFreqChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -143,10 +166,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
                 
                 case "MidGain":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.MidGain;
-                    robotEffectEventArgs.IntValue = effect.MidGain;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.MidGain;
+                    effectEventArgs.Current.Robot.IntValue = effect.MidGain;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnMidGainChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -155,10 +180,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
 
                 case "MidWidth":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.MidWidth;
-                    robotEffectEventArgs.StyleValue = effect.MidWidth;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.MidWidth;
+                    effectEventArgs.Current.Robot.IntValue = effect.MidWidth;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnMidWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -167,10 +194,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
 
                 case "PulseWidth":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.PulseWidth;
-                    robotEffectEventArgs.IntValue = effect.PulseWidth;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.PulseWidth;
+                    effectEventArgs.Current.Robot.IntValue = effect.PulseWidth;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnPulseWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -179,10 +208,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
 
                 case "Style":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.Style;
-                    robotEffectEventArgs.IntValue = effect.Style;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.Style;
+                    effectEventArgs.Current.Robot.StyleValue = effect.Style;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnStyleChanged?.Invoke(this, new RobotStyleEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -191,10 +222,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
 
                 case "Threshold":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.Threshold;
-                    robotEffectEventArgs.IntValue = effect.Threshold;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.Threshold;
+                    effectEventArgs.Current.Robot.IntValue = effect.Threshold;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnThresholdChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -203,10 +236,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     break;
 
                 case "WaveFrom":
-                    robotEffectEventArgs.TypeChanged = RobotEnum.WaveFrom;
-                    robotEffectEventArgs.IntValue = effect.WaveFrom;
+                    effectEventArgs.Current.Robot.TypeChanged = RobotEnum.WaveFrom;
+                    effectEventArgs.Current.Robot.IntValue = effect.WaveFrom;
                     
-                    OnReverbEffectChanged?.Invoke(this, robotEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
                     OnWaveFromChanged?.Invoke(this, new IntRobotEffectEventArgs
                     {
                         SerialNumber = serialNumber,

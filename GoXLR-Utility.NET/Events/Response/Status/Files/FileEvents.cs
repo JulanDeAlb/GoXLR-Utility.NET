@@ -39,28 +39,28 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Files
             switch (memInfo.Name)
             {
                 case "Icons":
-                    fileEventArgs.FileEnum = FileEnum.Icons;
+                    fileEventArgs.TypeChanged = FileEnum.Icons;
                     fileEventArgs.List = listFileEventArgs.List = files.Icons;
                     OnFilesChanged?.Invoke(this, fileEventArgs);
                     OnIconsChanged?.Invoke(this, listFileEventArgs);
                     break;
 
                 case "MicProfiles":
-                    fileEventArgs.FileEnum = FileEnum.MicProfiles;
+                    fileEventArgs.TypeChanged = FileEnum.MicProfiles;
                     fileEventArgs.List = listFileEventArgs.List = files.MicProfiles;
                     OnFilesChanged?.Invoke(this, fileEventArgs);
                     OnMicProfilesChanged?.Invoke(this, listFileEventArgs);
                     break;
 
                 case "Presets":
-                    fileEventArgs.FileEnum = FileEnum.Presets;
+                    fileEventArgs.TypeChanged = FileEnum.Presets;
                     fileEventArgs.List = listFileEventArgs.List = files.Presets;
                     OnFilesChanged?.Invoke(this, fileEventArgs);
                     OnPresetsChanged?.Invoke(this, listFileEventArgs);
                     break;
 
                 case "Profiles":
-                    fileEventArgs.FileEnum = FileEnum.Profiles;
+                    fileEventArgs.TypeChanged = FileEnum.Profiles;
                     fileEventArgs.List = listFileEventArgs.List = files.Profiles;
                     OnFilesChanged?.Invoke(this, fileEventArgs);
                     OnProfilesChanged?.Invoke(this, listFileEventArgs);
@@ -71,7 +71,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Files
                     {
                         PatchType = patchOp
                     };
-                    fileEventArgs.FileEnum = FileEnum.Samples;
+                    fileEventArgs.TypeChanged = FileEnum.Samples;
                     fileEventArgs.Dictionary = dictionaryFileEventArgs.Dictionary = files.Samples;
                     OnFilesChanged?.Invoke(this, fileEventArgs);
                     OnSamplesChanged?.Invoke(this, dictionaryFileEventArgs);

@@ -168,7 +168,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     OnFunctionChanged?.Invoke(this, new BankPlaybackEventArgs
                     {
                         SerialNumber = serialNumber,
-                        Function = bankBaseButton.Function
+                        Value = bankBaseButton.Function
                     });
                     break;
                 
@@ -183,7 +183,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     OnIsPlayingChanged?.Invoke(this, new BoolBankEventArgs
                     {
                         SerialNumber = serialNumber,
-                        IsPlaying = bankBaseButton.IsPlaying
+                        Value = bankBaseButton.IsPlaying
                     });
                     break;
                 
@@ -198,7 +198,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     OnOrderChanged?.Invoke(this, new PlayOrderBankEventArgs
                     {
                         SerialNumber = serialNumber,
-                        Order = bankBaseButton.Order
+                        Value = bankBaseButton.Order
                     });
                     break;
                 

@@ -15,6 +15,10 @@ using GoXLR_Utility.NET.Models.Response.Status.Files;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.ButtonDown;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels;
@@ -409,11 +413,25 @@ namespace GoXLR_Utility.NET
                     break;
                 
                 case Config config:
-                    _events.Config.HandleEvents(config, memInfo, value);
+                    _events.Config.HandleEvents(config, memInfo);
                     break;
                 
                 case Dictionary<string, Device> _:
                     _events.HandleEvents(serialNumber, (Device)value);
+                    break;
+                    
+                case EchoEffect _:
+                case GenderEffect _:
+                case HardTuneEffect _:
+                case MegaphoneEffect _:
+                case PitchEffect _:
+                case ReverbEffect _:
+                case RobotEffect _:
+                    _events.Device.Effect.HandleCurrentEffectEvents(serialNumber, pathAsClasses[pathAsClasses.Count - 1], memInfo);
+                    break;
+                
+                case Effects effects:
+                    _events.Device.Effect.HandleEvents(serialNumber, effects, memInfo);
                     break;
                 
                 case FaderBase faderBase:
@@ -466,6 +484,10 @@ namespace GoXLR_Utility.NET
                 
                 case Paths paths:
                     _events.Path.HandleEvents(paths, memInfo);
+                    break;
+                
+                case PresetNames presetNames:
+                    _events.Device.Effect.HandlePresetNamesEffectEvents(serialNumber, presetNames, memInfo);
                     break;
                 
                 case RouterBase routerBase:

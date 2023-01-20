@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Mega
 {
     public class MegaphoneStyleEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public MegaphoneStyle Value { get; set; }
+        public MegaphoneStyle Value { get; internal set; }
     }
 }

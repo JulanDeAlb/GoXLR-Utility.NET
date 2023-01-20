@@ -4,15 +4,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Reve
 {
     public class ReverbEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public int IntValue { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
+        
+        public ReverbStyle StyleValue { get; internal set; }
         
         /// <summary>
-        /// Indicating which type of the Config has been changed
+        /// Indicating which type of the Reverb has been changed
         /// </summary>
-        public ReverbEnum TypeChanged { get; set; }
-        
-        public int IntValue { get; set; }
-        
-        public ReverbStyle StyleValue { get; set; }
+        public ReverbEnum TypeChanged { get; internal set; }
     }
 }

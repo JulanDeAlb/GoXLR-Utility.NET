@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Megaphone;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Megaphone;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 
@@ -8,15 +10,18 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
 {
     public class MegaphoneEffectEvents
     {
-        public event EventHandler<MegaphoneEffectEventArgs> OnMegaphoneEffectChanged;
         public event EventHandler<IntMegaphoneEffectEventArgs> OnAmountChanged;
         public event EventHandler<BoolMegaphoneEffectEventArgs> OnIsEnabledChanged;
         public event EventHandler<IntMegaphoneEffectEventArgs> OnRateChanged;
         public event EventHandler<MegaphoneStyleEffectEventArgs> OnStyleChanged;
 
-        protected internal void HandleEvents(string serialNumber, MegaphoneEffect effect, MemberInfo memInfo)
+        protected internal void HandleEvents(string serialNumber, MegaphoneEffect effect, MemberInfo memInfo,
+            EventHandler<EffectEventArgs> effectsChanged,
+            EventHandler<CurrentEffectEventArgs> currentEffectChanged,
+            EventHandler<MegaphoneEffectEventArgs> megaphoneChanged,
+            EffectEventArgs effectEventArgs)
         {
-            var megaphoneEffectEventArgs = new MegaphoneEffectEventArgs
+            effectEventArgs.Current.Megaphone = new MegaphoneEffectEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -24,10 +29,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
             switch (memInfo.Name)
             {
                 case "Amount":
-                    megaphoneEffectEventArgs.TypeChanged = MegaphoneEnum.Amount;
-                    megaphoneEffectEventArgs.IntValue = effect.Amount;
+                    effectEventArgs.Current.Megaphone.TypeChanged = MegaphoneEnum.Amount;
+                    effectEventArgs.Current.Megaphone.IntValue = effect.Amount;
                     
-                    OnMegaphoneEffectChanged?.Invoke(this, megaphoneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
                     OnAmountChanged?.Invoke(this, new IntMegaphoneEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -36,10 +43,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
                     break;
                 
                 case "IsEnabled":
-                    megaphoneEffectEventArgs.TypeChanged = MegaphoneEnum.IsEnabled;
-                    megaphoneEffectEventArgs.BoolValue = effect.IsEnabled;
+                    effectEventArgs.Current.Megaphone.TypeChanged = MegaphoneEnum.IsEnabled;
+                    effectEventArgs.Current.Megaphone.BoolValue = effect.IsEnabled;
                     
-                    OnMegaphoneEffectChanged?.Invoke(this, megaphoneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
                     OnIsEnabledChanged?.Invoke(this, new BoolMegaphoneEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -48,10 +57,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
                     break;
                 
                 case "PostGain":
-                    megaphoneEffectEventArgs.TypeChanged = MegaphoneEnum.PostGain;
-                    megaphoneEffectEventArgs.IntValue = effect.PostGain;
+                    effectEventArgs.Current.Megaphone.TypeChanged = MegaphoneEnum.PostGain;
+                    effectEventArgs.Current.Megaphone.IntValue = effect.PostGain;
                     
-                    OnMegaphoneEffectChanged?.Invoke(this, megaphoneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
                     OnRateChanged?.Invoke(this, new IntMegaphoneEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -60,10 +71,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
                     break;
 
                 case "Style":
-                    megaphoneEffectEventArgs.TypeChanged = MegaphoneEnum.Style;
-                    megaphoneEffectEventArgs.StyleValue = effect.Style;
+                    effectEventArgs.Current.Megaphone.TypeChanged = MegaphoneEnum.Style;
+                    effectEventArgs.Current.Megaphone.StyleValue = effect.Style;
                     
-                    OnMegaphoneEffectChanged?.Invoke(this, megaphoneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
                     OnStyleChanged?.Invoke(this, new MegaphoneStyleEffectEventArgs
                     {
                         SerialNumber = serialNumber,

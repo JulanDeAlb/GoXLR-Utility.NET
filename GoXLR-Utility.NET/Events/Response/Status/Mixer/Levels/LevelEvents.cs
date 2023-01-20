@@ -27,7 +27,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
                 SerialNumber = serialNumber
             };
 
-            var specLevelEventArgs = new SByteLevelEventArgs
+            var sByteLevelEventArgs = new SByteLevelEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -36,16 +36,16 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
             {
                 case "Bleep":
                     levelEventArgs.TypeChanged = LevelEnum.Bleep;
-                    levelEventArgs.Volume = specLevelEventArgs.Value = levels.Bleep;
+                    levelEventArgs.Volume = sByteLevelEventArgs.Value = levels.Bleep;
                     OnLevelChanged?.Invoke(this, levelEventArgs);
-                    OnBleepLevelChanged?.Invoke(this, specLevelEventArgs);
+                    OnBleepLevelChanged?.Invoke(this, sByteLevelEventArgs);
                     break;
                 
                 case "DeEsser":
                     levelEventArgs.TypeChanged = LevelEnum.DeEsser;
-                    levelEventArgs.Volume = specLevelEventArgs.Value = levels.DeEsser;
+                    levelEventArgs.Volume = sByteLevelEventArgs.Value = levels.DeEsser;
                     OnLevelChanged?.Invoke(this, levelEventArgs);
-                    OnDeEsserLevelChanged?.Invoke(this, specLevelEventArgs);
+                    OnDeEsserLevelChanged?.Invoke(this, sByteLevelEventArgs);
                     break;
                 
                 default:

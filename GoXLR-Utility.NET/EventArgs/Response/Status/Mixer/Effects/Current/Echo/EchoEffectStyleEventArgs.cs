@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Echo
 {
     public class EchoEffectStyleEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public EchoStyle Value { get; set; }
+        public EchoStyle Value { get; internal set; }
     }
 }

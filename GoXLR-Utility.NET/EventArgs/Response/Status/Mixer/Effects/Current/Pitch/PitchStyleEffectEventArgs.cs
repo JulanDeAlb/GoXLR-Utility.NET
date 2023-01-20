@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Pitc
 {
     public class PitchStyleEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public PitchStyle Value { get; set; }
+        public PitchStyle Value { get; internal set; }
     }
 }

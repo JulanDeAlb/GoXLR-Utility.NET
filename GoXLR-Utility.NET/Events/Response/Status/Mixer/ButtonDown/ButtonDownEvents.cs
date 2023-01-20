@@ -45,6 +45,8 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown
         
         public event EventHandler<BoolButtonEventArgs> OnFader4MuteButtonDown;
         
+        public event EventHandler<BoolButtonEventArgs> OnSamplerClearButtonDown;
+        
         public event EventHandler<BoolButtonEventArgs> OnSamplerSelectAButtonDown;
         
         public event EventHandler<BoolButtonEventArgs> OnSamplerSelectBButtonDown;
@@ -65,7 +67,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown
             {
                 SerialNumber = serialNumber,
             };
-            var specButtonArgs = new BoolButtonEventArgs()
+            var boolButtonEventArgs = new BoolButtonEventArgs()
             {
                 SerialNumber = serialNumber,
             };
@@ -73,187 +75,195 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown
             switch (memInfo.Name)
             {
                 case "Bleep":
-                    buttonArgs.Button = ButtonEnum.Bleep;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.Bleep;
+                    buttonArgs.TypeChanged = ButtonEnum.Bleep;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.Bleep;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnBleepButtonDown?.Invoke(this, specButtonArgs);
+                    OnBleepButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "Cough":
-                    buttonArgs.Button = ButtonEnum.Cough;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.Cough;
+                    buttonArgs.TypeChanged = ButtonEnum.Cough;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.Cough;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnCoughButtonDown?.Invoke(this, specButtonArgs);
+                    OnCoughButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectFx":
-                    buttonArgs.Button = ButtonEnum.EffectFx;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectFx;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectFx;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectFx;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectFxButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectFxButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectHardTune":
-                    buttonArgs.Button = ButtonEnum.EffectHardTune;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectHardTune;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectHardTune;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectHardTune;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectHardTuneButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectHardTuneButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectMegaphone":
-                    buttonArgs.Button = ButtonEnum.EffectMegaphone;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectMegaphone;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectMegaphone;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectMegaphone;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectMegaphoneButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectMegaphoneButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectRobot":
-                    buttonArgs.Button = ButtonEnum.EffectRobot;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectRobot;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectRobot;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectRobot;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectRobotButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectRobotButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectSelect1":
-                    buttonArgs.Button = ButtonEnum.EffectSelect1;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectSelect1;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectSelect1;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectSelect1;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectSelect1ButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectSelect1ButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectSelect2":
-                    buttonArgs.Button = ButtonEnum.EffectSelect2;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectSelect2;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectSelect2;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectSelect2;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectSelect2ButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectSelect2ButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectSelect3":
-                    buttonArgs.Button = ButtonEnum.EffectSelect3;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectSelect3;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectSelect3;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectSelect3;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectSelect3ButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectSelect3ButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectSelect4":
-                    buttonArgs.Button = ButtonEnum.EffectSelect4;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectSelect4;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectSelect4;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectSelect4;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectSelect4ButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectSelect4ButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectSelect5":
-                    buttonArgs.Button = ButtonEnum.EffectSelect5;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectSelect5;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectSelect5;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectSelect5;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectSelect5ButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectSelect5ButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "EffectSelect6":
-                    buttonArgs.Button = ButtonEnum.EffectSelect6;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.EffectSelect6;
+                    buttonArgs.TypeChanged = ButtonEnum.EffectSelect6;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.EffectSelect6;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnEffectSelect6ButtonDown?.Invoke(this, specButtonArgs);
+                    OnEffectSelect6ButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "Fader1Mute":
-                    buttonArgs.Button = ButtonEnum.Fader1Mute;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.Fader1Mute;
+                    buttonArgs.TypeChanged = ButtonEnum.Fader1Mute;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.Fader1Mute;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnFader1MuteButtonDown?.Invoke(this, specButtonArgs);
+                    OnFader1MuteButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "Fader2Mute":
-                    buttonArgs.Button = ButtonEnum.Fader2Mute;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.Fader2Mute;
+                    buttonArgs.TypeChanged = ButtonEnum.Fader2Mute;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.Fader2Mute;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnFader2MuteButtonDown?.Invoke(this, specButtonArgs);
+                    OnFader2MuteButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "Fader3Mute":
-                    buttonArgs.Button = ButtonEnum.Fader3Mute;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.Fader3Mute;
+                    buttonArgs.TypeChanged = ButtonEnum.Fader3Mute;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.Fader3Mute;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnFader3MuteButtonDown?.Invoke(this, specButtonArgs);
+                    OnFader3MuteButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "Fader4Mute":
-                    buttonArgs.Button = ButtonEnum.Fader4Mute;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.Fader4Mute;
+                    buttonArgs.TypeChanged = ButtonEnum.Fader4Mute;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.Fader4Mute;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnFader4MuteButtonDown?.Invoke(this, specButtonArgs);
+                    OnFader4MuteButtonDown?.Invoke(this, boolButtonEventArgs);
+                    break;
+                
+                case "SamplerClear":
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerClear;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerClear;
+                    
+                    OnButtonDown?.Invoke(this, buttonArgs);
+                    OnSamplerClearButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerSelectA":
-                    buttonArgs.Button = ButtonEnum.SamplerSelectA;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerSelectA;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerSelectA;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerSelectA;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerSelectAButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerSelectAButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerSelectB":
-                    buttonArgs.Button = ButtonEnum.SamplerSelectB;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerSelectB;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerSelectB;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerSelectB;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerSelectBButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerSelectBButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerSelectC":
-                    buttonArgs.Button = ButtonEnum.SamplerSelectC;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerSelectC;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerSelectC;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerSelectC;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerSelectCButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerSelectCButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerTopLeft":
-                    buttonArgs.Button = ButtonEnum.SamplerTopLeft;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerTopLeft;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerTopLeft;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerTopLeft;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerTopLeftButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerTopLeftButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerTopRight":
-                    buttonArgs.Button = ButtonEnum.SamplerTopRight;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerTopRight;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerTopRight;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerTopRight;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerTopRightButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerTopRightButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerBottomLeft":
-                    buttonArgs.Button = ButtonEnum.SamplerBottomLeft;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerBottomLeft;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerBottomLeft;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerBottomLeft;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerBottomLeftButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerBottomLeftButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 case "SamplerBottomRight":
-                    buttonArgs.Button = ButtonEnum.SamplerBottomRight;
-                    buttonArgs.IsButtonDown = specButtonArgs.IsButtonDown = buttonDown.SamplerBottomRight;
+                    buttonArgs.TypeChanged = ButtonEnum.SamplerBottomRight;
+                    buttonArgs.Value = boolButtonEventArgs.Value = buttonDown.SamplerBottomRight;
                     
                     OnButtonDown?.Invoke(this, buttonArgs);
-                    OnSamplerBottomRightButtonDown?.Invoke(this, specButtonArgs);
+                    OnSamplerBottomRightButtonDown?.Invoke(this, boolButtonEventArgs);
                     break;
                 
                 default:

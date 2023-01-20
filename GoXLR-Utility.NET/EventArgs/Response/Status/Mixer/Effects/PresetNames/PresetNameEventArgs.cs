@@ -4,13 +4,13 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.PresetNames
 {
     public class PresetNameEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the Presets has been changed
         /// </summary>
-        public EffectBankPresets TypeChanged { get; set; }
+        public EffectBankPresets TypeChanged { get; internal set; }
 
-        public string Value { get; set; }
+        public string Value { get; internal set; }
     }
 }

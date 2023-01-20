@@ -34,6 +34,7 @@ public class Program
         _utility.Events.Device.ButtonDown.OnFader2MuteButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnFader2MuteButtonDown");
         _utility.Events.Device.ButtonDown.OnFader3MuteButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnFader3MuteButtonDown");
         _utility.Events.Device.ButtonDown.OnFader4MuteButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnFader4MuteButtonDown");
+        _utility.Events.Device.ButtonDown.OnSamplerClearButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnSamplerClearButtonDown");
         _utility.Events.Device.ButtonDown.OnSamplerSelectAButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnSamplerSelectAButtonDown");
         _utility.Events.Device.ButtonDown.OnSamplerSelectBButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnSamplerSelectBButtonDown");
         _utility.Events.Device.ButtonDown.OnSamplerSelectCButtonDown += (sender, args) => Console.WriteLine("Events.Device.ButtonDown.OnSamplerSelectCButtonDown");
@@ -56,7 +57,7 @@ public class Program
         
         #region Effects
 
-        
+        //TODO Effect Events Insert
 
         #endregion
         

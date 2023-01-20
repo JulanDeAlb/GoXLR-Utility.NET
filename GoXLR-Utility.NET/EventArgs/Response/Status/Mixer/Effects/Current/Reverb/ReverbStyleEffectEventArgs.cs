@@ -4,8 +4,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Reve
 {
     public class ReverbStyleEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public ReverbStyle Value { get; set; }
+        public ReverbStyle Value { get; internal set; }
     }
 }

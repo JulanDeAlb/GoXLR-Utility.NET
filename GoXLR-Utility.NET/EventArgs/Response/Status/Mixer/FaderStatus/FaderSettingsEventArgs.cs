@@ -6,15 +6,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
     public class FaderSettingsEventArgs : System.EventArgs
     {
-        public string StringValue { get; internal set; }
-        
-        public MuteState? StateValue { get; internal set; }
-        
         public FaderChannelEnum ChannelValue { get; internal set; }
+
+        public MuteFunction FunctionValue { get; internal set; }
         
         public FaderScribbleEventArgs Scribble { get; internal set; }
         
         public string SerialNumber { get; internal set; }
+        
+        public MuteState? StateValue { get; internal set; }
         
         /// <summary>
         /// Indicating which of the FaderSettings has been changed

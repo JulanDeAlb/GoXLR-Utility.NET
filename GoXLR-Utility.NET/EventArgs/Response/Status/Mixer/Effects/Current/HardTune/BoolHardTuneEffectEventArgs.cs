@@ -2,8 +2,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Hard
 {
     public class BoolHardTuneEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public bool Value { get; set; }
+        public bool Value { get; internal set; }
     }
 }

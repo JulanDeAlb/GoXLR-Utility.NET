@@ -92,41 +92,41 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus
             {
                 case "Channel":
                     fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.Channel;
-                    fadersEventArgs.Fader.Channel = new FaderChannelEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Value = faderBase.Channel
-                    };
+                    fadersEventArgs.Fader.ChannelValue = faderBase.Channel;
 
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
-                    OnChannelChanged?.Invoke(this, fadersEventArgs.Fader.Channel);
+                    OnChannelChanged?.Invoke(this, new FaderChannelEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = faderBase.Channel
+                    });
                     break;
                 
                 case "MuteType":
                     fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.MuteType;
-                    fadersEventArgs.Fader.Function = new FaderFunctionEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Value = faderBase.MuteType
-                    };
+                    fadersEventArgs.Fader.FunctionValue = faderBase.MuteType;
                     
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
-                    OnMuteTypeChanged?.Invoke(this, fadersEventArgs.Fader.Function);
+                    OnMuteTypeChanged?.Invoke(this, new FaderFunctionEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = faderBase.MuteType
+                    });
                     break;
                 
                 case "MuteState":
                     fadersEventArgs.Fader.TypeChanged = FaderSettingsEnum.MuteState;
-                    fadersEventArgs.Fader.MuteState = new FaderMuteStateEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Value = faderBase.MuteState
-                    };
+                    fadersEventArgs.Fader.StateValue = faderBase.MuteState;
                     
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     OnFaderSettingsChanged?.Invoke(this, fadersEventArgs.Fader);
-                    OnMuteStateChanged?.Invoke(this, fadersEventArgs.Fader.MuteState);
+                    OnMuteStateChanged?.Invoke(this, new FaderMuteStateEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = faderBase.MuteState
+                    });
                     break;
                 
                 default:

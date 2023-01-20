@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.HardTune;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.HardTune;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 
@@ -8,7 +10,6 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
 {
     public class HardTuneEffectEvents
     {
-        public event EventHandler<HardTuneEffectEventArgs> OnHardTuneEffectChanged;
         public event EventHandler<IntHardTuneEffectEventArgs> OnAmountChanged;
         public event EventHandler<BoolHardTuneEffectEventArgs> OnIsEnabledChanged;
         public event EventHandler<IntHardTuneEffectEventArgs> OnRateChanged;
@@ -16,9 +17,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
         public event EventHandler<HardTuneStyleEffectEventArgs> OnStyleChanged;
         public event EventHandler<IntHardTuneEffectEventArgs> OnWindowChanged;
 
-        protected internal void HandleEvents(string serialNumber, HardTuneEffect effect, MemberInfo memInfo)
+        protected internal void HandleEvents(string serialNumber, HardTuneEffect effect, MemberInfo memInfo,
+            EventHandler<EffectEventArgs> effectsChanged,
+            EventHandler<CurrentEffectEventArgs> currentEffectChanged,
+            EventHandler<HardTuneEffectEventArgs> hardTuneChanged,
+            EffectEventArgs effectEventArgs)
         {
-            var hardTuneEffectEventArgs = new HardTuneEffectEventArgs
+            effectEventArgs.Current.HardTune = new HardTuneEffectEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -26,10 +31,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
             switch (memInfo.Name)
             {
                 case "Amount":
-                    hardTuneEffectEventArgs.TypeChanged = HardTuneEnum.Amount;
-                    hardTuneEffectEventArgs.IntValue = effect.Amount;
+                    effectEventArgs.Current.HardTune.TypeChanged = HardTuneEnum.Amount;
+                    effectEventArgs.Current.HardTune.IntValue = effect.Amount;
                     
-                    OnHardTuneEffectChanged?.Invoke(this, hardTuneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
                     OnAmountChanged?.Invoke(this, new IntHardTuneEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -38,10 +45,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     break;
                 
                 case "IsEnabled":
-                    hardTuneEffectEventArgs.TypeChanged = HardTuneEnum.IsEnabled;
-                    hardTuneEffectEventArgs.BoolValue = effect.IsEnabled;
+                    effectEventArgs.Current.HardTune.TypeChanged = HardTuneEnum.IsEnabled;
+                    effectEventArgs.Current.HardTune.BoolValue = effect.IsEnabled;
                     
-                    OnHardTuneEffectChanged?.Invoke(this, hardTuneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
                     OnIsEnabledChanged?.Invoke(this, new BoolHardTuneEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -50,10 +59,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     break;
                 
                 case "Rate":
-                    hardTuneEffectEventArgs.TypeChanged = HardTuneEnum.Rate;
-                    hardTuneEffectEventArgs.IntValue = effect.Rate;
+                    effectEventArgs.Current.HardTune.TypeChanged = HardTuneEnum.Rate;
+                    effectEventArgs.Current.HardTune.IntValue = effect.Rate;
                     
-                    OnHardTuneEffectChanged?.Invoke(this, hardTuneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
                     OnRateChanged?.Invoke(this, new IntHardTuneEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -62,10 +73,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     break;
                 
                 case "Source":
-                    hardTuneEffectEventArgs.TypeChanged = HardTuneEnum.Source;
-                    hardTuneEffectEventArgs.SourceValue = effect.Source;
+                    effectEventArgs.Current.HardTune.TypeChanged = HardTuneEnum.Source;
+                    effectEventArgs.Current.HardTune.SourceValue = effect.Source;
                     
-                    OnHardTuneEffectChanged?.Invoke(this, hardTuneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
                     OnSourceChanged?.Invoke(this, new HardTuneSourceEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -74,10 +87,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     break;
 
                 case "Style":
-                    hardTuneEffectEventArgs.TypeChanged = HardTuneEnum.Style;
-                    hardTuneEffectEventArgs.StyleValue = effect.Style;
+                    effectEventArgs.Current.HardTune.TypeChanged = HardTuneEnum.Style;
+                    effectEventArgs.Current.HardTune.StyleValue = effect.Style;
                     
-                    OnHardTuneEffectChanged?.Invoke(this, hardTuneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
                     OnStyleChanged?.Invoke(this, new HardTuneStyleEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -86,10 +101,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     break;
 
                 case "Window":
-                    hardTuneEffectEventArgs.TypeChanged = HardTuneEnum.Window;
-                    hardTuneEffectEventArgs.IntValue = effect.Window;
+                    effectEventArgs.Current.HardTune.TypeChanged = HardTuneEnum.Window;
+                    effectEventArgs.Current.HardTune.IntValue = effect.Window;
                     
-                    OnHardTuneEffectChanged?.Invoke(this, hardTuneEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
                     OnWindowChanged?.Invoke(this, new IntHardTuneEffectEventArgs
                     {
                         SerialNumber = serialNumber,

@@ -4,15 +4,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Gend
 {
     public class GenderEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the Config has been changed
         /// </summary>
-        public GenderEnum TypeChanged { get; set; }
+        public GenderEnum TypeChanged { get; internal set; }
         
-        public int Value { get; set; }
+        public int Value { get; internal set; }
         
-        public GenderStyle? GenderStyle { get; set; }
+        public GenderStyle? StyleValue { get; internal set; }
     }
 }

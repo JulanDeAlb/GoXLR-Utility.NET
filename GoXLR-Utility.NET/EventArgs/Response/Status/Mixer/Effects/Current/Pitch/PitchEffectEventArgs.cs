@@ -4,15 +4,15 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Pitc
 {
     public class PitchEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public int IntValue { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
+        
+        public PitchStyle StyleValue { get; internal set; }
         
         /// <summary>
-        /// Indicating which type of the Config has been changed
+        /// Indicating which type of the Pitch has been changed
         /// </summary>
-        public PitchEnum TypeChanged { get; set; }
-        
-        public int IntValue { get; set; }
-        
-        public PitchStyle StyleValue { get; set; }
+        public PitchEnum TypeChanged { get; internal set; }
     }
 }

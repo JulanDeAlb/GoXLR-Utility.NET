@@ -24,7 +24,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Compressor
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.MicStatus.Compressor.Compressor compressor, MemberInfo memInfo,
             EventHandler<CompressorEventArgs> compressorChanged, CompressorEventArgs compressorEventArgs)
         {
-            var specMicGainEventArgs = new IntCompressorEventArgs
+            var intCompressorEventArgs = new IntCompressorEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -33,42 +33,42 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Compressor
             {
                 case "Attack":
                     compressorEventArgs.TypeChanged = CompressorEnum.Attack;
-                    compressorEventArgs.Value = specMicGainEventArgs.Value = compressor.Attack;
+                    compressorEventArgs.Value = intCompressorEventArgs.Value = compressor.Attack;
                     
                     compressorChanged?.Invoke(this, compressorEventArgs);
-                    OnAttackChanged?.Invoke(this, specMicGainEventArgs);
+                    OnAttackChanged?.Invoke(this, intCompressorEventArgs);
                     break;
         
                 case "MakeUpGain":
                     compressorEventArgs.TypeChanged = CompressorEnum.MakeUpGain;
-                    compressorEventArgs.Value = specMicGainEventArgs.Value = compressor.MakeUpGain;
+                    compressorEventArgs.Value = intCompressorEventArgs.Value = compressor.MakeUpGain;
                     
                     compressorChanged?.Invoke(this, compressorEventArgs);
-                    OnMakeUpGainChanged?.Invoke(this, specMicGainEventArgs);
+                    OnMakeUpGainChanged?.Invoke(this, intCompressorEventArgs);
                     break;
 
                 case "Ratio":
                     compressorEventArgs.TypeChanged = CompressorEnum.Ratio;
-                    compressorEventArgs.Value = specMicGainEventArgs.Value = compressor.Ratio;
+                    compressorEventArgs.Value = intCompressorEventArgs.Value = compressor.Ratio;
                     
                     compressorChanged?.Invoke(this, compressorEventArgs);
-                    OnRatioChanged?.Invoke(this, specMicGainEventArgs);
+                    OnRatioChanged?.Invoke(this, intCompressorEventArgs);
                     break;
         
                 case "Release":
                     compressorEventArgs.TypeChanged = CompressorEnum.Release;
-                    compressorEventArgs.Value = specMicGainEventArgs.Value = compressor.Release;
+                    compressorEventArgs.Value = intCompressorEventArgs.Value = compressor.Release;
                     
                     compressorChanged?.Invoke(this, compressorEventArgs);
-                    OnReleaseChanged?.Invoke(this, specMicGainEventArgs);
+                    OnReleaseChanged?.Invoke(this, intCompressorEventArgs);
                     break;
         
                 case "Threshold":
                     compressorEventArgs.TypeChanged = CompressorEnum.Threshold;
-                    compressorEventArgs.Value = specMicGainEventArgs.Value = compressor.Threshold;
+                    compressorEventArgs.Value = intCompressorEventArgs.Value = compressor.Threshold;
                     
                     compressorChanged?.Invoke(this, compressorEventArgs);
-                    OnThresholdChanged?.Invoke(this, specMicGainEventArgs);
+                    OnThresholdChanged?.Invoke(this, intCompressorEventArgs);
                     break;
                 
                 default:

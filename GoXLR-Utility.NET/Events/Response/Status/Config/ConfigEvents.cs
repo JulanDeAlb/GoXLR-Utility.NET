@@ -14,45 +14,45 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Config
         public event EventHandler<ConfigEventArgs> OnConfigChanged; 
         public event EventHandler<BoolConfigEventArgs> OnAutoStartEnabledChanged;
         public event EventHandler<StringConfigEventArgs> OnDaemonVersionChanged;
-        public event EventHandler<ShowTrayIconEventArgs> OnShowTrayIconChanged;
+        public event EventHandler<BoolConfigEventArgs> OnShowTrayIconChanged;
 
-        protected internal void HandleEvents(Models.Response.Status.Config.Config config, MemberInfo memInfo, object value)
+        protected internal void HandleEvents(Models.Response.Status.Config.Config config, MemberInfo memInfo)
         {
             switch (memInfo.Name)
             {
                 case "AutostartEnabled":
                     OnConfigChanged?.Invoke(this, new ConfigEventArgs
                     {
-                        ConfigEnum = ConfigEnum.AutostartEnabled,
-                        AutostartEnabled = (bool) value
+                        TypeChanged = ConfigEnum.AutostartEnabled,
+                        AutostartEnabled = config.AutostartEnabled
                     });
                     OnAutoStartEnabledChanged?.Invoke(this, new BoolConfigEventArgs
                     {
-                        AutoStartEnabled = (bool) value
+                        Value = config.AutostartEnabled
                     });
                     break;
 
                 case "DaemonVersion":
                     OnConfigChanged?.Invoke(this, new ConfigEventArgs
                     {
-                        ConfigEnum = ConfigEnum.DaemonVersion,
-                        DaemonVersion = (string) value
+                        TypeChanged = ConfigEnum.DaemonVersion,
+                        DaemonVersion = config.DaemonVersion
                     });
                     OnDaemonVersionChanged?.Invoke(this, new StringConfigEventArgs
                     {
-                        DaemonVersion = (string) value
+                        Value = config.DaemonVersion
                     });
                     break;
                 
                 case "ShowTrayIcon":
                     OnConfigChanged?.Invoke(this, new ConfigEventArgs
                     {
-                        ConfigEnum = ConfigEnum.ShowTrayIcon,
-                        ShowTrayIcon = (bool) value
+                        TypeChanged = ConfigEnum.ShowTrayIcon,
+                        ShowTrayIcon = config.ShowTrayIcon
                     });
-                    OnShowTrayIconChanged?.Invoke(this, new ShowTrayIconEventArgs
+                    OnShowTrayIconChanged?.Invoke(this, new BoolConfigEventArgs
                     {
-                        ShowTrayIcon = (bool) value
+                        Value = config.ShowTrayIcon
                     });
                     break;
                 

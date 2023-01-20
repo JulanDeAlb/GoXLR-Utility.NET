@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Echo;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Echo;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 
@@ -8,21 +10,24 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
 {
     public class EchoEffectEvents
     {
-        public event EventHandler<EchoEffectEventArgs> OnEchoEffectChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnAmountChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnDelayLeftChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnDelayRightChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnFeedbackChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnFeedbackLeftChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnFeedbackRightChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnFeedbackXfbRtLChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnFeedbackXfbLtRChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnAmountChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnDelayLeftChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnDelayRightChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnFeedbackChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnFeedbackLeftChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnFeedbackRightChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnFeedbackXfbRtLChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnFeedbackXfbLtRChanged;
         public event EventHandler<EchoEffectStyleEventArgs> OnStyleChanged;
-        public event EventHandler<SpecificEchoEffectEventArgs> OnTempoChanged;
+        public event EventHandler<IntEchoEffectEventArgs> OnTempoChanged;
 
-        protected internal void HandleEvents(string serialNumber, EchoEffect effect, MemberInfo memInfo)
+        protected internal void HandleEvents(string serialNumber, EchoEffect effect, MemberInfo memInfo,
+            EventHandler<EffectEventArgs> effectsChanged,
+            EventHandler<CurrentEffectEventArgs> currentEffectChanged,
+            EventHandler<EchoEffectEventArgs> echoChanged,
+            EffectEventArgs effectEventArgs)
         {
-            var echoEffectEventArgs = new EchoEffectEventArgs
+            effectEventArgs.Current.Echo = new EchoEffectEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -30,11 +35,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
             switch (memInfo.Name)
             {
                 case "Amount":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.Amount;
-                    echoEffectEventArgs.Value = effect.Amount;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.Amount;
+                    effectEventArgs.Current.Echo.Value = effect.Amount;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnAmountChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnAmountChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Amount
@@ -42,11 +49,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "DelayLeft":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.DelayLeft;
-                    echoEffectEventArgs.Value = effect.DelayLeft;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.DelayLeft;
+                    effectEventArgs.Current.Echo.Value = effect.DelayLeft;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnDelayLeftChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnDelayLeftChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.DelayLeft
@@ -54,11 +63,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "DelayRight":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.DelayRight;
-                    echoEffectEventArgs.Value = effect.DelayRight;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.DelayRight;
+                    effectEventArgs.Current.Echo.Value = effect.DelayRight;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnDelayRightChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnDelayRightChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.DelayRight
@@ -66,11 +77,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "Feedback":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.Feedback;
-                    echoEffectEventArgs.Value = effect.Feedback;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.Feedback;
+                    effectEventArgs.Current.Echo.Value = effect.Feedback;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnFeedbackChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnFeedbackChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Feedback
@@ -78,11 +91,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "FeedbackLeft":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.FeedbackLeft;
-                    echoEffectEventArgs.Value = effect.FeedbackLeft;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.FeedbackLeft;
+                    effectEventArgs.Current.Echo.Value = effect.FeedbackLeft;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnFeedbackLeftChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnFeedbackLeftChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.FeedbackLeft
@@ -90,11 +105,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "FeedbackRight":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.FeedbackRight;
-                    echoEffectEventArgs.Value = effect.FeedbackRight;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.FeedbackRight;
+                    effectEventArgs.Current.Echo.Value = effect.FeedbackRight;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnFeedbackRightChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnFeedbackRightChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.FeedbackRight
@@ -102,11 +119,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "FeedbackXfbRtL":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.FeedbackXfbRtL;
-                    echoEffectEventArgs.Value = effect.FeedbackXfbRtL;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.FeedbackXfbRtL;
+                    effectEventArgs.Current.Echo.Value = effect.FeedbackXfbRtL;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnFeedbackXfbRtLChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnFeedbackXfbRtLChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.FeedbackXfbRtL
@@ -114,11 +133,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "FeedbackXfbLtR":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.FeedbackXfbLtR;
-                    echoEffectEventArgs.Value = effect.FeedbackXfbLtR;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.FeedbackXfbLtR;
+                    effectEventArgs.Current.Echo.Value = effect.FeedbackXfbLtR;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnFeedbackXfbLtRChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnFeedbackXfbLtRChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.FeedbackXfbLtR
@@ -126,10 +147,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "Style":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.Style;
-                    echoEffectEventArgs.EchoStyle = effect.Style;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.Style;
+                    effectEventArgs.Current.Echo.StyleValue = effect.Style;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
                     OnStyleChanged?.Invoke(this, new EchoEffectStyleEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -138,11 +161,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Echo
                     break;
                 
                 case "Tempo":
-                    echoEffectEventArgs.TypeChanged = EchoEnum.Tempo;
-                    echoEffectEventArgs.Value = effect.Tempo;
+                    effectEventArgs.Current.Echo.TypeChanged = EchoEnum.Tempo;
+                    effectEventArgs.Current.Echo.Value = effect.Tempo;
                     
-                    OnEchoEffectChanged?.Invoke(this, echoEffectEventArgs);
-                    OnTempoChanged?.Invoke(this, new SpecificEchoEffectEventArgs
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    echoChanged?.Invoke(this, effectEventArgs.Current.Echo);
+                    OnTempoChanged?.Invoke(this, new IntEchoEffectEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Tempo

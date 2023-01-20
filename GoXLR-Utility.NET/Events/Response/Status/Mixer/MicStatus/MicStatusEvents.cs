@@ -59,7 +59,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus
                 MicType = new MicTypeEventArgs
                 {
                     SerialNumber = serialNumber,
-                    MicrophoneType = micStatus.MicType
+                    Value = micStatus.MicType
                 }
             };
             
@@ -137,7 +137,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus
                     break;
                 
                 default:
-                    throw new ArgumentOutOfRangeException($"The Property Name ({myClass}) is not implemented in MicStatusEvents-HandleEqualiserEvents");
+                    throw new ArgumentOutOfRangeException($"The Property Name ({myClass}) is not implemented in MicStatusEvents-HandleEqualiserMiniEvents");
             }
         }
 

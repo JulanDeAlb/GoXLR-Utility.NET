@@ -3,6 +3,7 @@ using System.Reflection;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus;
@@ -15,19 +16,21 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
 {
     public class MixerEvents
     {
-        public ButtonDownEvents ButtonDown; //TODO DONE
-        public CoughButtonEvents CoughButton; //TODO DONE
-        public FaderStatusEvents FaderStatus; //TODO DONE
-        public MicStatusEvents Mic; //TODO DONE
-        public RouterEvents Router; //TODO DONE
-        public SamplerEvents Sampler; //TODO DONE
-        public SettingEvents Settings; //TODO DONE
-        public LevelEvents Levels; //TODO DONE
+        public ButtonDownEvents ButtonDown; //!DONE
+        public CoughButtonEvents CoughButton; //!DONE
+        public EffectEvents Effect; 
+        public FaderStatusEvents FaderStatus; //!DONE
+        public MicStatusEvents Mic; //!DONE
+        public RouterEvents Router; //!DONE
+        public SamplerEvents Sampler; //!DONE
+        public SettingEvents Settings; //!DONE
+        public LevelEvents Levels; //!DONE
 
         public MixerEvents()
         {
             ButtonDown = new ButtonDownEvents();
             CoughButton = new CoughButtonEvents();
+            Effect = new EffectEvents();
             FaderStatus = new FaderStatusEvents();
             Mic = new MicStatusEvents();
             Router = new RouterEvents();

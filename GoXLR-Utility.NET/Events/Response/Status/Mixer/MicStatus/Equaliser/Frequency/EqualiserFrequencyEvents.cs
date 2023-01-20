@@ -40,7 +40,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Equaliser.Fre
             EventHandler<MicStatusEventArgs> micStatusChanged, EventHandler<EqualiserEventArgs> equaliserChanged,
             EventHandler<EqualiserFrequencyEventArgs> frequencyChanged)
         {
-            var specEqualiserEventArgs = new DoubleEqualiserFrequencyEventArgs
+            var doubleEqualiserFrequencyEventArgs = new DoubleEqualiserFrequencyEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -49,102 +49,102 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.Equaliser.Fre
             {
                 case "Equalizer31Hz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer31Hz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer31Hz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer31Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer31HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer31HzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer63Hz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer63Hz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer63Hz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer63Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer63HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer63HzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer125Hz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer125Hz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer125Hz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer125Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer125HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer125HzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer250Hz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer250Hz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer250Hz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer250Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer250HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer250HzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer500Hz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer500Hz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer500Hz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer500Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer500HzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer500HzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer1KHz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer1KHz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer1KHz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer1KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer1KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer1KHzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer2KHz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer2KHz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer2KHz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer2KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer2KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer2KHzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer4KHz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer4KHz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer4KHz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer4KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer4KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer4KHzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer8KHz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer8KHz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer8KHz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer8KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer8KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer8KHzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
         
                 case "Equalizer16KHz":
                     micStatusEventArgs.Equaliser.Frequency.TypeChanged = EqualiserEnum.Equalizer16KHz;
-                    micStatusEventArgs.Equaliser.Frequency.Value = specEqualiserEventArgs.Value = frequency.Equalizer16KHz;
+                    micStatusEventArgs.Equaliser.Frequency.Value = doubleEqualiserFrequencyEventArgs.Value = frequency.Equalizer16KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.Equaliser);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.Equaliser.Frequency);
-                    OnEqualizer16KHzChanged?.Invoke(this, specEqualiserEventArgs);
+                    OnEqualizer16KHzChanged?.Invoke(this, doubleEqualiserFrequencyEventArgs);
                     break;
                 
                 default:

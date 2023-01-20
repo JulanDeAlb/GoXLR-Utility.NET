@@ -40,56 +40,56 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                 case "Name":
                     samplerBanksEventArgs.BankButton.BankBase.TypeChanged = BankBaseEnum.SampleValue;
                     samplerBanksEventArgs.BankButton.BankBase.SampleValue.TypeChanged = SampleEnum.Name;
-                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Name = new StringSampleEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Value = sample.Name
-                    };
+                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.StringValue = sample.Name;
 
                     samplerBanksChanged?.Invoke(this, samplerBanksEventArgs);
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     bankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
                     OnSampleChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue);
-                    OnNameChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue.Name);
+                    OnNameChanged?.Invoke(this, new StringSampleEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = sample.Name
+                    });
                     break;
                         
                 case "StartPct":
                     samplerBanksEventArgs.BankButton.BankBase.TypeChanged = BankBaseEnum.SampleValue;
                     samplerBanksEventArgs.BankButton.BankBase.SampleValue.TypeChanged = SampleEnum.StartPct;
-                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct = new DoubleSampleEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Value = sample.StartPct
-                    };
+                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.DoubleValue = sample.StartPct;
 
                     samplerBanksChanged?.Invoke(this, samplerBanksEventArgs);
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     bankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
                     OnSampleChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue);
-                    OnStartPctChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct);
+                    OnStartPctChanged?.Invoke(this, new DoubleSampleEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = sample.StartPct
+                    });
                     break;
                         
                 case "StopPct":
                     samplerBanksEventArgs.BankButton.BankBase.TypeChanged = BankBaseEnum.SampleValue;
                     samplerBanksEventArgs.BankButton.BankBase.SampleValue.TypeChanged = SampleEnum.StopPct;
-                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct = new DoubleSampleEventArgs
-                    {
-                        SerialNumber = serialNumber,
-                        Value = sample.StopPct
-                    };
+                    samplerBanksEventArgs.BankButton.BankBase.SampleValue.DoubleValue = sample.StopPct;
 
                     samplerBanksChanged?.Invoke(this, samplerBanksEventArgs);
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     bankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
                     OnSampleChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue);
-                    OnStopPctChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue.Pct);
+                    OnStopPctChanged?.Invoke(this, new DoubleSampleEventArgs
+                    {
+                        SerialNumber = serialNumber,
+                        Value = sample.StopPct
+                    });
                     break;
                         
                 default:
-                    throw new ArgumentOutOfRangeException($"The Property Name ({memInfo.Name}) is not implemented in SamplerBankBaseButtonEvents (Sample != null)");
+                    throw new ArgumentOutOfRangeException($"The Property Name ({memInfo.Name}) is not implemented in SampleEvents");
             }
         }
     }

@@ -28,7 +28,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings.Display
                 SerialNumber = serialNumber
             };
             
-            var specDisplayEventArgs = new DisplayModeEventArgs
+            var displayModeEventArgs = new DisplayModeEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -36,31 +36,31 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings.Display
             switch (memInfo.Name)
             {
                 case "Compressor":
-                    displayEventArgs.GuiDisplayEnum = GuiDisplayEnum.Compressor;
-                    displayEventArgs.DisplayMode = specDisplayEventArgs.DisplayMode = guiDisplay.Compressor;
+                    displayEventArgs.TypeChanged = GuiDisplayEnum.Compressor;
+                    displayEventArgs.Value = displayModeEventArgs.Value = guiDisplay.Compressor;
                     OnDisplayChanged?.Invoke(this, displayEventArgs);
-                    OnCompressorChanged?.Invoke(this, specDisplayEventArgs);
+                    OnCompressorChanged?.Invoke(this, displayModeEventArgs);
                     break;
                 
                 case "Equaliser":
-                    displayEventArgs.GuiDisplayEnum = GuiDisplayEnum.Equaliser;
-                    displayEventArgs.DisplayMode = specDisplayEventArgs.DisplayMode = guiDisplay.Equaliser;
+                    displayEventArgs.TypeChanged = GuiDisplayEnum.Equaliser;
+                    displayEventArgs.Value = displayModeEventArgs.Value = guiDisplay.Equaliser;
                     OnDisplayChanged?.Invoke(this, displayEventArgs);
-                    OnEqualiserChanged?.Invoke(this, specDisplayEventArgs);
+                    OnEqualiserChanged?.Invoke(this, displayModeEventArgs);
                     break;
                 
                 case "EqualiserFine":
-                    displayEventArgs.GuiDisplayEnum = GuiDisplayEnum.EqualiserFine;
-                    displayEventArgs.DisplayMode = specDisplayEventArgs.DisplayMode = guiDisplay.EqualiserFine;
+                    displayEventArgs.TypeChanged = GuiDisplayEnum.EqualiserFine;
+                    displayEventArgs.Value = displayModeEventArgs.Value = guiDisplay.EqualiserFine;
                     OnDisplayChanged?.Invoke(this, displayEventArgs);
-                    OnEqualiserFineChanged?.Invoke(this, specDisplayEventArgs);
+                    OnEqualiserFineChanged?.Invoke(this, displayModeEventArgs);
                     break;
                 
                 case "Gate":
-                    displayEventArgs.GuiDisplayEnum = GuiDisplayEnum.Gate;
-                    displayEventArgs.DisplayMode = specDisplayEventArgs.DisplayMode = guiDisplay.Gate;
+                    displayEventArgs.TypeChanged = GuiDisplayEnum.Gate;
+                    displayEventArgs.Value = displayModeEventArgs.Value = guiDisplay.Gate;
                     OnDisplayChanged?.Invoke(this, displayEventArgs);
-                    OnGateChanged?.Invoke(this, specDisplayEventArgs);
+                    OnGateChanged?.Invoke(this, displayModeEventArgs);
                     break;
                 
                 default:

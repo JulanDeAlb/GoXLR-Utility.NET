@@ -2,8 +2,8 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Pitc
 {
     public class IntPitchEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; internal set; }
         
-        public int Value { get; set; }
+        public int Value { get; internal set; }
     }
 }

@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Pitch;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Pitch;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 
@@ -8,14 +10,17 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
 {
    public class PitchEffectEvents
     {
-        public event EventHandler<PitchEffectEventArgs> OnPitchEffectChanged;
         public event EventHandler<IntPitchEffectEventArgs> OnAmountChanged;
         public event EventHandler<IntPitchEffectEventArgs> OnCharacterChanged;
         public event EventHandler<PitchStyleEffectEventArgs> OnStyleChanged;
 
-        protected internal void HandleEvents(string serialNumber, PitchEffect effect, MemberInfo memInfo)
+        protected internal void HandleEvents(string serialNumber, PitchEffect effect, MemberInfo memInfo,
+            EventHandler<EffectEventArgs> effectsChanged,
+            EventHandler<CurrentEffectEventArgs> currentEffectChanged,
+            EventHandler<PitchEffectEventArgs> pitchChanged,
+            EffectEventArgs effectEventArgs)
         {
-            var pitchEffectEventArgs = new PitchEffectEventArgs
+            effectEventArgs.Current.Pitch = new PitchEffectEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -23,10 +28,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
             switch (memInfo.Name)
             {
                 case "Amount":
-                    pitchEffectEventArgs.TypeChanged = PitchEnum.Amount;
-                    pitchEffectEventArgs.IntValue = effect.Amount;
+                    effectEventArgs.Current.Pitch.TypeChanged = PitchEnum.Amount;
+                    effectEventArgs.Current.Pitch.IntValue = effect.Amount;
                     
-                    OnPitchEffectChanged?.Invoke(this, pitchEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    pitchChanged?.Invoke(this, effectEventArgs.Current.Pitch);
                     OnAmountChanged?.Invoke(this, new IntPitchEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -35,10 +42,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
                     break;
                 
                 case "Character":
-                    pitchEffectEventArgs.TypeChanged = PitchEnum.Character;
-                    pitchEffectEventArgs.IntValue = effect.Character;
+                    effectEventArgs.Current.Pitch.TypeChanged = PitchEnum.Character;
+                    effectEventArgs.Current.Pitch.IntValue = effect.Character;
                     
-                    OnPitchEffectChanged?.Invoke(this, pitchEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    pitchChanged?.Invoke(this, effectEventArgs.Current.Pitch);
                     OnCharacterChanged?.Invoke(this, new IntPitchEffectEventArgs
                     {
                         SerialNumber = serialNumber,
@@ -47,10 +56,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
                     break;
 
                 case "Style":
-                    pitchEffectEventArgs.TypeChanged = PitchEnum.Style;
-                    pitchEffectEventArgs.StyleValue = effect.Style;
+                    effectEventArgs.Current.Pitch.TypeChanged = PitchEnum.Style;
+                    effectEventArgs.Current.Pitch.StyleValue = effect.Style;
                     
-                    OnPitchEffectChanged?.Invoke(this, pitchEffectEventArgs);
+                    effectsChanged?.Invoke(this, effectEventArgs);
+                    currentEffectChanged?.Invoke(this, effectEventArgs.Current);
+                    pitchChanged?.Invoke(this, effectEventArgs.Current.Pitch);
                     OnStyleChanged?.Invoke(this, new PitchStyleEffectEventArgs
                     {
                         SerialNumber = serialNumber,

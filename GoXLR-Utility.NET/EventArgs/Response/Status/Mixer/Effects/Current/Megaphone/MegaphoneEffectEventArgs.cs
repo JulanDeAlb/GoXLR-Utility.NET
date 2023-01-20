@@ -4,17 +4,17 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Mega
 {
     public class MegaphoneEffectEventArgs : System.EventArgs
     {
-        public string SerialNumber { get; set; }
+        public bool BoolValue { get; internal set; }
+        
+        public int IntValue { get; internal set; }
+        
+        public string SerialNumber { get; internal set; }
+        
+        public MegaphoneStyle StyleValue { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the Megaphone has been changed
         /// </summary>
-        public MegaphoneEnum TypeChanged { get; set; }
-        
-        public int IntValue { get; set; }
-        
-        public bool BoolValue { get; set; }
-        
-        public MegaphoneStyle StyleValue { get; set; }
+        public MegaphoneEnum TypeChanged { get; internal set; }
     }
 }
