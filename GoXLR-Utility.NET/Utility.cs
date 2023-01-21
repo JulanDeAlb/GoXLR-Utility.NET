@@ -92,5 +92,45 @@ namespace GoXLR_Utility.NET
         {
             Console.WriteLine(e.Exception);
         }
+        
+        public void SendCommand(string serialNumber, string commandName, params object[] parameters)
+        {
+            if (commandName is null)
+                return;
+
+            if (parameters is null || parameters.Length < 1)
+                return;
+
+            var commandParameters = parameters.Length == 1
+                ? parameters[0]
+                : parameters;
+
+            SendCommand(serialNumber, new Dictionary<string, object>
+            {
+                [commandName] = commandParameters
+            });
+        }
+		
+        private void SendCommand(string serialNumber, object command)
+        {
+            if (serialNumber is null)
+                return;
+
+            var id = _id++;
+            var finalRequest = new
+            {
+                id,
+                data = new
+                {
+                    Command = new[] {
+                        serialNumber,
+                        command
+                    }
+                }
+            };
+			
+            var json = JsonSerializer.Serialize(finalRequest, _serializerOptions);
+            _websocket.Send(json);
+        }
     }
 }
