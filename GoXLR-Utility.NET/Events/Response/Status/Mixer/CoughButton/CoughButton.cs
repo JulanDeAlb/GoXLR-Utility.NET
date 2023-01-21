@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.CoughButton;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.CoughButton;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton;
 
@@ -13,7 +14,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton
     {
         public event EventHandler<CoughButtonEventArgs> OnCoughButtonChanged;
 
-        public event EventHandler<BoolCoughButtonEventArgs> OnIsToggledChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnIsToggledChanged;
 
         public event EventHandler<CoughButtonFunctionEventArgs> OnMuteFunctionChanged;
 
@@ -34,7 +35,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton
                     coughButtonArgs.BoolValue = coughButton.IsToggle;
                     
                     OnCoughButtonChanged?.Invoke(this, coughButtonArgs);
-                    OnIsToggledChanged?.Invoke(this, new BoolCoughButtonEventArgs
+                    OnIsToggledChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = coughButton.IsToggle

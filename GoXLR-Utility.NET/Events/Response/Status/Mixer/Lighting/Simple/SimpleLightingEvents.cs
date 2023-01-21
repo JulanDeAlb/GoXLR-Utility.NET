@@ -16,7 +16,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting.Simple
         public event EventHandler<StringSimpleColourEventArgs> OnScribble4Changed;
         public event EventHandler<StringSimpleColourEventArgs> OnGlobalChanged;
         
-        protected internal void HandleEvents(string serialNumber, object myClass,
+        protected internal void HandleEvents(string serialNumber, OneColour myClass,
             EventHandler<LightingEventArgs> lightningChanged,
             EventHandler<SimpleColourEventArgs> simpleChanged,
             LightingEventArgs lightingEventArgs)

@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Pitch;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Pitch;
@@ -10,8 +11,8 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
 {
    public class PitchEffectEvents
     {
-        public event EventHandler<IntPitchEffectEventArgs> OnAmountChanged;
-        public event EventHandler<IntPitchEffectEventArgs> OnCharacterChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAmountChanged;
+        public event EventHandler<IntDeviceEventArgs> OnCharacterChanged;
         public event EventHandler<PitchStyleEffectEventArgs> OnStyleChanged;
 
         protected internal void HandleEvents(string serialNumber, PitchEffect effect, MemberInfo memInfo,
@@ -34,7 +35,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     pitchChanged?.Invoke(this, effectEventArgs.Current.Pitch);
-                    OnAmountChanged?.Invoke(this, new IntPitchEffectEventArgs
+                    OnAmountChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Amount
@@ -48,7 +49,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Pitch
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     pitchChanged?.Invoke(this, effectEventArgs.Current.Pitch);
-                    OnCharacterChanged?.Invoke(this, new IntPitchEffectEventArgs
+                    OnCharacterChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Character

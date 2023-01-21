@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Megaphone;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Megaphone;
@@ -10,9 +11,9 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
 {
     public class MegaphoneEffectEvents
     {
-        public event EventHandler<IntMegaphoneEffectEventArgs> OnAmountChanged;
-        public event EventHandler<BoolMegaphoneEffectEventArgs> OnIsEnabledChanged;
-        public event EventHandler<IntMegaphoneEffectEventArgs> OnRateChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAmountChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnIsEnabledChanged;
+        public event EventHandler<IntDeviceEventArgs> OnRateChanged;
         public event EventHandler<MegaphoneStyleEffectEventArgs> OnStyleChanged;
 
         protected internal void HandleEvents(string serialNumber, MegaphoneEffect effect, MemberInfo memInfo,
@@ -35,7 +36,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
-                    OnAmountChanged?.Invoke(this, new IntMegaphoneEffectEventArgs
+                    OnAmountChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Amount
@@ -49,7 +50,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
-                    OnIsEnabledChanged?.Invoke(this, new BoolMegaphoneEffectEventArgs
+                    OnIsEnabledChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.IsEnabled
@@ -63,7 +64,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Megapho
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     megaphoneChanged?.Invoke(this, effectEventArgs.Current.Megaphone);
-                    OnRateChanged?.Invoke(this, new IntMegaphoneEffectEventArgs
+                    OnRateChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.PostGain

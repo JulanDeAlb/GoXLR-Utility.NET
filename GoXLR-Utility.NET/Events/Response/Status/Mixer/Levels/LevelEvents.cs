@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Levels;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Levels;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels.Volumes;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels;
@@ -16,9 +17,9 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
 
         public event EventHandler<LevelEventArgs> OnLevelChanged;
 
-        public event EventHandler<SByteLevelEventArgs> OnBleepLevelChanged;
+        public event EventHandler<SByteDeviceEventArgs> OnBleepLevelChanged;
 
-        public event EventHandler<SByteLevelEventArgs> OnDeEsserLevelChanged;
+        public event EventHandler<SByteDeviceEventArgs> OnDeEsserLevelChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.Levels.Levels levels, MemberInfo memInfo)
         {
@@ -27,7 +28,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
                 SerialNumber = serialNumber
             };
 
-            var sByteLevelEventArgs = new SByteLevelEventArgs
+            var sByteDeviceEventArgs = new SByteDeviceEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -36,16 +37,16 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels
             {
                 case "Bleep":
                     levelEventArgs.TypeChanged = LevelEnum.Bleep;
-                    levelEventArgs.Volume = sByteLevelEventArgs.Value = levels.Bleep;
+                    levelEventArgs.Volume = sByteDeviceEventArgs.Value = levels.Bleep;
                     OnLevelChanged?.Invoke(this, levelEventArgs);
-                    OnBleepLevelChanged?.Invoke(this, sByteLevelEventArgs);
+                    OnBleepLevelChanged?.Invoke(this, sByteDeviceEventArgs);
                     break;
                 
                 case "DeEsser":
                     levelEventArgs.TypeChanged = LevelEnum.DeEsser;
-                    levelEventArgs.Volume = sByteLevelEventArgs.Value = levels.DeEsser;
+                    levelEventArgs.Volume = sByteDeviceEventArgs.Value = levels.DeEsser;
                     OnLevelChanged?.Invoke(this, levelEventArgs);
-                    OnDeEsserLevelChanged?.Invoke(this, sByteLevelEventArgs);
+                    OnDeEsserLevelChanged?.Invoke(this, sByteDeviceEventArgs);
                     break;
                 
                 default:

@@ -1,11 +1,16 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
-using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Samplers;
-using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting;
-using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting.Samplers;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting.Button;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting.Encoder;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting.Fader;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting.Sampler;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Lighting.Simple;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting.Button;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting.Encoder;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting.Fader;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting.Sampler;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting.Simple;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons;
@@ -18,15 +23,18 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting
 {
     public class LightingEvents
     {
-        public SimpleLightingEvents Simple = new SimpleLightingEvents();
+        public ButtonLightingEvents Button = new ButtonLightingEvents();
+        public EncoderLightingEvents Encoder = new EncoderLightingEvents();
+        public FaderLightingEvents Fader = new FaderLightingEvents();
         public SamplerLightingEvents Sampler = new SamplerLightingEvents();
+        public SimpleLightingEvents Simple = new SimpleLightingEvents();
         
-        public event EventHandler<LightingEventArgs> OnLightningChanged; //TODO
-        public event EventHandler<System.EventArgs> OnButtosChanged; //TODO
-        public event EventHandler<System.EventArgs> OnEncodersChanged; //TODO
-        public event EventHandler<System.EventArgs> OnFadersChanged; //TODO
-        public event EventHandler<SamplerLightingEventArgs> OnSamplerChanged; //TODO
-        public event EventHandler<SimpleColourEventArgs> OnSimpleChanged; //TODO DONE
+        public event EventHandler<LightingEventArgs> OnLightningChanged;
+        public event EventHandler<ButtonLightingEventArgs> OnButtonsChanged;
+        public event EventHandler<EncoderLightingEventArgs> OnEncodersChanged;
+        public event EventHandler<FaderLightingEventArgs> OnFaderChanged;
+        public event EventHandler<SamplerLightingEventArgs> OnSamplerChanged;
+        public event EventHandler<SimpleColourEventArgs> OnSimpleChanged;
 
         protected internal void HandleEvents(string serialNumber, object lighting, object childObject, MemberInfo memInfo)
         {
@@ -37,16 +45,19 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting
 
             switch (lighting)
             {
-                case ButtonsLight buttons:
-
+                case ButtonLight _:
+                    lightingEventArgs.TypeChanged = LightingEnum.Buttons;
+                    Button.HandleEvents(serialNumber, (ButtonLightBase) childObject, memInfo, OnLightningChanged, OnButtonsChanged, lightingEventArgs);
                     break;
                 
-                case EncodersLight encoders:
-
+                case EncoderLight _:
+                    lightingEventArgs.TypeChanged = LightingEnum.Encoders;
+                    Encoder.HandleEvents(serialNumber, (ThreeColour) childObject, memInfo, OnLightningChanged, OnEncodersChanged, lightingEventArgs);
                     break;
                 
-                case FadersLight faders:
-
+                case FaderLight _:
+                    lightingEventArgs.TypeChanged = LightingEnum.Faders;
+                    Fader.HandleEvents(serialNumber, (FaderLightBase) childObject, memInfo, OnLightningChanged, OnFaderChanged, lightingEventArgs);
                     break;
                 
                 case SamplerLight _:
@@ -54,90 +65,14 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting
                     Sampler.HandleEvents(serialNumber, (SamplerLightBase) childObject, memInfo, OnLightningChanged, OnSamplerChanged, lightingEventArgs);
                     break;
                 
-                case SimpleLight simple:
+                case SimpleLight _:
                     lightingEventArgs.TypeChanged = LightingEnum.Simple;
-                    Simple.HandleEvents(serialNumber, simple, OnLightningChanged, OnSimpleChanged, lightingEventArgs);
+                    Simple.HandleEvents(serialNumber, (OneColour) childObject, OnLightningChanged, OnSimpleChanged, lightingEventArgs);
                     break;
                 
                 default:
                     var type = lighting.GetType();
                     throw new ArgumentOutOfRangeException($"Type out of Range in LightingEvents: {type.Name} | Path: {type.FullName}");
-            }
-        }
-    }
-
-    public class SamplerLightingEvents
-    {
-        public SamplerLightingBaseEvents A = new SamplerLightingBaseEvents();
-        public SamplerLightingBaseEvents B = new SamplerLightingBaseEvents();
-        public SamplerLightingBaseEvents C = new SamplerLightingBaseEvents();
-        
-        public event EventHandler<SamplerLightingBaseEventArgs> OnSamplerAChanged;
-        public event EventHandler<SamplerLightingBaseEventArgs> OnSamplerBChanged;
-        public event EventHandler<SamplerLightingBaseEventArgs> OnSamplerCChanged;
-
-        protected internal void HandleEvents(string serialNumber, SamplerLightBase lightBase, MemberInfo memInfo,
-            EventHandler<LightingEventArgs> lightningChanged,
-            EventHandler<SamplerLightingEventArgs> samplerChanged,
-            LightingEventArgs lightingEventArgs)
-        {
-            lightingEventArgs.Sampler = new SamplerLightingEventArgs
-            {
-                SerialNumber = serialNumber
-            };
-            
-            switch (lightBase)
-            {
-                case SamplerA samplerA:
-                    lightingEventArgs.Sampler.TypeChanged = SamplerEnum.SamplerA;
-                    A.HandleEvents(serialNumber, samplerA, memInfo, lightningChanged, samplerChanged, OnSamplerAChanged, lightingEventArgs);
-                    break;
-                
-                case SamplerB samplerB:
-                    lightingEventArgs.Sampler.TypeChanged = SamplerEnum.SamplerB;
-                    B.HandleEvents(serialNumber, samplerB, memInfo, lightningChanged, samplerChanged, OnSamplerBChanged, lightingEventArgs);
-                    break;
-                
-                case SamplerC samplerC:
-                    lightingEventArgs.Sampler.TypeChanged = SamplerEnum.SamplerC;
-                    C.HandleEvents(serialNumber, samplerC, memInfo, lightningChanged, samplerChanged, OnSamplerCChanged, lightingEventArgs);
-                    break;
-                
-                default:
-                    var type = lightBase.GetType();
-                    throw new ArgumentOutOfRangeException($"Type out of Range in SamplerLightingEvents: {type.Name} | Path: {type.FullName}");
-            }
-        }
-    }
-
-    public class SamplerLightingBaseEvents
-    {
-        public ThreeColourEvents Colour = new ThreeColourEvents();
-        
-        public event EventHandler<StringDeviceEventArgs> OnOffstyleChanged;
-        public event EventHandler<SamplerColourEventArgs> OnColourChanged;
-        
-        protected internal void HandleEvents(string serialNumber, SamplerLightBase sampler, MemberInfo memInfo,
-            EventHandler<LightingEventArgs> lightningChanged,
-            EventHandler<SamplerLightingEventArgs> samplerChanged,
-            EventHandler<SamplerLightingBaseEventArgs> samplerAChanged,
-            LightingEventArgs lightingEventArgs)
-        {
-            if (memInfo.Name.Equals("OffStyle"))
-            {
-                lightingEventArgs.Sampler.Base.TypeChanged = SamplerBaseEnum.OffStyle;
-                lightingEventArgs.Sampler.Base.StringValue = sampler.OffStyle;
-                
-                OnOffstyleChanged?.Invoke(this, new StringDeviceEventArgs
-                {
-                    SerialNumber = serialNumber,
-                    Value = sampler.OffStyle
-                });
-            }
-            else
-            {
-                lightingEventArgs.Sampler.Base.TypeChanged = SamplerBaseEnum.Colour;
-                Colour.HandleSamplerEvents(serialNumber, sampler.Colour, memInfo, lightningChanged, samplerChanged, samplerAChanged, OnColourChanged, lightingEventArgs);
             }
         }
     }

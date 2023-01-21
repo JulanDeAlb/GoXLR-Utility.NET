@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Robot;
@@ -10,21 +11,21 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
 {
     public class RobotEffectEvents
     {
-        public event EventHandler<IntRobotEffectEventArgs> OnDryMixChanged;
-        public event EventHandler<BoolRobotEffectEventArgs> OnIsEnabledChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnHighFreqChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnHighGainChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnHighWidthChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnLowFreqChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnLowGainChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnLowWidthChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnMidFreqChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnMidGainChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnMidWidthChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnPulseWidthChanged;
+        public event EventHandler<IntDeviceEventArgs> OnDryMixChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnIsEnabledChanged;
+        public event EventHandler<IntDeviceEventArgs> OnHighFreqChanged;
+        public event EventHandler<IntDeviceEventArgs> OnHighGainChanged;
+        public event EventHandler<IntDeviceEventArgs> OnHighWidthChanged;
+        public event EventHandler<IntDeviceEventArgs> OnLowFreqChanged;
+        public event EventHandler<IntDeviceEventArgs> OnLowGainChanged;
+        public event EventHandler<IntDeviceEventArgs> OnLowWidthChanged;
+        public event EventHandler<IntDeviceEventArgs> OnMidFreqChanged;
+        public event EventHandler<IntDeviceEventArgs> OnMidGainChanged;
+        public event EventHandler<IntDeviceEventArgs> OnMidWidthChanged;
+        public event EventHandler<IntDeviceEventArgs> OnPulseWidthChanged;
         public event EventHandler<RobotStyleEffectEventArgs> OnStyleChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnThresholdChanged;
-        public event EventHandler<IntRobotEffectEventArgs> OnWaveFromChanged;
+        public event EventHandler<IntDeviceEventArgs> OnThresholdChanged;
+        public event EventHandler<IntDeviceEventArgs> OnWaveFromChanged;
 
         protected internal void HandleEvents(string serialNumber, RobotEffect effect, MemberInfo memInfo,
             EventHandler<EffectEventArgs> effectsChanged,
@@ -46,7 +47,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnDryMixChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnDryMixChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.DryMix
@@ -60,7 +61,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnIsEnabledChanged?.Invoke(this, new BoolRobotEffectEventArgs
+                    OnIsEnabledChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.IsEnabled
@@ -74,7 +75,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnHighFreqChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnHighFreqChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.HighFreq
@@ -88,7 +89,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnHighGainChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnHighGainChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.HighGain
@@ -102,7 +103,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnHighWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnHighWidthChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.HighWidth
@@ -116,7 +117,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnLowFreqChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnLowFreqChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.LowFreq
@@ -130,7 +131,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnLowGainChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnLowGainChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.LowGain
@@ -144,7 +145,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnLowWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnLowWidthChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.LowWidth
@@ -158,7 +159,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnMidFreqChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnMidFreqChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.MidFreq
@@ -172,7 +173,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnMidGainChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnMidGainChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.MidGain
@@ -186,7 +187,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnMidWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnMidWidthChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.MidWidth
@@ -200,7 +201,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnPulseWidthChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnPulseWidthChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.PulseWidth
@@ -228,7 +229,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnThresholdChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnThresholdChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Threshold
@@ -242,7 +243,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Robot
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     robotChanged?.Invoke(this, effectEventArgs.Current.Robot);
-                    OnWaveFromChanged?.Invoke(this, new IntRobotEffectEventArgs
+                    OnWaveFromChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.WaveFrom

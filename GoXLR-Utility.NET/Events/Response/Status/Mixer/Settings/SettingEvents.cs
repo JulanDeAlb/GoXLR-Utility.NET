@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Settings;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Settings;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings.Display;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings;
@@ -16,9 +17,9 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
 
         public event EventHandler<SettingEventArgs> OnSettingsChanged;
         
-        public event EventHandler<IntSettingsEventArgs> OnMuteHoldDurationChanged;
+        public event EventHandler<IntDeviceEventArgs> OnMuteHoldDurationChanged;
         
-        public event EventHandler<BoolSettingsEventArgs> OnVcMuteAlsoMuteCmChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnVcMuteAlsoMuteCmChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.Settings.Settings settings, MemberInfo memInfo)
         {
@@ -33,7 +34,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
                     settingEventArgs.TypeChanged = SettingsEnum.MuteHoldDuration;
                     settingEventArgs.IntValue = settings.MuteHoldDuration;
                     OnSettingsChanged?.Invoke(this, settingEventArgs);
-                    OnMuteHoldDurationChanged?.Invoke(this, new IntSettingsEventArgs
+                    OnMuteHoldDurationChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = settings.MuteHoldDuration
@@ -44,7 +45,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Settings
                     settingEventArgs.TypeChanged = SettingsEnum.VcMuteAlsoMuteCm;
                     settingEventArgs.BoolValue = settings.VcMuteAlsoMuteCm;
                     OnSettingsChanged?.Invoke(this, settingEventArgs);
-                    OnVcMuteAlsoMuteCmChanged?.Invoke(this, new BoolSettingsEventArgs
+                    OnVcMuteAlsoMuteCmChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = settings.VcMuteAlsoMuteCm

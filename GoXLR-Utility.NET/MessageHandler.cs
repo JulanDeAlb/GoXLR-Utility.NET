@@ -13,8 +13,13 @@ namespace GoXLR_Utility.NET
         private static JsonSerializerOptions _serializerOptions;
         private static Status _status;
 
-        public bool ShouldInvokeEvents = _patchHandler.ShouldInvokeEvents;
         public static List<string> AvailableSerialNumbers = new List<string>();
+        
+        public bool ShouldInvokeEvents
+        {
+            get => _patchHandler.ShouldInvokeEvents;
+            set => _patchHandler.ShouldInvokeEvents = value;
+        }
 
         public MessageHandler(Events.Events events, Status status, JsonSerializerOptions serializerOptions)
         {
@@ -23,16 +28,19 @@ namespace GoXLR_Utility.NET
             _serializerOptions = serializerOptions;
         }
 
-        private static Stopwatch w = new Stopwatch();
+#if DEBUG
+        private static readonly Stopwatch DebugWatch = new Stopwatch();
+#endif
         
         public void HandleMessage(string message)
         {
+#if DEBUG
             double  ticks;
             double  seconds;
             double  milliseconds;
             double  nanoseconds;
-            
-            w.Start();
+            DebugWatch.Start();
+#endif
             Response response;
             try
             {
@@ -41,24 +49,26 @@ namespace GoXLR_Utility.NET
             catch (Exception e)
             {
                 Console.WriteLine(e.Message); //TODO Log exception
-                w.Stop();
-                ticks = w.ElapsedTicks;
+#if DEBUG
+                DebugWatch.Stop();
+                ticks = DebugWatch.ElapsedTicks;
                 seconds = ticks / Stopwatch.Frequency;
                 milliseconds = (ticks / Stopwatch.Frequency) * 1000;
                 nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
                 Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks} | ");
-                w.Reset();
+                DebugWatch.Reset();
+#endif
                 return;
             }
-            
-            w.Stop();
-            ticks = w.ElapsedTicks;
+#if DEBUG           
+            DebugWatch.Stop();
+            ticks = DebugWatch.ElapsedTicks;
             seconds = ticks / Stopwatch.Frequency;
             milliseconds = (ticks / Stopwatch.Frequency) * 1000;
             nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
             Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks} | ");
-            w.Reset();
-            
+            DebugWatch.Reset();
+#endif
             if (response is null)
                 throw new ArgumentNullException(nameof(HandleMessage)); // TODO Log it
 
@@ -68,7 +78,7 @@ namespace GoXLR_Utility.NET
             }
             else if (response.Data.Error != null)
             {
-                throw new NotImplementedException("Error WS Message"); //TODO Log the WS Message for implementation
+                throw new NotImplementedException($"Error WS Message | {response.Data.Error}"); //TODO Log the WS Message for implementation
                 /*
                  OnErrorResponseReceived?.Invoke(this, new OnErrorResponseReceivedEventArgs
                 {

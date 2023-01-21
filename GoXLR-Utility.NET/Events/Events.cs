@@ -10,10 +10,10 @@ namespace GoXLR_Utility.NET.Events
 {
     public class Events
     {
-        public ConfigEvents Config; //!DONE
-        public FileEvents File; //!DONE
+        public ConfigEvents Config;
+        public FileEvents File;
         public MixerEvents Device;
-        public PathEvents Path; //!DONE
+        public PathEvents Path;
 
         public Events()
         {

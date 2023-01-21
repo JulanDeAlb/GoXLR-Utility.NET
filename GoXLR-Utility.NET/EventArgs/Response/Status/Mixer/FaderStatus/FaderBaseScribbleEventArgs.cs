@@ -6,11 +6,11 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus
 {
     public class FaderBaseScribbleEventArgs : System.EventArgs
     {
-        public string StringValue { get; internal set; }
-        
         public bool BoolValue { get; internal set; }
         
         public string SerialNumber { get; internal set; }
+        
+        public string StringValue { get; internal set; }
         
         /// <summary>
         /// Indicating which type of the Scribble has been changed

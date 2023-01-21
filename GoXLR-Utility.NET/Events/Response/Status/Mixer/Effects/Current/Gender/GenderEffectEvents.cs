@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Gender;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Gender;
@@ -10,7 +11,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Gender
 {
     public class GenderEffectEvents
     {
-        public event EventHandler<IntGenderEffectEventArgs> OnAmountChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAmountChanged;
         public event EventHandler<GenderEffectStyleEventArgs> OnStyleChanged;
 
         protected internal void HandleEvents(string serialNumber, GenderEffect effect, MemberInfo memInfo,
@@ -28,12 +29,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Gender
             {
                 case "Amount":
                     effectEventArgs.Current.Gender.TypeChanged = GenderEnum.Amount;
-                    effectEventArgs.Current.Gender.Value = effect.Amount;
+                    effectEventArgs.Current.Gender.IntValue = effect.Amount;
 
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     genderChanged?.Invoke(this, effectEventArgs.Current.Gender);
-                    OnAmountChanged?.Invoke(this, new IntGenderEffectEventArgs
+                    OnAmountChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Amount

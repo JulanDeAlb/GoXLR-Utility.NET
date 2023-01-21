@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks.Sample;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Sampler.Banks;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Sampler.Banks.Sample;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample;
@@ -15,11 +16,11 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
     {
         public event EventHandler<SampleEventArgs> OnSampleChanged;
         
-        public event EventHandler<StringSampleEventArgs> OnNameChanged;
+        public event EventHandler<StringDeviceEventArgs> OnNameChanged;
         
-        public event EventHandler<DoubleSampleEventArgs> OnStartPctChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnStartPctChanged;
         
-        public event EventHandler<DoubleSampleEventArgs> OnStopPctChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnStopPctChanged;
 
         protected internal void HandleEvents(string serialNumber, MemberInfo memInfo,
             EventHandler<SamplerBanksEventArgs> samplerBanksChanged,
@@ -47,7 +48,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     bankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
                     OnSampleChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue);
-                    OnNameChanged?.Invoke(this, new StringSampleEventArgs
+                    OnNameChanged?.Invoke(this, new StringDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = sample.Name
@@ -64,7 +65,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     bankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
                     OnSampleChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue);
-                    OnStartPctChanged?.Invoke(this, new DoubleSampleEventArgs
+                    OnStartPctChanged?.Invoke(this, new DoubleDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = sample.StartPct
@@ -81,7 +82,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     bankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
                     OnSampleChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase.SampleValue);
-                    OnStopPctChanged?.Invoke(this, new DoubleSampleEventArgs
+                    OnStopPctChanged?.Invoke(this, new DoubleDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = sample.StopPct

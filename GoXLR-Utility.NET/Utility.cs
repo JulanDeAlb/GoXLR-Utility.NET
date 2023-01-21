@@ -19,18 +19,20 @@ namespace GoXLR_Utility.NET
             Converters = { new JsonStringEnumConverter() }
         };
 
-        public Status Status = new Status();
-        public CancellationTokenSource TokenSource;
-        public Events.Events Events = new Events.Events();
+        public readonly Status Status = new Status();
+        public readonly Events.Events Events = new Events.Events();
         public List<string> AvailableSerialNumbers => MessageHandler.AvailableSerialNumbers;
-        public bool ShouldInvokeEvents = _messageHandler.ShouldInvokeEvents;
         
+        public bool ShouldInvokeEvents
+        {
+            get => _messageHandler.ShouldInvokeEvents;
+            set => _messageHandler.ShouldInvokeEvents = value;
+        }
+
         public Utility(CancellationTokenSource cToken = null)
         {
             _websocket = new WebSocket("ws://localhost:14564/api/websocket");
             _messageHandler = new MessageHandler(Events, Status, _serializerOptions);
-            
-            TokenSource = cToken ?? new CancellationTokenSource();
             
             _websocket.OnOpen += OnWsConnected;
             _websocket.OnMessage += OnWsMessage;

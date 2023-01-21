@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Reverb;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.Reverb;
@@ -10,18 +11,18 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
 {
     public class ReverbEffectEvents
     {
-        public event EventHandler<IntReverbEffectEventArgs> OnAmountChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnDecayChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnDiffuseChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnEarlyLevelChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnHiColourChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnHiFactorChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnLoColourChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnModDepthChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnModSpeedChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnPreDelayChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAmountChanged;
+        public event EventHandler<IntDeviceEventArgs> OnDecayChanged;
+        public event EventHandler<IntDeviceEventArgs> OnDiffuseChanged;
+        public event EventHandler<IntDeviceEventArgs> OnEarlyLevelChanged;
+        public event EventHandler<IntDeviceEventArgs> OnHiColourChanged;
+        public event EventHandler<IntDeviceEventArgs> OnHiFactorChanged;
+        public event EventHandler<IntDeviceEventArgs> OnLoColourChanged;
+        public event EventHandler<IntDeviceEventArgs> OnModDepthChanged;
+        public event EventHandler<IntDeviceEventArgs> OnModSpeedChanged;
+        public event EventHandler<IntDeviceEventArgs> OnPreDelayChanged;
         public event EventHandler<ReverbStyleEffectEventArgs> OnStyleChanged;
-        public event EventHandler<IntReverbEffectEventArgs> OnTailLevelChanged;
+        public event EventHandler<IntDeviceEventArgs> OnTailLevelChanged;
 
         protected internal void HandleEvents(string serialNumber, ReverbEffect effect, MemberInfo memInfo,
             EventHandler<EffectEventArgs> effectsChanged,
@@ -43,7 +44,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnAmountChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnAmountChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Amount
@@ -57,7 +58,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnDecayChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnDecayChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Decay
@@ -71,7 +72,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnDiffuseChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnDiffuseChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Diffuse
@@ -85,7 +86,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnEarlyLevelChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnEarlyLevelChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.EarlyLevel
@@ -99,7 +100,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnHiColourChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnHiColourChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.HiColour
@@ -113,7 +114,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnHiFactorChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnHiFactorChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.HiFactor
@@ -127,7 +128,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnLoColourChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnLoColourChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.LoColour
@@ -141,7 +142,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnModDepthChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnModDepthChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.ModDepth
@@ -155,7 +156,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnModSpeedChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnModSpeedChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.ModSpeed
@@ -169,7 +170,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnPreDelayChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnPreDelayChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.PreDelay
@@ -197,7 +198,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.Reverb
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     reverbChanged?.Invoke(this, effectEventArgs.Current.Reverb);
-                    OnTailLevelChanged?.Invoke(this, new IntReverbEffectEventArgs
+                    OnTailLevelChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.TailLevel

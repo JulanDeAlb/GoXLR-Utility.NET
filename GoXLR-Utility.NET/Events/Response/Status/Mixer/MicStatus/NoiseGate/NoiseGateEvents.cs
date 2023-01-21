@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.NoiseGate;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.NoiseGate;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate;
 
@@ -11,20 +12,20 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.NoiseGate
     /// </summary>
     public class NoiseGateEvents
     {
-        public event EventHandler<IntNoiseGateEventArgs> OnAttackChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAttackChanged;
         
-        public event EventHandler<IntNoiseGateEventArgs> OnAttenuationChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAttenuationChanged;
         
-        public event EventHandler<BoolNoiseGateEventArgs> OnEnabledChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnEnabledChanged;
         
-        public event EventHandler<IntNoiseGateEventArgs> OnReleaseChanged;
+        public event EventHandler<IntDeviceEventArgs> OnReleaseChanged;
         
-        public event EventHandler<IntNoiseGateEventArgs> OnThresholdChanged;
+        public event EventHandler<IntDeviceEventArgs> OnThresholdChanged;
 
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.MicStatus.NoiseGate.NoiseGate noiseGate, MemberInfo memInfo,
             EventHandler<NoiseGateEventArgs> noiseGateChanged, NoiseGateEventArgs noiseGateEventArgs)
         {
-            var intNoiseGateEventArgs = new IntNoiseGateEventArgs
+            var intDeviceEventArgs = new IntDeviceEventArgs
             {
                 SerialNumber = serialNumber,
             };
@@ -33,22 +34,22 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.NoiseGate
             {
                 case "Attack":
                     noiseGateEventArgs.TypeChanged = NoiseGateEnum.Attack;
-                    noiseGateEventArgs.Value = intNoiseGateEventArgs.Value = noiseGate.Attack;
+                    noiseGateEventArgs.Value = intDeviceEventArgs.Value = noiseGate.Attack;
                     
                     noiseGateChanged?.Invoke(this, noiseGateEventArgs);
-                    OnAttackChanged?.Invoke(this, intNoiseGateEventArgs);
+                    OnAttackChanged?.Invoke(this, intDeviceEventArgs);
                     break;
                 
                 case "Attenuation":
                     noiseGateEventArgs.TypeChanged = NoiseGateEnum.Attenuation;
-                    noiseGateEventArgs.Value = intNoiseGateEventArgs.Value = noiseGate.Attenuation;
+                    noiseGateEventArgs.Value = intDeviceEventArgs.Value = noiseGate.Attenuation;
                     
                     noiseGateChanged?.Invoke(this, noiseGateEventArgs);
-                    OnAttenuationChanged?.Invoke(this, intNoiseGateEventArgs);
+                    OnAttenuationChanged?.Invoke(this, intDeviceEventArgs);
                     break;
                 
                 case "Enabled":
-                    var specBoolNoiseGateEventArgs = new BoolNoiseGateEventArgs
+                    var specBoolNoiseGateEventArgs = new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = noiseGate.Enabled
@@ -64,19 +65,19 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.NoiseGate
                 
                 case "Release":
                     noiseGateEventArgs.TypeChanged = NoiseGateEnum.Release;
-                    noiseGateEventArgs.Value = intNoiseGateEventArgs.Value = noiseGate.Release;
+                    noiseGateEventArgs.Value = intDeviceEventArgs.Value = noiseGate.Release;
                     
                     noiseGateChanged?.Invoke(this, noiseGateEventArgs);
-                    OnReleaseChanged?.Invoke(this, intNoiseGateEventArgs);
+                    OnReleaseChanged?.Invoke(this, intDeviceEventArgs);
                     break;
                 
                 
                 case "Threshold":
                     noiseGateEventArgs.TypeChanged = NoiseGateEnum.Threshold;
-                    noiseGateEventArgs.Value = intNoiseGateEventArgs.Value = noiseGate.Threshold;
+                    noiseGateEventArgs.Value = intDeviceEventArgs.Value = noiseGate.Threshold;
                     
                     noiseGateChanged?.Invoke(this, noiseGateEventArgs);
-                    OnThresholdChanged?.Invoke(this, intNoiseGateEventArgs);
+                    OnThresholdChanged?.Invoke(this, intDeviceEventArgs);
                     break;
                 
                 default:

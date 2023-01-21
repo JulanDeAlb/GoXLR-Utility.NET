@@ -1,11 +1,13 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.ButtonDown;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.CoughButton;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Levels;
+using GoXLR_Utility.NET.Events.Response.Status.Mixer.Lighting;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Router;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler;
@@ -16,15 +18,16 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
 {
     public class MixerEvents
     {
-        public ButtonDownEvents ButtonDown; //!DONE
-        public CoughButtonEvents CoughButton; //!DONE
+        public ButtonDownEvents ButtonDown;
+        public CoughButtonEvents CoughButton;
         public EffectEvents Effect; 
-        public FaderStatusEvents FaderStatus; //!DONE
-        public MicStatusEvents Mic; //!DONE
-        public RouterEvents Router; //!DONE
-        public SamplerEvents Sampler; //!DONE
-        public SettingEvents Settings; //!DONE
-        public LevelEvents Levels; //!DONE
+        public FaderStatusEvents FaderStatus;
+        public LightingEvents Lighting;
+        public MicStatusEvents Mic;
+        public RouterEvents Router;
+        public SamplerEvents Sampler;
+        public SettingEvents Settings;
+        public LevelEvents Levels;
 
         public MixerEvents()
         {
@@ -32,6 +35,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
             CoughButton = new CoughButtonEvents();
             Effect = new EffectEvents();
             FaderStatus = new FaderStatusEvents();
+            Lighting = new LightingEvents();
             Mic = new MicStatusEvents();
             Router = new RouterEvents();
             Sampler = new SamplerEvents();
@@ -39,13 +43,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
             Levels = new LevelEvents();
         }
         
-        public event EventHandler<ProfileEventArgs> OnMicProfileChanged;
+        public event EventHandler<StringDeviceEventArgs> OnMicProfileChanged;
         
-        public event EventHandler<ProfileEventArgs> OnProfileChanged;
+        public event EventHandler<StringDeviceEventArgs> OnProfileChanged;
         
         protected internal void HandleEvents(string serialNumber, Device device, MemberInfo memInfo)
         {
-            var profileEventArgs = new ProfileEventArgs
+            var stringDeviceEventArgs = new StringDeviceEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -53,13 +57,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer
             switch (memInfo.Name)
             {
                 case "MicProfileName":
-                    profileEventArgs.Value = device.MicProfileName;
-                    OnMicProfileChanged?.Invoke(this, profileEventArgs);
+                    stringDeviceEventArgs.Value = device.MicProfileName;
+                    OnMicProfileChanged?.Invoke(this, stringDeviceEventArgs);
                     break;
                 
                 case "ProfileName":
-                    profileEventArgs.Value = device.MicProfileName;
-                    OnProfileChanged?.Invoke(this, profileEventArgs);
+                    stringDeviceEventArgs.Value = device.MicProfileName;
+                    OnProfileChanged?.Invoke(this, stringDeviceEventArgs);
                     break;
                 
                 default:

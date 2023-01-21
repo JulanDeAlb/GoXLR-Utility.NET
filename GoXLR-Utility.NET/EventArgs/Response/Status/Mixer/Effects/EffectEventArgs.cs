@@ -1,4 +1,5 @@
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.PresetNames;
 
@@ -10,7 +11,7 @@ namespace GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects
         
         public CurrentEffectEventArgs Current { get; set; }
         
-        public BoolEffectEventArgs Enabled { get; set; }
+        public BoolDeviceEventArgs Enabled { get; set; }
         
         public PresetNameEventArgs PresetNames { get; set; }
         

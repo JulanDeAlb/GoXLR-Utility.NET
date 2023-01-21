@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Sampler.Banks;
 using GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks.Sample;
 using GoXLR_Utility.NET.Models.Patch;
@@ -137,7 +138,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
         
         public event EventHandler<BankPlaybackEventArgs> OnFunctionChanged;
         
-        public event EventHandler<BoolBankEventArgs> OnIsPlayingChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnIsPlayingChanged;
         
         public event EventHandler<PlayOrderBankEventArgs> OnOrderChanged;
         
@@ -180,7 +181,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks
                     samplerBankChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     samplerBankButtonChanged?.Invoke(this, samplerBanksEventArgs.BankButton);
                     OnBankBaseChanged?.Invoke(this, samplerBanksEventArgs.BankButton.BankBase);
-                    OnIsPlayingChanged?.Invoke(this, new BoolBankEventArgs
+                    OnIsPlayingChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = bankBaseButton.IsPlaying

@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.PresetNames;
@@ -18,7 +19,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects
         public event EventHandler<ActivePresetEventArgs> OnActivePresetChanged;
         public event EventHandler<CurrentEffectEventArgs> OnCurrentEffectChanged;
         public event EventHandler<PresetNameEventArgs> OnPresetNamesChanged;
-        public event EventHandler<BoolEffectEventArgs> OnEffectEnabledChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnEffectEnabledChanged;
         
         protected internal void HandleEvents(string serialNumber, Models.Response.Status.Mixer.Effects.Effects effects, MemberInfo memInfo)
         {
@@ -42,7 +43,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects
 
                 case "IsEnabled":
                     effectEventArgs.TypeChanged = EffectEnum.IsEnabled;
-                    effectEventArgs.Enabled = new BoolEffectEventArgs
+                    effectEventArgs.Enabled = new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effects.IsEnabled

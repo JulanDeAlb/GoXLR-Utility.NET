@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus.Scribble;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
@@ -14,13 +15,13 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
     {
         public event EventHandler<FaderBaseScribbleEventArgs> OnScribbleChanged;
         
-        public event EventHandler<StringScribbleEventArgs> OnBottomTextChanged;
+        public event EventHandler<StringDeviceEventArgs> OnBottomTextChanged;
         
-        public event EventHandler<StringScribbleEventArgs> OnFileNameChanged;
+        public event EventHandler<StringDeviceEventArgs> OnFileNameChanged;
         
-        public event EventHandler<BoolScribbleEventArgs> OnInvertedChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnInvertedChanged;
         
-        public event EventHandler<StringScribbleEventArgs> OnLeftTextChanged;
+        public event EventHandler<StringDeviceEventArgs> OnLeftTextChanged;
         
         protected internal void HandleEvents(string serialNumber, FaderScribble scribble, MemberInfo memInfo,
             EventHandler<FadersEventArgs> faderChangedEvent,
@@ -45,7 +46,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     scribbleEvent?.Invoke(this, fadersEventArgs.Fader.Scribble);
                     OnScribbleChanged?.Invoke(this, fadersEventArgs.Fader.Scribble.FaderBase);
-                    OnBottomTextChanged?.Invoke(this, new StringScribbleEventArgs
+                    OnBottomTextChanged?.Invoke(this, new StringDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = scribble.BottomText
@@ -59,7 +60,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     scribbleEvent?.Invoke(this, fadersEventArgs.Fader.Scribble);
                     OnScribbleChanged?.Invoke(this, fadersEventArgs.Fader.Scribble.FaderBase);
-                    OnFileNameChanged?.Invoke(this, new StringScribbleEventArgs
+                    OnFileNameChanged?.Invoke(this, new StringDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = scribble.FileName
@@ -73,7 +74,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     scribbleEvent?.Invoke(this, fadersEventArgs.Fader.Scribble);
                     OnScribbleChanged?.Invoke(this, fadersEventArgs.Fader.Scribble.FaderBase);
-                    OnInvertedChanged?.Invoke(this, new BoolScribbleEventArgs
+                    OnInvertedChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = scribble.Inverted
@@ -87,7 +88,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.FaderStatus.Scribble
                     faderChangedEvent?.Invoke(this, fadersEventArgs);
                     scribbleEvent?.Invoke(this, fadersEventArgs.Fader.Scribble);
                     OnScribbleChanged?.Invoke(this, fadersEventArgs.Fader.Scribble.FaderBase);
-                    OnLeftTextChanged?.Invoke(this, new StringScribbleEventArgs
+                    OnLeftTextChanged?.Invoke(this, new StringDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = scribble.LeftText

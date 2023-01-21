@@ -30,7 +30,7 @@
         Reverb
     }
 
-    public enum InputDevice //!DONE
+    public enum InputDevices //!DONE
     {
         Microphone,
         Chat,
@@ -51,7 +51,7 @@
         Sampler
     }
 
-    public enum FaderDisplayStyle //!DONE
+    public enum FaderDisplayStyles //!DONE
     {
         Gradient,
         GradientMeter,
@@ -132,7 +132,7 @@
         DimmedColour2,
     }
 
-    public enum MuteFunction //!DONE
+    public enum MuteFunctions //!DONE
     {
         All,
         ToStream,

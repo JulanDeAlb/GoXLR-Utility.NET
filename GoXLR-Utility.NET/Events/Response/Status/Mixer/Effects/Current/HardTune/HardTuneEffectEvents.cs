@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.HardTune;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Effects.Current.HardTune;
@@ -10,12 +11,12 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
 {
     public class HardTuneEffectEvents
     {
-        public event EventHandler<IntHardTuneEffectEventArgs> OnAmountChanged;
-        public event EventHandler<BoolHardTuneEffectEventArgs> OnIsEnabledChanged;
-        public event EventHandler<IntHardTuneEffectEventArgs> OnRateChanged;
+        public event EventHandler<IntDeviceEventArgs> OnAmountChanged;
+        public event EventHandler<BoolDeviceEventArgs> OnIsEnabledChanged;
+        public event EventHandler<IntDeviceEventArgs> OnRateChanged;
         public event EventHandler<HardTuneSourceEffectEventArgs> OnSourceChanged;
         public event EventHandler<HardTuneStyleEffectEventArgs> OnStyleChanged;
-        public event EventHandler<IntHardTuneEffectEventArgs> OnWindowChanged;
+        public event EventHandler<IntDeviceEventArgs> OnWindowChanged;
 
         protected internal void HandleEvents(string serialNumber, HardTuneEffect effect, MemberInfo memInfo,
             EventHandler<EffectEventArgs> effectsChanged,
@@ -37,7 +38,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
-                    OnAmountChanged?.Invoke(this, new IntHardTuneEffectEventArgs
+                    OnAmountChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Amount
@@ -51,7 +52,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
-                    OnIsEnabledChanged?.Invoke(this, new BoolHardTuneEffectEventArgs
+                    OnIsEnabledChanged?.Invoke(this, new BoolDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.IsEnabled
@@ -65,7 +66,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
-                    OnRateChanged?.Invoke(this, new IntHardTuneEffectEventArgs
+                    OnRateChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Rate
@@ -107,7 +108,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.Effects.Current.HardTun
                     effectsChanged?.Invoke(this, effectEventArgs);
                     currentEffectChanged?.Invoke(this, effectEventArgs.Current);
                     hardTuneChanged?.Invoke(this, effectEventArgs.Current.HardTune);
-                    OnWindowChanged?.Invoke(this, new IntHardTuneEffectEventArgs
+                    OnWindowChanged?.Invoke(this, new IntDeviceEventArgs
                     {
                         SerialNumber = serialNumber,
                         Value = effect.Window

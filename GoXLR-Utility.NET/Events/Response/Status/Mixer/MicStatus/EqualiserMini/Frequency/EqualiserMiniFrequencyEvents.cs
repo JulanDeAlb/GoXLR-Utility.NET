@@ -1,6 +1,7 @@
 using System;
 using System.Reflection;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.EqualiserMini;
+using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.EqualiserMini;
 using GoXLR_Utility.NET.EventArgs.Response.Status.Mixer.MicStatus.EqualiserMini.Frequency;
@@ -13,17 +14,17 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
     /// </summary>
     public class EqualiserMiniFrequencyEvents
     {
-        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer90HzChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnEqualizer90HzChanged;
         
-        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer250HzChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnEqualizer250HzChanged;
         
-        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer500HzChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnEqualizer500HzChanged;
         
-        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer1KHzChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnEqualizer1KHzChanged;
         
-        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer3KHzChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnEqualizer3KHzChanged;
         
-        public event EventHandler<DoubleEqualiserMiniFrequencyEventArgs> OnEqualizer8KHzChanged;
+        public event EventHandler<DoubleDeviceEventArgs> OnEqualizer8KHzChanged;
         
         public void HandleEvents(string serialNumber,
             FrequencyMini frequency,
@@ -31,7 +32,7 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
             EventHandler<MicStatusEventArgs> micStatusChanged, EventHandler<EqualiserMiniEventArgs> equaliserChanged,
             EventHandler<EqualiserMiniFrequencyEventArgs> frequencyChanged)
         {
-            var doubleEqualiserMiniFrequencyEventArgs = new DoubleEqualiserMiniFrequencyEventArgs
+            var doubleDeviceEventArgs = new DoubleDeviceEventArgs
             {
                 SerialNumber = serialNumber
             };
@@ -40,62 +41,62 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.EqualiserMini
             {
                 case "Equalizer90Hz":
                     micStatusEventArgs.EqualiserMini.FrequencyMini.TypeChanged = EqualiserMiniEnum.Equalizer90Hz;
-                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleEqualiserMiniFrequencyEventArgs.Value = frequency.Equalizer90Hz;
+                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleDeviceEventArgs.Value = frequency.Equalizer90Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.FrequencyMini);
-                    OnEqualizer90HzChanged?.Invoke(this, doubleEqualiserMiniFrequencyEventArgs);
+                    OnEqualizer90HzChanged?.Invoke(this, doubleDeviceEventArgs);
                     break;
         
                 case "Equalizer250Hz":
                     micStatusEventArgs.EqualiserMini.FrequencyMini.TypeChanged = EqualiserMiniEnum.Equalizer250Hz;
-                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleEqualiserMiniFrequencyEventArgs.Value = frequency.Equalizer250Hz;
+                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleDeviceEventArgs.Value = frequency.Equalizer250Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.FrequencyMini);
-                    OnEqualizer250HzChanged?.Invoke(this, doubleEqualiserMiniFrequencyEventArgs);
+                    OnEqualizer250HzChanged?.Invoke(this, doubleDeviceEventArgs);
                     break;
         
                 case "Equalizer500Hz":
                     micStatusEventArgs.EqualiserMini.FrequencyMini.TypeChanged = EqualiserMiniEnum.Equalizer500Hz;
-                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleEqualiserMiniFrequencyEventArgs.Value = frequency.Equalizer500Hz;
+                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleDeviceEventArgs.Value = frequency.Equalizer500Hz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.FrequencyMini);
-                    OnEqualizer500HzChanged?.Invoke(this, doubleEqualiserMiniFrequencyEventArgs);
+                    OnEqualizer500HzChanged?.Invoke(this, doubleDeviceEventArgs);
                     break;
         
                 case "Equalizer1KHz":
                     micStatusEventArgs.EqualiserMini.FrequencyMini.TypeChanged = EqualiserMiniEnum.Equalizer1KHz;
-                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleEqualiserMiniFrequencyEventArgs.Value = frequency.Equalizer1KHz;
+                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleDeviceEventArgs.Value = frequency.Equalizer1KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.FrequencyMini);
-                    OnEqualizer1KHzChanged?.Invoke(this, doubleEqualiserMiniFrequencyEventArgs);
+                    OnEqualizer1KHzChanged?.Invoke(this, doubleDeviceEventArgs);
                     break;
         
                 case "Equalizer3KHz":
                     micStatusEventArgs.EqualiserMini.FrequencyMini.TypeChanged = EqualiserMiniEnum.Equalizer3KHz;
-                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleEqualiserMiniFrequencyEventArgs.Value = frequency.Equalizer3KHz;
+                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleDeviceEventArgs.Value = frequency.Equalizer3KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.FrequencyMini);
-                    OnEqualizer3KHzChanged?.Invoke(this, doubleEqualiserMiniFrequencyEventArgs);
+                    OnEqualizer3KHzChanged?.Invoke(this, doubleDeviceEventArgs);
                     break;
         
                 case "Equalizer8KHz":
                     micStatusEventArgs.EqualiserMini.FrequencyMini.TypeChanged = EqualiserMiniEnum.Equalizer8KHz;
-                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleEqualiserMiniFrequencyEventArgs.Value = frequency.Equalizer8KHz;
+                    micStatusEventArgs.EqualiserMini.FrequencyMini.Value = doubleDeviceEventArgs.Value = frequency.Equalizer8KHz;
                     
                     micStatusChanged?.Invoke(this, micStatusEventArgs);
                     equaliserChanged?.Invoke(this, micStatusEventArgs.EqualiserMini);
                     frequencyChanged?.Invoke(this, micStatusEventArgs.EqualiserMini.FrequencyMini);
-                    OnEqualizer8KHzChanged?.Invoke(this, doubleEqualiserMiniFrequencyEventArgs);
+                    OnEqualizer8KHzChanged?.Invoke(this, doubleDeviceEventArgs);
                     break;
 
                 default:

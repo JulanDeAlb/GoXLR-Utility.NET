@@ -7,7 +7,7 @@ public class Program
     public static void Main(string[] args)
     {
         _utility.Connect();
-        //AllEvents();
+        AllEvents();
         Console.ReadKey();
         Console.ReadKey();
     }
@@ -57,20 +57,20 @@ public class Program
         
         #region Effects
 
-        _utility.Events.Device.Effect.OnEffectsChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.OnActivePresetChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.OnCurrentEffectChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.OnPresetNamesChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.OnEffectEnabledChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.OnEffectsChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.OnEffectsChanged");
+        _utility.Events.Device.Effect.OnActivePresetChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.OnActivePresetChanged");
+        _utility.Events.Device.Effect.OnCurrentEffectChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.OnCurrentEffectChanged");
+        _utility.Events.Device.Effect.OnPresetNamesChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.OnPresetNamesChanged");
+        _utility.Events.Device.Effect.OnEffectEnabledChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.OnEffectEnabledChanged");
 
         #region Effects.Current
 
-        _utility.Events.Device.Effect.Current.OnEchoChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.Current.OnGenderChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.Current.OnHardTuneChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.Current.OnMegaphoneChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.Current.OnPitchChanged += (sender, args) => Console.WriteLine("");
-        _utility.Events.Device.Effect.Current.OnRobotChanged += (sender, args) => Console.WriteLine("");
+        _utility.Events.Device.Effect.Current.OnEchoChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.OnEchoChanged");
+        _utility.Events.Device.Effect.Current.OnGenderChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.OnGenderChanged");
+        _utility.Events.Device.Effect.Current.OnHardTuneChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.OnHardTuneChanged");
+        _utility.Events.Device.Effect.Current.OnMegaphoneChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.OnMegaphoneChanged");
+        _utility.Events.Device.Effect.Current.OnPitchChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.OnPitchChanged");
+        _utility.Events.Device.Effect.Current.OnRobotChanged += (sender, args) => Console.WriteLine("Events.Device.Effect.Current.OnRobotChanged");
 
         #region Effects.Current.Echo
 
@@ -304,7 +304,427 @@ public class Program
         
         #region Lighting
 
+        _utility.Events.Device.Lighting.OnLightningChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.OnLightningChanged");
+        _utility.Events.Device.Lighting.OnButtonsChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.OnButtonsChanged");
+        _utility.Events.Device.Lighting.OnEncodersChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.OnEncodersChanged");
+        _utility.Events.Device.Lighting.OnFaderChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.OnFaderChanged");
+        _utility.Events.Device.Lighting.OnSamplerChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.OnSamplerChanged");
+        _utility.Events.Device.Lighting.OnSimpleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.OnSimpleChanged");
+
+        #region Lighting.Button
+
+        _utility.Events.Device.Lighting.Button.OnBleepChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnBleepChanged");
+        _utility.Events.Device.Lighting.Button.OnCoughChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnCoughChanged");
+        _utility.Events.Device.Lighting.Button.OnEffectFxChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectFxChanged");
+        _utility.Events.Device.Lighting.Button.OnEffectHardTuneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectHardTuneChanged");
+        _utility.Events.Device.Lighting.Button.OnEffectMegaphoneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectMegaphoneChanged");
+        _utility.Events.Device.Lighting.Button.OnEffectRobotChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectRobotChanged");
+        _utility.Events.Device.Lighting.Button.OnEffectSelect1Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectSelect1Changed");
+        _utility.Events.Device.Lighting.Button.OnEffectSelect2Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectSelect2Changed");
+        _utility.Events.Device.Lighting.Button.OnEffectSelect3Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectSelect3Changed");
+        _utility.Events.Device.Lighting.Button.OnEffectSelect4Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectSelect4Changed");
+        _utility.Events.Device.Lighting.Button.OnEffectSelect5Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectSelect5Changed");
+        _utility.Events.Device.Lighting.Button.OnEffectSelect6Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnEffectSelect6Changed");
+        _utility.Events.Device.Lighting.Button.OnFader1MuteChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnFader1MuteChanged");
+        _utility.Events.Device.Lighting.Button.OnFader2MuteChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnFader2MuteChanged");
+        _utility.Events.Device.Lighting.Button.OnFader3MuteChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnFader3MuteChanged");
+        _utility.Events.Device.Lighting.Button.OnFader4MuteChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.OnFader4MuteChanged");
+
+        #region Lighting.Button.Bleep
+
+        _utility.Events.Device.Lighting.Button.Bleep.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Bleep.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.Bleep.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Bleep.OnOffStyleChanged");
+
+        #region Lighting.Button.Bleep.Colour
+
+        _utility.Events.Device.Lighting.Button.Bleep.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Bleep.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.Bleep.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Bleep.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
         
+        #region Lighting.Button.Cough
+
+        _utility.Events.Device.Lighting.Button.Cough.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Cough.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.Cough.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Cough.OnOffStyleChanged");
+
+        #region Lighting.Button.Cough.Colour
+
+        _utility.Events.Device.Lighting.Button.Cough.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Cough.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.Cough.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Cough.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectFx
+
+        _utility.Events.Device.Lighting.Button.EffectFx.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectFx.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectFx.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectFx.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectFx.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectFx.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectFx.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectFx.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectFx.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectHardTune
+
+        _utility.Events.Device.Lighting.Button.EffectHardTune.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectHardTune.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectHardTune.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectHardTune.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectHardTune.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectHardTune.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectHardTune.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectHardTune.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectHardTune.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectMegaphone
+
+        _utility.Events.Device.Lighting.Button.EffectMegaphone.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectMegaphone.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectMegaphone.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectMegaphone.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectMegaphone.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectMegaphone.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectMegaphone.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectMegaphone.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectMegaphone.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectRobot
+
+        _utility.Events.Device.Lighting.Button.EffectRobot.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectRobot.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectRobot.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectRobot.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectRobot.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectRobot.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectRobot.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectRobot.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectRobot.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectSelect1
+
+        _utility.Events.Device.Lighting.Button.EffectSelect1.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect1.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect1.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect1.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectSelect1.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectSelect1.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect1.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect1.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect1.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectSelect2
+
+        _utility.Events.Device.Lighting.Button.EffectSelect2.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect2.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect2.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect2.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectSelect2.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectSelect2.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect2.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect2.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect2.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectSelect3
+
+        _utility.Events.Device.Lighting.Button.EffectSelect3.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect3.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect3.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect3.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectSelect3.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectSelect3.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect3.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect3.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect3.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectSelect4
+
+        _utility.Events.Device.Lighting.Button.EffectSelect4.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect4.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect4.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect4.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectSelect4.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectSelect4.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect4.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect4.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect4.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectSelect5
+
+        _utility.Events.Device.Lighting.Button.EffectSelect5.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect5.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect5.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect5.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectSelect5.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectSelect5.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect5.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect5.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect5.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.EffectSelect6
+
+        _utility.Events.Device.Lighting.Button.EffectSelect6.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect6.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect6.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect6.OnOffStyleChanged");
+
+        #region Lighting.Button.EffectSelect6.Colour
+
+        _utility.Events.Device.Lighting.Button.EffectSelect6.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect6.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.EffectSelect6.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.EffectSelect6.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.Fader1Mute
+
+        _utility.Events.Device.Lighting.Button.Fader1Mute.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader1Mute.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.Fader1Mute.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader1Mute.OnOffStyleChanged");
+
+        #region Lighting.Button.Fader1Mute.Colour
+
+        _utility.Events.Device.Lighting.Button.Fader1Mute.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader1Mute.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.Fader1Mute.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader1Mute.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.Fader2Mute
+
+        _utility.Events.Device.Lighting.Button.Fader2Mute.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader2Mute.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.Fader2Mute.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader2Mute.OnOffStyleChanged");
+
+        #region Lighting.Button.Fader2Mute.Colour
+
+        _utility.Events.Device.Lighting.Button.Fader2Mute.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader2Mute.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.Fader2Mute.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader2Mute.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.Fader3Mute
+
+        _utility.Events.Device.Lighting.Button.Fader3Mute.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader3Mute.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.Fader3Mute.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader3Mute.OnOffStyleChanged");
+
+        #region Lighting.Button.Fader3Mute.Colour
+
+        _utility.Events.Device.Lighting.Button.Fader3Mute.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader3Mute.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.Fader3Mute.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader3Mute.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+        
+        #region Lighting.Button.Fader4Mute
+
+        _utility.Events.Device.Lighting.Button.Fader4Mute.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader4Mute.OnColourChanged");
+        _utility.Events.Device.Lighting.Button.Fader4Mute.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader4Mute.OnOffStyleChanged");
+
+        #region Lighting.Button.Fader4Mute.Colour
+
+        _utility.Events.Device.Lighting.Button.Fader4Mute.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader4Mute.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Button.Fader4Mute.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Button.Fader4Mute.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Encoder
+
+        _utility.Events.Device.Lighting.Encoder.OnEchoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.OnEchoChanged");
+        _utility.Events.Device.Lighting.Encoder.OnGenderChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.OnGenderChanged");
+        _utility.Events.Device.Lighting.Encoder.OnPitchChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.OnPitchChanged");
+        _utility.Events.Device.Lighting.Encoder.OnReverbChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.OnReverbChanged");
+
+        #region Lighting.Encoder.Echo
+
+        _utility.Events.Device.Lighting.Encoder.Echo.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Echo.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Encoder.Echo.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Echo.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Encoder.Echo.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Echo.OnColourThreeChanged");
+
+        #endregion
+
+        #region Lighting.Encoder.Gender
+
+        _utility.Events.Device.Lighting.Encoder.Gender.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Gender.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Encoder.Gender.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Gender.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Encoder.Gender.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Gender.OnColourThreeChanged");
+
+        #endregion
+
+        #region Lighting.Encoder.Pitch
+
+        _utility.Events.Device.Lighting.Encoder.Pitch.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Pitch.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Encoder.Pitch.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Pitch.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Encoder.Pitch.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Pitch.OnColourThreeChanged");
+
+        #endregion
+
+        #region Lighting.Encoder.Reverb
+
+        _utility.Events.Device.Lighting.Encoder.Reverb.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Reverb.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Encoder.Reverb.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Reverb.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Encoder.Reverb.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Encoder.Reverb.OnColourThreeChanged");
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Fader
+
+        _utility.Events.Device.Lighting.Fader.OnFaderAChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.OnFaderAChanged");
+        _utility.Events.Device.Lighting.Fader.OnFaderBChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.OnFaderBChanged");
+        _utility.Events.Device.Lighting.Fader.OnFaderCChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.OnFaderCChanged");
+        _utility.Events.Device.Lighting.Fader.OnFaderDChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.OnFaderDChanged");
+
+        #region Lighting.Fader.A
+
+        _utility.Events.Device.Lighting.Fader.A.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.A.OnColourChanged");
+        _utility.Events.Device.Lighting.Fader.A.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.A.OnStyleChanged");
+        
+        #region Lighting.Fader.A.Colour
+
+        _utility.Events.Device.Lighting.Fader.A.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.A.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Fader.A.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.A.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Fader.B
+
+        _utility.Events.Device.Lighting.Fader.B.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.B.OnColourChanged");
+        _utility.Events.Device.Lighting.Fader.B.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.B.OnStyleChanged");
+        
+        #region Lighting.Fader.B.Colour
+
+        _utility.Events.Device.Lighting.Fader.B.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.B.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Fader.B.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.B.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Fader.C
+
+        _utility.Events.Device.Lighting.Fader.C.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.C.OnColourChanged");
+        _utility.Events.Device.Lighting.Fader.C.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.C.OnStyleChanged");
+        
+        #region Lighting.Fader.C.Colour
+
+        _utility.Events.Device.Lighting.Fader.C.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.C.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Fader.C.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.C.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Fader.D
+
+        _utility.Events.Device.Lighting.Fader.D.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.D.OnColourChanged");
+        _utility.Events.Device.Lighting.Fader.D.OnStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.D.OnStyleChanged");
+        
+        #region Lighting.Fader.D.Colour
+
+        _utility.Events.Device.Lighting.Fader.D.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.D.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Fader.D.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Fader.D.Colour.OnColourTwoChanged");
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Sampler
+
+        _utility.Events.Device.Lighting.Sampler.OnSamplerAChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.OnSamplerAChanged");
+        _utility.Events.Device.Lighting.Sampler.OnSamplerBChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.OnSamplerBChanged");
+        _utility.Events.Device.Lighting.Sampler.OnSamplerCChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.OnSamplerCChanged");
+
+        #region Lighting.Sampler.A
+
+        _utility.Events.Device.Lighting.Sampler.A.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.A.OnColourChanged");
+        _utility.Events.Device.Lighting.Sampler.A.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.A.OnOffStyleChanged");
+
+        #region Lighting.Sampler.A.Colour
+
+        _utility.Events.Device.Lighting.Sampler.A.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.A.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Sampler.A.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.A.Colour.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Sampler.A.Colour.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.A.Colour.OnColourThreeChanged");
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Sampler.B
+
+        _utility.Events.Device.Lighting.Sampler.B.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.B.OnColourChanged");
+        _utility.Events.Device.Lighting.Sampler.B.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.B.OnOffStyleChanged");
+
+        #region Lighting.Sampler.B.Colour
+
+        _utility.Events.Device.Lighting.Sampler.B.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.B.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Sampler.B.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.B.Colour.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Sampler.B.Colour.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.B.Colour.OnColourThreeChanged");
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Sampler.C
+
+        _utility.Events.Device.Lighting.Sampler.C.OnColourChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.C.OnColourChanged");
+        _utility.Events.Device.Lighting.Sampler.C.OnOffStyleChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.C.OnOffStyleChanged");
+
+        #region Lighting.Sampler.C.Colour
+
+        _utility.Events.Device.Lighting.Sampler.C.Colour.OnColourOneChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.C.Colour.OnColourOneChanged");
+        _utility.Events.Device.Lighting.Sampler.C.Colour.OnColourTwoChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.C.Colour.OnColourTwoChanged");
+        _utility.Events.Device.Lighting.Sampler.C.Colour.OnColourThreeChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Sampler.C.Colour.OnColourThreeChanged");
+
+        #endregion
+
+        #endregion
+
+        #endregion
+
+        #region Lighting.Simple
+
+        _utility.Events.Device.Lighting.Simple.OnAccentChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Simple.OnAccentChanged");
+        _utility.Events.Device.Lighting.Simple.OnScribble1Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Simple.OnScribble1Changed");
+        _utility.Events.Device.Lighting.Simple.OnScribble2Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Simple.OnScribble2Changed");
+        _utility.Events.Device.Lighting.Simple.OnScribble3Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Simple.OnScribble3Changed");
+        _utility.Events.Device.Lighting.Simple.OnScribble4Changed += (sender, args) => Console.WriteLine("Events.Device.Lighting.Simple.OnScribble4Changed");
+        _utility.Events.Device.Lighting.Simple.OnGlobalChanged += (sender, args) => Console.WriteLine("Events.Device.Lighting.Simple.OnGlobalChanged");
+
+        #endregion
 
         #endregion
         
