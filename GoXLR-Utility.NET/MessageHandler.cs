@@ -55,7 +55,7 @@ namespace GoXLR_Utility.NET
                 seconds = ticks / Stopwatch.Frequency;
                 milliseconds = (ticks / Stopwatch.Frequency) * 1000;
                 nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
-                Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks} | ");
+                Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks}");
                 DebugWatch.Reset();
 #endif
                 return;
@@ -66,7 +66,7 @@ namespace GoXLR_Utility.NET
             seconds = ticks / Stopwatch.Frequency;
             milliseconds = (ticks / Stopwatch.Frequency) * 1000;
             nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
-            Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks} | ");
+            Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks}");
             DebugWatch.Reset();
 #endif
             if (response is null)

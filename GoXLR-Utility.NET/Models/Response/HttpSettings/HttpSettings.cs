@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace GoXLR_Utility.NET.Models.HttpSettings
+namespace GoXLR_Utility.NET.Models.Response.HttpSettings
 {
     public class HttpSettings
     {
@@ -15,5 +15,12 @@ namespace GoXLR_Utility.NET.Models.HttpSettings
         
         [JsonPropertyName("port")]
         public int Port { get; set; }
+
+        public string ToWebSocketString()
+        {
+            return BindAddress.Equals("0.0.0.0")
+                ? $"ws://localhost:{Port}/api/websocket"
+                : $"ws://{BindAddress}:{Port}/api/websocket";
+        }
     }
 }

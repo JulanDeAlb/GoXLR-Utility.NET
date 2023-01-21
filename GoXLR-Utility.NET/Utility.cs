@@ -11,6 +11,7 @@ namespace GoXLR_Utility.NET
 {
     public class Utility
     {
+        private static NamedPipeServer _namedPipeServer;
         private static MessageHandler _messageHandler;
         private static long _id;
         private static WebSocket _websocket;
@@ -31,19 +32,22 @@ namespace GoXLR_Utility.NET
 
         public Utility(CancellationTokenSource cToken = null)
         {
-            _websocket = new WebSocket("ws://localhost:14564/api/websocket");
             _messageHandler = new MessageHandler(Events, Status, _serializerOptions);
-            
-            _websocket.OnOpen += OnWsConnected;
-            _websocket.OnMessage += OnWsMessage;
-            _websocket.OnClose += OnWsDisconnected;
-            _websocket.OnError += OnWsError;
+            _namedPipeServer = new NamedPipeServer(_serializerOptions);
         }
 
-        public void Connect()
+        public bool Connect()
         {
+            var settings = _namedPipeServer.Connect();
+            
+            if (settings == null || !settings.Enabled)
+                return false;
+
+            InitializeWebSocket(settings.ToWebSocketString());
+            
             Interlocked.Exchange(ref _id, 0);
             _websocket.Connect();
+            return true;
         }
 
         public void Disconnect()
@@ -54,6 +58,16 @@ namespace GoXLR_Utility.NET
         public void Send(string message)
         {
             _websocket.Send(message);
+        }
+
+        private void InitializeWebSocket(string url)
+        {
+            _websocket = new WebSocket(url);
+            
+            _websocket.OnOpen += OnWsConnected;
+            _websocket.OnMessage += OnWsMessage;
+            _websocket.OnClose += OnWsDisconnected;
+            _websocket.OnError += OnWsError;
         }
 
         private void OnWsConnected(object sender, System.EventArgs eventArgs)

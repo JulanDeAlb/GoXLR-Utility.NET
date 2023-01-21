@@ -85,7 +85,7 @@ namespace GoXLR_Utility.NET
             var seconds = ticks / Stopwatch.Frequency;
             var milliseconds = (ticks / Stopwatch.Frequency) * 1000;
             var nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
-            Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks} | ");
+            Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks}");
             _debugWatch.Reset();
 #endif
         }
@@ -180,7 +180,9 @@ namespace GoXLR_Utility.NET
                 if (type == typeof(Dictionary<string, Device>))
                 {
                     patchCacheItem.SerialNumber = path;
-                    patchCacheItem.ParentClass = type.GetProperty("Item")?.GetValue(patchCacheItem.ParentClass, new object[] { path }); //Get value of Device Dictionary with given SerialNumber
+                    
+                    //Get value of Device Dictionary with given SerialNumber
+                    patchCacheItem.ParentClass = type.GetProperty("Item")?.GetValue(patchCacheItem.ParentClass, new object[] { path });
                 }
                 else if (type == typeof(List<Sample>) && int.TryParse(path, out var index)
                                                       && ((IList)patchCacheItem.ParentClass).Count >= index)
