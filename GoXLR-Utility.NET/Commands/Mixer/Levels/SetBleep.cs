@@ -2,13 +2,13 @@ using System.Collections.Generic;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Levels
 {
-    public class SetDeeser : CommandBase
+    public class SetBleep : CommandBase
     {
-        public SetDeeser(byte volume)
+        public SetBleep(byte volume)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetDeeser"] = new
+                ["SetSwearButtonVolume"] = new
                 {
                     volume
                 }
