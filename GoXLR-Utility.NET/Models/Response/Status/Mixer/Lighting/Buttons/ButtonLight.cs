@@ -43,13 +43,13 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
         [JsonPropertyName("Fader1Mute")]
         public FaderAMute FaderAMute { get; set; }
         
-        [JsonPropertyName("FaderBMute")]
+        [JsonPropertyName("Fader2Mute")]
         public FaderBMute FaderBMute { get; set; }
         
-        [JsonPropertyName("FaderCMute")]
+        [JsonPropertyName("Fader3Mute")]
         public FaderCMute FaderCMute { get; set; }
         
-        [JsonPropertyName("FaderDMute")]
+        [JsonPropertyName("Fader4Mute")]
         public FaderDMute FaderDMute { get; set; }
     }
     
