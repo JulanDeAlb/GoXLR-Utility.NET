@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using GoXLR_Utility.NET.Commands;
+using GoXLR_Utility.NET.Enums.Commands;
+using GoXLR_Utility.NET.Enums.Response.Status.Paths;
 using GoXLR_Utility.NET.Models.Response.Status;
 using WebSocketSharp;
 using ErrorEventArgs = WebSocketSharp.ErrorEventArgs;
@@ -30,7 +33,7 @@ namespace GoXLR_Utility.NET
             set => _messageHandler.ShouldInvokeEvents = value;
         }
 
-        public Utility(CancellationTokenSource cToken = null)
+        public Utility()
         {
             _messageHandler = new MessageHandler(Events, Status, _serializerOptions);
             _namedPipeServer = new NamedPipeServer(_serializerOptions);
@@ -53,6 +56,24 @@ namespace GoXLR_Utility.NET
         public void Disconnect()
         {
             _websocket.Close();
+        }
+        
+        public void SendCommand(string serialNumber, CommandBase command)
+        {
+            Interlocked.Increment(ref _id);
+            Send(command.GetJson(_id, serialNumber));
+        }
+
+        public void OpenPath(PathEnum path)
+        {
+            Interlocked.Increment(ref _id);
+            Send(new CommandBase{ Path = path }.GetJson(_id));
+        }
+
+        public void SendSimpleCommand(SimpleCommandEnum command)
+        {
+            Interlocked.Increment(ref _id);
+            Send(new CommandBase{ Object = command }.GetJson(_id));
         }
 
         public void Send(string message)
@@ -92,7 +113,7 @@ namespace GoXLR_Utility.NET
         {
             Console.WriteLine(e.Exception);
         }
-        
+
         public void SendCommand(string serialNumber, string commandName, params object[] parameters)
         {
             if (commandName is null)

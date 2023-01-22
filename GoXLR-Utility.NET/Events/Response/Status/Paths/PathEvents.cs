@@ -26,35 +26,35 @@ namespace GoXLR_Utility.NET.Events.Response.Status.Paths
             switch (memInfo.Name)
             {
                 case "IconsDirectory":
-                    pathEventArgs.TypeChanged = PathEnum.IconsDirectory;
+                    pathEventArgs.TypeChanged = PathEnum.Icons;
                     pathEventArgs.Value = specPathEventArgs.Value = paths.IconsDirectory;
                     OnPathsChanged?.Invoke(this, pathEventArgs);
                     OnIconsDirectoryChanged?.Invoke(this, specPathEventArgs);
                     break;
                 
                 case "MicProfileDirectory":
-                    pathEventArgs.TypeChanged = PathEnum.MicProfileDirectory;
+                    pathEventArgs.TypeChanged = PathEnum.MicProfiles;
                     pathEventArgs.Value = specPathEventArgs.Value = paths.MicProfileDirectory;
                     OnPathsChanged?.Invoke(this, pathEventArgs);
                     OnMicProfileDirectoryChanged?.Invoke(this, specPathEventArgs);
                     break;
                 
                 case "PresetsDirectory":
-                    pathEventArgs.TypeChanged = PathEnum.PresetsDirectory;
+                    pathEventArgs.TypeChanged = PathEnum.Presets;
                     pathEventArgs.Value = specPathEventArgs.Value = paths.PresetsDirectory;
                     OnPathsChanged?.Invoke(this, pathEventArgs);
                     OnPresetsDirectoryChanged?.Invoke(this, specPathEventArgs);
                     break;
                 
                 case "ProfileDirectory":
-                    pathEventArgs.TypeChanged = PathEnum.ProfileDirectory;
+                    pathEventArgs.TypeChanged = PathEnum.Profiles;
                     pathEventArgs.Value = specPathEventArgs.Value = paths.ProfileDirectory;
                     OnPathsChanged?.Invoke(this, pathEventArgs);
                     OnProfileDirectoryChanged?.Invoke(this, specPathEventArgs);
                     break;
                 
                 case "SamplesDirectory":
-                    pathEventArgs.TypeChanged = PathEnum.SamplesDirectory;
+                    pathEventArgs.TypeChanged = PathEnum.Samples;
                     pathEventArgs.Value = specPathEventArgs.Value = paths.SamplesDirectory;
                     OnPathsChanged?.Invoke(this, pathEventArgs);
                     OnSamplesDirectoryChanged?.Invoke(this, specPathEventArgs);
