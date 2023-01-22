@@ -60,19 +60,19 @@ namespace GoXLR_Utility.NET
         
         public void SendCommand(string serialNumber, CommandBase command)
         {
-            Interlocked.Increment(ref _id);
+            IncrementId();
             Send(command.GetJson(_id, serialNumber));
         }
 
         public void OpenPath(PathEnum path)
         {
-            Interlocked.Increment(ref _id);
+            IncrementId();
             Send(new CommandBase{ Path = path }.GetJson(_id));
         }
 
         public void SendSimpleCommand(SimpleCommandEnum command)
         {
-            Interlocked.Increment(ref _id);
+            IncrementId();
             Send(new CommandBase{ Object = command }.GetJson(_id));
         }
 
@@ -112,6 +112,14 @@ namespace GoXLR_Utility.NET
         private static void OnWsError(object sender, ErrorEventArgs e)
         {
             Console.WriteLine(e.Exception);
+        }
+
+        private void IncrementId()
+        {
+            if (_id == long.MaxValue)
+                Interlocked.Exchange(ref _id, 0);
+            else 
+                Interlocked.Increment(ref _id);
         }
 
         public void SendCommand(string serialNumber, string commandName, params object[] parameters)
