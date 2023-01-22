@@ -24,7 +24,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         public Levels.Levels Levels { get; set; }
         
         [JsonPropertyName("lighting")]
-        public Lighting.Lighting Lighting { get; set; } //TODO rewrite and implement Lighting
+        public Lighting.Lighting Lighting { get; set; }
         
         [JsonPropertyName("mic_profile_name")]
         public string MicProfileName { get; set; }

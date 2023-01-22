@@ -22,7 +22,7 @@
         D
     }
 
-    public enum EncoderName
+    public enum EncoderName //!DONE
     {
         Echo,
         Gender,
@@ -93,7 +93,7 @@
         SamplerTopRight
     }
 
-    public enum SimpleColourTargets
+    public enum SimpleColourTargets //!DONE
     {
         Global,
         Accent,
@@ -103,14 +103,14 @@
         Scribble4
     }
 
-    public enum SamplerColourTargets
+    public enum SamplerColourTargets //!DONE
     {
         SamplerSelectA,
         SamplerSelectB,
         SamplerSelectC
     }
 
-    public enum EncoderColourTargets
+    public enum EncoderColourTargets //!DONE
     {
         Reverb,
         Pitch,
@@ -126,7 +126,7 @@
         SamplerButtons
     }
     
-    public enum ButtonColourOffStyle {
+    public enum ButtonColourOffStyles { //!DONE
         Dimmed,
         Colour2,
         DimmedColour2,
