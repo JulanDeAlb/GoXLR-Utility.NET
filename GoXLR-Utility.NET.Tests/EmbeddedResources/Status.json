@@ -1,11 +1,11 @@
 {
   "config":{
     "daemon_version":"0.9.0",
-    "autostart_enabled":false,
+    "autostart_enabled":true,
     "show_tray_icon":true
   },
   "mixers":{
-    "S200601828CQK":{
+    "SerialNumber":{
       "hardware":{
         "versions":{
           "firmware":[
@@ -22,7 +22,7 @@
             100
           ]
         },
-        "serial_number":"S200601828CQK",
+        "serial_number":"SerialNumber",
         "manufactured_date":"2020-06-23",
         "device_type":"Full",
         "usb_device":{
@@ -35,7 +35,7 @@
           ],
           "bus_number":0,
           "address":0,
-          "identifier":"USB\\VID_1220&PID_8FE0\\6&C1A2E2F&0&3"
+          "identifier":"USB\\Anything\\Anything"
         }
       },
       "fader_status":{
@@ -46,7 +46,7 @@
             "file_name":"person.png",
             "bottom_text":"Voice Chat",
             "left_text":"1",
-            "inverted":false
+            "inverted":true
           },
           "mute_state":"Unmuted"
         },
@@ -57,7 +57,7 @@
             "file_name":"scale.png",
             "bottom_text":"Browser",
             "left_text":"2",
-            "inverted":false
+            "inverted":true
           },
           "mute_state":"Unmuted"
         },
@@ -68,7 +68,7 @@
             "file_name":"level.png",
             "bottom_text":"System",
             "left_text":"3",
-            "inverted":false
+            "inverted":true
           },
           "mute_state":"Unmuted"
         },
@@ -79,7 +79,7 @@
             "file_name":"music.png",
             "bottom_text":"Music",
             "left_text":"4",
-            "inverted":false
+            "inverted":true
           },
           "mute_state":"Unmuted"
         }
@@ -179,50 +179,50 @@
           "Headphones":true,
           "BroadcastMix":true,
           "LineOut":true,
-          "ChatMic":false,
-          "Sampler":false
+          "ChatMic":true,
+          "Sampler":true
         },
         "Music":{
           "Headphones":true,
           "BroadcastMix":true,
           "LineOut":true,
-          "ChatMic":false,
-          "Sampler":false
+          "ChatMic":true,
+          "Sampler":true
         },
         "Game":{
           "Headphones":true,
-          "BroadcastMix":false,
+          "BroadcastMix":true,
           "LineOut":true,
-          "ChatMic":false,
-          "Sampler":false
+          "ChatMic":true,
+          "Sampler":true
         },
         "Console":{
           "Headphones":true,
           "BroadcastMix":true,
           "LineOut":true,
-          "ChatMic":false,
-          "Sampler":false
+          "ChatMic":true,
+          "Sampler":true
         },
         "LineIn":{
           "Headphones":true,
           "BroadcastMix":true,
           "LineOut":true,
-          "ChatMic":false,
-          "Sampler":false
+          "ChatMic":true,
+          "Sampler":true
         },
         "System":{
           "Headphones":true,
           "BroadcastMix":true,
           "LineOut":true,
-          "ChatMic":false,
-          "Sampler":false
+          "ChatMic":true,
+          "Sampler":true
         },
         "Samples":{
           "Headphones":true,
           "BroadcastMix":true,
           "LineOut":true,
           "ChatMic":true,
-          "Sampler":false
+          "Sampler":true
         }
       },
       "cough_button":{
@@ -498,7 +498,7 @@
             "post_gain":2
           },
           "robot":{
-            "is_enabled":false,
+            "is_enabled":true,
             "style":"Robot2",
             "low_gain":3,
             "low_freq":87,
@@ -537,7 +537,7 @@
                   "stop_pct":7.94702
                 }
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "BottomLeft":{
               "function":"PlayNext",
@@ -549,7 +549,7 @@
                   "stop_pct":34.6578
                 }
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "BottomRight":{
               "function":"PlayNext",
@@ -561,7 +561,7 @@
                   "stop_pct":43.4879
                 }
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "TopRight":{
               "function":"PlayStop",
@@ -569,7 +569,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             }
           },
           "A":{
@@ -579,7 +579,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "TopLeft":{
               "function":"PlayStop",
@@ -591,7 +591,7 @@
                   "stop_pct":94.702
                 }
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "TopRight":{
               "function":"PlayStop",
@@ -599,7 +599,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "BottomRight":{
               "function":"PlayStop",
@@ -607,7 +607,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             }
           },
           "B":{
@@ -617,7 +617,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "TopLeft":{
               "function":"PlayStop",
@@ -639,7 +639,7 @@
                   "stop_pct":100.0
                 }
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "TopRight":{
               "function":"PlayStop",
@@ -647,7 +647,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             },
             "BottomRight":{
               "function":"PlayStop",
@@ -655,7 +655,7 @@
               "samples":[
 
               ],
-              "is_playing":false
+              "is_playing":true
             }
           }
         }
@@ -668,84 +668,60 @@
           "equaliser_fine":"Simple"
         },
         "mute_hold_duration":500,
-        "vc_mute_also_mute_cm":false
+        "vc_mute_also_mute_cm":true
       },
       "button_down":{
-        "Fader1Mute":false,
-        "Fader2Mute":false,
-        "Fader3Mute":false,
-        "Fader4Mute":false,
-        "Bleep":false,
-        "Cough":false,
-        "EffectSelect1":false,
-        "EffectSelect2":false,
-        "EffectSelect3":false,
-        "EffectSelect4":false,
-        "EffectSelect5":false,
-        "EffectSelect6":false,
-        "EffectFx":false,
-        "EffectMegaphone":false,
-        "EffectRobot":false,
-        "EffectHardTune":false,
-        "SamplerSelectA":false,
-        "SamplerSelectB":false,
-        "SamplerSelectC":false,
-        "SamplerTopLeft":false,
-        "SamplerTopRight":false,
-        "SamplerBottomLeft":false,
-        "SamplerBottomRight":false,
-        "SamplerClear":false
+        "Fader1Mute":true,
+        "Fader2Mute":true,
+        "Fader3Mute":true,
+        "Fader4Mute":true,
+        "Bleep":true,
+        "Cough":true,
+        "EffectSelect1":true,
+        "EffectSelect2":true,
+        "EffectSelect3":true,
+        "EffectSelect4":true,
+        "EffectSelect5":true,
+        "EffectSelect6":true,
+        "EffectFx":true,
+        "EffectMegaphone":true,
+        "EffectRobot":true,
+        "EffectHardTune":true,
+        "SamplerSelectA":true,
+        "SamplerSelectB":true,
+        "SamplerSelectC":true,
+        "SamplerTopLeft":true,
+        "SamplerTopRight":true,
+        "SamplerBottomLeft":true,
+        "SamplerBottomRight":true,
+        "SamplerClear":true
       },
       "profile_name":"Main",
       "mic_profile_name":"DEFAULT"
     }
   },
   "paths":{
-    "profile_directory":"C:\\Users\\Julia\\AppData\\Roaming\\GoXLR-on-Linux\\GoXLR-Utility\\data\\profiles",
-    "mic_profile_directory":"C:\\Users\\Julia\\AppData\\Roaming\\GoXLR-on-Linux\\GoXLR-Utility\\data\\mic-profiles",
-    "samples_directory":"C:\\Users\\Julia\\AppData\\Roaming\\GoXLR-on-Linux\\GoXLR-Utility\\data\\samples",
-    "presets_directory":"C:\\Users\\Julia\\AppData\\Roaming\\GoXLR-on-Linux\\GoXLR-Utility\\data\\presets",
-    "icons_directory":"C:\\Users\\Julia\\AppData\\Roaming\\GoXLR-on-Linux\\GoXLR-Utility\\data\\icons"
+    "profile_directory":"C:\\Users\\profiles",
+    "mic_profile_directory":"C:\\Users\\mic-profiles",
+    "samples_directory":"C:\\Users\\samples",
+    "presets_directory":"C:\\Users\\presets",
+    "icons_directory":"C:\\Users\\icons"
   },
   "files":{
     "profiles":[
-      "Main",
-      "MainTwo",
-      "NewMain",
-      "Sleep",
-      "Stream"
+      "Main"
     ],
     "mic_profiles":[
-      "DEFAULT",
-      "Original"
+      "DEFAULT"
     ],
     "presets":[
-      "BadMic",
-      "Big Echo",
-      "Big Verb",
-      "Comms Radio",
-      "HardTune Music",
-      "Kid Robot",
-      "PitchDn Echo",
-      "Tank"
+      "BadMic"
     ],
     "samples":{
-      "Recorded\\123.wav":"123.wav",
-      "Recorded\\234.wav":"234.wav",
-      "Recorded\\345.wav":"345.wav",
-      "Snippets\\123.mp3":"123.mp3",
-      "Snippets\\234.mp3":"234.mp3",
-      "Snippets\\345.mp3":"345.mp3"
+      "Recorded\\123.wav":"123.wav"
     },
     "icons":[
-      "headphone.png",
-      "level.png",
-      "lightbulb2.png",
-      "mic.png",
-      "mic3.png",
-      "music.png",
-      "person.png",
-      "scale.png"
+      "headphone.png"
     ]
   }
 }
