@@ -24,8 +24,6 @@ namespace GoXLR_Utility.NET
         private readonly Stopwatch _debugWatch = new Stopwatch();
 #endif
         
-        public bool ShouldInvokeEvents = true;
-        
         public PatchHandler(JsonSerializerOptions serializerOptions)
         {
             _serializerOptions = serializerOptions;
@@ -73,7 +71,7 @@ namespace GoXLR_Utility.NET
             }
 
             //Indicates that a GoXLR has been connected or removed
-            if (PatchDeviceConnection(patch, patchCacheItem, out var value))
+            if (PatchDeviceConnection(patch, patchCacheItem))
                 return;
             
             //In case propType or myClass is null, the path could be not implemented yet. 
@@ -84,15 +82,15 @@ namespace GoXLR_Utility.NET
             switch (genericType)
             {
                 case GenericTypeEnum.NonGeneric:
-                    PatchNonGeneric(patch, patchCacheItem, out value);
+                    PatchNonGeneric(patch, patchCacheItem);
                     break;
                 
                 case GenericTypeEnum.List:
-                    PatchGenericList(patch, patchCacheItem, lastIndex, out value);
+                    PatchGenericList(patch, patchCacheItem, lastIndex);
                     break;
                 
                 case GenericTypeEnum.Dictionary:
-                    PatchGenericDictionary(patch, patchCacheItem, filePath, out value);
+                    PatchGenericDictionary(patch, patchCacheItem, filePath);
                     break;
 
                 case GenericTypeEnum.Other:
@@ -197,9 +195,10 @@ namespace GoXLR_Utility.NET
             return GenericTypeEnum.Other;
         }
 
-        private void PatchNonGeneric(Patch patch, PatchCacheItem patchCacheItem, out object value)
+        private void PatchNonGeneric(Patch patch, PatchCacheItem patchCacheItem)
         {
             //If the Deserialization throws, there could be a problem with the Models
+            object value;
             try
             {
                 value = patch.Value.Deserialize(patchCacheItem.PropType, _serializerOptions);
@@ -211,11 +210,11 @@ namespace GoXLR_Utility.NET
             patchCacheItem.PropInfo.SetValue(patchCacheItem.ParentClass, value);
         }
 
-        private void PatchGenericList(Patch patch, PatchCacheItem patchCacheItem, int lastIndex, out object value)
+        private void PatchGenericList(Patch patch, PatchCacheItem patchCacheItem, int lastIndex)
         {
             //Since we know the Generic Type is a List, use it to cast to IList and manipulate it.
             var array = (IList)patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
-            value = default;
+            object value;
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
@@ -250,7 +249,7 @@ namespace GoXLR_Utility.NET
             }
         }
 
-        private void PatchGenericDictionary(Patch patch, PatchCacheItem patchCacheItem, string filePath, out object value)
+        private void PatchGenericDictionary(Patch patch, PatchCacheItem patchCacheItem, string filePath)
         {
             if (patchCacheItem.PropType.GetGenericArguments().FirstOrDefault() != typeof(string))
                 throw new ArgumentOutOfRangeException($"{patchCacheItem.PropType.Name} is a Dictionary<T, S> but T, S maybe isn't implemented");
@@ -260,7 +259,7 @@ namespace GoXLR_Utility.NET
                 
             //Split the File Name from its path
             var splitPath = filePath.Split('/', '\\');
-            value = splitPath[splitPath.Length - 1];
+            var value = splitPath[splitPath.Length - 1];
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
@@ -289,10 +288,9 @@ namespace GoXLR_Utility.NET
             }
         }
         
-        private bool PatchDeviceConnection(Patch patch, PatchCacheItem patchCacheItem, out object value)
+        private bool PatchDeviceConnection(Patch patch, PatchCacheItem patchCacheItem)
         {
             //Indicates that a GoXLR has been connected or removed
-            value = default;
             if (!(patchCacheItem.PropType is null &&
                   patchCacheItem.PathSegments.Length == 2 &&
                   patchCacheItem.SerialNumber != null))
@@ -305,7 +303,7 @@ namespace GoXLR_Utility.NET
             switch (patch.Op)
             {
                 case OpPatchEnum.Add:
-                    value = patch.Value.Deserialize<Device>(_serializerOptions);
+                    var value = patch.Value.Deserialize<Device>(_serializerOptions);
                     lock (dictionary)
                     {
                         dictionary.Add(patchCacheItem.SerialNumber, value);

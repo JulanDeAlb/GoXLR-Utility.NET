@@ -9,8 +9,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini
 {
     public class EqualiserMini : INotifyPropertyChanged
     {
-        public GainMini _gain;
-        public FrequencyMini _frequency;
+        private GainMini _gain;
+        private FrequencyMini _frequency;
         
         [JsonPropertyName("gain")]
         public GainMini Gain

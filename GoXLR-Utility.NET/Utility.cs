@@ -25,12 +25,6 @@ namespace GoXLR_Utility.NET
 
         public readonly Status Status = new Status();
         public List<string> AvailableSerialNumbers => MessageHandler.AvailableSerialNumbers;
-        
-        public bool ShouldInvokeEvents
-        {
-            get => _messageHandler.ShouldInvokeEvents;
-            set => _messageHandler.ShouldInvokeEvents = value;
-        }
 
         public Utility()
         {
