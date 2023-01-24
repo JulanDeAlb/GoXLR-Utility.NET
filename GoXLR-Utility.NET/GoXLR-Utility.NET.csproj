@@ -20,9 +20,4 @@
       <Folder Include="Enums\Response\Status\Mixer\Levels\Volumes" />
     </ItemGroup>
 
-    <ItemGroup>
-      <None Remove="Ressources\Status.json" />
-      <EmbeddedResource Include="Ressources\Status.json" />
-    </ItemGroup>
-
 </Project>

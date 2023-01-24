@@ -1,29 +1,83 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current
 {
-    public class Current
+    public class Current : INotifyPropertyChanged
     {
+        private EchoEffect _echo;
+        private GenderEffect _gender;
+        private HardTuneEffect _hardTune;
+        private MegaphoneEffect _megaphone;
+        private PitchEffect _pitch;
+        private ReverbEffect _reverb;
+        private RobotEffect _robot;
+        
         [JsonPropertyName("echo")]
-        public EchoEffect Echo { get; set; }
+        public EchoEffect Echo
+        {
+            get => _echo;
+            internal set => SetField(ref _echo, value);
+        }
         
         [JsonPropertyName("gender")]
-        public GenderEffect Gender { get; set; }
+        public GenderEffect Gender
+        {
+            get => _gender;
+            internal set => SetField(ref _gender, value);
+        }
         
         [JsonPropertyName("hard_tune")]
-        public HardTuneEffect HardTune { get; set; }
+        public HardTuneEffect HardTune
+        {
+            get => _hardTune;
+            internal set => SetField(ref _hardTune, value);
+        }
         
         [JsonPropertyName("megaphone")]
-        public MegaphoneEffect Megaphone { get; set; }
+        public MegaphoneEffect Megaphone
+        {
+            get => _megaphone;
+            internal set => SetField(ref _megaphone, value);
+        }
         
         [JsonPropertyName("pitch")]
-        public PitchEffect Pitch { get; set; }
+        public PitchEffect Pitch
+        {
+            get => _pitch;
+            internal set => SetField(ref _pitch, value);
+        }
         
         [JsonPropertyName("reverb")]
-        public ReverbEffect Reverb { get; set; }
+        public ReverbEffect Reverb
+        {
+            get => _reverb;
+            internal set => SetField(ref _reverb, value);
+        }
         
         [JsonPropertyName("robot")]
-        public RobotEffect Robot { get; set; }
+        public RobotEffect Robot
+        {
+            get => _robot;
+            internal set => SetField(ref _robot, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

@@ -1,32 +1,74 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple
 {
-    public class SimpleLight
+    public class SimpleLight : INotifyPropertyChanged
     {
+        private OneColour _accent;
+        private OneColour _scribble1;
+        private OneColour _scribble2;
+        private OneColour _scribble3;
+        private OneColour _scribble4;
+        private OneColour _global;
+
         [JsonPropertyName("Accent")]
-        public Accent Accent { get; set; }
+        public OneColour Accent
+        {
+            get => _accent;
+            internal set => SetField(ref _accent, value);
+        }
         
         [JsonPropertyName("Scribble1")]
-        public Scribble1 Scribble1 { get; set; }
+        public OneColour Scribble1
+        {
+            get => _scribble1;
+            internal set => SetField(ref _scribble1, value);
+        }
         
         [JsonPropertyName("Scribble2")]
-        public Scribble2 Scribble2 { get; set; }
+        public OneColour Scribble2
+        {
+            get => _scribble2;
+            internal set => SetField(ref _scribble2, value);
+        }
         
         [JsonPropertyName("Scribble3")]
-        public Scribble3 Scribble3 { get; set; }
+        public OneColour Scribble3
+        {
+            get => _scribble3;
+            internal set => SetField(ref _scribble3, value);
+        }
         
         [JsonPropertyName("Scribble4")]
-        public Scribble4 Scribble4 { get; set; }
+        public OneColour Scribble4
+        {
+            get => _scribble4;
+            internal set => SetField(ref _scribble4, value);
+        }
         
         [JsonPropertyName("Global")]
-        public Global Global { get; set; }
-    }
+        public OneColour Global
+        {
+            get => _global;
+            internal set => SetField(ref _global, value);
+        }
 
-    public class Accent : OneColour { }
-    public class Scribble1 : OneColour { }
-    public class Scribble2 : OneColour { }
-    public class Scribble3 : OneColour { }
-    public class Scribble4 : OneColour { }
-    public class Global : OneColour { }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
+    }
 }

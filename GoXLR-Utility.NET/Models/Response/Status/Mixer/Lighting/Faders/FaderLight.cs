@@ -1,35 +1,95 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
 {
-    public class FaderLight
+    public class FaderLight : INotifyPropertyChanged
     {
+        private FaderLightBase _faderA;
+        private FaderLightBase _faderB;
+        private FaderLightBase _faderC;
+        private FaderLightBase _faderD;
+        
         [JsonPropertyName("A")]
-        public FaderA FaderA { get; set; }
+        public FaderLightBase FaderA
+        {
+            get => _faderA;
+            internal set => SetField(ref _faderA, value);
+        }
         
         [JsonPropertyName("B")]
-        public FaderB FaderB { get; set; }
+        public FaderLightBase FaderB
+        {
+            get => _faderB;
+            internal set => SetField(ref _faderB, value);
+        }
         
         [JsonPropertyName("C")]
-        public FaderC FaderC { get; set; }
+        public FaderLightBase FaderC
+        {
+            get => _faderC;
+            internal set => SetField(ref _faderC, value);
+        }
         
         [JsonPropertyName("D")]
-        public FaderD FaderD { get; set; }
+        public FaderLightBase FaderD
+        {
+            get => _faderD;
+            internal set => SetField(ref _faderD, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
     
-    public class FaderA : FaderLightBase { }
-    public class FaderB : FaderLightBase { }
-    public class FaderC : FaderLightBase { }
-    public class FaderD : FaderLightBase { }
-    
-    public class FaderLightBase
+    public class FaderLightBase : INotifyPropertyChanged
     {
+        private TwoColour _colour;
+        private FaderDisplayStyle _style;
+        
         [JsonPropertyName("colours")]
-        public TwoColour Colour { get; set; }
+        public TwoColour Colour
+        {
+            get => _colour;
+            internal set => SetField(ref _colour, value);
+        }
         
         [JsonPropertyName("style")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public FaderDisplayStyle Style { get; set; }
+        public FaderDisplayStyle Style
+        {
+            get => _style;
+            internal set => SetField(ref _style, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

@@ -1,29 +1,68 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
-using GoXLR_Utility.NET.Events.Response.Status.Files;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Files
 {
     //Path: files/...
-    
-    /// <summary>
-    /// <seealso cref="FileEvents"/>
-    /// </summary>
-    public class Files
+    public class Files : INotifyPropertyChanged
     {
+        private ObservableCollection<string> _icons;
+        private ObservableCollection<string> _micProfiles;
+        private ObservableCollection<string> _presets;
+        private ObservableCollection<string> _profiles;
+        private Dictionary<string, string> _samples; //TODO Implement own ObservableDirectory
+        
         [JsonPropertyName("icons")]
-        public List<string> Icons { get; set; }
+        public ObservableCollection<string> Icons
+        {
+            get => _icons;
+            internal set => SetField(ref _icons, value);
+        }
         
         [JsonPropertyName("mic_profiles")]
-        public List<string> MicProfiles { get; set; }
+        public ObservableCollection<string> MicProfiles
+        {
+            get => _micProfiles;
+            internal set => SetField(ref _micProfiles, value);
+        }
         
         [JsonPropertyName("presets")]
-        public List<string> Presets { get; set; }
+        public ObservableCollection<string> Presets
+        {
+            get => _presets;
+            internal set => SetField(ref _presets, value);
+        }
         
         [JsonPropertyName("profiles")]
-        public List<string> Profiles { get; set; }
+        public ObservableCollection<string> Profiles
+        {
+            get => _profiles;
+            internal set => SetField(ref _profiles, value);
+        }
         
         [JsonPropertyName("samples")]
-        public Dictionary<string, string> Samples { get; set; }
+        public Dictionary<string, string> Samples
+        {
+            get => _samples;
+            internal set => SetField(ref _samples, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

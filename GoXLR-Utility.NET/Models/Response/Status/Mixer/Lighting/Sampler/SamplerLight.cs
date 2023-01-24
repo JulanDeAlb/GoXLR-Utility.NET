@@ -1,29 +1,85 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
 {
-    public class SamplerLight
+    public class SamplerLight : INotifyPropertyChanged
     {
+        private SamplerLightBase _samplerA;
+        private SamplerLightBase _samplerB;
+        private SamplerLightBase _samplerC;
+        
         [JsonPropertyName("SamplerSelectA")]
-        public SamplerA SamplerA { get; set; }
+        public SamplerLightBase SamplerA
+        {
+            get => _samplerA;
+            internal set => SetField(ref _samplerA, value);
+        }
         
         [JsonPropertyName("SamplerSelectB")]
-        public SamplerB SamplerB { get; set; }
+        public SamplerLightBase SamplerB
+        {
+            get => _samplerB;
+            internal set => SetField(ref _samplerB, value);
+        }
         
         [JsonPropertyName("SamplerSelectC")]
-        public SamplerC SamplerC { get; set; }
+        public SamplerLightBase SamplerC
+        {
+            get => _samplerC;
+            internal set => SetField(ref _samplerC, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
     
-    public class SamplerA : SamplerLightBase { } 
-    public class SamplerB : SamplerLightBase { } 
-    public class SamplerC : SamplerLightBase { } 
-    
-    public class SamplerLightBase
+    public class SamplerLightBase : INotifyPropertyChanged
     {
+        private string _offStyle;
+        private ThreeColour _colour;
+        
         [JsonPropertyName("off_style")]
-        public string OffStyle { get; set; }
+        public string OffStyle
+        {
+            get => _offStyle;
+            internal set => SetField(ref _offStyle, value);
+        }
         
         [JsonPropertyName("colours")]
-        public ThreeColour Colour { get; set; }
+        public ThreeColour Colour
+        {
+            get => _colour;
+            internal set => SetField(ref _colour, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

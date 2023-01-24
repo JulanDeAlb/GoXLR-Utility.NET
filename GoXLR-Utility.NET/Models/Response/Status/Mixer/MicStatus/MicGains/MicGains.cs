@@ -1,20 +1,50 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
-using GoXLR_Utility.NET.Events.Response.Status.Mixer.MicStatus.MicGains;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.MicGains
 {
-    /// <summary>
-    /// <seealso cref="MicGainEvents"/>
-    /// </summary>
-    public class MicGains
+    public class MicGains : INotifyPropertyChanged
     {
+        private int _condenser;
+        private int _dynamic;
+        private int _jack;
+        
         [JsonPropertyName("Condenser")]
-        public int Condenser { get; set; }
+        public int Condenser
+        {
+            get => _condenser;
+            internal set => SetField(ref _condenser, value);
+        }
         
         [JsonPropertyName("Dynamic")]
-        public int Dynamic { get; set; }
+        public int Dynamic
+        {
+            get => _dynamic;
+            internal set => SetField(ref _dynamic, value);
+        }
         
         [JsonPropertyName("Jack")]
-        public int Jack { get; set; }
+        public int Jack
+        {
+            get => _jack;
+            internal set => SetField(ref _jack, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

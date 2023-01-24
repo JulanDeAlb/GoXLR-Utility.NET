@@ -1,69 +1,156 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
-using GoXLR_Utility.NET.Events.Response.Status.Mixer.Sampler.Banks;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
 {
-    /// <summary>
-    /// <seealso cref="SamplerBankEvents"/>
-    /// </summary>
-    public class SamplerBanks
+    public class SamplerBanks : INotifyPropertyChanged
     {
+        private SamplerBankBase _samplerBankA;
+        private SamplerBankBase _samplerBankB;
+        private SamplerBankBase _samplerBankC;
+        
         [JsonPropertyName("A")]
-        public SamplerBankA SamplerBankA { get; set; }
+        public SamplerBankBase SamplerBankA
+        {
+            get => _samplerBankA;
+            internal set => SetField(ref _samplerBankA, value);
+        }
         
         [JsonPropertyName("B")]
-        public SamplerBankB SamplerBankB { get; set; }
+        public SamplerBankBase SamplerBankB
+        {
+            get => _samplerBankB;
+            internal set => SetField(ref _samplerBankB, value);
+        }
         
         [JsonPropertyName("C")]
-        public SamplerBankC SamplerBankC { get; set; }
+        public SamplerBankBase SamplerBankC
+        {
+            get => _samplerBankC;
+            internal set => SetField(ref _samplerBankC, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
     
-    public class SamplerBankA : SamplerBankBase { }
-    public class SamplerBankB : SamplerBankBase { }
-    public class SamplerBankC : SamplerBankBase { }
-    
-    /// <summary>
-    /// <seealso cref="SamplerBankBaseEvents"/>
-    /// </summary>
-    public class SamplerBankBase
-    { 
+    public class SamplerBankBase : INotifyPropertyChanged
+    {
+        private BankBaseButton _bottomLeft;
+        private BankBaseButton _bottomRight;
+        private BankBaseButton _topLeft;
+        private BankBaseButton _topRight;
+        
         [JsonPropertyName("BottomLeft")]
-        public BottomLeftBank BottomLeft { get; set; }
+        public BankBaseButton BottomLeft
+        {
+            get => _bottomLeft;
+            internal set => SetField(ref _bottomLeft, value);
+        }
         
         [JsonPropertyName("BottomRight")]
-        public BottomRightBank BottomRight { get; set; }
+        public BankBaseButton BottomRight
+        {
+            get => _bottomRight;
+            internal set => SetField(ref _bottomRight, value);
+        }
         
         [JsonPropertyName("TopLeft")]
-        public TopLeftBank TopLeft { get; set; }
+        public BankBaseButton TopLeft
+        {
+            get => _topLeft;
+            internal set => SetField(ref _topLeft, value);
+        }
         
         [JsonPropertyName("TopRight")]
-        public TopRightBank TopRight { get; set; }
+        public BankBaseButton TopRight
+        {
+            get => _topRight;
+            internal set => SetField(ref _topRight, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
     
-    public class BottomLeftBank : BankBaseButton { }
-    public class BottomRightBank : BankBaseButton { }
-    public class TopLeftBank : BankBaseButton { }
-    public class TopRightBank : BankBaseButton { }
-    
-    /// <summary>
-    /// <seealso cref="SamplerBankBaseButtonEvents"/>
-    /// </summary>
-    public class BankBaseButton
+    public class BankBaseButton : INotifyPropertyChanged
     {
+        private SamplePlaybackMode _function;
+        private bool _isPlaying;
+        private SamplePlayOrder _order;
+        private ObservableCollection<Sample.Sample> _samples;
+        
         [JsonPropertyName("function")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public SamplePlaybackMode Function { get; set; }
+        public SamplePlaybackMode Function
+        {
+            get => _function;
+            internal set => SetField(ref _function, value);
+        }
         
         [JsonPropertyName("is_playing")]
-        public bool IsPlaying { get; set; }
+        public bool IsPlaying
+        {
+            get => _isPlaying;
+            internal set => SetField(ref _isPlaying, value);
+        }
         
         [JsonPropertyName("order")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public SamplePlayOrder Order { get; set; }
+        public SamplePlayOrder Order
+        {
+            get => _order;
+            internal set => SetField(ref _order, value);
+        }
         
         [JsonPropertyName("samples")]
-        public List<Sample.Sample> Samples { get; set; }
+        public ObservableCollection<Sample.Sample> Samples
+        {
+            get => _samples;
+            internal set => SetField(ref _samples, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

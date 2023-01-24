@@ -1,24 +1,58 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Encoders
 {
-    public class EncoderLight
+    public class EncoderLight : INotifyPropertyChanged
     {
+        private ThreeColour _echo;
+        private ThreeColour _gender;
+        private ThreeColour _pitch;
+        private ThreeColour _reverb;
+        
         [JsonPropertyName("Echo")]
-        public EchoColour Echo { get; set; }
+        public ThreeColour Echo
+        {
+            get => _echo;
+            internal set => SetField(ref _echo, value);
+        }
         
         [JsonPropertyName("Gender")]
-        public GenderColour Gender { get; set; }
+        public ThreeColour Gender
+        {
+            get => _gender;
+            internal set => SetField(ref _gender, value);
+        }
         
         [JsonPropertyName("Pitch")]
-        public PitchColour Pitch { get; set; }
+        public ThreeColour Pitch
+        {
+            get => _pitch;
+            internal set => SetField(ref _pitch, value);
+        }
         
         [JsonPropertyName("Reverb")]
-        public ReverbColour Reverb { get; set; }
+        public ThreeColour Reverb
+        {
+            get => _reverb;
+            internal set => SetField(ref _reverb, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
-    
-    public class EchoColour : ThreeColour {}
-    public class GenderColour : ThreeColour {}
-    public class PitchColour : ThreeColour {}
-    public class ReverbColour : ThreeColour {}
 }

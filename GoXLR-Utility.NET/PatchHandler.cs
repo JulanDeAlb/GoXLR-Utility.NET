@@ -9,44 +9,14 @@ using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums;
 using GoXLR_Utility.NET.Models;
-using GoXLR_Utility.NET.Models.Patch;
-using GoXLR_Utility.NET.Models.Response.Status.Config;
-using GoXLR_Utility.NET.Models.Response.Status.Files;
+using GoXLR_Utility.NET.Models.Response.Patch;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.ButtonDown;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Volumes;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Compressor;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser.Frequency;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser.Gain;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Frequency;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Gain;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.MicGains;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Router;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings.GuiDisplay;
-using GoXLR_Utility.NET.Models.Response.Status.Paths;
-using FaderLight = GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders;
 
 namespace GoXLR_Utility.NET
 {
     public class PatchHandler
     {
-        private readonly Events.Events _events;
         private readonly PatchCache _patchCache = new PatchCache();
         private static JsonSerializerOptions _serializerOptions;
    
@@ -56,9 +26,8 @@ namespace GoXLR_Utility.NET
         
         public bool ShouldInvokeEvents = true;
         
-        public PatchHandler(Events.Events events, JsonSerializerOptions serializerOptions)
+        public PatchHandler(JsonSerializerOptions serializerOptions)
         {
-            _events = events;
             _serializerOptions = serializerOptions;
         }
         
@@ -105,7 +74,7 @@ namespace GoXLR_Utility.NET
 
             //Indicates that a GoXLR has been connected or removed
             if (PatchDeviceConnection(patch, patchCacheItem, out var value))
-                goto InvokeEvents;
+                return;
             
             //In case propType or myClass is null, the path could be not implemented yet. 
             if (patchCacheItem.PropType is null || parentClass is null)
@@ -130,10 +99,6 @@ namespace GoXLR_Utility.NET
                 default:
                     throw new ArgumentOutOfRangeException($"{genType} is Generic but maybe isn't implemented");
             }
-            
-            InvokeEvents:
-            if (ShouldInvokeEvents)
-                InvokeEvent(patchCacheItem.SerialNumber, patchCacheItem.PathAsClasses, patchCacheItem.ParentClass, patchCacheItem.PropInfo, patch, value, lastIndex);
         }
         
         private void CreatePathSegments(string path, out string[] pathSegments,out int lastIndex, out string filePath)
@@ -404,184 +369,6 @@ namespace GoXLR_Utility.NET
             }
 
             return null;
-        }
-
-        private void InvokeEvent(string serialNumber, IReadOnlyList<object> pathAsClasses, object parentClass, MemberInfo memInfo, Patch patch, object value, int lastIndex)
-        {
-            switch (parentClass)
-            {
-                case BankBaseButton bankBaseButton:
-                    _events.Device.Sampler.SamplerBank.HandleEvents(serialNumber, (SamplerBankBase)pathAsClasses[pathAsClasses.Count - 2],
-                        bankBaseButton, memInfo, patch.Op, lastIndex, null);
-                   break;
-                
-                case Bleep _:
-                case Cough _:
-                case EffectFx _:
-                case EffectHardTune _:
-                case EffectMegaphone _:
-                case EffectRobot _:
-                case EffectSelect1 _:
-                case EffectSelect2 _:
-                case EffectSelect3 _:
-                case EffectSelect4 _:
-                case EffectSelect5 _:
-                case EffectSelect6 _:
-                case FaderAMute _:
-                case FaderBMute _:
-                case FaderCMute _:
-                case FaderDMute _:
-                    _events.Device.Lighting.HandleEvents(serialNumber, (ButtonLight)pathAsClasses[pathAsClasses.Count - 2], pathAsClasses[pathAsClasses.Count - 1] , memInfo);
-                        break;
-                
-                case ButtonDown buttonDown:
-                    _events.Device.ButtonDown.HandleEvents(serialNumber, buttonDown, memInfo);
-                    break;
-                
-                case Compressor compressor:
-                    _events.Device.Mic.HandleCompressorEvents(serialNumber, compressor, memInfo);
-                    break;
-                
-                case CoughButton coughButton:
-                    _events.Device.CoughButton.HandleEvents(serialNumber, coughButton, memInfo);
-                    break;
-                
-                case Config config:
-                    _events.Config.HandleEvents(config, memInfo);
-                    break;
-                
-                case Device device:
-                    _events.HandleEvents(serialNumber, device);
-                    break;
-                
-                case Dictionary<string, Device> _:
-                    _events.HandleEvents(serialNumber, (Device)value);
-                    break;
-                    
-                case EchoEffect _:
-                case GenderEffect _:
-                case HardTuneEffect _:
-                case MegaphoneEffect _:
-                case PitchEffect _:
-                case ReverbEffect _:
-                case RobotEffect _:
-                    _events.Device.Effect.HandleCurrentEffectEvents(serialNumber, pathAsClasses[pathAsClasses.Count - 1], memInfo);
-                    break;
-                
-                case Effects effects:
-                    _events.Device.Effect.HandleEvents(serialNumber, effects, memInfo);
-                    break;
-                
-                case FaderLight.FaderA _:
-                case FaderLight.FaderB _:
-                case FaderLight.FaderC _:
-                case FaderLight.FaderD _:
-                    _events.Device.Lighting.HandleEvents(serialNumber, (FaderLight.FaderLight)pathAsClasses[pathAsClasses.Count - 2], pathAsClasses[pathAsClasses.Count - 1] , memInfo);
-                    break;
-                
-                case FaderBase faderBase:
-                    _events.Device.FaderStatus.HandleEvents(serialNumber, faderBase, memInfo, null);
-                    break;
-                
-                case FaderScribble scribble:
-                    _events.Device.FaderStatus.HandleEvents(serialNumber, (FaderBase)pathAsClasses[pathAsClasses.Count - 2], memInfo, scribble);
-                    break;
-                
-                case Files files:
-                    _events.File.HandleEvents(files, memInfo, patch.Op, value);
-                    break;
-                
-                case Frequency frequency:
-                    _events.Device.Mic.HandleEqualiserEvents(serialNumber, frequency, memInfo);
-                    break;
-                
-                case FrequencyMini frequencyMini:
-                    _events.Device.Mic.HandleEqualiserMiniEvents(serialNumber, frequencyMini, memInfo);
-                    break;
-                
-                case Gain gain:
-                    _events.Device.Mic.HandleEqualiserEvents(serialNumber, gain, memInfo);
-                    break;
-                
-                case GainMini gainMini:
-                    _events.Device.Mic.HandleEqualiserMiniEvents(serialNumber, gainMini, memInfo);
-                    break;
-                
-                case GuiDisplay guiDisplay:
-                    _events.Device.Settings.GuiDisplay.HandleEvents(serialNumber, guiDisplay, memInfo);
-                    break;
-                
-                case Levels levels:
-                    _events.Device.Levels.HandleEvents(serialNumber, levels, memInfo);
-                    break;
-                
-                case MicGains micGains:
-                    _events.Device.Mic.HandleMicGainEvents(serialNumber, micGains, memInfo);
-                    break;
-                
-                case MicStatus micStatus:
-                    _events.Device.Mic.HandleMicTypeEvents(serialNumber, micStatus);
-                    break;
-                
-                case NoiseGate noiseGate:
-                    _events.Device.Mic.HandleNoiseGateEvents(serialNumber, noiseGate, memInfo);
-                    break;
-                
-                case Paths paths:
-                    _events.Path.HandleEvents(paths, memInfo);
-                    break;
-                
-                case PresetNames presetNames:
-                    _events.Device.Effect.HandlePresetNamesEffectEvents(serialNumber, presetNames, memInfo);
-                    break;
-                
-                case RouterBase routerBase:
-                    _events.Device.Router.HandleEvents(serialNumber, routerBase, memInfo, (bool)value);
-                    break;
-                
-                case Sample sample:
-                    _events.Device.Sampler.SamplerBank.HandleEvents(serialNumber, (SamplerBankBase)pathAsClasses[pathAsClasses.Count - 4],
-                        (BankBaseButton)pathAsClasses[pathAsClasses.Count - 3], memInfo, patch.Op, lastIndex, sample);
-                    break;
-                
-                case SamplerA _:
-                case SamplerB _:
-                case SamplerC _:
-                    _events.Device.Lighting.HandleEvents(serialNumber, (SamplerLight)pathAsClasses[pathAsClasses.Count - 2], pathAsClasses[pathAsClasses.Count - 1] , memInfo);
-                    break;
-                
-                case Accent _:
-                case Scribble1 _:
-                case Scribble2 _:
-                case Scribble3 _:
-                case Scribble4 _:
-                case Global _:
-                    _events.Device.Lighting.HandleEvents(serialNumber, (SimpleLight)pathAsClasses[pathAsClasses.Count - 2], pathAsClasses[pathAsClasses.Count - 1] , memInfo);
-                    break;
-                
-                case Settings settings:
-                    _events.Device.Settings.HandleEvents(serialNumber, settings, memInfo);
-                    break;
-                
-                case ThreeColour _ when pathAsClasses[pathAsClasses.Count - 3].GetType() == typeof(Lighting):
-                case TwoColour _ when pathAsClasses[pathAsClasses.Count - 3].GetType() == typeof(Lighting):
-                    _events.Device.Lighting.HandleEvents(serialNumber, pathAsClasses[pathAsClasses.Count - 2], pathAsClasses[pathAsClasses.Count - 1] , memInfo);
-                    break;
-                
-                
-                case ThreeColour _:
-                case TwoColour _:
-                    _events.Device.Lighting.HandleEvents(serialNumber, pathAsClasses[pathAsClasses.Count - 3], pathAsClasses[pathAsClasses.Count - 2] , memInfo);
-                    break;
-                
-                case Volume volumes:
-                    _events.Device.Levels.Volume.HandleEvents(serialNumber, volumes, null, memInfo);
-                    break;
-
-                default:
-                    var type = parentClass.GetType();
-                    throw new ArgumentOutOfRangeException($"Type out of Range in PatchHandler: {type.Name} | Path: {type.FullName}");
-            }
         }
     }
 }

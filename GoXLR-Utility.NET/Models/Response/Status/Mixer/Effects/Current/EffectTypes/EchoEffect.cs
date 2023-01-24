@@ -1,39 +1,108 @@
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Echo;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes
 {
-    public class EchoEffect
+    public class EchoEffect : INotifyPropertyChanged
     {
+        private int _amount;
+        private int _delayLeft;
+        private int _delayRight;
+        private int _feedback;
+        private int _feedbackLeft;
+        private int _feedbackRight;
+        private int _feedbackXfbRtL;
+        private int _feedbackXfbLtR;
+        private EchoStyle _style;
+        private int _tempo;
+        
         [JsonPropertyName("amount")]
-        public int Amount { get; set; }
+        public int Amount
+        {
+            get => _amount;
+            internal set => SetField(ref _amount, value);
+        }
         
         [JsonPropertyName("delay_left")]
-        public int DelayLeft { get; set; }
+        public int DelayLeft
+        {
+            get => _delayLeft;
+            internal set => SetField(ref _delayLeft, value);
+        }
         
         [JsonPropertyName("delay_right")]
-        public int DelayRight { get; set; }
+        public int DelayRight
+        {
+            get => _delayRight;
+            internal set => SetField(ref _delayRight, value);
+        }
         
         [JsonPropertyName("feedback")]
-        public int Feedback { get; set; }
+        public int Feedback
+        {
+            get => _feedback;
+            internal set => SetField(ref _feedback, value);
+        }
         
         [JsonPropertyName("feedback_left")]
-        public int FeedbackLeft { get; set; }
+        public int FeedbackLeft
+        {
+            get => _feedbackLeft;
+            internal set => SetField(ref _feedbackLeft, value);
+        }
         
         [JsonPropertyName("feedback_right")]
-        public int FeedbackRight { get; set; }
+        public int FeedbackRight
+        {
+            get => _feedbackRight;
+            internal set => SetField(ref _feedbackRight, value);
+        }
         
         [JsonPropertyName("feedback_xfb_r_to_l")]
-        public int FeedbackXfbRtL { get; set; }
+        public int FeedbackXfbRtL
+        {
+            get => _feedbackXfbRtL;
+            internal set => SetField(ref _feedbackXfbRtL, value);
+        }
         
         [JsonPropertyName("feedback_xfb_l_to_r")]
-        public int FeedbackXfbLtR { get; set; }
+        public int FeedbackXfbLtR
+        {
+            get => _feedbackXfbLtR;
+            internal set => SetField(ref _feedbackXfbLtR, value);
+        }
         
         [JsonPropertyName("style")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public EchoStyle Style { get; set; }
+        public EchoStyle Style
+        {
+            get => _style;
+            internal set => SetField(ref _style, value);
+        }
         
         [JsonPropertyName("tempo")]
-        public int Tempo { get; set; }
+        public int Tempo
+        {
+            get => _tempo;
+            internal set => SetField(ref _tempo, value);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        {
+            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            OnPropertyChanged(propertyName);
+            return true;
+        }
     }
 }

@@ -21,9 +21,9 @@ namespace GoXLR_Utility.NET
             set => _patchHandler.ShouldInvokeEvents = value;
         }
 
-        public MessageHandler(Events.Events events, Status status, JsonSerializerOptions serializerOptions)
+        public MessageHandler(Status status, JsonSerializerOptions serializerOptions)
         {
-            _patchHandler = new PatchHandler(events, serializerOptions);
+            _patchHandler = new PatchHandler(serializerOptions);
             _status = status;
             _serializerOptions = serializerOptions;
         }

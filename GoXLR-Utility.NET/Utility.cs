@@ -24,7 +24,6 @@ namespace GoXLR_Utility.NET
         };
 
         public readonly Status Status = new Status();
-        public readonly Events.Events Events = new Events.Events();
         public List<string> AvailableSerialNumbers => MessageHandler.AvailableSerialNumbers;
         
         public bool ShouldInvokeEvents
@@ -35,7 +34,7 @@ namespace GoXLR_Utility.NET
 
         public Utility()
         {
-            _messageHandler = new MessageHandler(Events, Status, _serializerOptions);
+            _messageHandler = new MessageHandler(Status, _serializerOptions);
             _namedPipeServer = new NamedPipeServer(_serializerOptions);
         }
 
