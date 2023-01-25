@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -15,7 +16,7 @@ namespace GoXLR_Utility.NET
     public class Utility
     {
         private static NamedPipeServer _namedPipeServer;
-        private static MessageHandler _messageHandler;
+        private MessageHandler _messageHandler;
         private static long _id;
         private static WebSocket _websocket;
         private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
@@ -23,12 +24,12 @@ namespace GoXLR_Utility.NET
             Converters = { new JsonStringEnumConverter() }
         };
 
-        public readonly Status Status = new Status();
-        public List<string> AvailableSerialNumbers => MessageHandler.AvailableSerialNumbers;
+        public Status Status => _messageHandler.Status;
+        public List<string> AvailableSerialNumbers => Status.Mixers.Keys.ToList();
 
         public Utility()
         {
-            _messageHandler = new MessageHandler(Status, _serializerOptions);
+            _messageHandler = new MessageHandler(_serializerOptions);
             _namedPipeServer = new NamedPipeServer(_serializerOptions);
         }
 
@@ -92,7 +93,7 @@ namespace GoXLR_Utility.NET
             _websocket.Send("{\"id\":0, \"data\":\"GetStatus\"}");
         }
 
-        private static void OnWsMessage(object sender, MessageEventArgs message)
+        private void OnWsMessage(object sender, MessageEventArgs message)
         {
             _messageHandler.HandleMessage(message.Data);
         }

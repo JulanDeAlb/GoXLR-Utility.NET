@@ -11,14 +11,12 @@ namespace GoXLR_Utility.NET
     {
         private static PatchHandler _patchHandler;
         private static JsonSerializerOptions _serializerOptions;
-        private static Status _status;
+        
+        public Status Status;
 
-        public static List<string> AvailableSerialNumbers = new List<string>();
-
-        public MessageHandler(Status status, JsonSerializerOptions serializerOptions)
+        public MessageHandler(JsonSerializerOptions serializerOptions)
         {
             _patchHandler = new PatchHandler(serializerOptions);
-            _status = status;
             _serializerOptions = serializerOptions;
         }
 
@@ -84,10 +82,10 @@ namespace GoXLR_Utility.NET
                 
             } else if (response.Data.Status != null)
             {
-                _status = response.Data.Status;
+                Status = response.Data.Status;
             } else if (response.Data.Patch != null)
             {
-                _patchHandler.HandlePatch(_status, response.Data.Patch);
+                _patchHandler.HandlePatch(Status, response.Data.Patch);
             }
         }
     }

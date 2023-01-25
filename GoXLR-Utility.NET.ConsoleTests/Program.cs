@@ -7,8 +7,9 @@ public class Program
     public static void Main(string[] args)
     {
         _utility.Connect();
-        AllEvents("");
         Console.ReadKey();
+        AllEvents(_utility.AvailableSerialNumbers[0]);
+        Console.WriteLine("Subscribed to Events");
         Console.ReadKey();
     }
 
