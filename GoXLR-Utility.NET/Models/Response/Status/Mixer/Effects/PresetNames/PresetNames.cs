@@ -18,42 +18,42 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames
         public string Preset1
         {
             get => _preset1;
-            internal set => SetField(ref _preset1, value);
+            set => SetField(ref _preset1, value);
         }
         
         [JsonPropertyName("Preset2")]
         public string Preset2
         {
             get => _preset2;
-            internal set => SetField(ref _preset2, value);
+            set => SetField(ref _preset2, value);
         }
         
         [JsonPropertyName("Preset3")]
         public string Preset3
         {
             get => _preset3;
-            internal set => SetField(ref _preset3, value);
+            set => SetField(ref _preset3, value);
         }
         
         [JsonPropertyName("Preset4")]
         public string Preset4
         {
             get => _preset4;
-            internal set => SetField(ref _preset4, value);
+            set => SetField(ref _preset4, value);
         }
         
         [JsonPropertyName("Preset5")]
         public string Preset5
         {
             get => _preset5;
-            internal set => SetField(ref _preset5, value);
+            set => SetField(ref _preset5, value);
         }
         
         [JsonPropertyName("Preset6")]
         public string Preset6
         {
             get => _preset6;
-            internal set => SetField(ref _preset6, value);
+            set => SetField(ref _preset6, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

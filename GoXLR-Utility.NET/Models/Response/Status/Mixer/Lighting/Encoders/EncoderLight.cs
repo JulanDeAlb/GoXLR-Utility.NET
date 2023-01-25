@@ -16,28 +16,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Encoders
         public ThreeColour Echo
         {
             get => _echo;
-            internal set => SetField(ref _echo, value);
+            set => SetField(ref _echo, value);
         }
         
         [JsonPropertyName("Gender")]
         public ThreeColour Gender
         {
             get => _gender;
-            internal set => SetField(ref _gender, value);
+            set => SetField(ref _gender, value);
         }
         
         [JsonPropertyName("Pitch")]
         public ThreeColour Pitch
         {
             get => _pitch;
-            internal set => SetField(ref _pitch, value);
+            set => SetField(ref _pitch, value);
         }
         
         [JsonPropertyName("Reverb")]
         public ThreeColour Reverb
         {
             get => _reverb;
-            internal set => SetField(ref _reverb, value);
+            set => SetField(ref _reverb, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

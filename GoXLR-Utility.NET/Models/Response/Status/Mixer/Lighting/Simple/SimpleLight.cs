@@ -18,42 +18,42 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple
         public OneColour Accent
         {
             get => _accent;
-            internal set => SetField(ref _accent, value);
+            set => SetField(ref _accent, value);
         }
         
         [JsonPropertyName("Scribble1")]
         public OneColour Scribble1
         {
             get => _scribble1;
-            internal set => SetField(ref _scribble1, value);
+            set => SetField(ref _scribble1, value);
         }
         
         [JsonPropertyName("Scribble2")]
         public OneColour Scribble2
         {
             get => _scribble2;
-            internal set => SetField(ref _scribble2, value);
+            set => SetField(ref _scribble2, value);
         }
         
         [JsonPropertyName("Scribble3")]
         public OneColour Scribble3
         {
             get => _scribble3;
-            internal set => SetField(ref _scribble3, value);
+            set => SetField(ref _scribble3, value);
         }
         
         [JsonPropertyName("Scribble4")]
         public OneColour Scribble4
         {
             get => _scribble4;
-            internal set => SetField(ref _scribble4, value);
+            set => SetField(ref _scribble4, value);
         }
         
         [JsonPropertyName("Global")]
         public OneColour Global
         {
             get => _global;
-            internal set => SetField(ref _global, value);
+            set => SetField(ref _global, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

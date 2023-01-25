@@ -15,21 +15,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
         public SamplerLightBase SamplerA
         {
             get => _samplerA;
-            internal set => SetField(ref _samplerA, value);
+            set => SetField(ref _samplerA, value);
         }
         
         [JsonPropertyName("SamplerSelectB")]
         public SamplerLightBase SamplerB
         {
             get => _samplerB;
-            internal set => SetField(ref _samplerB, value);
+            set => SetField(ref _samplerB, value);
         }
         
         [JsonPropertyName("SamplerSelectC")]
         public SamplerLightBase SamplerC
         {
             get => _samplerC;
-            internal set => SetField(ref _samplerC, value);
+            set => SetField(ref _samplerC, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -57,14 +57,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
         public string OffStyle
         {
             get => _offStyle;
-            internal set => SetField(ref _offStyle, value);
+            set => SetField(ref _offStyle, value);
         }
         
         [JsonPropertyName("colours")]
         public ThreeColour Colour
         {
             get => _colour;
-            internal set => SetField(ref _colour, value);
+            set => SetField(ref _colour, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

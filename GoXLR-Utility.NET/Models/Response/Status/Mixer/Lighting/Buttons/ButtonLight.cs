@@ -28,112 +28,112 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
         public ButtonLightBase Bleep
         {
             get => _bleep;
-            internal set => SetField(ref _bleep, value);
+            set => SetField(ref _bleep, value);
         }
         
         [JsonPropertyName("Cough")]
         public ButtonLightBase Cough
         {
             get => _cough;
-            internal set => SetField(ref _cough, value);
+            set => SetField(ref _cough, value);
         }
         
         [JsonPropertyName("EffectFx")]
         public ButtonLightBase EffectFx
         {
             get => _effectFx;
-            internal set => SetField(ref _effectFx, value);
+            set => SetField(ref _effectFx, value);
         }
         
         [JsonPropertyName("EffectHardTune")]
         public ButtonLightBase EffectHardTune
         {
             get => _effectHardTune;
-            internal set => SetField(ref _effectHardTune, value);
+            set => SetField(ref _effectHardTune, value);
         }
         
         [JsonPropertyName("EffectMegaphone")]
         public ButtonLightBase EffectMegaphone
         {
             get => _effectMegaphone;
-            internal set => SetField(ref _effectMegaphone, value);
+            set => SetField(ref _effectMegaphone, value);
         }
         
         [JsonPropertyName("EffectRobot")]
         public ButtonLightBase EffectRobot
         {
             get => _effectRobot;
-            internal set => SetField(ref _effectRobot, value);
+            set => SetField(ref _effectRobot, value);
         }
         
         [JsonPropertyName("EffectSelect1")]
         public ButtonLightBase EffectSelect1
         {
             get => _effectSelect1;
-            internal set => SetField(ref _effectSelect1, value);
+            set => SetField(ref _effectSelect1, value);
         }
         
         [JsonPropertyName("EffectSelect2")]
         public ButtonLightBase EffectSelect2
         {
             get => _effectSelect2;
-            internal set => SetField(ref _effectSelect2, value);
+            set => SetField(ref _effectSelect2, value);
         }
         
         [JsonPropertyName("EffectSelect3")]
         public ButtonLightBase EffectSelect3
         {
             get => _effectSelect3;
-            internal set => SetField(ref _effectSelect3, value);
+            set => SetField(ref _effectSelect3, value);
         }
         
         [JsonPropertyName("EffectSelect4")]
         public ButtonLightBase EffectSelect4
         {
             get => _effectSelect4;
-            internal set => SetField(ref _effectSelect4, value);
+            set => SetField(ref _effectSelect4, value);
         }
         
         [JsonPropertyName("EffectSelect5")]
         public ButtonLightBase EffectSelect5
         {
             get => _effectSelect5;
-            internal set => SetField(ref _effectSelect5, value);
+            set => SetField(ref _effectSelect5, value);
         }
         
         [JsonPropertyName("EffectSelect6")]
         public ButtonLightBase EffectSelect6
         {
             get => _effectSelect6;
-            internal set => SetField(ref _effectSelect6, value);
+            set => SetField(ref _effectSelect6, value);
         }
 
         [JsonPropertyName("Fader1Mute")]
         public ButtonLightBase FaderAMute
         {
             get => _faderAMute;
-            internal set => SetField(ref _faderAMute, value);
+            set => SetField(ref _faderAMute, value);
         }
         
         [JsonPropertyName("Fader2Mute")]
         public ButtonLightBase FaderBMute
         {
             get => _faderBMute;
-            internal set => SetField(ref _faderBMute, value);
+            set => SetField(ref _faderBMute, value);
         }
         
         [JsonPropertyName("Fader3Mute")]
         public ButtonLightBase FaderCMute
         {
             get => _faderCMute;
-            internal set => SetField(ref _faderCMute, value);
+            set => SetField(ref _faderCMute, value);
         }
         
         [JsonPropertyName("Fader4Mute")]
         public ButtonLightBase FaderDMute
         {
             get => _faderDMute;
-            internal set => SetField(ref _faderDMute, value);
+            set => SetField(ref _faderDMute, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -161,14 +161,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
         public TwoColour Colour
         {
             get => _colour;
-            internal set => SetField(ref _colour, value);
+            set => SetField(ref _colour, value);
         }
         
         [JsonPropertyName("off_style")]
         public string OffStyle
         {
             get => _offStyle;
-            internal set => SetField(ref _offStyle, value);
+            set => SetField(ref _offStyle, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

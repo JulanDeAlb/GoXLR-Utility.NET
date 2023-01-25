@@ -16,21 +16,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Config
         public string DaemonVersion
         {
             get => _daemonVersion;
-            internal set => SetField(ref _daemonVersion, value);
+            set => SetField(ref _daemonVersion, value);
         }
         
         [JsonPropertyName("autostart_enabled")]
         public bool AutostartEnabled
         {
             get => _autostartEnabled;
-            internal set => SetField(ref _autostartEnabled, value);
+            set => SetField(ref _autostartEnabled, value);
         }
         
         [JsonPropertyName("show_tray_icon")]
         public bool ShowTrayIcon
         {
             get => _showTrayIcon;
-            internal set => SetField(ref _showTrayIcon, value);
+            set => SetField(ref _showTrayIcon, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -17,35 +17,35 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate
         public int Attack
         {
             get => _attack;
-            internal set => SetField(ref _attack, value);
+            set => SetField(ref _attack, value);
         }
         
         [JsonPropertyName("attenuation")]
         public int Attenuation
         {
             get => _attenuation;
-            internal set => SetField(ref _attenuation, value);
+            set => SetField(ref _attenuation, value);
         }
         
         [JsonPropertyName("enabled")]
         public bool Enabled
         {
             get => _enabled;
-            internal set => SetField(ref _enabled, value);
+            set => SetField(ref _enabled, value);
         }
         
         [JsonPropertyName("release")]
         public int Release
         {
             get => _release;
-            internal set => SetField(ref _release, value);
+            set => SetField(ref _release, value);
         }
         
         [JsonPropertyName("threshold")]
         public int Threshold
         {
             get => _threshold;
-            internal set => SetField(ref _threshold, value);
+            set => SetField(ref _threshold, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -19,28 +19,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public int Amount
         {
             get => _amount;
-            internal set => SetField(ref _amount, value);
+            set => SetField(ref _amount, value);
         }
         
         [JsonPropertyName("is_enabled")]
         public bool IsEnabled
         {
             get => _isEnabled;
-            internal set => SetField(ref _isEnabled, value);
+            set => SetField(ref _isEnabled, value);
         }
         
         [JsonPropertyName("rate")]
         public int Rate
         {
             get => _rate;
-            internal set => SetField(ref _rate, value);
+            set => SetField(ref _rate, value);
         }
 
         [JsonPropertyName("source")]
         public HardTuneSource Source
         {
             get => _source;
-            internal set => SetField(ref _source, value);
+            set => SetField(ref _source, value);
         }
         
         [JsonPropertyName("style")]
@@ -48,14 +48,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public HardTuneStyle Style
         {
             get => _style;
-            internal set => SetField(ref _style, value);
+            set => SetField(ref _style, value);
         }
         
         [JsonPropertyName("window")]
         public int Window
         {
             get => _window;
-            internal set => SetField(ref _window, value);
+            set => SetField(ref _window, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

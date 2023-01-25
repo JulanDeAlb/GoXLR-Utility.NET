@@ -18,28 +18,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
         public FaderBase FaderA
         {
             get => _faderA;
-            internal set => SetField(ref _faderA, value);
+            set => SetField(ref _faderA, value);
         }
         
         [JsonPropertyName("B")]
         public FaderBase FaderB
         {
             get => _faderB;
-            internal set => SetField(ref _faderB, value);
+            set => SetField(ref _faderB, value);
         }
         
         [JsonPropertyName("C")]
         public FaderBase FaderC
         {
             get => _faderC;
-            internal set => SetField(ref _faderC, value);
+            set => SetField(ref _faderC, value);
         }
         
         [JsonPropertyName("D")]
         public FaderBase FaderD
         {
             get => _faderD;
-            internal set => SetField(ref _faderD, value);
+            set => SetField(ref _faderD, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,7 +70,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
         public FaderChannelEnum Channel
         {
             get => _channel;
-            internal set => SetField(ref _channel, value);
+            set => SetField(ref _channel, value);
         }
         
         [JsonPropertyName("mute_type")]
@@ -78,21 +78,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
         public MuteFunction MuteType
         {
             get => _muteType;
-            internal set => SetField(ref _muteType, value);
+            set => SetField(ref _muteType, value);
         }
         
         [JsonPropertyName("mute_state")]
         public MuteState MuteState
         {
             get => _muteState;
-            internal set => SetField(ref _muteState, value);
+            set => SetField(ref _muteState, value);
         }
         
         [JsonPropertyName("scribble")]
         public Scribble.FaderScribble Scribble
         {
             get => _scribble;
-            internal set => SetField(ref _scribble, value);
+            set => SetField(ref _scribble, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

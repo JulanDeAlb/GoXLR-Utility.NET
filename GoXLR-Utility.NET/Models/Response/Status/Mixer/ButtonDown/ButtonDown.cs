@@ -37,168 +37,168 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.ButtonDown
         public bool Bleep
         {
             get => _bleep;
-            internal set => SetField(ref _bleep, value);
+            set => SetField(ref _bleep, value);
         }
 
         [JsonPropertyName("Cough")]
         public bool Cough
         {
             get => _cough;
-            internal set => SetField(ref _cough, value);
+            set => SetField(ref _cough, value);
         }
 
         [JsonPropertyName("EffectFx")]
         public bool EffectFx
         {
             get => _effectFx;
-            internal set => SetField(ref _effectFx, value);
+            set => SetField(ref _effectFx, value);
         }
         
         [JsonPropertyName("EffectHardTune")]
         public bool EffectHardTune
         {
             get => _effectHardTune;
-            internal set => SetField(ref _effectHardTune, value);
+            set => SetField(ref _effectHardTune, value);
         }
         
         [JsonPropertyName("EffectMegaphone")]
         public bool EffectMegaphone
         {
             get => _effectMegaphone;
-            internal set => SetField(ref _effectMegaphone, value);
+            set => SetField(ref _effectMegaphone, value);
         }
         
         [JsonPropertyName("EffectRobot")]
         public bool EffectRobot
         {
             get => _effectRobot;
-            internal set => SetField(ref _effectRobot, value);
+            set => SetField(ref _effectRobot, value);
         }
 
         [JsonPropertyName("EffectSelect1")]
         public bool EffectSelect1
         {
             get => _effectSelect1;
-            internal set => SetField(ref _effectSelect1, value);
+            set => SetField(ref _effectSelect1, value);
         }
         
         [JsonPropertyName("EffectSelect2")]
         public bool EffectSelect2
         {
             get => _effectSelect2;
-            internal set => SetField(ref _effectSelect2, value);
+            set => SetField(ref _effectSelect2, value);
         }
         
         [JsonPropertyName("EffectSelect3")]
         public bool EffectSelect3
         {
             get => _effectSelect3;
-            internal set => SetField(ref _effectSelect3, value);
+            set => SetField(ref _effectSelect3, value);
         }
         
         [JsonPropertyName("EffectSelect4")]
         public bool EffectSelect4
         {
             get => _effectSelect4;
-            internal set => SetField(ref _effectSelect4, value);
+            set => SetField(ref _effectSelect4, value);
         }
         
         [JsonPropertyName("EffectSelect5")]
         public bool EffectSelect5
         {
             get => _effectSelect5;
-            internal set => SetField(ref _effectSelect5, value);
+            set => SetField(ref _effectSelect5, value);
         }
         
         [JsonPropertyName("EffectSelect6")]
         public bool EffectSelect6
         {
             get => _effectSelect6;
-            internal set => SetField(ref _effectSelect6, value);
+            set => SetField(ref _effectSelect6, value);
         }
         
         [JsonPropertyName("Fader1Mute")]
         public bool Fader1Mute
         {
             get => _fader1Mute;
-            internal set => SetField(ref _fader1Mute, value);
+            set => SetField(ref _fader1Mute, value);
         }
         
         [JsonPropertyName("Fader2Mute")]
         public bool Fader2Mute
         {
             get => _fader2Mute;
-            internal set => SetField(ref _fader2Mute, value);
+            set => SetField(ref _fader2Mute, value);
         }
         
         [JsonPropertyName("Fader3Mute")]
         public bool Fader3Mute
         {
             get => _fader3Mute;
-            internal set => SetField(ref _fader3Mute, value);
+            set => SetField(ref _fader3Mute, value);
         }
         
         [JsonPropertyName("Fader4Mute")]
         public bool Fader4Mute
         {
             get => _fader4Mute;
-            internal set => SetField(ref _fader4Mute, value);
+            set => SetField(ref _fader4Mute, value);
         }
 
         [JsonPropertyName("SamplerClear")]
         public bool SamplerClear
         {
             get => _samplerClear;
-            internal set => SetField(ref _samplerClear, value);
+            set => SetField(ref _samplerClear, value);
         }
 
         [JsonPropertyName("SamplerSelectA")]
         public bool SamplerSelectA
         {
             get => _samplerSelectA;
-            internal set => SetField(ref _samplerSelectA, value);
+            set => SetField(ref _samplerSelectA, value);
         }
         
         [JsonPropertyName("SamplerSelectB")]
         public bool SamplerSelectB
         {
             get => _samplerSelectB;
-            internal set => SetField(ref _samplerSelectB, value);
+            set => SetField(ref _samplerSelectB, value);
         }
         
         [JsonPropertyName("SamplerSelectC")]
         public bool SamplerSelectC
         {
             get => _samplerSelectC;
-            internal set => SetField(ref _samplerSelectC, value);
+            set => SetField(ref _samplerSelectC, value);
         }
         
         [JsonPropertyName("SamplerBottomLeft")]
         public bool SamplerBottomLeft
         {
             get => _samplerBottomLeft;
-            internal set => SetField(ref _samplerBottomLeft, value);
+            set => SetField(ref _samplerBottomLeft, value);
         }
         
         [JsonPropertyName("SamplerBottomRight")]
         public bool SamplerBottomRight
         {
             get => _samplerBottomRight;
-            internal set => SetField(ref _samplerBottomRight, value);
+            set => SetField(ref _samplerBottomRight, value);
         }
         
         [JsonPropertyName("SamplerTopLeft")]
         public bool SamplerTopLeft
         {
             get => _samplerTopLeft;
-            internal set => SetField(ref _samplerTopLeft, value);
+            set => SetField(ref _samplerTopLeft, value);
         }
         
         [JsonPropertyName("SamplerTopRight")]
         public bool SamplerTopRight
         {
             get => _samplerTopRight;
-            internal set => SetField(ref _samplerTopRight, value);
+            set => SetField(ref _samplerTopRight, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

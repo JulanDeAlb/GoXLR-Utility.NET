@@ -15,7 +15,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public int Amount
         {
             get => _amount;
-            internal set => SetField(ref _amount, value);
+            set => SetField(ref _amount, value);
         }
         
         [JsonPropertyName("style")]
@@ -23,7 +23,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public GenderStyle Style
         {
             get => _style;
-            internal set => SetField(ref _style, value);
+            set => SetField(ref _style, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

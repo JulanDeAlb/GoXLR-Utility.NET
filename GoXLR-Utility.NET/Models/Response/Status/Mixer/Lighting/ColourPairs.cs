@@ -14,14 +14,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
         public string ColourOne
         {
             get => _colourOne;
-            internal set => SetField(ref _colourOne, value);
+            set => SetField(ref _colourOne, value);
         }
         
         [JsonPropertyName("colour_two")]
         public string ColourTwo
         {
             get => _colourTwo;
-            internal set => SetField(ref _colourTwo, value);
+            set => SetField(ref _colourTwo, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -50,21 +50,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
         public string ColourOne
         {
             get => _colourOne;
-            internal set => SetField(ref _colourOne, value);
+            set => SetField(ref _colourOne, value);
         }
         
         [JsonPropertyName("colour_two")]
         public string ColourTwo
         {
             get => _colourTwo;
-            internal set => SetField(ref _colourTwo, value);
+            set => SetField(ref _colourTwo, value);
         }
         
         [JsonPropertyName("colour_three")]
         public string ColourThree
         {
             get => _colourThree;
-            internal set => SetField(ref _colourThree, value);
+            set => SetField(ref _colourThree, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -91,7 +91,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
         public string ColourOne
         {
             get => _colourOne;
-            internal set => SetField(ref _colourOne, value);
+            set => SetField(ref _colourOne, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

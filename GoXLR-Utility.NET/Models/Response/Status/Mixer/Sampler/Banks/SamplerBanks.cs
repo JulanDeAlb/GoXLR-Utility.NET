@@ -17,21 +17,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
         public SamplerBankBase SamplerBankA
         {
             get => _samplerBankA;
-            internal set => SetField(ref _samplerBankA, value);
+            set => SetField(ref _samplerBankA, value);
         }
         
         [JsonPropertyName("B")]
         public SamplerBankBase SamplerBankB
         {
             get => _samplerBankB;
-            internal set => SetField(ref _samplerBankB, value);
+            set => SetField(ref _samplerBankB, value);
         }
         
         [JsonPropertyName("C")]
         public SamplerBankBase SamplerBankC
         {
             get => _samplerBankC;
-            internal set => SetField(ref _samplerBankC, value);
+            set => SetField(ref _samplerBankC, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,28 +61,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
         public BankBaseButton BottomLeft
         {
             get => _bottomLeft;
-            internal set => SetField(ref _bottomLeft, value);
+            set => SetField(ref _bottomLeft, value);
         }
         
         [JsonPropertyName("BottomRight")]
         public BankBaseButton BottomRight
         {
             get => _bottomRight;
-            internal set => SetField(ref _bottomRight, value);
+            set => SetField(ref _bottomRight, value);
         }
         
         [JsonPropertyName("TopLeft")]
         public BankBaseButton TopLeft
         {
             get => _topLeft;
-            internal set => SetField(ref _topLeft, value);
+            set => SetField(ref _topLeft, value);
         }
         
         [JsonPropertyName("TopRight")]
         public BankBaseButton TopRight
         {
             get => _topRight;
-            internal set => SetField(ref _topRight, value);
+            set => SetField(ref _topRight, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -113,14 +113,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
         public SamplePlaybackMode Function
         {
             get => _function;
-            internal set => SetField(ref _function, value);
+            set => SetField(ref _function, value);
         }
         
         [JsonPropertyName("is_playing")]
         public bool IsPlaying
         {
             get => _isPlaying;
-            internal set => SetField(ref _isPlaying, value);
+            set => SetField(ref _isPlaying, value);
         }
         
         [JsonPropertyName("order")]
@@ -128,14 +128,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
         public SamplePlayOrder Order
         {
             get => _order;
-            internal set => SetField(ref _order, value);
+            set => SetField(ref _order, value);
         }
         
         [JsonPropertyName("samples")]
         public ObservableCollection<Sample.Sample> Samples
         {
             get => _samples;
-            internal set => SetField(ref _samples, value);
+            set => SetField(ref _samples, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

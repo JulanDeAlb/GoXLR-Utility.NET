@@ -18,42 +18,42 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini
         public double Equalizer90Hz
         {
             get => _equalizer90Hz;
-            internal set => SetField(ref _equalizer90Hz, value);
+            set => SetField(ref _equalizer90Hz, value);
         }
         
         [JsonPropertyName("Equalizer250Hz")]
         public double Equalizer250Hz
         {
             get => _equalizer250Hz;
-            internal set => SetField(ref _equalizer250Hz, value);
+            set => SetField(ref _equalizer250Hz, value);
         }
         
         [JsonPropertyName("Equalizer500Hz")]
         public double Equalizer500Hz
         {
             get => _equalizer500Hz;
-            internal set => SetField(ref _equalizer500Hz, value);
+            set => SetField(ref _equalizer500Hz, value);
         }
         
         [JsonPropertyName("Equalizer1KHz")]
         public double Equalizer1KHz
         {
             get => _equalizer1KHz;
-            internal set => SetField(ref _equalizer1KHz, value);
+            set => SetField(ref _equalizer1KHz, value);
         }
         
         [JsonPropertyName("Equalizer3KHz")]
         public double Equalizer3KHz
         {
             get => _equalizer3KHz;
-            internal set => SetField(ref _equalizer3KHz, value);
+            set => SetField(ref _equalizer3KHz, value);
         }
         
         [JsonPropertyName("Equalizer8KHz")]
         public double Equalizer8KHz
         {
             get => _equalizer8KHz;
-            internal set => SetField(ref _equalizer8KHz, value);
+            set => SetField(ref _equalizer8KHz, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -22,35 +22,35 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
         public ButtonLight Button
         {
             get => _button;
-            internal set => SetField(ref _button, value);
+            set => SetField(ref _button, value);
         }
         
         [JsonPropertyName("encoders")]
         public EncoderLight Encoder
         {
             get => _encoder;
-            internal set => SetField(ref _encoder, value);
+            set => SetField(ref _encoder, value);
         }
         
         [JsonPropertyName("faders")]
         public FaderLight Fader
         {
             get => _fader;
-            internal set => SetField(ref _fader, value);
+            set => SetField(ref _fader, value);
         }
         
         [JsonPropertyName("sampler")]
         public SamplerLight Sampler
         {
             get => _sampler;
-            internal set => SetField(ref _sampler, value);
+            set => SetField(ref _sampler, value);
         }
         
         [JsonPropertyName("simple")]
         public SimpleLight Simple
         {
             get => _simple;
-            internal set => SetField(ref _simple, value);
+            set => SetField(ref _simple, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

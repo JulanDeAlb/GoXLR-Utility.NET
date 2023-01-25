@@ -18,35 +18,35 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Paths
         public string IconsDirectory
         {
             get => _iconsDirectory;
-            internal set => SetField(ref _iconsDirectory, value);
+            set => SetField(ref _iconsDirectory, value);
         }
         
         [JsonPropertyName("mic_profile_directory")]
         public string MicProfileDirectory
         {
             get => _micProfileDirectory;
-            internal set => SetField(ref _micProfileDirectory, value);
+            set => SetField(ref _micProfileDirectory, value);
         }
         
         [JsonPropertyName("presets_directory")]
         public string PresetsDirectory
         {
             get => _presetsDirectory;
-            internal set => SetField(ref _presetsDirectory, value);
+            set => SetField(ref _presetsDirectory, value);
         }
         
         [JsonPropertyName("profile_directory")]
         public string ProfileDirectory
         {
             get => _profileDirectory;
-            internal set => SetField(ref _profileDirectory, value);
+            set => SetField(ref _profileDirectory, value);
         }
         
         [JsonPropertyName("samples_directory")]
         public string SamplesDirectory
         {
             get => _samplesDirectory;
-            internal set => SetField(ref _samplesDirectory, value);
+            set => SetField(ref _samplesDirectory, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

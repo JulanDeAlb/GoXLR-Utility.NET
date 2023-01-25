@@ -24,77 +24,77 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Volumes
         public byte Chat
         {
             get => _chat;
-            internal set => SetField(ref _chat, value);
+            set => SetField(ref _chat, value);
         }
         
         [JsonPropertyName("Console")]
         public byte Console
         {
             get => _console;
-            internal set => SetField(ref _console, value);
+            set => SetField(ref _console, value);
         }
         
         [JsonPropertyName("Game")]
         public byte Game
         {
             get => _game;
-            internal set => SetField(ref _game, value);
+            set => SetField(ref _game, value);
         }
         
         [JsonPropertyName("Headphones")]
         public byte Headphones
         {
             get => _headphones;
-            internal set => SetField(ref _headphones, value);
+            set => SetField(ref _headphones, value);
         }
         
         [JsonPropertyName("LineIn")]
         public byte LineIn
         {
             get => _lineIn;
-            internal set => SetField(ref _lineIn, value);
+            set => SetField(ref _lineIn, value);
         }
         
         [JsonPropertyName("LineOut")]
         public byte LineOut
         {
             get => _lineOut;
-            internal set => SetField(ref _lineOut, value);
+            set => SetField(ref _lineOut, value);
         }
         
         [JsonPropertyName("Mic")]
         public byte Mic
         {
             get => _mic;
-            internal set => SetField(ref _mic, value);
+            set => SetField(ref _mic, value);
         }
         
         [JsonPropertyName("MicMonitor")]
         public byte MicMonitor
         {
             get => _micMonitor;
-            internal set => SetField(ref _micMonitor, value);
+            set => SetField(ref _micMonitor, value);
         }
         
         [JsonPropertyName("Music")]
         public byte Music
         {
             get => _music;
-            internal set => SetField(ref _music, value);
+            set => SetField(ref _music, value);
         }
         
         [JsonPropertyName("Sample")]
         public byte Sample
         {
             get => _sample;
-            internal set => SetField(ref _sample, value);
+            set => SetField(ref _sample, value);
         }
         
         [JsonPropertyName("System")]
         public byte System
         {
             get => _system;
-            internal set => SetField(ref _system, value);
+            set => SetField(ref _system, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

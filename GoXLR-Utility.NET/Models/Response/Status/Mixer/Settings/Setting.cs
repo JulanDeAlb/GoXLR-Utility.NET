@@ -15,14 +15,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings
         public GuiDisplay.GuiDisplay Display
         {
             get => _display;
-            internal set => SetField(ref _display, value);
+            set => SetField(ref _display, value);
         }
         
         [JsonPropertyName("mute_hold_duration")]
         public int MuteHoldDuration
         {
             get => _muteHoldDuration;
-            internal set => SetField(ref _muteHoldDuration, value);
+            set => SetField(ref _muteHoldDuration, value);
         }
         
         /// <summary>
@@ -32,7 +32,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings
         public bool VcMuteAlsoMuteCm
         {
             get => _vcMuteAlsoMuteCm;
-            internal set => SetField(ref _vcMuteAlsoMuteCm, value);
+            set => SetField(ref _vcMuteAlsoMuteCm, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

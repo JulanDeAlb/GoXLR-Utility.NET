@@ -19,35 +19,35 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Files
         public ObservableCollection<string> Icons
         {
             get => _icons;
-            internal set => SetField(ref _icons, value);
+            set => SetField(ref _icons, value);
         }
         
         [JsonPropertyName("mic_profiles")]
         public ObservableCollection<string> MicProfiles
         {
             get => _micProfiles;
-            internal set => SetField(ref _micProfiles, value);
+            set => SetField(ref _micProfiles, value);
         }
         
         [JsonPropertyName("presets")]
         public ObservableCollection<string> Presets
         {
             get => _presets;
-            internal set => SetField(ref _presets, value);
+            set => SetField(ref _presets, value);
         }
         
         [JsonPropertyName("profiles")]
         public ObservableCollection<string> Profiles
         {
             get => _profiles;
-            internal set => SetField(ref _profiles, value);
+            set => SetField(ref _profiles, value);
         }
         
         [JsonPropertyName("samples")]
         public Dictionary<string, string> Samples
         {
             get => _samples;
-            internal set => SetField(ref _samples, value);
+            set => SetField(ref _samples, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

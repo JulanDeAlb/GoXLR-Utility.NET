@@ -17,21 +17,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public int Amount
         {
             get => _amount;
-            internal set => SetField(ref _amount, value);
+            set => SetField(ref _amount, value);
         }
         
         [JsonPropertyName("is_enabled")]
         public bool IsEnabled
         {
             get => _isEnabled;
-            internal set => SetField(ref _isEnabled, value);
+            set => SetField(ref _isEnabled, value);
         }
         
         [JsonPropertyName("post_gain")]
         public int PostGain
         {
             get => _postGain;
-            internal set => SetField(ref _postGain, value);
+            set => SetField(ref _postGain, value);
         }
 
         [JsonPropertyName("style")]
@@ -39,7 +39,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public MegaphoneStyle Style
         {
             get => _style;
-            internal set => SetField(ref _style, value);
+            set => SetField(ref _style, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

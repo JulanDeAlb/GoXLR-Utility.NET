@@ -17,28 +17,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
         public FaderLightBase FaderA
         {
             get => _faderA;
-            internal set => SetField(ref _faderA, value);
+            set => SetField(ref _faderA, value);
         }
         
         [JsonPropertyName("B")]
         public FaderLightBase FaderB
         {
             get => _faderB;
-            internal set => SetField(ref _faderB, value);
+            set => SetField(ref _faderB, value);
         }
         
         [JsonPropertyName("C")]
         public FaderLightBase FaderC
         {
             get => _faderC;
-            internal set => SetField(ref _faderC, value);
+            set => SetField(ref _faderC, value);
         }
         
         [JsonPropertyName("D")]
         public FaderLightBase FaderD
         {
             get => _faderD;
-            internal set => SetField(ref _faderD, value);
+            set => SetField(ref _faderD, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -66,7 +66,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
         public TwoColour Colour
         {
             get => _colour;
-            internal set => SetField(ref _colour, value);
+            set => SetField(ref _colour, value);
         }
         
         [JsonPropertyName("style")]
@@ -74,7 +74,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
         public FaderDisplayStyle Style
         {
             get => _style;
-            internal set => SetField(ref _style, value);
+            set => SetField(ref _style, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

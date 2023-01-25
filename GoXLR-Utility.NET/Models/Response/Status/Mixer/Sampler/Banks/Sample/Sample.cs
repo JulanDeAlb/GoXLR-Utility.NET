@@ -15,21 +15,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
         public string Name
         {
             get => _name;
-            internal set => SetField(ref _name, value);
+            set => SetField(ref _name, value);
         }
         
         [JsonPropertyName("start_pct")]
         public double StartPct
         {
             get => _startPct;
-            internal set => SetField(ref _startPct, value);
+            set => SetField(ref _startPct, value);
         }
         
         [JsonPropertyName("stop_pct")]
         public double StopPct
         {
             get => _stopPct;
-            internal set => SetField(ref _stopPct, value);
+            set => SetField(ref _stopPct, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

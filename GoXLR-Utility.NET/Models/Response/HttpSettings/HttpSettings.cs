@@ -16,28 +16,28 @@ namespace GoXLR_Utility.NET.Models.Response.HttpSettings
         public string BindAddress
         {
             get => _bindAddress;
-            internal set => SetField(ref _bindAddress, value);
+            set => SetField(ref _bindAddress, value);
         }
         
         [JsonPropertyName("cors_enabled")]
         public bool CorsEnabled
         {
             get => _corsEnabled;
-            internal set => SetField(ref _corsEnabled, value);
+            set => SetField(ref _corsEnabled, value);
         }
         
         [JsonPropertyName("enabled")]
         public bool Enabled
         {
             get => _enabled;
-            internal set => SetField(ref _enabled, value);
+            set => SetField(ref _enabled, value);
         }
         
         [JsonPropertyName("port")]
         public int Port
         {
             get => _port;
-            internal set => SetField(ref _port, value);
+            set => SetField(ref _port, value);
         }
 
         public string ToWebSocketString()

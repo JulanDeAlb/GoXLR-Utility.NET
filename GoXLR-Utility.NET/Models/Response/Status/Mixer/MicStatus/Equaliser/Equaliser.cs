@@ -14,14 +14,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser
         public Gain.Gain Gain
         {
             get => _gain;
-            internal set => SetField(ref _gain, value);
+            set => SetField(ref _gain, value);
         }
         
         [JsonPropertyName("frequency")]
         public Frequency.Frequency Frequency
         {
             get => _frequency;
-            internal set => SetField(ref _frequency, value);
+            set => SetField(ref _frequency, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

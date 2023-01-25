@@ -23,56 +23,56 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public int Amount
         {
             get => _amount;
-            internal set => SetField(ref _amount, value);
+            set => SetField(ref _amount, value);
         }
         
         [JsonPropertyName("delay_left")]
         public int DelayLeft
         {
             get => _delayLeft;
-            internal set => SetField(ref _delayLeft, value);
+            set => SetField(ref _delayLeft, value);
         }
         
         [JsonPropertyName("delay_right")]
         public int DelayRight
         {
             get => _delayRight;
-            internal set => SetField(ref _delayRight, value);
+            set => SetField(ref _delayRight, value);
         }
         
         [JsonPropertyName("feedback")]
         public int Feedback
         {
             get => _feedback;
-            internal set => SetField(ref _feedback, value);
+            set => SetField(ref _feedback, value);
         }
         
         [JsonPropertyName("feedback_left")]
         public int FeedbackLeft
         {
             get => _feedbackLeft;
-            internal set => SetField(ref _feedbackLeft, value);
+            set => SetField(ref _feedbackLeft, value);
         }
         
         [JsonPropertyName("feedback_right")]
         public int FeedbackRight
         {
             get => _feedbackRight;
-            internal set => SetField(ref _feedbackRight, value);
+            set => SetField(ref _feedbackRight, value);
         }
         
         [JsonPropertyName("feedback_xfb_r_to_l")]
         public int FeedbackXfbRtL
         {
             get => _feedbackXfbRtL;
-            internal set => SetField(ref _feedbackXfbRtL, value);
+            set => SetField(ref _feedbackXfbRtL, value);
         }
         
         [JsonPropertyName("feedback_xfb_l_to_r")]
         public int FeedbackXfbLtR
         {
             get => _feedbackXfbLtR;
-            internal set => SetField(ref _feedbackXfbLtR, value);
+            set => SetField(ref _feedbackXfbLtR, value);
         }
         
         [JsonPropertyName("style")]
@@ -80,14 +80,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectT
         public EchoStyle Style
         {
             get => _style;
-            internal set => SetField(ref _style, value);
+            set => SetField(ref _style, value);
         }
         
         [JsonPropertyName("tempo")]
         public int Tempo
         {
             get => _tempo;
-            internal set => SetField(ref _tempo, value);
+            set => SetField(ref _tempo, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

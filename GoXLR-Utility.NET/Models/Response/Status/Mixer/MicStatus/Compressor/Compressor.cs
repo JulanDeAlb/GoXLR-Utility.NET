@@ -17,35 +17,35 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Compressor
         public int Attack
         {
             get => _attack;
-            internal set => SetField(ref _attack, value);
+            set => SetField(ref _attack, value);
         }
         
         [JsonPropertyName("makeup_gain")]
         public int MakeUpGain
         {
             get => _makeUpGain;
-            internal set => SetField(ref _makeUpGain, value);
+            set => SetField(ref _makeUpGain, value);
         }
 
         [JsonPropertyName("ratio")]
         public int Ratio
         {
             get => _ratio;
-            internal set => SetField(ref _ratio, value);
+            set => SetField(ref _ratio, value);
         }
         
         [JsonPropertyName("release")]
         public int Release
         {
             get => _release;
-            internal set => SetField(ref _release, value);
+            set => SetField(ref _release, value);
         }
         
         [JsonPropertyName("threshold")]
         public int Threshold
         {
             get => _threshold;
-            internal set => SetField(ref _threshold, value);
+            set => SetField(ref _threshold, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

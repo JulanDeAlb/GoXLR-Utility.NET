@@ -22,70 +22,70 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser.Fre
         public double Equalizer31Hz
         {
             get => _equalizer31Hz;
-            internal set => SetField(ref _equalizer31Hz, value);
+            set => SetField(ref _equalizer31Hz, value);
         }
         
         [JsonPropertyName("Equalizer63Hz")]
         public double Equalizer63Hz
         {
             get => _equalizer63Hz;
-            internal set => SetField(ref _equalizer63Hz, value);
+            set => SetField(ref _equalizer63Hz, value);
         }
         
         [JsonPropertyName("Equalizer125Hz")]
         public double Equalizer125Hz
         {
             get => _equalizer125Hz;
-            internal set => SetField(ref _equalizer125Hz, value);
+            set => SetField(ref _equalizer125Hz, value);
         }
         
         [JsonPropertyName("Equalizer250Hz")]
         public double Equalizer250Hz
         {
             get => _equalizer250Hz;
-            internal set => SetField(ref _equalizer250Hz, value);
+            set => SetField(ref _equalizer250Hz, value);
         }
         
         [JsonPropertyName("Equalizer500Hz")]
         public double Equalizer500Hz
         {
             get => _equalizer500Hz;
-            internal set => SetField(ref _equalizer500Hz, value);
+            set => SetField(ref _equalizer500Hz, value);
         }
         
         [JsonPropertyName("Equalizer1KHz")]
         public double Equalizer1KHz
         {
             get => _equalizer1KHz;
-            internal set => SetField(ref _equalizer1KHz, value);
+            set => SetField(ref _equalizer1KHz, value);
         }
         
         [JsonPropertyName("Equalizer2KHz")]
         public double Equalizer2KHz
         {
             get => _equalizer2KHz;
-            internal set => SetField(ref _equalizer2KHz, value);
+            set => SetField(ref _equalizer2KHz, value);
         }
         
         [JsonPropertyName("Equalizer4KHz")]
         public double Equalizer4KHz
         {
             get => _equalizer4KHz;
-            internal set => SetField(ref _equalizer4KHz, value);
+            set => SetField(ref _equalizer4KHz, value);
         }
         
         [JsonPropertyName("Equalizer8KHz")]
         public double Equalizer8KHz
         {
             get => _equalizer8KHz;
-            internal set => SetField(ref _equalizer8KHz, value);
+            set => SetField(ref _equalizer8KHz, value);
         }
         
         [JsonPropertyName("Equalizer16KHz")]
         public double Equalizer16KHz
         {
             get => _equalizer16KHz;
-            internal set => SetField(ref _equalizer16KHz, value);
+            set => SetField(ref _equalizer16KHz, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

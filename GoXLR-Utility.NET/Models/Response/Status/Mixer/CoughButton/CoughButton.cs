@@ -17,7 +17,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton
         public bool IsToggle
         {
             get => _isToggle;
-            internal set => SetField(ref _isToggle, value);
+            set => SetField(ref _isToggle, value);
         }
         
         [JsonPropertyName("mute_type")]
@@ -25,7 +25,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton
         public MuteFunction MuteFunction
         {
             get => _muteFunction;
-            internal set => SetField(ref _muteFunction, value);
+            set => SetField(ref _muteFunction, value);
         }
         
         [JsonPropertyName("state")]
@@ -33,7 +33,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.CoughButton
         public MuteState MuteState
         {
             get => _muteState;
-            internal set => SetField(ref _muteState, value);
+            set => SetField(ref _muteState, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

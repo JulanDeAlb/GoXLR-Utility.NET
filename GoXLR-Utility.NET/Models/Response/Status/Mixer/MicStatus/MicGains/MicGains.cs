@@ -15,21 +15,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.MicGains
         public int Condenser
         {
             get => _condenser;
-            internal set => SetField(ref _condenser, value);
+            set => SetField(ref _condenser, value);
         }
         
         [JsonPropertyName("Dynamic")]
         public int Dynamic
         {
             get => _dynamic;
-            internal set => SetField(ref _dynamic, value);
+            set => SetField(ref _dynamic, value);
         }
         
         [JsonPropertyName("Jack")]
         public int Jack
         {
             get => _jack;
-            internal set => SetField(ref _jack, value);
+            set => SetField(ref _jack, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -21,56 +21,56 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Router
         public RouterBase Chat
         {
             get => _chat;
-            internal set => SetField(ref _chat, value);
+            set => SetField(ref _chat, value);
         }
         
         [JsonPropertyName("Console")]
         public RouterBase Console
         {
             get => _console;
-            internal set => SetField(ref _console, value);
+            set => SetField(ref _console, value);
         }
         
         [JsonPropertyName("Game")]
         public RouterBase Game
         {
             get => _game;
-            internal set => SetField(ref _game, value);
+            set => SetField(ref _game, value);
         }
         
         [JsonPropertyName("LineIn")]
         public RouterBase LineIn
         {
             get => _lineIn;
-            internal set => SetField(ref _lineIn, value);
+            set => SetField(ref _lineIn, value);
         }
         
         [JsonPropertyName("Microphone")]
         public RouterBase Microphone
         {
             get => _microphone;
-            internal set => SetField(ref _microphone, value);
+            set => SetField(ref _microphone, value);
         }
         
         [JsonPropertyName("Music")]
         public RouterBase Music
         {
             get => _music;
-            internal set => SetField(ref _music, value);
+            set => SetField(ref _music, value);
         }
         
         [JsonPropertyName("Samples")]
         public RouterBase Samples
         {
             get => _samples;
-            internal set => SetField(ref _samples, value);
+            set => SetField(ref _samples, value);
         }
         
         [JsonPropertyName("System")]
         public RouterBase System
         {
             get => _system;
-            internal set => SetField(ref _system, value);
+            set => SetField(ref _system, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -101,35 +101,35 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Router
         public bool BroadcastMix
         {
             get => _broadcastMix;
-            internal set => SetField(ref _broadcastMix, value);
+            set => SetField(ref _broadcastMix, value);
         }
         
         [JsonPropertyName("ChatMic")]
         public bool ChatMic
         {
             get => _chatMic;
-            internal set => SetField(ref _chatMic, value);
+            set => SetField(ref _chatMic, value);
         }
         
         [JsonPropertyName("Headphones")]
         public bool Headphones
         {
             get => _headphones;
-            internal set => SetField(ref _headphones, value);
+            set => SetField(ref _headphones, value);
         }
         
         [JsonPropertyName("LineOut")]
         public bool LineOut
         {
             get => _lineOut;
-            internal set => SetField(ref _lineOut, value);
+            set => SetField(ref _lineOut, value);
         }
         
         [JsonPropertyName("Sampler")]
         public bool Sampler
         {
             get => _sampler;
-            internal set => SetField(ref _sampler, value);
+            set => SetField(ref _sampler, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

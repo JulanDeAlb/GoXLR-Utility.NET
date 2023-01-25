@@ -20,49 +20,49 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current
         public EchoEffect Echo
         {
             get => _echo;
-            internal set => SetField(ref _echo, value);
+            set => SetField(ref _echo, value);
         }
         
         [JsonPropertyName("gender")]
         public GenderEffect Gender
         {
             get => _gender;
-            internal set => SetField(ref _gender, value);
+            set => SetField(ref _gender, value);
         }
         
         [JsonPropertyName("hard_tune")]
         public HardTuneEffect HardTune
         {
             get => _hardTune;
-            internal set => SetField(ref _hardTune, value);
+            set => SetField(ref _hardTune, value);
         }
         
         [JsonPropertyName("megaphone")]
         public MegaphoneEffect Megaphone
         {
             get => _megaphone;
-            internal set => SetField(ref _megaphone, value);
+            set => SetField(ref _megaphone, value);
         }
         
         [JsonPropertyName("pitch")]
         public PitchEffect Pitch
         {
             get => _pitch;
-            internal set => SetField(ref _pitch, value);
+            set => SetField(ref _pitch, value);
         }
         
         [JsonPropertyName("reverb")]
         public ReverbEffect Reverb
         {
             get => _reverb;
-            internal set => SetField(ref _reverb, value);
+            set => SetField(ref _reverb, value);
         }
         
         [JsonPropertyName("robot")]
         public RobotEffect Robot
         {
             get => _robot;
-            internal set => SetField(ref _robot, value);
+            set => SetField(ref _robot, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

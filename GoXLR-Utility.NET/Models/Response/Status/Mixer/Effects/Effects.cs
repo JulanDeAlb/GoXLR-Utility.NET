@@ -18,28 +18,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects
         public EffectBankPresets ActivePreset
         {
             get => _activePreset;
-            internal set => SetField(ref _activePreset, value);
+            set => SetField(ref _activePreset, value);
         }
         
         [JsonPropertyName("current")]
         public Current.Current Current
         {
             get => _current;
-            internal set => SetField(ref _current, value);
+            set => SetField(ref _current, value);
         }
 
         [JsonPropertyName("preset_names")]
         public PresetNames.PresetNames PresetNames
         {
             get => _presetNames;
-            internal set => SetField(ref _presetNames, value);
+            set => SetField(ref _presetNames, value);
         }
         
         [JsonPropertyName("is_enabled")]
         public bool IsEnabled
         {
             get => _isEnabled;
-            internal set => SetField(ref _isEnabled, value);
+            set => SetField(ref _isEnabled, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

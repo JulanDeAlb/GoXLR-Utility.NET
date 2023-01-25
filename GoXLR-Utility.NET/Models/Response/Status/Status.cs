@@ -17,28 +17,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status
         public Config.Config Config
         {
             get => _config;
-            internal set => SetField(ref _config, value);
+            set => SetField(ref _config, value);
         }
 
         [JsonPropertyName("files")]
         public Files.Files Files
         {
             get => _files;
-            internal set => SetField(ref _files, value);
+            set => SetField(ref _files, value);
         }
         
         [JsonPropertyName("mixers")]
         public Dictionary<string, Device> Mixers
         {
             get => _mixers;
-            internal set => SetField(ref _mixers, value);
+            set => SetField(ref _mixers, value);
         }
         
         [JsonPropertyName("paths")]
         public Paths.Paths Paths
         {
             get => _paths;
-            internal set => SetField(ref _paths, value);
+            set => SetField(ref _paths, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
