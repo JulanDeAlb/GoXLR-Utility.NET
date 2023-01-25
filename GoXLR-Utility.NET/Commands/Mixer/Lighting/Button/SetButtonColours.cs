@@ -7,6 +7,8 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Button
     {
         public SetButtonColours(ButtonLightEnum button, string colour1, string colour2)
         {
+            colour1 = colour1.Replace("#", "");
+            colour2 = colour2.Replace("#", "");
             Command = new Dictionary<string, object>
             {
                 ["SetButtonColours"] = new
