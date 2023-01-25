@@ -1,0 +1,19 @@
+using System.Collections.Generic;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Megaphone;
+
+namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone
+{
+    public class SetMegaphoneStyle : CommandBase
+    {
+        public SetMegaphoneStyle(MegaphoneStyle style)
+        {
+            Command = new Dictionary<string, object>
+            {
+                ["SetMegaphoneStyle"] = new
+                {
+                    style
+                }
+            };
+        }
+    }
+}

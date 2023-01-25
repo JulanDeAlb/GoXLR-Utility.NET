@@ -15,8 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Commands\Config" />
-      <Folder Include="Commands\Files" />
       <Folder Include="Enums\Response\Status\Mixer\Levels\Volumes" />
     </ItemGroup>
 
