@@ -29,6 +29,11 @@ namespace GoXLR_Utility.NET
             _serializerOptions = serializerOptions;
         }
         
+        /// <summary>
+        /// Handle an Array of Patches
+        /// </summary>
+        /// <param name="parentClass">The class where the Patch should be applied</param>
+        /// <param name="patches">The Array of patches</param>
         public void HandlePatch(object parentClass, params Patch[] patches)
         {
 #if DEBUG
@@ -57,6 +62,12 @@ namespace GoXLR_Utility.NET
 #endif
         }
 
+        /// <summary>
+        /// Handle single Patches
+        /// </summary>
+        /// <param name="parentClass">The class where the Patch should be applied</param>
+        /// <param name="patch">The Patch that should be applied</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void HandlePatch(object parentClass, Patch patch)
         {
             //Return if parentClass hasn't been initialized after connection
@@ -99,7 +110,14 @@ namespace GoXLR_Utility.NET
             }
         }
         
-        private void CreatePathSegments(string path, out string[] pathSegments,out int lastIndex, out string filePath)
+        /// <summary>
+        /// Create Path Segments from the given Patch
+        /// </summary>
+        /// <param name="path">The Path of the Patch</param>
+        /// <param name="pathSegments">The created Path Segments</param>
+        /// <param name="lastIndex">The Index if a List has been manipulated</param>
+        /// <param name="filePath">The FilePath if a File has been manipulated</param>
+        private void CreatePathSegments(string path, out string[] pathSegments, out int lastIndex, out string filePath)
         {
             //Split the Path in Segments
             pathSegments = path.Split(new []{'/'}, StringSplitOptions.RemoveEmptyEntries);
@@ -113,6 +131,12 @@ namespace GoXLR_Utility.NET
                 Array.Resize(ref pathSegments, pathSegments.Length - 1);
         }
 
+        /// <summary>
+        /// Check if the Patch Path is already in the Cache for faster access
+        /// </summary>
+        /// <param name="path">The Patch</param>
+        /// <param name="item">The found PatchCacheItem</param>
+        /// <returns>If it has been found in the Cache</returns>
         private bool CheckCache(string path, out PatchCacheItem item)
         {
             if (!_patchCache.TryGetValue(path, out var cacheItem))
@@ -125,6 +149,13 @@ namespace GoXLR_Utility.NET
             return true;
         }
         
+        /// <summary>
+        /// Traverse the Class and return a new PatchCacheItem
+        /// </summary>
+        /// <param name="fullPath">The Path as String</param>
+        /// <param name="parentClass">The parentClass</param>
+        /// <param name="pathSegments">The Segments of the Path</param>
+        /// <returns>Created PatchCacheItem</returns>
         private PatchCacheItem CacheNewPatches(string fullPath, object parentClass, string[] pathSegments)
         {
             var patchCacheItem = new PatchCacheItem(parentClass, pathSegments);
@@ -175,6 +206,13 @@ namespace GoXLR_Utility.NET
             return patchCacheItem;
         }
 
+        /// <summary>
+        /// Check which type of Generic the Property is
+        /// In case it isn't Generic its "Other"
+        /// </summary>
+        /// <param name="propType">The PropertyType</param>
+        /// <param name="genericType">The parsed generic Type</param>
+        /// <returns>A GenericTypeEnum indication what it is</returns>
         private GenericTypeEnum GetGenericType(Type propType, out Type genericType)
         {
             genericType = default;
@@ -194,7 +232,39 @@ namespace GoXLR_Utility.NET
 
             return GenericTypeEnum.Other;
         }
+        
+        /// <summary>
+        /// Gets the PropertyInfo where the JsonPropertyName or the default PropertyName
+        /// matches the given PathSegment
+        /// </summary>
+        /// <param name="type">Type where to search for the segment</param>
+        /// <param name="pathSegment">Segment to search for</param>
+        /// <returns>The found PropertyInfo</returns>
+        private PropertyInfo GetPropertyInfo(Type type, string pathSegment)
+        {
+            if (type is null)
+                return null;
 
+            foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            {
+                //Match on exact name from JsonPropertyName:
+                if (propertyInfo.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name == pathSegment)
+                    return propertyInfo;
+
+                //Or match from segment to property name, cleaned for snake_case to camelCase with ignore case:
+                if (propertyInfo.Name.Equals(pathSegment.Replace("_", ""), StringComparison.OrdinalIgnoreCase))
+                    return propertyInfo;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Patch non Generic Items
+        /// </summary>
+        /// <param name="patch">The patch that should be applied</param>
+        /// <param name="patchCacheItem">The cached Item</param>
+        /// <exception cref="JsonException"></exception>
         private void PatchNonGeneric(Patch patch, PatchCacheItem patchCacheItem)
         {
             //If the Deserialization throws, there could be a problem with the Models
@@ -210,6 +280,13 @@ namespace GoXLR_Utility.NET
             patchCacheItem.PropInfo.SetValue(patchCacheItem.ParentClass, value);
         }
 
+        /// <summary>
+        /// Patch a Generic List
+        /// </summary>
+        /// <param name="patch">The patch that should be applied</param>
+        /// <param name="patchCacheItem">The cached Item</param>
+        /// <param name="lastIndex">The index that should be manipulated</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void PatchGenericList(Patch patch, PatchCacheItem patchCacheItem, int lastIndex)
         {
             //Since we know the Generic Type is a List, use it to cast to IList and manipulate it.
@@ -249,6 +326,13 @@ namespace GoXLR_Utility.NET
             }
         }
 
+        /// <summary>
+        /// Patch a Generic Dictionary (Only File Paths)
+        /// </summary>
+        /// <param name="patch">The patch that should be applied</param>
+        /// <param name="patchCacheItem">The cached Item</param>
+        /// <param name="filePath">The Filepath</param>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void PatchGenericDictionary(Patch patch, PatchCacheItem patchCacheItem, string filePath)
         {
             if (patchCacheItem.PropType.GetGenericArguments().FirstOrDefault() != typeof(string))
@@ -288,6 +372,14 @@ namespace GoXLR_Utility.NET
             }
         }
         
+        /// <summary>
+        /// Check if its a Device connection or disconnection and patch it
+        /// </summary>
+        /// <param name="patch">The patch that should be applied</param>
+        /// <param name="patchCacheItem">The cached Item</param>
+        /// <returns>A bool indication if its a Device Patch or not</returns>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException"></exception>
         private bool PatchDeviceConnection(Patch patch, PatchCacheItem patchCacheItem)
         {
             //Indicates that a GoXLR has been connected or removed
@@ -324,6 +416,13 @@ namespace GoXLR_Utility.NET
             return true;
         }
 
+        /// <summary>
+        /// Retrieve the Values of a List via deserialization
+        /// </summary>
+        /// <param name="type">Type that is a List</param>
+        /// <param name="value">The JsonNode that should be deserialized</param>
+        /// <returns>The List as object</returns>
+        /// <exception cref="ArgumentNullException"></exception>
         private object GetListValue(Type type, JsonNode value)
         {
             //To deserialize it we need the to get the base class which the List uses.
@@ -348,25 +447,6 @@ namespace GoXLR_Utility.NET
 
             fileName = segments[segments.Count - 1];
             return true;
-        }
-        
-        private PropertyInfo GetPropertyInfo(Type type, string pathSegment)
-        {
-            if (type is null)
-                return null;
-
-            foreach (var propertyInfo in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-            {
-                //Match on exact name from JsonPropertyName:
-                if (propertyInfo.GetCustomAttribute<JsonPropertyNameAttribute>()?.Name == pathSegment)
-                    return propertyInfo;
-
-                //Or match from segment to property name, cleaned for snake_case to camelCase with ignore case:
-                if (propertyInfo.Name.Equals(pathSegment.Replace("_", ""), StringComparison.OrdinalIgnoreCase))
-                    return propertyInfo;
-            }
-
-            return null;
         }
     }
 }
