@@ -19,6 +19,11 @@ namespace GoXLR_Utility.NET
         private readonly PatchCache _patchCache = new PatchCache();
         private static JsonSerializerOptions _serializerOptions;
         
+        /// <summary>
+        /// Initialize the PatchHandler with Serializer Options.
+        /// Does require JSON Enum Converter.
+        /// </summary>
+        /// <param name="serializerOptions">Serializer Options including JsonEnumConverter</param>
         public PatchHandler(JsonSerializerOptions serializerOptions)
         {
             _serializerOptions = serializerOptions;
@@ -57,10 +62,13 @@ namespace GoXLR_Utility.NET
             if (parentClass is null)
                 return;
 
+            //Create Segments from the given Patch including the check if its a FilePath or an Index at the end
             CreatePathSegments(patch.Path, out var pathSegments, out var lastIndex, out var filePath);
 
+            //Check if the Patch Path is already present in the Dictionary/Cache and retrieve it in case it is.
             if (!CheckCache(patch.Path, out var patchCacheItem))
             {
+                //Create a new entry in the Cache
                 patchCacheItem = CacheNewPatches(patch.Path, parentClass, pathSegments);
             }
 
@@ -72,6 +80,7 @@ namespace GoXLR_Utility.NET
             if (patchCacheItem.PropType is null || parentClass is null)
                 throw new ArgumentOutOfRangeException($"Path not implemented: {patch.Path}");
             
+            //Check what type the object is to go trough switch case.
             var genericType = GetGenericType(patchCacheItem.PropType, out var genType);
             switch (genericType)
             {
@@ -171,6 +180,7 @@ namespace GoXLR_Utility.NET
                 }
                 else
                 {
+                    //Retrieve the new ParentClass
                     patchCacheItem.ParentClass = GetPropertyInfo(type, path)?.GetValue(patchCacheItem.ParentClass);
                 }
 
@@ -347,6 +357,7 @@ namespace GoXLR_Utility.NET
                     lock (dictionary)
                     {
                         dictionary[filePath] = value;
+                        Console.WriteLine("Sure im needed. Remove TODO in PatchHandler: 356");
                     }
                     break;
                     
@@ -416,6 +427,12 @@ namespace GoXLR_Utility.NET
             return value.Deserialize(genArg, _serializerOptions);
         }
 
+        /// <summary>
+        /// Try Parse the Segments to a FileName
+        /// </summary>
+        /// <param name="segments">The Segments that should be checked</param>
+        /// <param name="fileName">Returns the parsed FileName</param>
+        /// <returns>True if it is a FileName</returns>
         private bool TryParseFile(IReadOnlyList<string> segments, out string fileName)
         {
             fileName = default;
@@ -423,8 +440,8 @@ namespace GoXLR_Utility.NET
             if (segments.Count <= 1)
                 return false;
 
+            //Only if the second last segments equals samples it can be a FileName
             var isPresent = segments[segments.Count - 2];
-
             if (!isPresent.Equals("samples"))
                 return false;
 
