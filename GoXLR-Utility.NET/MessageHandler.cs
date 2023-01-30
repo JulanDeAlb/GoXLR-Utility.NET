@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Text.Json;
 using GoXLR_Utility.NET.Models.Response;
 using GoXLR_Utility.NET.Models.Response.Status;
@@ -19,20 +17,9 @@ namespace GoXLR_Utility.NET
             _patchHandler = new PatchHandler(serializerOptions);
             _serializerOptions = serializerOptions;
         }
-
-#if DEBUG
-        private static readonly Stopwatch DebugWatch = new Stopwatch();
-#endif
         
         public void HandleMessage(string message)
         {
-#if DEBUG
-            double  ticks;
-            double  seconds;
-            double  milliseconds;
-            double  nanoseconds;
-            DebugWatch.Start();
-#endif
             Response response;
             try
             {
@@ -41,26 +28,9 @@ namespace GoXLR_Utility.NET
             catch (Exception e)
             {
                 Console.WriteLine(e.Message); //TODO Log exception
-#if DEBUG
-                DebugWatch.Stop();
-                ticks = DebugWatch.ElapsedTicks;
-                seconds = ticks / Stopwatch.Frequency;
-                milliseconds = (ticks / Stopwatch.Frequency) * 1000;
-                nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
-                Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks}");
-                DebugWatch.Reset();
-#endif
                 return;
             }
-#if DEBUG           
-            DebugWatch.Stop();
-            ticks = DebugWatch.ElapsedTicks;
-            seconds = ticks / Stopwatch.Frequency;
-            milliseconds = (ticks / Stopwatch.Frequency) * 1000;
-            nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
-            Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks}");
-            DebugWatch.Reset();
-#endif
+            
             if (response is null)
                 throw new ArgumentNullException(nameof(HandleMessage)); // TODO Log it
 
@@ -71,12 +41,6 @@ namespace GoXLR_Utility.NET
             else if (response.Data.Error != null)
             {
                 throw new NotImplementedException($"Error WS Message | {response.Data.Error}"); //TODO Log the WS Message for implementation
-                /*
-                 OnErrorResponseReceived?.Invoke(this, new OnErrorResponseReceivedEventArgs
-                {
-                    Id = response.Id,
-                });
-                */
             } else if (response.Data.HttpState != null)
             {
                 

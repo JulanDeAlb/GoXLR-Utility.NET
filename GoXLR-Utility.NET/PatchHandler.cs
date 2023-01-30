@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -19,10 +18,6 @@ namespace GoXLR_Utility.NET
     {
         private readonly PatchCache _patchCache = new PatchCache();
         private static JsonSerializerOptions _serializerOptions;
-   
-#if DEBUG
-        private readonly Stopwatch _debugWatch = new Stopwatch();
-#endif
         
         public PatchHandler(JsonSerializerOptions serializerOptions)
         {
@@ -36,9 +31,6 @@ namespace GoXLR_Utility.NET
         /// <param name="patches">The Array of patches</param>
         public void HandlePatch(object parentClass, params Patch[] patches)
         {
-#if DEBUG
-            _debugWatch.Start();
-#endif
             foreach (var patch in patches)
             {
                 try
@@ -51,15 +43,6 @@ namespace GoXLR_Utility.NET
                     Console.WriteLine(e);
                 }
             }
-#if DEBUG     
-            _debugWatch.Stop();
-            double  ticks = _debugWatch.ElapsedTicks;
-            var seconds = ticks / Stopwatch.Frequency;
-            var milliseconds = (ticks / Stopwatch.Frequency) * 1000;
-            var nanoseconds = (ticks / Stopwatch.Frequency) * 1000000000;
-            Console.WriteLine($"s: {seconds} | ms: {milliseconds} | ns: {nanoseconds} | t: {ticks}");
-            _debugWatch.Reset();
-#endif
         }
 
         /// <summary>
