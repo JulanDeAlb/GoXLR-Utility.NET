@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
 {
