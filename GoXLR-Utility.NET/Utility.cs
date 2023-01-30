@@ -8,31 +8,51 @@ using GoXLR_Utility.NET.Commands;
 using GoXLR_Utility.NET.Enums.Commands;
 using GoXLR_Utility.NET.Enums.Response.Status.Paths;
 using GoXLR_Utility.NET.Models.Response.Status;
+using GoXLR_Utility.NET.Models.Response.Status.Config;
+using GoXLR_Utility.NET.Models.Response.Status.Files;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer;
+using GoXLR_Utility.NET.Models.Response.Status.Paths;
 using WebSocketSharp;
-using ErrorEventArgs = WebSocketSharp.ErrorEventArgs;
 
 namespace GoXLR_Utility.NET
 {
     public class Utility
     {
+        private readonly MessageHandler _messageHandler;
+        
         private static NamedPipeServer _namedPipeServer;
-        private MessageHandler _messageHandler;
         private static long _id;
         private static WebSocket _websocket;
-        private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
+        
+        private static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
         {
             Converters = { new JsonStringEnumConverter() }
         };
 
+        /// <summary>
+        /// The Daemon Status including:
+        /// <br/><see cref="Config"/>,
+        /// <br/><see cref="Files"/>,
+        /// <br/><see cref="Device"/> as Dictionary using SerialNumber,
+        /// <br/><see cref="Paths"/>
+        /// </summary>
         public Status Status => _messageHandler.Status;
         public List<string> AvailableSerialNumbers => Status.Mixers.Keys.ToList();
 
+        /// <summary>
+        /// Initialize a new Utility Client.
+        /// </summary>
         public Utility()
         {
-            _messageHandler = new MessageHandler(_serializerOptions);
-            _namedPipeServer = new NamedPipeServer(_serializerOptions);
+            _messageHandler = new MessageHandler(SerializerOptions);
+            _namedPipeServer = new NamedPipeServer(SerializerOptions);
         }
 
+        /// <summary>
+        /// Connect to the GoXLR Daemon via WebSocket while using the
+        /// Windows Named Pipe to get the WebSocket URL.
+        /// </summary>
+        /// <returns>True on success</returns>
         public bool Connect()
         {
             var settings = _namedPipeServer.Connect();
@@ -47,75 +67,66 @@ namespace GoXLR_Utility.NET
             return true;
         }
 
+        /// <summary>
+        /// Connect to the GoXLR Daemon via WebSocket.
+        /// </summary>
+        /// <param name="url">The URL to connect to</param>
+        /// <returns>True on success</returns>
+        public bool Connect(string url)
+        {
+            InitializeWebSocket(url);
+            
+            Interlocked.Exchange(ref _id, 0);
+            _websocket.Connect();
+            return true;
+        }
+
+        /// <summary>
+        /// Disconnect from the GoXLR Daemon WebSocket
+        /// </summary>
         public void Disconnect()
         {
             _websocket.Close();
         }
         
+        /// <summary>
+        /// Send a Command to the GoXLR Daemon.
+        /// </summary>
+        /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
+        /// <param name="command">The Command that should be send.</param>
         public void SendCommand(string serialNumber, CommandBase command)
         {
             IncrementId();
             Send(command.GetJson(_id, serialNumber));
         }
 
+        /// <summary>
+        /// Send the GoXLR Daemon a Command to open a Path in File Explorer
+        /// </summary>
+        /// <param name="path">The Path which should be opened</param>
         public void OpenPath(PathEnum path)
         {
             IncrementId();
-            Send(new CommandBase{ Path = path }.GetJson(_id));
+            Send(new CommandBase{ Path = (Object) path }.GetJson(_id));
         }
 
+        /// <summary>
+        /// Send a Command to the GoXLR Daemon which doesnt require a Device/SerialNumber.
+        /// </summary>
+        /// <param name="command">The Command to send</param>
         public void SendSimpleCommand(SimpleCommandEnum command)
         {
             IncrementId();
-            Send(new CommandBase{ Object = command }.GetJson(_id));
+            Send(new CommandBase{ Object = (Object) command }.GetJson(_id));
         }
-
-        public void Send(string message)
-        {
-            _websocket.Send(message);
-        }
-
-        private void InitializeWebSocket(string url)
-        {
-            _websocket = new WebSocket(url);
-            
-            _websocket.OnOpen += OnWsConnected;
-            _websocket.OnMessage += OnWsMessage;
-            _websocket.OnClose += OnWsDisconnected;
-            _websocket.OnError += OnWsError;
-        }
-
-        private void OnWsConnected(object sender, System.EventArgs eventArgs)
-        {
-            Console.WriteLine("Connected");
-            
-            //TODO Send GetStatus Command
-            _websocket.Send("{\"id\":0, \"data\":\"GetStatus\"}");
-        }
-
-        private void OnWsMessage(object sender, MessageEventArgs message)
-        {
-            _messageHandler.HandleMessage(message.Data);
-        }
-
-        private static void OnWsDisconnected(object sender, CloseEventArgs closeEventArgs)
-        {
-            Console.WriteLine("Disconnected");
-        }
-
-        private static void OnWsError(object sender, ErrorEventArgs e)
-        {
-            Console.WriteLine(e.Exception);
-        }
-
-        private void IncrementId()
-        {
-            if (_id == long.MaxValue)
-                Interlocked.Exchange(ref _id, 0);
-            else 
-                Interlocked.Increment(ref _id);
-        }
-
+        
+        /// <summary>
+        /// Send a Device Command using its Command String and the Parameters
+        /// in case the Command isn't implemented.
+        /// </summary>
+        /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
+        /// <param name="commandName">As String<br/>(Example: SetVolume)</param>
+        /// <param name="parameters">The Parameters<br/>(Example: "Game", 255)</param>
         public void SendCommand(string serialNumber, string commandName, params object[] parameters)
         {
             if (commandName is null)
@@ -133,16 +144,89 @@ namespace GoXLR_Utility.NET
                 [commandName] = commandParameters
             });
         }
+        
+        /// <summary>
+        /// Initialize the WebSocket
+        /// </summary>
+        /// <param name="url">URL to connect to</param>
+        private void InitializeWebSocket(string url)
+        {
+            _websocket = new WebSocket(url);
+            
+            _websocket.OnOpen += OnWsConnected;
+            _websocket.OnMessage += OnWsMessage;
+            _websocket.OnClose += OnWsDisconnected;
+            _websocket.OnError += OnWsError;
+        }
+
+        /// <summary>
+        /// WebSocket OnConnected Event
+        /// </summary>
+        private void OnWsConnected(object sender, EventArgs eventArgs)
+        {
+            Console.WriteLine("Connected"); //TODO Log or re-invoke it later
+            SendSimpleCommand(SimpleCommandEnum.GetStatus);
+        }
+        
+        /// <summary>
+        /// WebSocket OnMessage Event
+        /// </summary>
+        private void OnWsMessage(object sender, MessageEventArgs message)
+        {
+            //TODO Log or re-invoke it later as raw Message
+            _messageHandler.HandleMessage(message.Data);
+        }
+
+        /// <summary>
+        /// WebSocket OnDisconnected Event
+        /// </summary>
+        private static void OnWsDisconnected(object sender, CloseEventArgs closeEventArgs)
+        {
+            Console.WriteLine("Disconnected"); //TODO Log or re-invoke it later
+        }
+
+        /// <summary>
+        /// WebSocket OnError Event
+        /// </summary>
+        private static void OnWsError(object sender, ErrorEventArgs e)
+        {
+            Console.WriteLine(e.Exception); //TODO Log or re-invoke it later
+        }
+        
+        /// <summary>
+        /// Increment the ID
+        /// </summary>
+        private void IncrementId()
+        {
+            if (_id == long.MaxValue)
+                Interlocked.Exchange(ref _id, 0);
+            else 
+                Interlocked.Increment(ref _id);
+        }
+        
+        /// <summary>
+        /// Send the Message via WebSocket
+        /// </summary>
+        /// <param name="message">Message</param>
+        private void Send(string message)
+        {
+            _websocket.Send(message);
+        }
 		
+        /// <summary>
+        /// Base Class of <see cref="SendCommand(string, string, object[])"/>
+        /// </summary>
+        /// <param name="serialNumber">SerialNumber</param>
+        /// <param name="command">Command as Object</param>
         private void SendCommand(string serialNumber, object command)
         {
             if (serialNumber is null)
                 return;
 
-            var id = _id++;
+            IncrementId();
             var finalRequest = new
             {
-                id,
+                _id,
                 data = new
                 {
                     Command = new[] {
@@ -152,7 +236,7 @@ namespace GoXLR_Utility.NET
                 }
             };
 			
-            var json = JsonSerializer.Serialize(finalRequest, _serializerOptions);
+            var json = JsonSerializer.Serialize(finalRequest, SerializerOptions);
             _websocket.Send(json);
         }
     }
