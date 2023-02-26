@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -37,6 +38,10 @@ namespace GoXLR_Utility.NET
         /// <br/><see cref="Paths"/>
         /// </summary>
         public Status Status => _messageHandler.Status;
+        
+        /// <summary>
+        /// A List of available SerialNumbers
+        /// </summary>
         public List<string> AvailableSerialNumbers => Status.Mixers.Keys.ToList();
 
         /// <summary>
@@ -59,7 +64,7 @@ namespace GoXLR_Utility.NET
             
             if (settings == null || !settings.Enabled)
                 return false;
-
+            
             InitializeWebSocket(settings.ToWebSocketString());
             
             Interlocked.Exchange(ref _id, 0);
@@ -93,11 +98,29 @@ namespace GoXLR_Utility.NET
         /// Send a Command to the GoXLR Daemon.
         /// </summary>
         /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
-        /// <param name="command">The Command that should be send.</param>
-        public void SendCommand(string serialNumber, CommandBase command)
+        /// <param name="deviceCommand">The Command that should be send.</param>
+        public void SendCommand(string serialNumber, DeviceCommandBase deviceCommand)
         {
             IncrementId();
-            Send(command.GetJson(_id, serialNumber));
+            var commands = deviceCommand.GetJson(_id, serialNumber);
+            foreach (var cmd in commands)
+            {
+                Send(cmd);
+            }
+        }
+
+        /// <summary>
+        /// Send a Command to the GoXLR Daemon.
+        /// </summary>
+        /// <param name="deviceCommand">The Command that should be send.</param>
+        public void SendCommand(CommandBase deviceCommand)
+        {
+            IncrementId();
+            var commands = deviceCommand.GetJson(_id);
+            foreach (var cmd in commands)
+            {
+                Send(cmd);
+            }
         }
 
         /// <summary>
@@ -107,17 +130,17 @@ namespace GoXLR_Utility.NET
         public void OpenPath(PathEnum path)
         {
             IncrementId();
-            Send(new CommandBase{ Path = (Object) path }.GetJson(_id));
+            Send(new CommandBase { Path = ((Object) path).ToString() }.GetJson(_id)[0]);
         }
 
         /// <summary>
         /// Send a Command to the GoXLR Daemon which doesnt require a Device/SerialNumber.
         /// </summary>
         /// <param name="command">The Command to send</param>
-        public void SendSimpleCommand(SimpleCommandEnum command)
+        public void SendSimpleCommand(SimpleCommand command)
         {
             IncrementId();
-            Send(new CommandBase{ Object = (Object) command }.GetJson(_id));
+            Send(new DeviceCommandBase{ Object = ((Object) command).ToString() }.GetJson(_id)[0]);
         }
         
         /// <summary>
@@ -165,7 +188,7 @@ namespace GoXLR_Utility.NET
         private void OnWsConnected(object sender, EventArgs eventArgs)
         {
             Console.WriteLine("Connected"); //TODO Log or re-invoke it later
-            SendSimpleCommand(SimpleCommandEnum.GetStatus);
+            SendSimpleCommand(SimpleCommand.GetStatus);
         }
         
         /// <summary>
@@ -183,6 +206,7 @@ namespace GoXLR_Utility.NET
         private static void OnWsDisconnected(object sender, CloseEventArgs closeEventArgs)
         {
             Console.WriteLine("Disconnected"); //TODO Log or re-invoke it later
+            Console.WriteLine(closeEventArgs.Reason);
         }
 
         /// <summary>

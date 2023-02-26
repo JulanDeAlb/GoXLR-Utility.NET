@@ -2,18 +2,40 @@ using System.Collections.Generic;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Echo
 {
-    public class SetEchoAmount : CommandBase
+    public class SetEchoAmount : DeviceCommandBase
     {
         private const int MinValue = 0;
         private const int MaxValue = 100;
-        
-        public SetEchoAmount(int value)
+
+        /// <summary>
+        /// Set the Echo Amount of the Current Preset.
+        /// </summary>
+        /// <param name="value">The Amount as Byte (0 - 100)</param>
+        public SetEchoAmount(byte value)
         {
-            value = value < MinValue ? MinValue : value;
-            value = value > MaxValue ? MaxValue : value;
+            value = value > MaxValue ? (byte) SetMaxValue(nameof(SetEchoAmount), MaxValue) : value;
+
             Command = new Dictionary<string, object>
             {
-                ["SetEchoAmount"] = new
+                ["SetEchoAmount"] = new object[]
+                {
+                    value
+                }
+            };
+        }
+
+        /// <summary>
+        /// Set the Echo Amount of the Current Preset.
+        /// </summary>
+        /// <param name="value">The Amount as Int (0 - 100)</param>
+        public SetEchoAmount(int value)
+        {
+            value = value < MinValue ? SetMinValue(nameof(SetEchoAmount), MinValue) : value;
+            value = value > MaxValue ? SetMaxValue(nameof(SetEchoAmount), MaxValue) : value;
+
+            Command = new Dictionary<string, object>
+            {
+                ["SetEchoAmount"] = new object[]
                 {
                     value
                 }

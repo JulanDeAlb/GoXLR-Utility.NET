@@ -3,15 +3,20 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.FaderStatus.Scribble
 {
-    public class SetScribbleIcon : CommandBase
+    public class SetScribbleIcon : DeviceCommandBase
     {
-        public SetScribbleIcon(FaderEnum fader, string filename)
+        /// <summary>
+        /// Set the Scribble Icon of a Fader (Display)
+        /// </summary>
+        /// <param name="fader">The Fader to edit</param>
+        /// <param name="filename">The FileName to apply</param>
+        public SetScribbleIcon(FaderName fader, string filename)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetScribbleIcon"] = new
+                ["SetScribbleIcon"] = new object[]
                 {
-                    fader,
+                    fader.ToString(),
                     filename
                 }
             };

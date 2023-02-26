@@ -60,14 +60,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
     
     public class FaderBase : INotifyPropertyChanged
     {
-        private FaderChannelEnum _channel;
+        private ChannelName _channel;
         private MuteFunction _muteType;
         private MuteState _muteState;
         private Scribble.FaderScribble _scribble;
         
         [JsonPropertyName("channel")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public FaderChannelEnum Channel
+        public ChannelName Channel
         {
             get => _channel;
             set => SetField(ref _channel, value);

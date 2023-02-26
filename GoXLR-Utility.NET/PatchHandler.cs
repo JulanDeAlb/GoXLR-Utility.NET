@@ -107,8 +107,8 @@ namespace GoXLR_Utility.NET
         /// </summary>
         /// <param name="path">The Path of the Patch</param>
         /// <param name="pathSegments">The created Path Segments</param>
-        /// <param name="lastIndex">The Index if a List has been manipulated</param>
-        /// <param name="filePath">The FilePath if a File has been manipulated</param>
+        /// <param name="lastIndex">The Index if a List has been edited</param>
+        /// <param name="filePath">The FilePath if a File has been edited</param>
         private void CreatePathSegments(string path, out string[] pathSegments, out int lastIndex, out string filePath)
         {
             //Split the Path in Segments
@@ -278,17 +278,17 @@ namespace GoXLR_Utility.NET
         /// </summary>
         /// <param name="patch">The patch that should be applied</param>
         /// <param name="patchCacheItem">The cached Item</param>
-        /// <param name="lastIndex">The index that should be manipulated</param>
+        /// <param name="lastIndex">The index that should be edited</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void PatchGenericList(Patch patch, PatchCacheItem patchCacheItem, int lastIndex)
         {
-            //Since we know the Generic Type is a List, use it to cast to IList and manipulate it.
+            //Since we know the Generic Type is a List, use it to cast to IList and edit it.
             var array = (IList)patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
             object value;
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
-                    lock (array) //Lock the array to safely manipulate it
+                    lock (array) //Lock the array to safely edit it
                     {
                         array.RemoveAt(lastIndex);
                     }
@@ -331,7 +331,7 @@ namespace GoXLR_Utility.NET
             if (patchCacheItem.PropType.GetGenericArguments().FirstOrDefault() != typeof(string))
                 throw new ArgumentOutOfRangeException($"{patchCacheItem.PropType.Name} is a Dictionary<T, S> but T, S maybe isn't implemented");
                 
-            //Since we know the Generic Type is a Dictionary, use it to cast to Dictionary and manipulate it.
+            //Since we know the Generic Type is a Dictionary, use it to cast to Dictionary and edit it.
             var dictionary = (IDictionary)patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
                 
             //Split the File Name from its path

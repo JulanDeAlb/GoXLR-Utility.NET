@@ -1,18 +1,19 @@
 using System.Collections.Generic;
+using System.Globalization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Sampler
 {
-    public class SetSampleStartPercent : CommandBase
+    public class SetSampleStartPercent : DeviceCommandBase
     {
         public SetSampleStartPercent(SamplerBank bank, BankButtonEnum button, int index, double startPct)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetSampleStartPercent"] = new
+                ["SetSampleStartPercent"] = new object[]
                 {
-                    bank,
-                    button,
+                    bank.ToString(),
+                    button.ToString(),
                     index,
                     startPct
                 }

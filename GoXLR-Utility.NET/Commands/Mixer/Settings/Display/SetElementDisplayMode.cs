@@ -3,16 +3,21 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Settings.Display;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Settings.Display
 {
-    public class SetElementDisplayMode : CommandBase
+    public class SetElementDisplayMode : DeviceCommandBase
     {
-        public SetElementDisplayMode(DisplayEnum display, DisplayModeEnum mode)
+        /// <summary>
+        /// Set the Display Mode of a Component in Mic Settings.
+        /// </summary>
+        /// <param name="displayComponent">The Component</param>
+        /// <param name="mode">The Mode</param>
+        public SetElementDisplayMode(DisplayComponentEnum displayComponent, DisplayModeEnum mode)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetElementDisplayMode"] = new
+                ["SetElementDisplayMode"] = new object[]
                 {
-                    display,
-                    mode
+                    displayComponent.ToString(),
+                    mode.ToString()
                 }
             };
         }

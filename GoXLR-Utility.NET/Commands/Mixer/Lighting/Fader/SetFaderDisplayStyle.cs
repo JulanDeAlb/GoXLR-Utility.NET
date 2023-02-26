@@ -4,16 +4,21 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Fader
 {
-    public class SetFaderDisplayStyle : CommandBase
+    public class SetFaderDisplayStyle : DeviceCommandBase
     {
-        public SetFaderDisplayStyle(FaderEnum fader, FaderDisplayStyle displayStyle)
+        /// <summary>
+        /// Set the Fader Display Style.
+        /// </summary>
+        /// <param name="fader">The Fader to edit</param>
+        /// <param name="displayStyle">The Display Style to set</param>
+        public SetFaderDisplayStyle(FaderName fader, FaderDisplayStyle displayStyle)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetFaderDisplayStyle"] = new
+                ["SetFaderDisplayStyle"] = new object[]
                 {
-                    fader,
-                    displayStyle
+                    fader.ToString(),
+                    displayStyle.ToString()
                 }
             };
         }

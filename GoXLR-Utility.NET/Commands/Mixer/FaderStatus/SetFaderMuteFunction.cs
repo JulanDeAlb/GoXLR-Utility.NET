@@ -4,16 +4,21 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.FaderStatus
 {
-    public class SetFaderMuteFunction : CommandBase
+    public class SetFaderMuteFunction : DeviceCommandBase
     {
-        public SetFaderMuteFunction(FaderEnum fader, MuteFunction function)
+        /// <summary>
+        /// Set a MuteFunction of a certain Fader
+        /// </summary>
+        /// <param name="fader">Fader to edit</param>
+        /// <param name="function">MuteFunction to set</param>
+        public SetFaderMuteFunction(FaderName fader, MuteFunction function)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetFaderMuteFunction"] = new
+                ["SetFaderMuteFunction"] = new object[]
                 {
-                    fader,
-                    function
+                    fader.ToString(),
+                    function.ToString()
                 }
             };
         }

@@ -1,16 +1,59 @@
 using System.Collections.Generic;
+using GoXLR_Utility.NET.Enums.Commands;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 {
-    public class SetCompressorReleaseTime : CommandBase
+    public class SetCompressorReleaseTime : DeviceCommandBase
     {
-        public SetCompressorReleaseTime(int value)
+        private const int MinValue = 0;
+        private const int MaxValue = 19;
+
+        /// <summary>
+        /// Set the Compressor Release timing.
+        /// </summary>
+        /// <param name="timing">The timing to apply</param>
+        public SetCompressorReleaseTime(CompReleaseTime timing)
         {
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorReleaseTime"] = new
+                ["SetCompressorReleaseTime"] = new object[]
                 {
-                    value
+                    timing
+                }
+            };
+        }
+
+        /// <summary>
+        /// Set the Compressor Release timing.
+        /// </summary>
+        /// <param name="timing">The timing to apply as Byte (0 - 19)</param>
+        public SetCompressorReleaseTime(byte timing)
+        {
+            timing = timing > MaxValue ? (byte) SetMaxValue(nameof(SetCompressorReleaseTime), MaxValue) : timing;
+
+            Command = new Dictionary<string, object>
+            {
+                ["SetCompressorReleaseTime"] = new object[]
+                {
+                    timing
+                }
+            };
+        }
+
+        /// <summary>
+        /// Set the Compressor Release timing.
+        /// </summary>
+        /// <param name="timing">The timing to apply as Int (0-19)</param>
+        public SetCompressorReleaseTime(int timing)
+        {
+            timing = timing < MinValue ? SetMinValue(nameof(SetCompressorReleaseTime), MinValue) : timing;
+            timing = timing > MaxValue ? SetMaxValue(nameof(SetCompressorReleaseTime), MaxValue) : timing;
+
+            Command = new Dictionary<string, object>
+            {
+                ["SetCompressorReleaseTime"] = new object[]
+                {
+                    timing
                 }
             };
         }

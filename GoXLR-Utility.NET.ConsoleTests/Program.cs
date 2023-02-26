@@ -1,4 +1,10 @@
-﻿namespace GoXLR_Utility.NET.ConsoleTests;
+﻿using GoXLR_Utility.NET.Commands.Mixer.FaderStatus.Scribble;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Button;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Button;
+using GoXLR_Utility.NET.Enums.Response.Status.Paths;
+
+namespace GoXLR_Utility.NET.ConsoleTests;
 
 public class Program
 {
@@ -7,6 +13,8 @@ public class Program
     public static void Main(string[] args)
     {
         _utility.Connect();
+        Console.ReadKey();
+        _utility.SendCommand(_utility.AvailableSerialNumbers[0], new SetButtonGroupColours(ButtonGroupsEnum.SampleBankSelector, "004004", "ffffff"));
         Console.ReadKey();
         AllEvents(_utility.AvailableSerialNumbers[0]);
         Console.WriteLine("Subscribed to Events");

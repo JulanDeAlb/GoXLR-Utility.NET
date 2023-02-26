@@ -40,7 +40,7 @@ namespace GoXLR_Utility.NET
             }
             else if (response.Data.Error != null)
             {
-                throw new NotImplementedException($"Error WS Message | {response.Data.Error}"); //TODO Log the WS Message for implementation
+                Console.WriteLine($"Error WS Message | {response.Data.Error}"); //TODO Log the WS Message for implementation
             } else if (response.Data.HttpState != null)
             {
                 
