@@ -70,7 +70,7 @@ Command(String, GoXLRCommand),
 
 //SetButtonColours(Button, String, Option<String>),
 //SetButtonOffStyle(Button, ButtonColourOffStyle),
-//TODO SetButtonGroupColours(ButtonColourGroups, String, Option<String>),
+//SetButtonGroupColours(ButtonColourGroups, String, Option<String>),
 //SetButtonGroupOffStyle(ButtonColourGroups, ButtonColourOffStyle),
 
 //SetSimpleColour(SimpleColourTargets, String),
@@ -86,7 +86,7 @@ Command(String, GoXLRCommand),
 // Reverb
 //SetReverbStyle(ReverbStyle),
 //SetReverbAmount(u8),
-//TODO SetReverbDecay(u16),
+//SetReverbDecay(u16),
 //SetReverbEarlyLevel(i8),
 //SetReverbTailLevel(i8),
 //SetReverbPreDelay(u8),

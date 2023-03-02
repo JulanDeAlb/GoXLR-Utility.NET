@@ -367,7 +367,7 @@ namespace GoXLR_Utility.NET
                     }
                     break;
                         
-                case OpPatchEnum.Replace: //TODO Maybe this isn't even needed
+                case OpPatchEnum.Replace:
                     lock (dictionary)
                     {
                         dictionary[filePath] = value;

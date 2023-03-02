@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using GoXLR_Utility.NET.Models.Response;
+using GoXLR_Utility.NET.Models.Response.HttpSettings;
 using GoXLR_Utility.NET.Models.Response.Status;
 using Microsoft.Extensions.Logging;
 
@@ -12,6 +13,7 @@ namespace GoXLR_Utility.NET
         private static JsonSerializerOptions? _serializerOptions;
         
         public Status Status = null!;
+        public HttpSettings HttpSettings = null!;
 
         public MessageHandler(JsonSerializerOptions? serializerOptions)
         {
@@ -47,7 +49,7 @@ namespace GoXLR_Utility.NET
                 Utility.Logger?.Log(LogLevel.Error, new EventId(4, "Daemon Error"), "Received Error from Daemon: {error}", response.Data.Error);
             } else if (response.Data?.HttpState != null)
             {
-                //TODO HttpState
+                HttpSettings = response.Data.HttpState;
             } else if (response.Data?.Status != null)
             {
                 Status = response.Data.Status;

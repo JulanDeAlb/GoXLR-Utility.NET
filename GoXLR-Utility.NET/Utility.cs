@@ -7,6 +7,7 @@ using System.Threading;
 using GoXLR_Utility.NET.Commands;
 using GoXLR_Utility.NET.Enums.Commands;
 using GoXLR_Utility.NET.Enums.Response.Status.Paths;
+using GoXLR_Utility.NET.Models.Response.HttpSettings;
 using GoXLR_Utility.NET.Models.Response.Status;
 using GoXLR_Utility.NET.Models.Response.Status.Config;
 using GoXLR_Utility.NET.Models.Response.Status.Files;
@@ -41,6 +42,11 @@ namespace GoXLR_Utility.NET
         /// <br/><see cref="Paths"/>
         /// </summary>
         public Status Status => _messageHandler.Status;
+
+        /// <summary>
+        /// The Daemon HttpSettings
+        /// </summary>
+        public HttpSettings HttpSettings => _messageHandler.HttpSettings;
         
         /// <summary>
         /// A List of available SerialNumbers
