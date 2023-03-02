@@ -7,12 +7,12 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames
 {
     public class PresetNames : INotifyPropertyChanged
     {
-        private string _preset1;
-        private string _preset2;
-        private string _preset3;
-        private string _preset4;
-        private string _preset5;
-        private string _preset6;
+        private string _preset1 = null!;
+        private string _preset2 = null!;
+        private string _preset3 = null!;
+        private string _preset4 = null!;
+        private string _preset5 = null!;
+        private string _preset6 = null!;
         
         [JsonPropertyName("Preset1")]
         public string Preset1
@@ -56,19 +56,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames
             set => SetField(ref _preset6, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

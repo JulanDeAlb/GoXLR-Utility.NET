@@ -9,11 +9,11 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Files
     //Path: files/...
     public class Files : INotifyPropertyChanged
     {
-        private ObservableCollection<string> _icons;
-        private ObservableCollection<string> _micProfiles;
-        private ObservableCollection<string> _presets;
-        private ObservableCollection<string> _profiles;
-        private Dictionary<string, string> _samples; //TODO Implement own ObservableDirectory
+        private ObservableCollection<string> _icons = null!;
+        private ObservableCollection<string> _micProfiles = null!;
+        private ObservableCollection<string> _presets = null!;
+        private ObservableCollection<string> _profiles = null!;
+        private Dictionary<string, string> _samples = null!; //TODO Implement own ObservableDirectory
         
         [JsonPropertyName("icons")]
         public ObservableCollection<string> Icons
@@ -50,19 +50,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Files
             set => SetField(ref _samples, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

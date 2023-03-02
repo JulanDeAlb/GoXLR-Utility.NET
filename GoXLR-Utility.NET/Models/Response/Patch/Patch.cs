@@ -1,5 +1,8 @@
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Enums.Response;
+
+// ReSharper disable UnusedAutoPropertyAccessor.Global
 
 namespace GoXLR_Utility.NET.Models.Response.Patch
 {
@@ -8,18 +11,11 @@ namespace GoXLR_Utility.NET.Models.Response.Patch
         [JsonPropertyName("op")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public OpPatchEnum Op { get; set; }
-        
-        [JsonPropertyName("path")]
-        public string Path { get; set; }
-        
-        [JsonPropertyName("value")]
-        public JsonNode Value { get; set; }
-    }
 
-    public enum OpPatchEnum
-    {
-        Add,
-        Replace,
-        Remove
+        [JsonPropertyName("path")]
+        public string Path { get; set; } = null!;
+
+        [JsonPropertyName("value")]
+        public JsonNode Value { get; set; } = null!;
     }
 }

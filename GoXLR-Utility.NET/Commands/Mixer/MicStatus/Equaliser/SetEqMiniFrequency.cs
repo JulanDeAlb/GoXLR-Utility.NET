@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.Equaliser;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.EqualiserMini;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser

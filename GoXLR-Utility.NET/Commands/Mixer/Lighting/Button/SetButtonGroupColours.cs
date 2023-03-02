@@ -10,11 +10,11 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Button
         /// </summary>
         /// <param name="buttonGroup">The Button Group to change Colour</param>
         /// <param name="colourOne">The Colour 1 (#ffffff)</param>
-        /// <param name="colourTwo">The Colour 2 (#ffffff)</param>
-        public SetButtonGroupColours(ButtonGroupsEnum buttonGroup, string colourOne, string colourTwo)
+        /// <param name="colourTwo">The Colour 2 (#ffffff) (Optional)</param>
+        public SetButtonGroupColours(ButtonGroupsEnum buttonGroup, string colourOne, string? colourTwo = null)
         {
             colourOne = colourOne.Replace("#", "");
-            colourTwo = colourTwo.Replace("#", "");
+            colourTwo = colourTwo?.Replace("#", "");
 
             Command = new Dictionary<string, object>
             {
@@ -22,7 +22,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Button
                 {
                     buttonGroup.ToString(),
                     colourOne,
-                    colourTwo
+                    colourTwo!
                 }
             };
         }

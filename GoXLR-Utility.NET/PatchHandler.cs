@@ -7,24 +7,26 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums;
+using GoXLR_Utility.NET.Enums.Response;
 using GoXLR_Utility.NET.Models;
 using GoXLR_Utility.NET.Models.Response.Patch;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample;
+using Microsoft.Extensions.Logging;
 
 namespace GoXLR_Utility.NET
 {
     public class PatchHandler
     {
         private readonly PatchCache _patchCache = new PatchCache();
-        private static JsonSerializerOptions _serializerOptions;
+        private static JsonSerializerOptions? _serializerOptions;
         
         /// <summary>
         /// Initialize the PatchHandler with Serializer Options.
         /// Does require JSON Enum Converter.
         /// </summary>
         /// <param name="serializerOptions">Serializer Options including JsonEnumConverter</param>
-        public PatchHandler(JsonSerializerOptions serializerOptions)
+        public PatchHandler(JsonSerializerOptions? serializerOptions)
         {
             _serializerOptions = serializerOptions;
         }
@@ -44,8 +46,7 @@ namespace GoXLR_Utility.NET
                 }
                 catch (Exception e)
                 {
-                    //TODO Log every exception thrown by the Patch Handler
-                    Console.WriteLine(e);
+                    Utility.Logger?.Log(LogLevel.Error, new EventId(2, "PatchHandler"), e, "Error occured while patching.");
                 }
             }
         }
@@ -56,7 +57,7 @@ namespace GoXLR_Utility.NET
         /// <param name="parentClass">The class where the Patch should be applied</param>
         /// <param name="patch">The Patch that should be applied</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        private void HandlePatch(object parentClass, Patch patch)
+        private void HandlePatch(object? parentClass, Patch patch)
         {
             //Return if parentClass hasn't been initialized after connection
             if (parentClass is null)
@@ -133,7 +134,7 @@ namespace GoXLR_Utility.NET
         {
             if (!_patchCache.TryGetValue(path, out var cacheItem))
             {
-                item = default;
+                item = default!;
                 return false;
             }
 
@@ -148,13 +149,12 @@ namespace GoXLR_Utility.NET
         /// <param name="parentClass">The parentClass</param>
         /// <param name="pathSegments">The Segments of the Path</param>
         /// <returns>Created PatchCacheItem</returns>
-        private PatchCacheItem CacheNewPatches(string fullPath, object parentClass, string[] pathSegments)
+        private PatchCacheItem CacheNewPatches(string fullPath, object? parentClass, string[] pathSegments)
         {
             var patchCacheItem = new PatchCacheItem(parentClass, pathSegments);
-            var pathAsClasses = new List<object>{ parentClass };
 
             var shouldBeCached = true;
-            var type = parentClass.GetType();
+            var type = parentClass?.GetType();
             var lastSegment = patchCacheItem.PathSegments.Last();
 
             //Traverse Properties:
@@ -171,7 +171,8 @@ namespace GoXLR_Utility.NET
                     patchCacheItem.ParentClass = type.GetProperty("Item")?.GetValue(patchCacheItem.ParentClass, new object[] { path });
                 }
                 else if (type == typeof(List<Sample>) && int.TryParse(path, out var index)
-                                                      && ((IList)patchCacheItem.ParentClass).Count >= index)
+                                                      && patchCacheItem.ParentClass != null
+                                                      && ((IList) patchCacheItem.ParentClass).Count >= index)
                 {
                     //Skip caching since the List isn't the final type to
                     //avoid using an old cache after this list has been changed
@@ -184,14 +185,12 @@ namespace GoXLR_Utility.NET
                     patchCacheItem.ParentClass = GetPropertyInfo(type, path)?.GetValue(patchCacheItem.ParentClass);
                 }
 
-                pathAsClasses.Add(patchCacheItem.ParentClass);
                 type = patchCacheItem.ParentClass?.GetType();
             }
 
             //Set value:
             patchCacheItem.PropInfo = GetPropertyInfo(type, lastSegment);
             patchCacheItem.PropType = patchCacheItem.PropInfo?.PropertyType;
-            patchCacheItem.PathAsClasses = pathAsClasses;
 
             if (shouldBeCached)
                 _patchCache.TryAdd(fullPath, patchCacheItem);
@@ -208,7 +207,7 @@ namespace GoXLR_Utility.NET
         /// <returns>A GenericTypeEnum indication what it is</returns>
         private GenericTypeEnum GetGenericType(Type propType, out Type genericType)
         {
-            genericType = default;
+            genericType = default!;
             if (!propType.IsGenericType)
                 return GenericTypeEnum.NonGeneric;
 
@@ -233,7 +232,7 @@ namespace GoXLR_Utility.NET
         /// <param name="type">Type where to search for the segment</param>
         /// <param name="pathSegment">Segment to search for</param>
         /// <returns>The found PropertyInfo</returns>
-        private PropertyInfo GetPropertyInfo(Type type, string pathSegment)
+        private PropertyInfo? GetPropertyInfo(Type? type, string pathSegment)
         {
             if (type is null)
                 return null;
@@ -261,16 +260,17 @@ namespace GoXLR_Utility.NET
         private void PatchNonGeneric(Patch patch, PatchCacheItem patchCacheItem)
         {
             //If the Deserialization throws, there could be a problem with the Models
-            object value;
+            object? value = null;
             try
             {
-                value = patch.Value.Deserialize(patchCacheItem.PropType, _serializerOptions);
+                if (patchCacheItem.PropType != null)
+                    value = patch.Value.Deserialize(patchCacheItem.PropType, _serializerOptions);
             }
             catch
             {
-                throw new JsonException($"Couldn't deserialize '{patch.Value}' to {patchCacheItem.PropType.Name} ({patch.Path}).");
+                throw new JsonException($"Couldn't deserialize '{patch.Value}' to {patchCacheItem.PropType?.Name} ({patch.Path}).");
             }
-            patchCacheItem.PropInfo.SetValue(patchCacheItem.ParentClass, value);
+            patchCacheItem.PropInfo?.SetValue(patchCacheItem.ParentClass, value);
         }
 
         /// <summary>
@@ -282,9 +282,12 @@ namespace GoXLR_Utility.NET
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void PatchGenericList(Patch patch, PatchCacheItem patchCacheItem, int lastIndex)
         {
+            if (patchCacheItem.PropInfo is null)
+                return;
+
             //Since we know the Generic Type is a List, use it to cast to IList and edit it.
-            var array = (IList)patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
-            object value;
+            var array = (IList) patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
+            object? value;
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
@@ -299,6 +302,10 @@ namespace GoXLR_Utility.NET
                     lock (array)
                     {
                         value = GetListValue(patchCacheItem.PropType, patch.Value);
+
+                        if (value is null)
+                            break;
+
                         array.Add(value);
                     }
 
@@ -308,6 +315,10 @@ namespace GoXLR_Utility.NET
                     lock (array)
                     {
                         value = GetListValue(patchCacheItem.PropType, patch.Value);
+
+                        if (value is null)
+                            break;
+
                         array[lastIndex] = value;
                     }
 
@@ -315,7 +326,7 @@ namespace GoXLR_Utility.NET
 
                 default:
                     throw new ArgumentOutOfRangeException(
-                        $"{patch.Op} not implemented for {patchCacheItem.PropType.BaseType}");
+                        $"{patch.Op} not implemented for {patchCacheItem.PropType?.BaseType}");
             }
         }
 
@@ -328,15 +339,18 @@ namespace GoXLR_Utility.NET
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         private void PatchGenericDictionary(Patch patch, PatchCacheItem patchCacheItem, string filePath)
         {
-            if (patchCacheItem.PropType.GetGenericArguments().FirstOrDefault() != typeof(string))
-                throw new ArgumentOutOfRangeException($"{patchCacheItem.PropType.Name} is a Dictionary<T, S> but T, S maybe isn't implemented");
+            if (patchCacheItem.PropType?.GetGenericArguments().FirstOrDefault() != typeof(string))
+                throw new ArgumentOutOfRangeException($"{patchCacheItem.PropType?.Name} is a Dictionary<T, S> but T, S maybe isn't implemented");
+
+            if (patchCacheItem.PropInfo is null)
+                throw new ArgumentNullException(nameof(patchCacheItem.PropInfo));
                 
             //Since we know the Generic Type is a Dictionary, use it to cast to Dictionary and edit it.
             var dictionary = (IDictionary)patchCacheItem.PropInfo.GetValue(patchCacheItem.ParentClass);
                 
             //Split the File Name from its path
             var splitPath = filePath.Split('/', '\\');
-            var value = splitPath[splitPath.Length - 1];
+            var value = splitPath[^1];
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
@@ -357,7 +371,7 @@ namespace GoXLR_Utility.NET
                     lock (dictionary)
                     {
                         dictionary[filePath] = value;
-                        Console.WriteLine("Sure im needed. Remove TODO in PatchHandler: 356");
+                        Utility.Logger?.Log(LogLevel.Debug, new EventId(0, "Please Report Issue"), "Remove TODO in PatchHandler: 356.");
                     }
                     break;
                     
@@ -374,17 +388,16 @@ namespace GoXLR_Utility.NET
         /// <returns>A bool indication if its a Device Patch or not</returns>
         /// <exception cref="ArgumentNullException"></exception>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        private bool PatchDeviceConnection(Patch patch, PatchCacheItem patchCacheItem)
+        private bool PatchDeviceConnection(Patch patch, PatchCacheItem? patchCacheItem)
         {
             //Indicates that a GoXLR has been connected or removed
-            if (!(patchCacheItem.PropType is null &&
-                  patchCacheItem.PathSegments.Length == 2 &&
-                  patchCacheItem.SerialNumber != null))
+            if (!(patchCacheItem?.PropType is null && patchCacheItem?.PathSegments.Length == 2)
+                || patchCacheItem.ParentClass is null)
                 return false;
 
             var dictionary = (IDictionary) patchCacheItem.ParentClass;
             if (dictionary is null)
-                throw new ArgumentNullException(nameof(patch), "HandleDeviceConnection | Dictionary is null");
+                throw new ArgumentNullException(nameof(PatchCacheItem), "HandleDeviceConnection | Dictionary is null");
 
             switch (patch.Op)
             {
@@ -395,7 +408,7 @@ namespace GoXLR_Utility.NET
                         dictionary.Add(patchCacheItem.SerialNumber, value);
                     }
                     break;
-                
+
                 case OpPatchEnum.Remove:
                     lock (dictionary)
                     {
@@ -417,10 +430,10 @@ namespace GoXLR_Utility.NET
         /// <param name="value">The JsonNode that should be deserialized</param>
         /// <returns>The List as object</returns>
         /// <exception cref="ArgumentNullException"></exception>
-        private object GetListValue(Type type, JsonNode value)
+        private object? GetListValue(Type? type, JsonNode value)
         {
             //To deserialize it we need the to get the base class which the List uses.
-            var genArg = type.GetGenericArguments().FirstOrDefault();
+            var genArg = type?.GetGenericArguments().FirstOrDefault();
             if (genArg is null)
                 throw new ArgumentNullException($"ElementType of {type} is null");
 
@@ -435,17 +448,17 @@ namespace GoXLR_Utility.NET
         /// <returns>True if it is a FileName</returns>
         private bool TryParseFile(IReadOnlyList<string> segments, out string fileName)
         {
-            fileName = default;
+            fileName = default!;
             
             if (segments.Count <= 1)
                 return false;
 
             //Only if the second last segments equals samples it can be a FileName
-            var isPresent = segments[segments.Count - 2];
+            var isPresent = segments[^2];
             if (!isPresent.Equals("samples"))
                 return false;
 
-            fileName = segments[segments.Count - 1];
+            fileName = segments[^1];
             return true;
         }
     }

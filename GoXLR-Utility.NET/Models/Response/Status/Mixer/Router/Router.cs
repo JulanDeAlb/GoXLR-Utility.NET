@@ -8,14 +8,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Router
     //Path: mixer/SERIAL-NUMBER/router/...
     public class Router : INotifyPropertyChanged
     {
-        private RouterBase _chat;
-        private RouterBase _console;
-        private RouterBase _game;
-        private RouterBase _lineIn;
-        private RouterBase _microphone;
-        private RouterBase _music;
-        private RouterBase _samples;
-        private RouterBase _system;
+        private RouterBase _chat = null!;
+        private RouterBase _console = null!;
+        private RouterBase _game = null!;
+        private RouterBase _lineIn = null!;
+        private RouterBase _microphone = null!;
+        private RouterBase _music = null!;
+        private RouterBase _samples = null!;
+        private RouterBase _system = null!;
         
         [JsonPropertyName("Chat")]
         public RouterBase Chat
@@ -73,19 +73,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Router
             set => SetField(ref _system, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
     
@@ -132,19 +131,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Router
             set => SetField(ref _sampler, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

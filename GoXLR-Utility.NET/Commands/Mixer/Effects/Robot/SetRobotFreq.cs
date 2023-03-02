@@ -4,7 +4,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 {
-    //TODO Value currently Random from Utility Side
+    //TODO Value currently like Random Displayed from Utility Side, need to have a look into it more
 
     public class SetRobotFreq : DeviceCommandBase
     {

@@ -9,9 +9,9 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
 {
     public class SamplerBanks : INotifyPropertyChanged
     {
-        private SamplerBankBase _samplerBankA;
-        private SamplerBankBase _samplerBankB;
-        private SamplerBankBase _samplerBankC;
+        private SamplerBankBase _samplerBankA = null!;
+        private SamplerBankBase _samplerBankB = null!;
+        private SamplerBankBase _samplerBankC = null!;
         
         [JsonPropertyName("A")]
         public SamplerBankBase SamplerBankA
@@ -34,28 +34,27 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
             set => SetField(ref _samplerBankC, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
     
     public class SamplerBankBase : INotifyPropertyChanged
     {
-        private BankBaseButton _bottomLeft;
-        private BankBaseButton _bottomRight;
-        private BankBaseButton _topLeft;
-        private BankBaseButton _topRight;
+        private BankBaseButton _bottomLeft = null!;
+        private BankBaseButton _bottomRight = null!;
+        private BankBaseButton _topLeft = null!;
+        private BankBaseButton _topRight = null!;
         
         [JsonPropertyName("BottomLeft")]
         public BankBaseButton BottomLeft
@@ -85,19 +84,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
             set => SetField(ref _topRight, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
     
@@ -106,7 +104,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
         private SamplePlaybackMode _function;
         private bool _isPlaying;
         private SamplePlayOrder _order;
-        private ObservableCollection<Sample.Sample> _samples;
+        private ObservableCollection<Sample.Sample> _samples = null!;
         
         [JsonPropertyName("function")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -138,19 +136,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
             set => SetField(ref _samples, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

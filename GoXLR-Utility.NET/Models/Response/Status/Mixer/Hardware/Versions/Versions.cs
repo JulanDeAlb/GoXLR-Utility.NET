@@ -6,11 +6,11 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Hardware.Versions
     public class Versions
     {
         [JsonPropertyName("dice")]
-        public List<int> Dice { get; set; }
-        
+        public List<int> Dice { get; set; } = null!;
+
         [JsonPropertyName("firmware")]
-        public List<int> Firmware { get; set; }
-        
+        public List<int> Firmware { get; set; } = null!;
+
         [JsonPropertyName("fpga_count")]
         public int FpgaCount { get; set; }
     }

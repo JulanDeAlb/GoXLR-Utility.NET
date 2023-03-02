@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
 

@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 

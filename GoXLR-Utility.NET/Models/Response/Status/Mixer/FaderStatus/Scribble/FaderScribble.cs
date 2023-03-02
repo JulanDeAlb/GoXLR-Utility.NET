@@ -7,10 +7,10 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble
 {
     public class FaderScribble : INotifyPropertyChanged
     {
-        private string _bottomText;
-        private string _fileName;
+        private string _bottomText = null!;
+        private string _fileName = null!;
         private bool _inverted;
-        private string _leftText;
+        private string _leftText = null!;
         
         [JsonPropertyName("bottom_text")]
         public string BottomText
@@ -40,19 +40,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble
             set => SetField(ref _leftText, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Globalization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Sampler

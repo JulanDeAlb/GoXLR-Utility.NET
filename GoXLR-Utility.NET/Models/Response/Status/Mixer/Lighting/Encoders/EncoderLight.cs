@@ -7,10 +7,10 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Encoders
 {
     public class EncoderLight : INotifyPropertyChanged
     {
-        private ThreeColour _echo;
-        private ThreeColour _gender;
-        private ThreeColour _pitch;
-        private ThreeColour _reverb;
+        private ThreeColour _echo = null!;
+        private ThreeColour _gender = null!;
+        private ThreeColour _pitch = null!;
+        private ThreeColour _reverb = null!;
         
         [JsonPropertyName("Echo")]
         public ThreeColour Echo
@@ -40,19 +40,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Encoders
             set => SetField(ref _reverb, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

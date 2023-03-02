@@ -7,12 +7,12 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple
 {
     public class SimpleLight : INotifyPropertyChanged
     {
-        private OneColour _accent;
-        private OneColour _scribble1;
-        private OneColour _scribble2;
-        private OneColour _scribble3;
-        private OneColour _scribble4;
-        private OneColour _global;
+        private OneColour _accent = null!;
+        private OneColour _scribble1 = null!;
+        private OneColour _scribble2 = null!;
+        private OneColour _scribble3 = null!;
+        private OneColour _scribble4 = null!;
+        private OneColour _global = null!;
 
         [JsonPropertyName("Accent")]
         public OneColour Accent
@@ -56,19 +56,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple
             set => SetField(ref _global, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

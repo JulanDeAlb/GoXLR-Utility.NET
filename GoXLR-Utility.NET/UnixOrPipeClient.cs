@@ -14,9 +14,9 @@ namespace GoXLR_Utility.NET
 {
     public class UnixOrPipeClient
     {
-        private readonly JsonSerializerOptions _jsonSerializerOptions;
+        private readonly JsonSerializerOptions? _jsonSerializerOptions;
 
-        public UnixOrPipeClient(JsonSerializerOptions jsonSerializerOptions)
+        public UnixOrPipeClient(JsonSerializerOptions? jsonSerializerOptions)
         {
             _jsonSerializerOptions = jsonSerializerOptions;
         }

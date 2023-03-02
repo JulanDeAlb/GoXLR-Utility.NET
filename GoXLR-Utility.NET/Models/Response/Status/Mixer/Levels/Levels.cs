@@ -11,7 +11,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
     {
         private sbyte _bleep;
         private sbyte _deEsser;
-        private Volume _volumes;
+        private Volume _volumes = null!;
         
         [JsonPropertyName("bleep")]
         public sbyte Bleep
@@ -34,19 +34,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
             set => SetField(ref _volumes, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

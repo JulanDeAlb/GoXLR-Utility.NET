@@ -7,8 +7,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser
 {
     public class Equaliser : INotifyPropertyChanged
     {
-        private Gain.Gain _gain;
-        private Frequency.Frequency _frequency;
+        private Gain.Gain _gain = null!;
+        private Frequency.Frequency _frequency = null!;
         
         [JsonPropertyName("gain")]
         public Gain.Gain Gain
@@ -24,19 +24,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Equaliser
             set => SetField(ref _frequency, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

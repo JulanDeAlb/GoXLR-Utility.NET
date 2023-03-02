@@ -1,24 +1,23 @@
 using System;
 using System.Text.Json.Serialization;
-using GoXLR_Utility.NET.Models.Response.Status.Mixer.Hardware.UsbDeveice;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Hardware
 {
     public class Hardware
     {
         [JsonPropertyName("device_type")]
-        public string DeviceType { get; set; }
+        public string DeviceType { get; set; } = null!;
         
         [JsonPropertyName("manufactured_date")]
         public DateTimeOffset ManufacturedDate { get; set; }
         
         [JsonPropertyName("serial_number")]
-        public string SerialNumber { get; set; }
+        public string SerialNumber { get; set; } = null!;
         
         [JsonPropertyName("usb_device")]
-        public UsbDevice UsbDevice { get; set; }
+        public UsbDevice.UsbDevice UsbDevice { get; set; } = null!;
         
         [JsonPropertyName("versions")]
-        public Versions.Versions Versions { get; set; }
+        public Versions.Versions Versions { get; set; } = null!;
     }
 }

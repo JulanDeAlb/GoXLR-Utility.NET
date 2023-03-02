@@ -9,10 +9,10 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
 {
     public class FaderStatus : INotifyPropertyChanged
     {
-        private FaderBase _faderA;
-        private FaderBase _faderB;
-        private FaderBase _faderC;
-        private FaderBase _faderD;
+        private FaderBase _faderA = null!;
+        private FaderBase _faderB = null!;
+        private FaderBase _faderC = null!;
+        private FaderBase _faderD = null!;
         
         [JsonPropertyName("A")]
         public FaderBase FaderA
@@ -42,19 +42,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
             set => SetField(ref _faderD, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
     
@@ -63,7 +62,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
         private ChannelName _channel;
         private MuteFunction _muteType;
         private MuteState _muteState;
-        private Scribble.FaderScribble _scribble;
+        private Scribble.FaderScribble _scribble = null!;
         
         [JsonPropertyName("channel")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -95,19 +94,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
             set => SetField(ref _scribble, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

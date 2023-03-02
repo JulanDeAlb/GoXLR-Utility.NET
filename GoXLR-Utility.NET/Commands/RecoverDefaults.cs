@@ -15,7 +15,7 @@ namespace GoXLR_Utility.NET.Commands
             {
                 ["RecoverDefaults"] = new object[]
                 {
-                    path,
+                    path.ToString(),
                 }
             };
         }

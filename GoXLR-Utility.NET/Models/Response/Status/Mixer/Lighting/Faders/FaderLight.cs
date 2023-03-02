@@ -2,17 +2,16 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
-using GoXLR_Utility.NET.Enums.Response.Status.Mixer;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
 {
     public class FaderLight : INotifyPropertyChanged
     {
-        private FaderLightBase _faderA;
-        private FaderLightBase _faderB;
-        private FaderLightBase _faderC;
-        private FaderLightBase _faderD;
+        private FaderLightBase _faderA = null!;
+        private FaderLightBase _faderB = null!;
+        private FaderLightBase _faderC = null!;
+        private FaderLightBase _faderD = null!;
         
         [JsonPropertyName("A")]
         public FaderLightBase FaderA
@@ -42,25 +41,24 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
             set => SetField(ref _faderD, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
     
     public class FaderLightBase : INotifyPropertyChanged
     {
-        private TwoColour _colour;
+        private TwoColour _colour = null!;
         private FaderDisplayStyle _style;
         
         [JsonPropertyName("colours")]
@@ -78,19 +76,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
             set => SetField(ref _style, value);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private bool SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
         {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
+            if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
-            return true;
         }
     }
 }

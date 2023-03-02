@@ -1,17 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Microsoft.Extensions.Logging;
 
 namespace GoXLR_Utility.NET.Commands
 {
     public class CommandBase
     {
-        internal List<Dictionary<string, object>> CommandList;
-        internal Dictionary<string, object> Command;
-        internal object Path;
-        internal object Object;
+        internal List<Dictionary<string, object>>? CommandList;
+        internal Dictionary<string, object>? Command;
+        internal object? Path;
+        internal object? Object;
 
-        internal List<string> GetJson(long id, string serialNumber = null)
+        internal List<string>? GetJson(long id, string? serialNumber = null)
         {
             var returnStrings = new List<string>();
 
@@ -69,13 +69,13 @@ namespace GoXLR_Utility.NET.Commands
 
         internal static int SetMinValue(string cmdName, int value)
         {
-            Console.WriteLine("{cmdName} exceeds min. Value: {minValue}", cmdName, value.ToString());
+            Utility.Logger?.Log(LogLevel.Debug, new EventId(5, "Commands"), "{cmdName} exceeds min. Value: {minValue}", cmdName, value.ToString());
             return value;
         }
 
         internal static int SetMaxValue(string cmdName, int value)
         {
-            Console.WriteLine("{cmdName} exceeds max. Value: {maxValue}", cmdName, value.ToString());
+            Utility.Logger?.Log(LogLevel.Debug, new EventId(5, "Commands"), "{cmdName} exceeds max. Value: {maxValue}", cmdName, value.ToString());
             return value;
         }
     }

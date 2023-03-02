@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
-using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Button;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Sampler;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Sampler

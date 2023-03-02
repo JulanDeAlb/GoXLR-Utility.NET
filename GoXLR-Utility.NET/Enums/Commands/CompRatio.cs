@@ -2,20 +2,20 @@ namespace GoXLR_Utility.NET.Enums.Commands
 {
     public enum CompRatio
     {
-        Ratio1_0,
-        Ratio1_1,
-        Ratio1_2,
-        Ratio1_4,
-        Ratio1_6,
-        Ratio1_8,
-        Ratio2_0,
-        Ratio2_5,
-        Ratio3_2,
-        Ratio4_0,
-        Ratio5_6,
-        Ratio8_0,
-        Ratio16_0,
-        Ratio32_0,
-        Ratio64_0
+        Ratio1To0,
+        Ratio1To1,
+        Ratio1To2,
+        Ratio1To4,
+        Ratio1To6,
+        Ratio1To8,
+        Ratio2To0,
+        Ratio2To5,
+        Ratio3To2,
+        Ratio4To0,
+        Ratio5To6,
+        Ratio8To0,
+        Ratio16To0,
+        Ratio32To0,
+        Ratio64To0
     }
 }

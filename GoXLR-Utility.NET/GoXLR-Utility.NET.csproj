@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>GoXLR_Utility.NET</RootNamespace>
-        <Nullable>disable</Nullable>
-        <LangVersion>7.3</LangVersion>
+        <Nullable>enable</Nullable>
+        <LangVersion>8</LangVersion>
         <Version>0.1.0.0</Version>
         <Authors>JulanDeAlb</Authors>
         <Title>GoXLR-Utility.NET</Title>
@@ -14,7 +14,7 @@ https://github.com/GoXLR-on-Linux</Description>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
-      <PackageReference Include="System.Text.Json" Version="7.0.1" />
+      <PackageReference Include="System.Text.Json" Version="7.0.2" />
       <PackageReference Include="WebSocketSharp" Version="1.0.3-rc11" />
     </ItemGroup>
 

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
@@ -13,22 +12,26 @@ using GoXLR_Utility.NET.Models.Response.Status.Config;
 using GoXLR_Utility.NET.Models.Response.Status.Files;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer;
 using GoXLR_Utility.NET.Models.Response.Status.Paths;
+using Microsoft.Extensions.Logging;
 using WebSocketSharp;
+using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace GoXLR_Utility.NET
 {
     public class Utility
     {
         private readonly MessageHandler _messageHandler;
-        
-        private static NamedPipeServer _namedPipeServer;
+
         private static long _id;
-        private static WebSocket _websocket;
+        private static UnixOrPipeClient? _unixOrPipeClient;
+        private static WebSocket? _websocket;
         
-        private static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
+        private static readonly JsonSerializerOptions? SerializerOptions = new JsonSerializerOptions
         {
             Converters = { new JsonStringEnumConverter() }
         };
+
+        internal static ILogger? Logger;
 
         /// <summary>
         /// The Daemon Status including:
@@ -47,10 +50,11 @@ namespace GoXLR_Utility.NET
         /// <summary>
         /// Initialize a new Utility Client.
         /// </summary>
-        public Utility()
+        public Utility(ILogger? logger = null)
         {
+            Logger = logger;
             _messageHandler = new MessageHandler(SerializerOptions);
-            _namedPipeServer = new NamedPipeServer(SerializerOptions);
+            _unixOrPipeClient = new UnixOrPipeClient(SerializerOptions);
         }
 
         /// <summary>
@@ -60,7 +64,7 @@ namespace GoXLR_Utility.NET
         /// <returns>True on success</returns>
         public bool Connect()
         {
-            var settings = _namedPipeServer.Connect();
+            var settings = _unixOrPipeClient?.Connect();
             
             if (settings == null || !settings.Enabled)
                 return false;
@@ -68,7 +72,7 @@ namespace GoXLR_Utility.NET
             InitializeWebSocket(settings.ToWebSocketString());
             
             Interlocked.Exchange(ref _id, 0);
-            _websocket.Connect();
+            _websocket?.Connect();
             return true;
         }
 
@@ -82,7 +86,7 @@ namespace GoXLR_Utility.NET
             InitializeWebSocket(url);
             
             Interlocked.Exchange(ref _id, 0);
-            _websocket.Connect();
+            _websocket?.Connect();
             return true;
         }
 
@@ -91,7 +95,7 @@ namespace GoXLR_Utility.NET
         /// </summary>
         public void Disconnect()
         {
-            _websocket.Close();
+            _websocket?.Close();
         }
         
         /// <summary>
@@ -103,6 +107,10 @@ namespace GoXLR_Utility.NET
         {
             IncrementId();
             var commands = deviceCommand.GetJson(_id, serialNumber);
+
+            if (commands is null)
+                return;
+
             foreach (var cmd in commands)
             {
                 Send(cmd);
@@ -117,6 +125,10 @@ namespace GoXLR_Utility.NET
         {
             IncrementId();
             var commands = deviceCommand.GetJson(_id);
+
+            if (commands is null)
+                return;
+
             foreach (var cmd in commands)
             {
                 Send(cmd);
@@ -130,7 +142,7 @@ namespace GoXLR_Utility.NET
         public void OpenPath(PathEnum path)
         {
             IncrementId();
-            Send(new CommandBase { Path = ((Object) path).ToString() }.GetJson(_id)[0]);
+            Send(new CommandBase { Path = path.ToString() }.GetJson(_id)![0]);
         }
 
         /// <summary>
@@ -140,7 +152,7 @@ namespace GoXLR_Utility.NET
         public void SendSimpleCommand(SimpleCommand command)
         {
             IncrementId();
-            Send(new DeviceCommandBase{ Object = ((Object) command).ToString() }.GetJson(_id)[0]);
+            Send(new DeviceCommandBase{ Object =  command.ToString() }.GetJson(_id)![0]);
         }
         
         /// <summary>
@@ -152,10 +164,7 @@ namespace GoXLR_Utility.NET
         /// <param name="parameters">The Parameters<br/>(Example: "Game", 255)</param>
         public void SendCommand(string serialNumber, string commandName, params object[] parameters)
         {
-            if (commandName is null)
-                return;
-
-            if (parameters is null || parameters.Length < 1)
+            if (parameters.Length < 1)
                 return;
 
             var commandParameters = parameters.Length == 1
@@ -187,7 +196,7 @@ namespace GoXLR_Utility.NET
         /// </summary>
         private void OnWsConnected(object sender, EventArgs eventArgs)
         {
-            Console.WriteLine("Connected"); //TODO Log or re-invoke it later
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Connected to Utility.");
             SendSimpleCommand(SimpleCommand.GetStatus);
         }
         
@@ -196,7 +205,7 @@ namespace GoXLR_Utility.NET
         /// </summary>
         private void OnWsMessage(object sender, MessageEventArgs message)
         {
-            //TODO Log or re-invoke it later as raw Message
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message from Utility received.");
             _messageHandler.HandleMessage(message.Data);
         }
 
@@ -205,7 +214,7 @@ namespace GoXLR_Utility.NET
         /// </summary>
         private static void OnWsDisconnected(object sender, CloseEventArgs closeEventArgs)
         {
-            Console.WriteLine("Disconnected"); //TODO Log or re-invoke it later
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Disconnected from Utility.");
             Console.WriteLine(closeEventArgs.Reason);
         }
 
@@ -214,7 +223,7 @@ namespace GoXLR_Utility.NET
         /// </summary>
         private static void OnWsError(object sender, ErrorEventArgs e)
         {
-            Console.WriteLine(e.Exception); //TODO Log or re-invoke it later
+            Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), e.Exception, "Error occured on the Websocket.");
         }
         
         /// <summary>
@@ -234,7 +243,9 @@ namespace GoXLR_Utility.NET
         /// <param name="message">Message</param>
         private void Send(string message)
         {
-            _websocket.Send(message);
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", message);
+            Console.WriteLine(message);
+            _websocket?.Send(message);
         }
 		
         /// <summary>
@@ -244,9 +255,6 @@ namespace GoXLR_Utility.NET
         /// <param name="command">Command as Object</param>
         private void SendCommand(string serialNumber, object command)
         {
-            if (serialNumber is null)
-                return;
-
             IncrementId();
             var finalRequest = new
             {
@@ -261,7 +269,7 @@ namespace GoXLR_Utility.NET
             };
 			
             var json = JsonSerializer.Serialize(finalRequest, SerializerOptions);
-            _websocket.Send(json);
+            _websocket?.Send(json);
         }
     }
 }
