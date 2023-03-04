@@ -169,8 +169,6 @@ namespace GoXLR_Utility.NET
 
                 if (type == typeof(Dictionary<string, Device>))
                 {
-                    patchCacheItem.SerialNumber = path;
-                    
                     //Get value of Device Dictionary with given SerialNumber
                     patchCacheItem.ParentClass = type.GetProperty("Item")?.GetValue(patchCacheItem.ParentClass, new object[] { path });
                 }

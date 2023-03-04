@@ -22,6 +22,9 @@ namespace GoXLR_Utility.NET.Models
         {
             ParentClass = parentClass;
             PathSegments = pathSegments;
+
+            if (pathSegments[0].Equals("mixers", StringComparison.OrdinalIgnoreCase))
+                SerialNumber = pathSegments[1];
         }
     }
 }
