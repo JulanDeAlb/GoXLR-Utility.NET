@@ -3,8 +3,12 @@
   "data": {
     "Patch": [
       {
+        "op": "remove",
+        "path": "/mixers/SerialNumber"
+      },
+      {
         "op": "add",
-        "path": "/mixers/S200601828CQK",
+        "path": "/mixers/SerialNumber",
         "value": {
           "hardware":{
             "versions":{

@@ -25,6 +25,7 @@ public class PatchingTest
 {
     private readonly string _statusString;
     private readonly string _patchString;
+    private readonly string _smallPatchString;
     private readonly MessageHandler _messageHandler;
 
     private readonly JsonSerializerOptions _serializerOptions = new()
@@ -46,6 +47,10 @@ public class PatchingTest
         using var stream2 = assembly.GetManifestResourceStream("GoXLR_Utility.NET.Tests.EmbeddedResources.Patch.json");
         using var reader2 = new StreamReader(stream2!);
         _patchString = reader2.ReadToEnd();
+
+        using var stream3 = assembly.GetManifestResourceStream("GoXLR_Utility.NET.Tests.EmbeddedResources.Patch.json");
+        using var reader3 = new StreamReader(stream3!);
+        _smallPatchString = reader3.ReadToEnd();
     }
 
     [Fact]
@@ -1195,5 +1200,7 @@ public class PatchingTest
         Assert.Equal("5", _messageHandler.Status.Paths.SamplesDirectory);
 
         #endregion
+
+        _messageHandler.HandleMessage(_smallPatchString);
     }
 }
