@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.Compressor
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/compressor/...
     public class Compressor : INotifyPropertyChanged
     {
         private int _attack;

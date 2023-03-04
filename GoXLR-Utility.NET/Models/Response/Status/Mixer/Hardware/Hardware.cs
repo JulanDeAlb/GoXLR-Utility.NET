@@ -3,6 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Hardware
 {
+    //Path: mixer/SERIAL-NUMBER/hardware/...
     public class Hardware
     {
         [JsonPropertyName("device_type")]

@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
 {
+    //Path: mixer/SERIAL-NUMBER/...
     public class Device : INotifyPropertyChanged
     {
         private ButtonDown.ButtonDown _buttonDown = null!;

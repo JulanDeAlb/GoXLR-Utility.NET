@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
 {
+    //Path: mixer/SERIAL-NUMBER/lighting/sampler/...
     public class SamplerLight : INotifyPropertyChanged
     {
         private SamplerLightBase _samplerA = null!;
@@ -49,11 +51,12 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
     
     public class SamplerLightBase : INotifyPropertyChanged
     {
-        private string _offStyle = null!;
+        private LightingOffStyleEnum _offStyle;
         private ThreeColour _colour = null!;
         
         [JsonPropertyName("off_style")]
-        public string OffStyle
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public LightingOffStyleEnum OffStyle
         {
             get => _offStyle;
             set => SetField(ref _offStyle, value);

@@ -6,6 +6,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects
 {
+    //Path: mixer/SERIAL-NUMBER/effects/...
     public class Effects : INotifyPropertyChanged
     {
         private EffectBankPresets _activePreset;

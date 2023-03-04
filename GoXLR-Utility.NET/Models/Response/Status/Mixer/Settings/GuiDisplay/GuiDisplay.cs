@@ -6,6 +6,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Settings.Display;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings.GuiDisplay
 {
+    //Path: mixer/SERIAL-NUMBER/settings/display/...
     public class GuiDisplay : INotifyPropertyChanged
     {
         private DisplayModeEnum _compressor;

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -44,6 +45,18 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
             OnPropertyChanged(propertyName);
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj.GetType() != typeof(Sample))
+                return false;
+
+            var sample = (Sample)obj;
+
+            return _name == sample._name
+                   && _startPct.Equals(sample._startPct)
+                   && _stopPct.Equals(sample._stopPct);
         }
     }
 }

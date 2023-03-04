@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler
 {
+    //Path: mixer/SERIAL-NUMBER/sampler/...
     public class Sampler : INotifyPropertyChanged
     {
         private Banks.SamplerBanks _samplerBanks = null!;

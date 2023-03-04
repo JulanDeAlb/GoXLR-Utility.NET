@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings
 {
+    //Path: mixer/SERIAL-NUMBER/settings/...
     public class Settings : INotifyPropertyChanged
     {
         private GuiDisplay.GuiDisplay _display = null!;

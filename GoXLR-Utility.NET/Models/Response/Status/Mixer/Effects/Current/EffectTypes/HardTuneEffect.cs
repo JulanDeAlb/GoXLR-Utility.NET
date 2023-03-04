@@ -6,6 +6,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.HardTune;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes
 {
+    //Path: mixer/SERIAL-NUMBER/effects/preset_names/current/hard_tune/...
     public class HardTuneEffect : INotifyPropertyChanged
     {
         private int _amount;

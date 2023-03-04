@@ -6,6 +6,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/...
     public class MicStatus : INotifyPropertyChanged
     {
         private Compressor.Compressor _compressor = null!;

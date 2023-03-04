@@ -11,16 +11,28 @@ namespace GoXLR_Utility.NET
     {
         private static PatchHandler? _patchHandler;
         private static JsonSerializerOptions? _serializerOptions;
+        private static ILogger? _logger;
         
         public Status Status = null!;
         public HttpSettings HttpSettings = null!;
 
-        public MessageHandler(JsonSerializerOptions? serializerOptions)
+        /// <summary>
+        /// Initialize the MessageHandler with Serializer Options.
+        /// Does require JSON Enum Converter.
+        /// </summary>
+        /// <param name="serializerOptions">Serializer Options including JsonEnumConverter</param>
+        /// <param name="logger">Optional Logger primary for Tests.</param>
+        public MessageHandler(JsonSerializerOptions? serializerOptions, ILogger? logger = null)
         {
-            _patchHandler = new PatchHandler(serializerOptions);
+            _logger = logger ?? Utility.Logger;
+            _patchHandler = new PatchHandler(serializerOptions, logger);
             _serializerOptions = serializerOptions;
         }
 
+        /// <summary>
+        /// Handle new Messages coming from the Daemon
+        /// </summary>
+        /// <param name="message">Message to handle.</param>
         public void HandleMessage(string message)
         {
             Response? response;
@@ -30,23 +42,23 @@ namespace GoXLR_Utility.NET
             }
             catch (Exception e)
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(3, "MessageHandler"), e, "Unable to deserialize Message.");
+                _logger?.Log(LogLevel.Error, new EventId(3, "MessageHandler"), e, "Unable to deserialize Message.");
                 return;
             }
 
             if (response is null)
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(3, "MessageHandler"), "Deserialized JSON is null.");
+                _logger?.Log(LogLevel.Error, new EventId(3, "MessageHandler"), "Deserialized JSON is null.");
                 return;
             }
 
             if (response.SimpleData != null)
             {
-                //TODO Simple Data
+                //Simple Data is just OK, maybe an Event after X seconds when id doesnt come back.
             }
             else if (response.Data?.Error != null)
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(4, "Daemon Error"), "Received Error from Daemon: {error}", response.Data.Error);
+                _logger?.Log(LogLevel.Error, new EventId(4, "Daemon Error"), "Received Error from Daemon: {error}", response.Data.Error);
             } else if (response.Data?.HttpState != null)
             {
                 HttpSettings = response.Data.HttpState;

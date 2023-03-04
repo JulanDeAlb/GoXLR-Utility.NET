@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Gain
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/equaliser_mini/gain/...
     public class GainMini : INotifyPropertyChanged
     {
         private int _equalizer90Hz;

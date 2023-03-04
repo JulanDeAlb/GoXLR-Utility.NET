@@ -7,6 +7,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks
 {
+    //Path: mixer/SERIAL-NUMBER/sampler/banks/...
     public class SamplerBanks : INotifyPropertyChanged
     {
         private SamplerBankBase _samplerBankA = null!;

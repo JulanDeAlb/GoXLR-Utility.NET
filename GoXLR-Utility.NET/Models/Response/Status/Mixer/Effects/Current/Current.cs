@@ -6,6 +6,7 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current.EffectTypes
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.Current
 {
+    //Path: mixer/SERIAL-NUMBER/effects/preset_names/current/...
     public class Current : INotifyPropertyChanged
     {
         private EchoEffect _echo = null!;

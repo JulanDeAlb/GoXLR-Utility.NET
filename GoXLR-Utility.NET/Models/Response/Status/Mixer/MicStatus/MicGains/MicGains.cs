@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.MicGains
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/mic_gains/...
     public class MicGains : INotifyPropertyChanged
     {
         private int _condenser;

@@ -6,6 +6,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders
 {
+    //Path: mixer/SERIAL-NUMBER/lighting/faders/...
     public class FaderLight : INotifyPropertyChanged
     {
         private FaderLightBase _faderA = null!;

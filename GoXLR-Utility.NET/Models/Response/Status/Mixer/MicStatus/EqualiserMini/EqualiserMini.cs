@@ -7,6 +7,7 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Gai
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/equaliser_mini/...
     public class EqualiserMini : INotifyPropertyChanged
     {
         private GainMini _gain = null!;

@@ -7,6 +7,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
 {
+    //Path: mixer/SERIAL-NUMBER/fader_status/...
     public class FaderStatus : INotifyPropertyChanged
     {
         private FaderBase _faderA = null!;
@@ -56,7 +57,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus
             OnPropertyChanged(propertyName);
         }
     }
-    
+
+    //Path: mixer/SERIAL-NUMBER/fader_status/A,B,C,D/...
     public class FaderBase : INotifyPropertyChanged
     {
         private ChannelName _channel;

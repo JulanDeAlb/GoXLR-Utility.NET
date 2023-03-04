@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.NoiseGate
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/noise_gate/...
     public class NoiseGate : INotifyPropertyChanged
     {
         private int _attack;

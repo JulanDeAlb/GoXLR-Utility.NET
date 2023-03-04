@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
 {
+    //Path: mixer/SERIAL-NUMBER/lighting/buttons/...
     public class ButtonLight : INotifyPropertyChanged
     {
         private ButtonLightBase _bleep = null!;
@@ -154,7 +156,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
     public class ButtonLightBase : INotifyPropertyChanged
     {
         private TwoColour _colour = null!;
-        private string _offStyle = null!;
+        private LightingOffStyleEnum _offStyle;
         
         [JsonPropertyName("colours")]
         public TwoColour Colour
@@ -164,7 +166,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
         }
         
         [JsonPropertyName("off_style")]
-        public string OffStyle
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public LightingOffStyleEnum OffStyle
         {
             get => _offStyle;
             set => SetField(ref _offStyle, value);

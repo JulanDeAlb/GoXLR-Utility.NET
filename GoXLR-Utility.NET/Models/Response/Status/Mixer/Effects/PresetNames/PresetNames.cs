@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects.PresetNames
 {
+    //Path: mixer/SERIAL-NUMBER/effects/preset_names/...
     public class PresetNames : INotifyPropertyChanged
     {
         private string _preset1 = null!;

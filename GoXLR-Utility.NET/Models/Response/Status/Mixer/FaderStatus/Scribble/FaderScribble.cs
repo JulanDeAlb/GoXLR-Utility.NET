@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.FaderStatus.Scribble
 {
+    //Path: mixer/SERIAL-NUMBER/fader_status/A,B,C,D/scribble/...
     public class FaderScribble : INotifyPropertyChanged
     {
         private string _bottomText = null!;

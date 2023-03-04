@@ -56,7 +56,12 @@ public static class Program
         Utility.Status.Mixers[serialNumber].Effects.Current.Megaphone.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
         Utility.Status.Mixers[serialNumber].Effects.Current.Pitch.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
         Utility.Status.Mixers[serialNumber].Effects.Current.Robot.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
+        #region Effects.Current.Echo
+
+        Utility.Status.Mixers[serialNumber].Effects.Current.Echo.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
 
         #region Effects.Current.Gender
 

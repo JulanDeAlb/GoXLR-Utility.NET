@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Encoders
 {
+    //Path: mixer/SERIAL-NUMBER/lighting/encoders/...
     public class EncoderLight : INotifyPropertyChanged
     {
         private ThreeColour _echo = null!;

@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus.EqualiserMini.Frequency
 {
+    //Path: mixer/SERIAL-NUMBER/mic_status/equaliser_mini/frequency...
     public class FrequencyMini : INotifyPropertyChanged
     {
         private double _equalizer90Hz;

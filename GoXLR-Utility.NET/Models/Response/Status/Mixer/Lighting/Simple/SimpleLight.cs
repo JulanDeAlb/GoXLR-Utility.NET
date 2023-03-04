@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple
 {
+    //Path: mixer/SERIAL-NUMBER/lighting/simple/...
     public class SimpleLight : INotifyPropertyChanged
     {
         private OneColour _accent = null!;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
@@ -20,14 +21,17 @@ namespace GoXLR_Utility.NET
     {
         private readonly PatchCache _patchCache = new PatchCache();
         private static JsonSerializerOptions? _serializerOptions;
-        
+        private static ILogger? _logger;
+
         /// <summary>
         /// Initialize the PatchHandler with Serializer Options.
         /// Does require JSON Enum Converter.
         /// </summary>
         /// <param name="serializerOptions">Serializer Options including JsonEnumConverter</param>
-        public PatchHandler(JsonSerializerOptions? serializerOptions)
+        /// <param name="logger">Optional Logger primary for Tests.</param>
+        public PatchHandler(JsonSerializerOptions? serializerOptions, ILogger? logger = null)
         {
+            _logger = logger ?? Utility.Logger;
             _serializerOptions = serializerOptions;
         }
         
@@ -46,7 +50,7 @@ namespace GoXLR_Utility.NET
                 }
                 catch (Exception e)
                 {
-                    Utility.Logger?.Log(LogLevel.Error, new EventId(2, "PatchHandler"), e, "Error occured while patching.");
+                    _logger?.Log(LogLevel.Error, new EventId(2, "PatchHandler"), e, "Error occured while patching.");
                 }
             }
         }
@@ -170,7 +174,7 @@ namespace GoXLR_Utility.NET
                     //Get value of Device Dictionary with given SerialNumber
                     patchCacheItem.ParentClass = type.GetProperty("Item")?.GetValue(patchCacheItem.ParentClass, new object[] { path });
                 }
-                else if (type == typeof(List<Sample>) && int.TryParse(path, out var index)
+                else if (type == typeof(ObservableCollection<Sample>) && int.TryParse(path, out var index)
                                                       && patchCacheItem.ParentClass != null
                                                       && ((IList) patchCacheItem.ParentClass).Count >= index)
                 {
@@ -212,7 +216,7 @@ namespace GoXLR_Utility.NET
                 return GenericTypeEnum.NonGeneric;
 
             genericType = propType.GetGenericTypeDefinition();
-            if (genericType == typeof(List<>))
+            if (genericType == typeof(ObservableCollection<>))
             {
                 return GenericTypeEnum.List;
             }
@@ -371,7 +375,7 @@ namespace GoXLR_Utility.NET
                     lock (dictionary)
                     {
                         dictionary[filePath] = value;
-                        Utility.Logger?.Log(LogLevel.Debug, new EventId(0, "Please Report Issue"), "Remove TODO in PatchHandler: 356.");
+                        _logger?.Log(LogLevel.Debug, new EventId(0, "Please Report Issue"), "Remove TODO in PatchHandler: 356.");
                     }
                     break;
                     

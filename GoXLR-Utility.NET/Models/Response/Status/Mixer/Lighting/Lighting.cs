@@ -10,6 +10,7 @@ using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Simple;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
 {
+    //Path: mixer/SERIAL-NUMBER/lighting/...
     public class Lighting : INotifyPropertyChanged
     {
         private ButtonLight _button = null!;
