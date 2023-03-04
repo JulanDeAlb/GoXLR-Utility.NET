@@ -221,7 +221,6 @@ namespace GoXLR_Utility.NET
         private static void OnWsDisconnected(object sender, CloseEventArgs closeEventArgs)
         {
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Disconnected from Utility.");
-            Console.WriteLine(closeEventArgs.Reason);
         }
 
         /// <summary>

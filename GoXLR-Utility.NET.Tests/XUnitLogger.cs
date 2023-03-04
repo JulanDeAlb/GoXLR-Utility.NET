@@ -22,7 +22,7 @@ public class XUnitLogger : ILogger
         throw new NotImplementedException();
     }
 
-    public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+    public IDisposable BeginScope<TState>(TState state) where TState : notnull
     {
         throw new NotImplementedException();
     }

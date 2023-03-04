@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+// ReSharper disable NonReadonlyMemberInGetHashCode
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
 {
@@ -57,6 +58,16 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
             return _name == sample._name
                    && _startPct.Equals(sample._startPct)
                    && _stopPct.Equals(sample._stopPct);
+        }
+
+        protected bool Equals(Sample other)
+        {
+            return _name == other._name && _startPct.Equals(other._startPct) && _stopPct.Equals(other._stopPct);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_name, _startPct, _stopPct);
         }
     }
 }
