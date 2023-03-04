@@ -10,7 +10,7 @@
 
         <OutputType>Library</OutputType>
 
-        <LangVersion>11</LangVersion>
+        <LangVersion>latestmajor</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
@@ -27,7 +27,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <EmbeddedResource Include="EmbeddedResources\SmallPatch.json" />
       <EmbeddedResource Include="EmbeddedResources\Status.json" />
+      <None Remove="EmbeddedResources\Patch.json" />
+      <EmbeddedResource Include="EmbeddedResources\Patch.json" />
     </ItemGroup>
 
     <ItemGroup>
