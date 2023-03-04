@@ -1,0 +1,12 @@
+{
+  "id": 0,
+  "data": {
+    "Patch": [
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/effects/current/pitch/amount",
+        "value": 11
+      }
+    ]
+  }
+}
