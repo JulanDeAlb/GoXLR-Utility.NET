@@ -1,0 +1,6 @@
+0 - Please Report
+1 - Daemon connectivity
+2 - Patch Handler
+3 - Message Handler
+4 - Daemon Error
+5 - Commands

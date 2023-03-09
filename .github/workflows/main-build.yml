@@ -1,0 +1,37 @@
+name: Build, Test & Release [Main]
+
+on:
+  push:
+    branches: [main]
+
+env:
+  release_nuget: ${{ contains(toJSON(github.event.commits.*.message), '[nuget]') }}
+
+jobs:
+  release-nuget:
+    if: ${{ !contains(toJSON(github.event.commits.*.message), '[skip-ci]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: 6.0.x
+      - uses: actions/cache@v3.2.6
+        with:
+          path: ~/.nuget/packages
+          key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nuget
+      - name: Restore dependency's
+        run: dotnet restore
+      - name: Build GoXLR-Utility.NET
+        run: dotnet build
+      - name: Test GoXLR-Utility.NET
+        run: dotnet test --no-build
+      - if: ${{ env.release_nuget == 'true' }}
+        name: Pack Release
+        run: dotnet pack GoXLR-Utility.NET.sln -c Release --output nugets --no-build --include-symbols
+      - if: ${{ env.release_nuget == 'true' }}
+        name: Push to Nuget
+        run: dotnet nuget push "./nugets/*.nupkg" -k ${{ secrets.API_NUGET_TOKEN }} -src https://api.nuget.org/v3/index.json --skip-duplicate

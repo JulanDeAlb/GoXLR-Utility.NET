@@ -5,11 +5,21 @@
         <RootNamespace>GoXLR_Utility.NET</RootNamespace>
         <Nullable>enable</Nullable>
         <LangVersion>8</LangVersion>
-        <Version>0.1.0.0</Version>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <Version>0.1.0</Version>
         <Authors>JulanDeAlb</Authors>
         <Title>GoXLR-Utility.NET</Title>
         <Description>A Wrapper arount the GoXLR-Utility from 
 https://github.com/GoXLR-on-Linux</Description>
+        <RepositoryUrl>https://github.com/julandealb/goxlr-utility.net</RepositoryUrl>
+        <PackageTags>GoXLR-Utility GoXLR</PackageTags>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+        <AssemblyVersion>0.1.0</AssemblyVersion>
+        <FileVersion>0.1.0</FileVersion>
+        <NeutralLanguage>en</NeutralLanguage>
+        <Copyright />
     </PropertyGroup>
 
     <ItemGroup>

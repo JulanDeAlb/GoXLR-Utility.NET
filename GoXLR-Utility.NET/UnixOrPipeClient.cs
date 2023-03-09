@@ -28,6 +28,7 @@ namespace GoXLR_Utility.NET
 
         private HttpSettings? ConnectUnix()
         {
+            Utility.Logger?.Log(LogLevel.Information, new EventId(0, "Please Report"), "I dont know if {methode} works", nameof(ConnectUnix));
             var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
 
             try
@@ -36,7 +37,7 @@ namespace GoXLR_Utility.NET
             }
             catch
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe.");
+                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe using Unix.");
                 return null;
             }
 
@@ -89,7 +90,7 @@ namespace GoXLR_Utility.NET
             }
             catch
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe.");
+                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe using Pipe.");
                 return null;
             }
 

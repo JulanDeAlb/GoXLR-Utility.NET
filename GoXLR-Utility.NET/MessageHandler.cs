@@ -42,13 +42,13 @@ namespace GoXLR_Utility.NET
             }
             catch (Exception e)
             {
-                _logger?.Log(LogLevel.Error, new EventId(3, "MessageHandler"), e, "Unable to deserialize Message.");
+                _logger?.Log(LogLevel.Error, new EventId(3, "Message Handler"), e, "Unable to deserialize Message.");
                 return;
             }
 
             if (response is null)
             {
-                _logger?.Log(LogLevel.Error, new EventId(3, "MessageHandler"), "Deserialized JSON is null.");
+                _logger?.Log(LogLevel.Error, new EventId(3, "Message Handler"), "Deserialized JSON is null.");
                 return;
             }
 

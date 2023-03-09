@@ -50,7 +50,7 @@ namespace GoXLR_Utility.NET
                 }
                 catch (Exception e)
                 {
-                    _logger?.Log(LogLevel.Error, new EventId(2, "PatchHandler"), e, "Error occured while patching.");
+                    _logger?.Log(LogLevel.Error, new EventId(2, "Patch Handler"), e, "Error occured while patching.");
                 }
             }
         }
@@ -373,7 +373,7 @@ namespace GoXLR_Utility.NET
                     lock (dictionary)
                     {
                         dictionary[filePath] = value;
-                        _logger?.Log(LogLevel.Debug, new EventId(0, "Please Report Issue"), "Remove TODO in PatchHandler: 356.");
+                        _logger?.Log(LogLevel.Debug, new EventId(0, "Please Report"), "Remove TODO in PatchHandler: 356.");
                     }
                     break;
                     
