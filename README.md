@@ -1,5 +1,5 @@
 # GoXLR-Utility.NET
-A .NET Standard 2.1 Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.9  
+A .NET Standard 2.1 Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.9
 
 This project is work and progress.
 
@@ -7,8 +7,10 @@ If you are on a Linux machine and the Connect() does not work, please use: Conne
 
 **If you encounter any issues, feel free to report it.**
 
-# 3rd Party Licenses
-[GoXLR-Utility.NET](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE)  
+# Licenses
+[GoXLR-Utility.NET](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE)
+
+### 3rd Party
 [Music Tribe](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-MUSIC-TRIBE)  
 [GoXLR-Utility](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-GOXLR-UTILITY)
 
@@ -23,7 +25,7 @@ Ping,
 OpenUi,  
 GetStatus,  
 StopDaemon,  
-GetHttpState  
+GetHttpState
 
 **Example: SendSimpleCommand(SimpleCommand.Ping)**
 
@@ -93,12 +95,12 @@ SetElementDisplayMode(DisplayComponent, DisplayMode)
 SetFaderDisplayStyle(FaderName, FaderDisplayStyle),  
 SetFaderColours(FaderName, String, String),  
 SetAllFaderColours(String, String),  
-SetAllFaderDisplayStyle(FaderDisplayStyle),  
+SetAllFaderDisplayStyle(FaderDisplayStyle),
 
 SetButtonColours(ButtonLight, String, String),  
 SetButtonOffStyle(ButtonLight, LightingOffStyle),  
 SetButtonGroupColours(ButtonGroups, String, String),  
-SetButtonGroupOffStyle(ButtonGroups, LightingOffStyle),  
+SetButtonGroupOffStyle(ButtonGroups, LightingOffStyle),
 
 SetSimpleColour(SimpleLighting, String),  
 SetEncoderColour(EncoderEnum, String, String, String),  
@@ -108,7 +110,7 @@ SetSampleOffStyle(SamplerEnum, LightingOffStyle),
 **Effects**  
 LoadEffectPreset(String),  
 RenameActivePreset(String),  
-SaveActivePreset(),  
+SaveActivePreset(),
 
 SetReverbStyle(ReverbStyle),  
 SetReverbAmount(int),  
@@ -121,7 +123,7 @@ SetReverbHighColour(int),
 SetReverbHighFactor(int),  
 SetReverbDiffuse(int),  
 SetReverbModSpeed(int),  
-SetReverbModDepth(int),  
+SetReverbModDepth(int),
 
 SetEchoStyle(EchoStyle),  
 SetEchoAmount(int),  
@@ -132,18 +134,18 @@ SetEchoDelayRight(int),
 SetEchoFeedbackLeft(int),  
 SetEchoFeedbackRight(int),  
 SetEchoFeedbackXFBLtoR(int),  
-SetEchoFeedbackXFBRtoL(int),  
+SetEchoFeedbackXFBRtoL(int),
 
 SetPitchStyle(PitchStyle),  
 SetPitchAmount(int),  
-SetPitchCharacter(int),  
+SetPitchCharacter(int),
 
 SetGenderStyle(GenderStyle),  
-SetGenderAmount(int),  
+SetGenderAmount(int),
 
 SetMegaphoneStyle(MegaphoneStyle),  
 SetMegaphoneAmount(int),  
-SetMegaphonePostGain(int),  
+SetMegaphonePostGain(int),
 
 SetRobotStyle(RobotStyle),  
 SetRobotGain(RobotRange, int),  
@@ -152,7 +154,7 @@ SetRobotWidth(RobotRange, int),
 SetRobotWaveform(int),  
 SetRobotPulseWidth(int),  
 SetRobotThreshold(int),  
-SetRobotDryMix(int),  
+SetRobotDryMix(int),
 
 SetHardTuneStyle(HardTuneStyle),  
 SetHardTuneAmount(int),  
@@ -176,7 +178,7 @@ DeleteMicProfile(String)
 
 **General Settings**  
 SetMuteHoldDuration(int),  
-SetVCMuteAlsoMuteCM(bool)  
+SetVCMuteAlsoMuteCM(bool)
 
 **These control the current GoXLR 'State'**  
 SetActiveEffectPreset(EffectBankPresets),  
