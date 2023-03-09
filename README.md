@@ -1,5 +1,5 @@
 # GoXLR-Utility.NET
-A .NET Standard 2.1 Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.9<br/>
+A .NET Standard 2.1 Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.9  
 
 This project is work and progress.
 
@@ -8,7 +8,8 @@ If you are on a Linux machine and the Connect() does not work, please use: Conne
 **If you encounter any issues, feel free to report it.**
 
 # 3rd Party Licenses
-[Music Tribe](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-MUSIC-TRIBE)<br/>
+[GoXLR-Utility.NET](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE)  
+[Music Tribe](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-MUSIC-TRIBE)  
 [GoXLR-Utility](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-GOXLR-UTILITY)
 
 # Disclaimer
@@ -18,171 +19,171 @@ please refer to their website.
 # Simple Commands
 #### The following Commands can be send via ***SendSimpleCommand(...)***:
 
-Ping,<br/>
-OpenUi,<br/>
-GetStatus,<br/>
-StopDaemon,<br/>
-GetHttpState<br/>
+Ping,  
+OpenUi,  
+GetStatus,  
+StopDaemon,  
+GetHttpState  
 
 **Example: SendSimpleCommand(SimpleCommand.Ping)**
 
 # Commands without SerialNumber
 #### The following Commands can be send via ***SendCommand(new ...)***:
 
-OpenPath(PathTypes),<br/>
-SetShowTrayIcon(bool),<br/>
-SetAutoStartEnabled(bool),<br/>
+OpenPath(PathTypes),  
+SetShowTrayIcon(bool),  
+SetAutoStartEnabled(bool),  
 RecoverDefaults(PathTypes)
 
 # Commands with SerialNumber
 #### The following Commands can be send via ***SendCommand(SerialNumber, new ...)***:
 
-**Fader**<br/>
-SetFader(FaderName, ChannelName),<br/>
+**Fader**  
+SetFader(FaderName, ChannelName),  
 SetFaderMuteFunction(FaderName, MuteFunction)
 
-**Scribble**<br/>
-SetScribbleIcon(FaderName, String),<br/>
-SetScribbleText(FaderName, String),<br/>
-SetScribbleNumber(FaderName, String),<br/>
+**Scribble**  
+SetScribbleIcon(FaderName, String),  
+SetScribbleText(FaderName, String),  
+SetScribbleNumber(FaderName, String),  
 SetScribbleInvert(FaderName, bool)
 
-**Levels**<br/>
-SetDeeser(int),<br/>
+**Levels**  
+SetDeeser(int),  
 SetSwearButtonVolume(int)
 
-**Volumes**<br/>
+**Volumes**  
 SetVolume(ChannelName, int)
 
-**Router**<br/>
+**Router**  
 SetRouter(InputDevice, OutputDevice, bool)
 
-**Cough Button**<br/>
-SetCoughMuteFunction(MuteFunction),<br/>
+**Cough Button**  
+SetCoughMuteFunction(MuteFunction),  
 SetCoughIsHold(bool)
 
-**Mic Settings**<br/>
-SetMicrophoneType(MicrophoneType),<br/>
+**Mic Settings**  
+SetMicrophoneType(MicrophoneType),  
 SetMicrophoneGain(MicrophoneType, int)
 
-**EQ Settings**<br/>
-SetEqMiniGain(MiniEqFrequencies, int),<br/>
-SetEqMiniFreq(MiniEqFrequencies, int),<br/>
-SetEqGain(EqFrequencies, int),<br/>
+**EQ Settings**  
+SetEqMiniGain(MiniEqFrequencies, int),  
+SetEqMiniFreq(MiniEqFrequencies, int),  
+SetEqGain(EqFrequencies, int),  
 SetEqFreq(EqFrequencies, int)
 
-**Gate Settings**<br/>
-SetGateThreshold(int),<br/>
-SetGateAttenuation(int),<br/>
-SetGateAttack(GateTimes),<br/>
-SetGateRelease(GateTimes),<br/>
+**Gate Settings**  
+SetGateThreshold(int),  
+SetGateAttenuation(int),  
+SetGateAttack(GateTimes),  
+SetGateRelease(GateTimes),  
 SetGateActive(bool)
 
-**Compressor**<br/>
-SetCompressorThreshold(int),<br/>
-SetCompressorRatio(CompressorRatio),<br/>
-SetCompressorAttack(CompressorAttackTime),<br/>
-SetCompressorReleaseTime(CompressorReleaseTime),<br/>
+**Compressor**  
+SetCompressorThreshold(int),  
+SetCompressorRatio(CompressorRatio),  
+SetCompressorAttack(CompressorAttackTime),  
+SetCompressorReleaseTime(CompressorReleaseTime),  
 SetCompressorMakeupGain(int)
 
-**Display Mode (Mic)**<br/>
+**Display Mode (Mic)**  
 SetElementDisplayMode(DisplayComponent, DisplayMode)
 
-**Colours**<br/>
-SetFaderDisplayStyle(FaderName, FaderDisplayStyle),<br/>
-SetFaderColours(FaderName, String, String),<br/>
-SetAllFaderColours(String, String),<br/>
-SetAllFaderDisplayStyle(FaderDisplayStyle),<br/>
+**Colours**  
+SetFaderDisplayStyle(FaderName, FaderDisplayStyle),  
+SetFaderColours(FaderName, String, String),  
+SetAllFaderColours(String, String),  
+SetAllFaderDisplayStyle(FaderDisplayStyle),  
 
-SetButtonColours(ButtonLight, String, String),<br/>
-SetButtonOffStyle(ButtonLight, LightingOffStyle),<br/>
-SetButtonGroupColours(ButtonGroups, String, String),<br/>
-SetButtonGroupOffStyle(ButtonGroups, LightingOffStyle),<br/>
+SetButtonColours(ButtonLight, String, String),  
+SetButtonOffStyle(ButtonLight, LightingOffStyle),  
+SetButtonGroupColours(ButtonGroups, String, String),  
+SetButtonGroupOffStyle(ButtonGroups, LightingOffStyle),  
 
-SetSimpleColour(SimpleLighting, String),<br/>
-SetEncoderColour(EncoderEnum, String, String, String),<br/>
-SetSampleColour(SamplerEnum, String, String, String),<br/>
+SetSimpleColour(SimpleLighting, String),  
+SetEncoderColour(EncoderEnum, String, String, String),  
+SetSampleColour(SamplerEnum, String, String, String),  
 SetSampleOffStyle(SamplerEnum, LightingOffStyle),
 
-**Effects**<br/>
-LoadEffectPreset(String),<br/>
-RenameActivePreset(String),<br/>
-SaveActivePreset(),<br/>
+**Effects**  
+LoadEffectPreset(String),  
+RenameActivePreset(String),  
+SaveActivePreset(),  
 
-SetReverbStyle(ReverbStyle),<br/>
-SetReverbAmount(int),<br/>
-SetReverbDecay(int),<br/>
-SetReverbEarlyLevel(int),<br/>
-SetReverbTailLevel(int),<br/>
-SetReverbPreDelay(int),<br/>
-SetReverbLowColour(int),<br/>
-SetReverbHighColour(int),<br/>
-SetReverbHighFactor(int),<br/>
-SetReverbDiffuse(int),<br/>
-SetReverbModSpeed(int),<br/>
-SetReverbModDepth(int),<br/>
+SetReverbStyle(ReverbStyle),  
+SetReverbAmount(int),  
+SetReverbDecay(int),  
+SetReverbEarlyLevel(int),  
+SetReverbTailLevel(int),  
+SetReverbPreDelay(int),  
+SetReverbLowColour(int),  
+SetReverbHighColour(int),  
+SetReverbHighFactor(int),  
+SetReverbDiffuse(int),  
+SetReverbModSpeed(int),  
+SetReverbModDepth(int),  
 
-SetEchoStyle(EchoStyle),<br/>
-SetEchoAmount(int),<br/>
-SetEchoFeedback(int),<br/>
-SetEchoTempo(int),<br/>
-SetEchoDelayLeft(int),<br/>
-SetEchoDelayRight(int),<br/>
-SetEchoFeedbackLeft(int),<br/>
-SetEchoFeedbackRight(int),<br/>
-SetEchoFeedbackXFBLtoR(int),<br/>
-SetEchoFeedbackXFBRtoL(int),<br/>
+SetEchoStyle(EchoStyle),  
+SetEchoAmount(int),  
+SetEchoFeedback(int),  
+SetEchoTempo(int),  
+SetEchoDelayLeft(int),  
+SetEchoDelayRight(int),  
+SetEchoFeedbackLeft(int),  
+SetEchoFeedbackRight(int),  
+SetEchoFeedbackXFBLtoR(int),  
+SetEchoFeedbackXFBRtoL(int),  
 
-SetPitchStyle(PitchStyle),<br/>
-SetPitchAmount(int),<br/>
-SetPitchCharacter(int),<br/>
+SetPitchStyle(PitchStyle),  
+SetPitchAmount(int),  
+SetPitchCharacter(int),  
 
-SetGenderStyle(GenderStyle),<br/>
-SetGenderAmount(int),<br/>
+SetGenderStyle(GenderStyle),  
+SetGenderAmount(int),  
 
-SetMegaphoneStyle(MegaphoneStyle),<br/>
-SetMegaphoneAmount(int),<br/>
-SetMegaphonePostGain(int),<br/>
+SetMegaphoneStyle(MegaphoneStyle),  
+SetMegaphoneAmount(int),  
+SetMegaphonePostGain(int),  
 
-SetRobotStyle(RobotStyle),<br/>
-SetRobotGain(RobotRange, int),<br/>
-SetRobotFreq(RobotRange, int),<br/> (Needs check)
-SetRobotWidth(RobotRange, int),<br/>
-SetRobotWaveform(int),<br/>
-SetRobotPulseWidth(int),<br/>
-SetRobotThreshold(int),<br/>
-SetRobotDryMix(int),<br/>
+SetRobotStyle(RobotStyle),  
+SetRobotGain(RobotRange, int),  
+SetRobotFreq(RobotRange, int),   (Needs check)
+SetRobotWidth(RobotRange, int),  
+SetRobotWaveform(int),  
+SetRobotPulseWidth(int),  
+SetRobotThreshold(int),  
+SetRobotDryMix(int),  
 
-SetHardTuneStyle(HardTuneStyle),<br/>
-SetHardTuneAmount(int),<br/>
-SetHardTuneRate(int),<br/>
-SetHardTuneWindow(int),<br/>
+SetHardTuneStyle(HardTuneStyle),  
+SetHardTuneAmount(int),  
+SetHardTuneRate(int),  
+SetHardTuneWindow(int),  
 SetHardTuneSource(HardTuneSource)
 
-**Profile**<br/>
-NewProfile(String),<br/>
-LoadProfile(String),<br/>
-LoadProfileColours(String),<br/>
-SaveProfile(),<br/>
-SaveProfileAs(String),<br/>
+**Profile**  
+NewProfile(String),  
+LoadProfile(String),  
+LoadProfileColours(String),  
+SaveProfile(),  
+SaveProfileAs(String),  
 DeleteProfile(String)
 
-**Mic Profile**<br/>
-LoadMicProfile(String),<br/>
-SaveMicProfile(),<br/>
-SaveMicProfileAs(String),<br/>
+**Mic Profile**  
+LoadMicProfile(String),  
+SaveMicProfile(),  
+SaveMicProfileAs(String),  
 DeleteMicProfile(String)
 
-**General Settings**<br/>
-SetMuteHoldDuration(int),<br/>
-SetVCMuteAlsoMuteCM(bool)<br/>
+**General Settings**  
+SetMuteHoldDuration(int),  
+SetVCMuteAlsoMuteCM(bool)  
 
-**These control the current GoXLR 'State'**<br/>
-SetActiveEffectPreset(EffectBankPresets),<br/>
-SetActiveSamplerBank(SampleBank),<br/>
-SetMegaphoneEnabled(bool),<br/>
-SetRobotEnabled(bool),<br/>
-SetHardTuneEnabled(bool),<br/>
-SetFXEnabled(bool),<br/>
-SetFaderMuteState(FaderName, MuteState),<br/>
+**These control the current GoXLR 'State'**  
+SetActiveEffectPreset(EffectBankPresets),  
+SetActiveSamplerBank(SampleBank),  
+SetMegaphoneEnabled(bool),  
+SetRobotEnabled(bool),  
+SetHardTuneEnabled(bool),  
+SetFXEnabled(bool),  
+SetFaderMuteState(FaderName, MuteState),  
 SetCoughMuteState(MuteState)

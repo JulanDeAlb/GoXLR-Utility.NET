@@ -6,6 +6,7 @@
         <RootNamespace>GoXLR_Utility.NET.ConsoleTests</RootNamespace>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
