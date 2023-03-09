@@ -26,7 +26,7 @@ jobs:
       - name: Restore dependency's
         run: dotnet restore
       - name: Build GoXLR-Utility.NET
-        run: dotnet build
+        run: dotnet build -c Release
       - name: Test GoXLR-Utility.NET
         run: dotnet test
       - if: ${{ env.release_nuget == 'true' }}
