@@ -50,9 +50,12 @@ namespace GoXLR_Utility.NET.Commands
                 {
                     OpenPath = Path
                 };
+            } else if (Command != null && serialNumber == null)
+            {
+                Object = Command;
             }
 
-            if (Object is null && returnStrings.Count == 0)
+            if (Object == null && returnStrings.Count == 0)
                 return null;
 
             if (Object != null)

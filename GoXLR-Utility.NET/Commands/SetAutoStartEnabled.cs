@@ -14,7 +14,7 @@ namespace GoXLR_Utility.NET.Commands
             {
                 ["SetAutoStartEnabled"] = new object[]
                 {
-                    enable,
+                    enable
                 }
             };
         }
