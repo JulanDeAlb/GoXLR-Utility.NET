@@ -1,6 +1,12 @@
 # GoXLR-Utility.NET
 A .NET Standard 2.1 Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.9<br/>
 
+This project is work and progress.
+
+If you are on a Linux machine and the Connect() does not work, please use: Connect("ws://localhost:14564/api/websocket").
+
+**If you encounter any issues, feel free to report it.**
+
 # 3rd Party Licenses
 [Music Tribe](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-MUSIC-TRIBE)<br/>
 [GoXLR-Utility](https://github.com/JulanDeAlb/GoXLR-Utility.NET/blob/develop/LICENSE-3RD-PARTY-GOXLR-UTILITY)

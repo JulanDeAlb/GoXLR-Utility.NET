@@ -163,7 +163,7 @@ namespace GoXLR_Utility.NET
         
         /// <summary>
         /// Send a Device Command using its Command String and the Parameters
-        /// in case the Command isn't implemented.
+        /// in case the Command isn't implemented or not working.
         /// </summary>
         /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
         /// <param name="commandName">As String<br/>(Example: SetVolume)</param>
@@ -249,7 +249,6 @@ namespace GoXLR_Utility.NET
         private void Send(string message)
         {
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", message);
-            Console.WriteLine(message);
             _websocket?.Send(message);
         }
 		
