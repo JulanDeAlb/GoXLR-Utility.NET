@@ -1,6 +1,6 @@
 namespace GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Button
 {
-    public enum ButtonLightEnum
+    public enum ButtonLight
     {
         Bleep,
         Cough,

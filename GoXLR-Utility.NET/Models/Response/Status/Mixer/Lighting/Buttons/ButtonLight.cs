@@ -156,7 +156,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
     public class ButtonLightBase : INotifyPropertyChanged
     {
         private TwoColour _colour = null!;
-        private LightingOffStyleEnum _offStyle;
+        private LightingOffStyle _offStyle;
         
         [JsonPropertyName("colours")]
         public TwoColour Colour
@@ -167,7 +167,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
         
         [JsonPropertyName("off_style")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public LightingOffStyleEnum OffStyle
+        public LightingOffStyle OffStyle
         {
             get => _offStyle;
             set => SetField(ref _offStyle, value);

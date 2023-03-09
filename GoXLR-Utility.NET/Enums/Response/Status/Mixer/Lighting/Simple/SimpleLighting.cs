@@ -1,6 +1,6 @@
 namespace GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Simple
 {
-    public enum SimpleLightingEnum
+    public enum SimpleLighting
     {
         Accent,
         Scribble1,

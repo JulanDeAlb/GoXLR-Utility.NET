@@ -11,7 +11,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Button
         /// </summary>
         /// <param name="button">The Button to change</param>
         /// <param name="offStyle">The OffStyle to apply</param>
-        public SetButtonOffStyle(ButtonLightEnum button, LightingOffStyleEnum offStyle)
+        public SetButtonOffStyle(ButtonLight button, LightingOffStyle offStyle)
         {
             Command = new Dictionary<string, object>
             {

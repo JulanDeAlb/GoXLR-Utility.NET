@@ -11,7 +11,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Button
         /// <param name="button">The Button to change Colour</param>
         /// <param name="colour1">The Colour 1 (#ffffff)</param>
         /// <param name="colour2">The Colour 2 (#ffffff)</param>
-        public SetButtonColours(ButtonLightEnum button, string colour1, string colour2)
+        public SetButtonColours(ButtonLight button, string colour1, string colour2)
         {
             colour1 = colour1.Replace("#", "");
             colour2 = colour2.Replace("#", "");

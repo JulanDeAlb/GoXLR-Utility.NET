@@ -11,7 +11,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Sampler
         /// </summary>
         /// <param name="button">The Sampler to edit</param>
         /// <param name="offStyle">The OffStyle to apply</param>
-        public SetSampleOffStyle(SamplerEnum button, LightingOffStyleEnum offStyle)
+        public SetSampleOffStyle(SamplerEnum button, LightingOffStyle offStyle)
         {
             Command = new Dictionary<string, object>
             {

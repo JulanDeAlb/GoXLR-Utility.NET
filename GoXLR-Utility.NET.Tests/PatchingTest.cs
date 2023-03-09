@@ -367,7 +367,7 @@ public class PatchingTest
 
         #region Lighting.Button.Bleep
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.Bleep.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.Bleep.OffStyle);
 
         #region Lighting.Button.Bleep.Colour
 
@@ -380,7 +380,7 @@ public class PatchingTest
 
         #region Lighting.Button.Cough
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.Cough.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.Cough.OffStyle);
 
         #region Lighting.Button.Cough.Colour
 
@@ -393,7 +393,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectFx
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectFx.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectFx.OffStyle);
 
         #region Lighting.Button.EffectFx.Colour
 
@@ -406,7 +406,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectHardTune
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectHardTune.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectHardTune.OffStyle);
 
         #region Lighting.Button.EffectHardTune.Colour
 
@@ -419,7 +419,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectMegaphone
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectMegaphone.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectMegaphone.OffStyle);
 
         #region Lighting.Button.EffectMegaphone.Colour
 
@@ -432,7 +432,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectRobot
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectRobot.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectRobot.OffStyle);
 
         #region Lighting.Button.EffectRobot.Colour
 
@@ -445,7 +445,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectSelect1
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect1.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect1.OffStyle);
 
         #region Lighting.Button.EffectSelect1.Colour
 
@@ -458,7 +458,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectSelect2
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect2.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect2.OffStyle);
 
         #region Lighting.Button.EffectSelect2.Colour
 
@@ -471,7 +471,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectSelect3
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect3.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect3.OffStyle);
 
         #region Lighting.Button.EffectSelect3.Colour
 
@@ -484,7 +484,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectSelect4
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect4.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect4.OffStyle);
 
         #region Lighting.Button.EffectSelect4.Colour
 
@@ -497,7 +497,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectSelect5
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect5.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect5.OffStyle);
 
         #region Lighting.Button.EffectSelect5.Colour
 
@@ -510,7 +510,7 @@ public class PatchingTest
 
         #region Lighting.Button.EffectSelect6
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect6.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.EffectSelect6.OffStyle);
 
         #region Lighting.Button.EffectSelect6.Colour
 
@@ -523,7 +523,7 @@ public class PatchingTest
 
         #region Lighting.Button.FaderAMute
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderAMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderAMute.OffStyle);
 
         #region Lighting.Button.FaderAMute.Colour
 
@@ -536,7 +536,7 @@ public class PatchingTest
 
         #region Lighting.Button.FaderBMute
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderBMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderBMute.OffStyle);
 
         #region Lighting.Button.FaderBMute.Colour
 
@@ -549,7 +549,7 @@ public class PatchingTest
 
         #region Lighting.Button.FaderCMute
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderCMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderCMute.OffStyle);
 
         #region Lighting.Button.FaderCMute.Colour
 
@@ -562,7 +562,7 @@ public class PatchingTest
 
         #region Lighting.Button.FaderDMute
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderDMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Button.FaderDMute.OffStyle);
 
         #region Lighting.Button.FaderDMute.Colour
 
@@ -671,7 +671,7 @@ public class PatchingTest
 
         #region Lighting.Sampler.SamplerA
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Sampler.SamplerA.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Sampler.SamplerA.OffStyle);
 
         #region Lighting.Sampler.SamplerA.Colour
 
@@ -685,7 +685,7 @@ public class PatchingTest
 
         #region Lighting.Sampler.SamplerB
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Sampler.SamplerB.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Sampler.SamplerB.OffStyle);
 
         #region Lighting.Sampler.SamplerB.Colour
 
@@ -699,7 +699,7 @@ public class PatchingTest
 
         #region Lighting.Sampler.SamplerC
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Sampler.SamplerC.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, _messageHandler.Status.Mixers["SerialNumber"].Lighting.Sampler.SamplerC.OffStyle);
 
         #region Lighting.Sampler.SamplerC.Colour
 
@@ -1156,10 +1156,10 @@ public class PatchingTest
 
         #region Settings.Display
 
-        Assert.Equal(DisplayModeEnum.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Compressor);
-        Assert.Equal(DisplayModeEnum.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Equaliser);
-        Assert.Equal(DisplayModeEnum.Advanced, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.EqualiserFine);
-        Assert.Equal(DisplayModeEnum.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Gate);
+        Assert.Equal(DisplayMode.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Compressor);
+        Assert.Equal(DisplayMode.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Equaliser);
+        Assert.Equal(DisplayMode.Advanced, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.EqualiserFine);
+        Assert.Equal(DisplayMode.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Gate);
 
         #endregion
 

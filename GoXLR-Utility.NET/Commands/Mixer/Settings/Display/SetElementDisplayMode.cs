@@ -10,7 +10,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Settings.Display
         /// </summary>
         /// <param name="displayComponent">The Component</param>
         /// <param name="mode">The Mode</param>
-        public SetElementDisplayMode(DisplayComponentEnum displayComponent, DisplayModeEnum mode)
+        public SetElementDisplayMode(DisplayComponent displayComponent, DisplayMode mode)
         {
             Command = new Dictionary<string, object>
             {

@@ -358,7 +358,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.Bleep
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.Bleep.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.Bleep.OffStyle);
 
         #region Lighting.Button.Bleep.Colour
 
@@ -371,7 +371,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.Cough
 
-        Assert.Equal(LightingOffStyleEnum.Dimmed, status.Mixers["SerialNumber"].Lighting.Button.Cough.OffStyle);
+        Assert.Equal(LightingOffStyle.Dimmed, status.Mixers["SerialNumber"].Lighting.Button.Cough.OffStyle);
 
         #region Lighting.Button.Cough.Colour
 
@@ -384,7 +384,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectFx
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectFx.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectFx.OffStyle);
 
         #region Lighting.Button.EffectFx.Colour
 
@@ -397,7 +397,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectHardTune
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectHardTune.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectHardTune.OffStyle);
 
         #region Lighting.Button.EffectHardTune.Colour
 
@@ -410,7 +410,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectMegaphone
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectMegaphone.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectMegaphone.OffStyle);
 
         #region Lighting.Button.EffectMegaphone.Colour
 
@@ -423,7 +423,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectRobot
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectRobot.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectRobot.OffStyle);
 
         #region Lighting.Button.EffectRobot.Colour
 
@@ -436,7 +436,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectSelect1
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect1.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect1.OffStyle);
 
         #region Lighting.Button.EffectSelect1.Colour
 
@@ -449,7 +449,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectSelect2
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect2.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect2.OffStyle);
 
         #region Lighting.Button.EffectSelect2.Colour
 
@@ -462,7 +462,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectSelect3
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect3.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect3.OffStyle);
 
         #region Lighting.Button.EffectSelect3.Colour
 
@@ -475,7 +475,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectSelect4
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect4.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect4.OffStyle);
 
         #region Lighting.Button.EffectSelect4.Colour
 
@@ -488,7 +488,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectSelect5
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect5.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect5.OffStyle);
 
         #region Lighting.Button.EffectSelect5.Colour
 
@@ -501,7 +501,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.EffectSelect6
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect6.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.EffectSelect6.OffStyle);
 
         #region Lighting.Button.EffectSelect6.Colour
 
@@ -514,7 +514,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.FaderAMute
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.FaderAMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.FaderAMute.OffStyle);
 
         #region Lighting.Button.FaderAMute.Colour
 
@@ -527,7 +527,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.FaderBMute
 
-        Assert.Equal(LightingOffStyleEnum.DimmedColour2, status.Mixers["SerialNumber"].Lighting.Button.FaderBMute.OffStyle);
+        Assert.Equal(LightingOffStyle.DimmedColour2, status.Mixers["SerialNumber"].Lighting.Button.FaderBMute.OffStyle);
 
         #region Lighting.Button.FaderBMute.Colour
 
@@ -540,7 +540,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.FaderCMute
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.FaderCMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.FaderCMute.OffStyle);
 
         #region Lighting.Button.FaderCMute.Colour
 
@@ -553,7 +553,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Button.FaderDMute
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Button.FaderDMute.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Button.FaderDMute.OffStyle);
 
         #region Lighting.Button.FaderDMute.Colour
 
@@ -662,7 +662,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Sampler.SamplerA
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Sampler.SamplerA.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Sampler.SamplerA.OffStyle);
 
         #region Lighting.Sampler.SamplerA.Colour
 
@@ -676,7 +676,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Sampler.SamplerB
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Sampler.SamplerB.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Sampler.SamplerB.OffStyle);
 
         #region Lighting.Sampler.SamplerB.Colour
 
@@ -690,7 +690,7 @@ public class JsonDeserializeTest
 
         #region Lighting.Sampler.SamplerC
 
-        Assert.Equal(LightingOffStyleEnum.Colour2, status.Mixers["SerialNumber"].Lighting.Sampler.SamplerC.OffStyle);
+        Assert.Equal(LightingOffStyle.Colour2, status.Mixers["SerialNumber"].Lighting.Sampler.SamplerC.OffStyle);
 
         #region Lighting.Sampler.SamplerC.Colour
 
@@ -1128,10 +1128,10 @@ public class JsonDeserializeTest
 
         #region Settings.Display
 
-        Assert.Equal(DisplayModeEnum.Advanced, status.Mixers["SerialNumber"].Settings.Display.Compressor);
-        Assert.Equal(DisplayModeEnum.Advanced, status.Mixers["SerialNumber"].Settings.Display.Equaliser);
-        Assert.Equal(DisplayModeEnum.Simple, status.Mixers["SerialNumber"].Settings.Display.EqualiserFine);
-        Assert.Equal(DisplayModeEnum.Advanced, status.Mixers["SerialNumber"].Settings.Display.Gate);
+        Assert.Equal(DisplayMode.Advanced, status.Mixers["SerialNumber"].Settings.Display.Compressor);
+        Assert.Equal(DisplayMode.Advanced, status.Mixers["SerialNumber"].Settings.Display.Equaliser);
+        Assert.Equal(DisplayMode.Simple, status.Mixers["SerialNumber"].Settings.Display.EqualiserFine);
+        Assert.Equal(DisplayMode.Advanced, status.Mixers["SerialNumber"].Settings.Display.Gate);
 
         #endregion
 

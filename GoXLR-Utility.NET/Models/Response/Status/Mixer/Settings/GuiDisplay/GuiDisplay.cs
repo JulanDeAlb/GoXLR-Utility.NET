@@ -9,14 +9,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings.GuiDisplay
     //Path: mixer/SERIAL-NUMBER/settings/display/...
     public class GuiDisplay : INotifyPropertyChanged
     {
-        private DisplayModeEnum _compressor;
-        private DisplayModeEnum _equaliser;
-        private DisplayModeEnum _equaliserFine;
-        private DisplayModeEnum _gate;
+        private DisplayMode _compressor;
+        private DisplayMode _equaliser;
+        private DisplayMode _equaliserFine;
+        private DisplayMode _gate;
         
         [JsonPropertyName("compressor")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public DisplayModeEnum Compressor
+        public DisplayMode Compressor
         {
             get => _compressor;
             set => SetField(ref _compressor, value);
@@ -24,7 +24,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings.GuiDisplay
         
         [JsonPropertyName("equaliser")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public DisplayModeEnum Equaliser
+        public DisplayMode Equaliser
         {
             get => _equaliser;
             set => SetField(ref _equaliser, value);
@@ -32,7 +32,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings.GuiDisplay
         
         [JsonPropertyName("equaliser_fine")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public DisplayModeEnum EqualiserFine
+        public DisplayMode EqualiserFine
         {
             get => _equaliserFine;
             set => SetField(ref _equaliserFine, value);
@@ -40,7 +40,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings.GuiDisplay
         
         [JsonPropertyName("gate")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public DisplayModeEnum Gate
+        public DisplayMode Gate
         {
             get => _gate;
             set => SetField(ref _gate, value);
