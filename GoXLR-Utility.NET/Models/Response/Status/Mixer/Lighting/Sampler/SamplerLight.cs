@@ -9,9 +9,9 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
     //Path: mixer/SERIAL-NUMBER/lighting/sampler/...
     public class SamplerLight : INotifyPropertyChanged
     {
-        private SamplerLightBase _samplerA = null!;
-        private SamplerLightBase _samplerB = null!;
-        private SamplerLightBase _samplerC = null!;
+        private SamplerLightBase _samplerA;
+        private SamplerLightBase _samplerB;
+        private SamplerLightBase _samplerC;
         
         [JsonPropertyName("SamplerSelectA")]
         public SamplerLightBase SamplerA
@@ -34,14 +34,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
             set => SetField(ref _samplerC, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
@@ -52,7 +52,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
     public class SamplerLightBase : INotifyPropertyChanged
     {
         private LightingOffStyle _offStyle;
-        private ThreeColour _colour = null!;
+        private ThreeColour _colour;
         
         [JsonPropertyName("off_style")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -69,14 +69,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Sampler
             set => SetField(ref _colour, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

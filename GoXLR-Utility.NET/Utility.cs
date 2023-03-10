@@ -24,15 +24,15 @@ namespace GoXLR_Utility.NET
         private readonly MessageHandler _messageHandler;
 
         private static long _id;
-        private static UnixOrPipeClient? _unixOrPipeClient;
-        private static WebSocket? _websocket;
+        private static UnixOrPipeClient _unixOrPipeClient;
+        private static WebSocket _websocket;
         
-        private static readonly JsonSerializerOptions? SerializerOptions = new JsonSerializerOptions
+        internal static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
         {
             Converters = { new JsonStringEnumConverter() }
         };
 
-        internal static ILogger? Logger;
+        internal static ILogger Logger;
 
         /// <summary>
         /// The Daemon Status including:
@@ -56,11 +56,11 @@ namespace GoXLR_Utility.NET
         /// <summary>
         /// Initialize a new Utility Client.
         /// </summary>
-        public Utility(ILogger? logger = null)
+        public Utility(ILogger logger = null)
         {
             Logger = logger;
-            _messageHandler = new MessageHandler(SerializerOptions);
-            _unixOrPipeClient = new UnixOrPipeClient(SerializerOptions);
+            _messageHandler = new MessageHandler();
+            _unixOrPipeClient = new UnixOrPipeClient();
         }
 
         /// <summary>
@@ -148,7 +148,12 @@ namespace GoXLR_Utility.NET
         public void OpenPath(PathEnum path)
         {
             IncrementId();
-            Send(new CommandBase { Path = path.ToString() }.GetJson(_id)![0]);
+
+            var command = new CommandBase { Path = path.ToString() }.GetJson(_id);
+            if (command == null)
+                return;
+
+            Send(command[0]);
         }
 
         /// <summary>
@@ -158,7 +163,12 @@ namespace GoXLR_Utility.NET
         public void SendSimpleCommand(SimpleCommand command)
         {
             IncrementId();
-            Send(new DeviceCommandBase{ Object =  command.ToString() }.GetJson(_id)![0]);
+
+            var sendCommand = new DeviceCommandBase { Object = command.ToString() }.GetJson(_id);
+            if (sendCommand == null)
+                return;
+
+            Send(sendCommand[0]);
         }
         
         /// <summary>

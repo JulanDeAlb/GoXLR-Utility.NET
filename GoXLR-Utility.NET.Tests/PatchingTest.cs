@@ -28,15 +28,9 @@ public class PatchingTest
     private readonly string _smallPatchString;
     private readonly MessageHandler _messageHandler;
 
-    private readonly JsonSerializerOptions _serializerOptions = new()
-    {
-        Converters = { new JsonStringEnumConverter() },
-        WriteIndented = true
-    };
-
     public PatchingTest(ITestOutputHelper output)
     {
-        _messageHandler = new MessageHandler(_serializerOptions, new XUnitLogger(output));
+        _messageHandler = new MessageHandler(new XUnitLogger(output));
 
         var assembly = Assembly.GetExecutingAssembly();
 

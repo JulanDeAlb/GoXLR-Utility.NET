@@ -9,22 +9,22 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
     //Path: mixer/SERIAL-NUMBER/lighting/buttons/...
     public class ButtonLight : INotifyPropertyChanged
     {
-        private ButtonLightBase _bleep = null!;
-        private ButtonLightBase _cough = null!;
-        private ButtonLightBase _effectFx = null!;
-        private ButtonLightBase _effectHardTune = null!;
-        private ButtonLightBase _effectMegaphone = null!;
-        private ButtonLightBase _effectRobot = null!;
-        private ButtonLightBase _effectSelect1 = null!;
-        private ButtonLightBase _effectSelect2 = null!;
-        private ButtonLightBase _effectSelect3 = null!;
-        private ButtonLightBase _effectSelect4 = null!;
-        private ButtonLightBase _effectSelect5 = null!;
-        private ButtonLightBase _effectSelect6 = null!;
-        private ButtonLightBase _faderAMute = null!;
-        private ButtonLightBase _faderBMute = null!;
-        private ButtonLightBase _faderCMute = null!;
-        private ButtonLightBase _faderDMute = null!;
+        private ButtonLightBase _bleep ;
+        private ButtonLightBase _cough ;
+        private ButtonLightBase _effectFx ;
+        private ButtonLightBase _effectHardTune ;
+        private ButtonLightBase _effectMegaphone ;
+        private ButtonLightBase _effectRobot ;
+        private ButtonLightBase _effectSelect1 ;
+        private ButtonLightBase _effectSelect2 ;
+        private ButtonLightBase _effectSelect3 ;
+        private ButtonLightBase _effectSelect4 ;
+        private ButtonLightBase _effectSelect5 ;
+        private ButtonLightBase _effectSelect6 ;
+        private ButtonLightBase _faderAMute ;
+        private ButtonLightBase _faderBMute ;
+        private ButtonLightBase _faderCMute ;
+        private ButtonLightBase _faderDMute ;
         
         [JsonPropertyName("Bleep")]
         public ButtonLightBase Bleep
@@ -138,14 +138,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
             set => SetField(ref _faderDMute, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
@@ -155,7 +155,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
     
     public class ButtonLightBase : INotifyPropertyChanged
     {
-        private TwoColour _colour = null!;
+        private TwoColour _colour ;
         private LightingOffStyle _offStyle;
         
         [JsonPropertyName("colours")]
@@ -173,14 +173,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons
             set => SetField(ref _offStyle, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

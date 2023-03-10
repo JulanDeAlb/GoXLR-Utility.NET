@@ -13,11 +13,11 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
     //Path: mixer/SERIAL-NUMBER/lighting/...
     public class Lighting : INotifyPropertyChanged
     {
-        private ButtonLight _button = null!;
-        private EncoderLight _encoder = null!;
-        private FaderLight _fader = null!;
-        private SamplerLight _sampler = null!;
-        private SimpleLight _simple = null!;
+        private ButtonLight _button;
+        private EncoderLight _encoder;
+        private FaderLight _fader;
+        private SamplerLight _sampler;
+        private SimpleLight _simple;
         
         [JsonPropertyName("buttons")]
         public ButtonLight Button
@@ -54,14 +54,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
             set => SetField(ref _simple, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

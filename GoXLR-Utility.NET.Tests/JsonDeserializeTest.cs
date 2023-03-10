@@ -25,11 +25,9 @@ namespace GoXLR_Utility.NET.Tests;
 public class JsonDeserializeTest
 {
     private readonly string _statusString;
-
-    private readonly JsonSerializerOptions _serializerOptions = new()
+    private readonly JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
     {
-        Converters = { new JsonStringEnumConverter() },
-        WriteIndented = true
+        Converters = { new JsonStringEnumConverter() }
     };
 
     public JsonDeserializeTest()

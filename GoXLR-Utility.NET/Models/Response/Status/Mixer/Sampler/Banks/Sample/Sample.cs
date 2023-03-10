@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -9,7 +8,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
 {
     public class Sample : INotifyPropertyChanged
     {
-        private string _name = null!;
+        private string _name = null;
         private double _startPct;
         private double _stopPct;
         
@@ -34,14 +33,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
             set => SetField(ref _stopPct, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
@@ -50,12 +49,13 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() != typeof(Sample))
+            if (obj != null && obj.GetType() != typeof(Sample))
                 return false;
 
             var sample = (Sample)obj;
 
-            return _name == sample._name
+            return sample != null
+                   && _name == sample._name
                    && _startPct.Equals(sample._startPct)
                    && _stopPct.Equals(sample._stopPct);
         }
@@ -67,7 +67,13 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(_name, _startPct, _stopPct);
+            unchecked
+            {
+                var hashCode = _name.GetHashCode();
+                hashCode = (hashCode * 397) ^ _startPct.GetHashCode();
+                hashCode = (hashCode * 397) ^ _stopPct.GetHashCode();
+                return hashCode;
+            }
         }
     }
 }

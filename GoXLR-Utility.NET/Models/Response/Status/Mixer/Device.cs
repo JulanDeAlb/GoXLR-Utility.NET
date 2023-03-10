@@ -8,19 +8,19 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
     //Path: mixer/SERIAL-NUMBER/...
     public class Device : INotifyPropertyChanged
     {
-        private ButtonDown.ButtonDown _buttonDown = null!;
-        private CoughButton.CoughButton _coughButton = null!;
-        private Effects.Effects _effects = null!;
-        private FaderStatus.FaderStatus _faderStatus = null!;
-        private Hardware.Hardware _hardware = null!;
-        private Levels.Levels _levels = null!;
-        private Lighting.Lighting _lighting = null!;
-        private string _micProfileName = null!;
-        private MicStatus.MicStatus _micStatus = null!;
-        private string _profileName = null!;
-        private Router.Router _router = null!;
-        private Sampler.Sampler _sampler = null!;
-        private Settings.Settings _settings = null!;
+        private ButtonDown.ButtonDown _buttonDown;
+        private CoughButton.CoughButton _coughButton;
+        private Effects.Effects _effects;
+        private FaderStatus.FaderStatus _faderStatus;
+        private Hardware.Hardware _hardware;
+        private Levels.Levels _levels;
+        private Lighting.Lighting _lighting;
+        private string _micProfileName;
+        private MicStatus.MicStatus _micStatus;
+        private string _profileName;
+        private Router.Router _router;
+        private Sampler.Sampler _sampler;
+        private Settings.Settings _settings;
 
         [JsonPropertyName("button_down")]
         public ButtonDown.ButtonDown ButtonDown
@@ -114,14 +114,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
             set => SetField(ref _settings, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

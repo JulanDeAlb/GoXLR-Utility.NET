@@ -6,12 +6,12 @@ namespace GoXLR_Utility.NET.Commands
 {
     public class CommandBase
     {
-        internal List<Dictionary<string, object>>? CommandList;
-        internal Dictionary<string, object>? Command;
-        internal object? Path;
-        internal object? Object;
+        internal List<Dictionary<string, object>> CommandList;
+        internal Dictionary<string, object> Command;
+        internal object Path;
+        internal object Object;
 
-        internal List<string>? GetJson(long id, string? serialNumber = null)
+        internal List<string> GetJson(long id, string serialNumber = null)
         {
             var returnStrings = new List<string>();
 

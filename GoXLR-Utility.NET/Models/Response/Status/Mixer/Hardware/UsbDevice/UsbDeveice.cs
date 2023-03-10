@@ -12,15 +12,15 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Hardware.UsbDevice
         public int BusNumber { get; set; }
 
         [JsonPropertyName("identifier")]
-        public string Identifier { get; set; } = null!;
+        public string Identifier { get; set; }
 
         [JsonPropertyName("manufacturer_name")]
-        public string ManufacturerName { get; set; } = null!;
+        public string ManufacturerName { get; set; }
 
         [JsonPropertyName("product_name")]
-        public string ProductName { get; set; } = null!;
+        public string ProductName { get; set; }
 
         [JsonPropertyName("version")]
-        public List<int> Version { get; set; } = null!;
+        public List<int> Version { get; set; }
     }
 }

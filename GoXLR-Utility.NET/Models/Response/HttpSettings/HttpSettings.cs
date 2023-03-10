@@ -7,7 +7,7 @@ namespace GoXLR_Utility.NET.Models.Response.HttpSettings
 {
     public class HttpSettings : INotifyPropertyChanged
     {
-        private string _bindAddress = null!;
+        private string _bindAddress;
         private bool _corsEnabled;
         private bool _enabled;
         private int _port;
@@ -47,14 +47,14 @@ namespace GoXLR_Utility.NET.Models.Response.HttpSettings
                 : $"ws://{BindAddress}:{Port}/api/websocket";
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

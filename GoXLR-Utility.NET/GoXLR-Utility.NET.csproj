@@ -1,13 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>netstandard2.1</TargetFramework>
         <RootNamespace>GoXLR_Utility.NET</RootNamespace>
-        <Nullable>enable</Nullable>
-        <LangVersion>8</LangVersion>
+        <Nullable>disable</Nullable>
+        <LangVersion>7.3</LangVersion>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <Version>0.1.0-preview0.2</Version>
+        <Version>0.1.0-preview0.3</Version>
         <Authors>JulanDeAlb</Authors>
         <Title>GoXLR-Utility.NET</Title>
         <Description>A Wrapper arount the GoXLR-Utility from 
@@ -21,6 +20,7 @@ https://github.com/GoXLR-on-Linux</Description>
         <PackageLicenseFile>LICENSE-3RD-PARTY-GOXLR-UTILITY</PackageLicenseFile>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <TargetFrameworks>netstandard2.0;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>

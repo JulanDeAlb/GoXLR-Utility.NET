@@ -8,7 +8,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings
     //Path: mixer/SERIAL-NUMBER/settings/...
     public class Settings : INotifyPropertyChanged
     {
-        private GuiDisplay.GuiDisplay _display = null!;
+        private GuiDisplay.GuiDisplay _display;
         private int _muteHoldDuration;
         private bool _vcMuteAlsoMuteCm;
 
@@ -36,14 +36,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Settings
             set => SetField(ref _vcMuteAlsoMuteCm, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

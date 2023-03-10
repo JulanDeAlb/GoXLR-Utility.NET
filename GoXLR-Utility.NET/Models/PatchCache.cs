@@ -8,17 +8,17 @@ namespace GoXLR_Utility.NET.Models
     
     public class PatchCacheItem
     {
-        public object? ParentClass { get; set; }
+        public object ParentClass { get; set; }
 
         public string[] PathSegments { get; set; }
         
-        public PropertyInfo? PropInfo { get; set; }
+        public PropertyInfo PropInfo { get; set; }
         
-        public Type? PropType { get; set; }
+        public Type PropType { get; set; }
         
-        public string SerialNumber { get; set; } = null!;
+        public string SerialNumber { get; set; }
 
-        public PatchCacheItem(object? parentClass, string[] pathSegments)
+        public PatchCacheItem(object parentClass, string[] pathSegments)
         {
             ParentClass = parentClass;
             PathSegments = pathSegments;

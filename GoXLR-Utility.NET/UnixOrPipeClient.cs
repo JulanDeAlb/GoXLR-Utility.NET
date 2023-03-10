@@ -14,30 +14,30 @@ namespace GoXLR_Utility.NET
 {
     public class UnixOrPipeClient
     {
-        private readonly JsonSerializerOptions? _jsonSerializerOptions;
-
-        public UnixOrPipeClient(JsonSerializerOptions? jsonSerializerOptions)
-        {
-            _jsonSerializerOptions = jsonSerializerOptions;
-        }
-
-        public HttpSettings? Connect()
+        public HttpSettings Connect()
         {
             return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ConnectPipe() : ConnectUnix();
         }
 
-        private HttpSettings? ConnectUnix()
+        private HttpSettings ConnectUnix()
         {
             Utility.Logger?.Log(LogLevel.Information, new EventId(0, "Please Report"), "I dont know if {methode} works", nameof(ConnectUnix));
             var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
 
             try
             {
+#if NETSTANDARD2_0
+                throw new NotSupportedException(".NET Standard 2.0 does not support UnixDomainSocketEndPoint");
+#else
                 socket.Connect(new UnixDomainSocketEndPoint("/tmp/goxlr.socket"));
+#endif
             }
-            catch
+            catch (Exception e)
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe using Unix.");
+                if (e.GetType() == typeof(NotSupportedException))
+                    throw;
+
+                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), e, "Unable to connect to the GoXLR Pipe using Unix.");
                 return null;
             }
 
@@ -70,10 +70,10 @@ namespace GoXLR_Utility.NET
             socket.Close();
             networkStream.Close();
 
-            return JsonSerializer.Deserialize<DataPayload>(new string(responseBody), _jsonSerializerOptions)?.HttpState;
+            return JsonSerializer.Deserialize<DataPayload>(new string(responseBody), Utility.SerializerOptions)?.HttpState;
         }
         
-        private HttpSettings? ConnectPipe()
+        private HttpSettings ConnectPipe()
         {
             var processes = Process.GetProcessesByName("goxlr-daemon");
             if (processes.Length == 0)
@@ -121,7 +121,7 @@ namespace GoXLR_Utility.NET
 
             client.Close();
 
-            return JsonSerializer.Deserialize<DataPayload>(new string(responseBody), _jsonSerializerOptions)?.HttpState;
+            return JsonSerializer.Deserialize<DataPayload>(new string(responseBody), Utility.SerializerOptions)?.HttpState;
         }
     }
 }

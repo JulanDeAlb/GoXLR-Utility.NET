@@ -10,8 +10,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects
     public class Effects : INotifyPropertyChanged
     {
         private EffectBankPresets _activePreset;
-        private Current.Current _current = null!;
-        private PresetNames.PresetNames _presetNames = null!;
+        private Current.Current _current;
+        private PresetNames.PresetNames _presetNames;
         private bool _isEnabled;
         
         [JsonPropertyName("active_preset")]
@@ -43,14 +43,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Effects
             set => SetField(ref _isEnabled, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;

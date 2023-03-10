@@ -9,24 +9,20 @@ namespace GoXLR_Utility.NET
 {
     public class MessageHandler
     {
-        private static PatchHandler? _patchHandler;
-        private static JsonSerializerOptions? _serializerOptions;
-        private static ILogger? _logger;
+        private static PatchHandler _patchHandler;
+        private static ILogger _logger;
         
-        public Status Status = null!;
-        public HttpSettings HttpSettings = null!;
+        public Status Status;
+        public HttpSettings HttpSettings;
 
         /// <summary>
         /// Initialize the MessageHandler with Serializer Options.
-        /// Does require JSON Enum Converter.
         /// </summary>
-        /// <param name="serializerOptions">Serializer Options including JsonEnumConverter</param>
         /// <param name="logger">Optional Logger primary for Tests.</param>
-        public MessageHandler(JsonSerializerOptions? serializerOptions, ILogger? logger = null)
+        public MessageHandler(ILogger logger = null)
         {
             _logger = logger ?? Utility.Logger;
-            _patchHandler = new PatchHandler(serializerOptions, logger);
-            _serializerOptions = serializerOptions;
+            _patchHandler = new PatchHandler(logger);
         }
 
         /// <summary>
@@ -35,10 +31,10 @@ namespace GoXLR_Utility.NET
         /// <param name="message">Message to handle.</param>
         public void HandleMessage(string message)
         {
-            Response? response;
+            Response response;
             try
             {
-                response  = JsonSerializer.Deserialize<Response>(message, _serializerOptions);
+                response  = JsonSerializer.Deserialize<Response>(message, Utility.SerializerOptions);
             }
             catch (Exception e)
             {

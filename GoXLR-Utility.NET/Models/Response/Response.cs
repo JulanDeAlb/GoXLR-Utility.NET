@@ -23,7 +23,7 @@ namespace GoXLR_Utility.NET.Models.Response
             }
         }
         
-        public DataPayload? Data { get; set; }
-        public string? SimpleData { get; set; }
+        public DataPayload Data { get; set; }
+        public string SimpleData { get; set; }
     }
 }

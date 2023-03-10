@@ -9,11 +9,11 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus
     //Path: mixer/SERIAL-NUMBER/mic_status/...
     public class MicStatus : INotifyPropertyChanged
     {
-        private Compressor.Compressor _compressor = null!;
-        private Equaliser.Equaliser _equaliser = null!;
-        private EqualiserMini.EqualiserMini _equaliserMini = null!;
-        private MicGains.MicGains _micGains = null!;
-        private NoiseGate.NoiseGate _noiseGate = null!;
+        private Compressor.Compressor _compressor;
+        private Equaliser.Equaliser _equaliser;
+        private EqualiserMini.EqualiserMini _equaliserMini;
+        private MicGains.MicGains _micGains;
+        private NoiseGate.NoiseGate _noiseGate;
         private MicrophoneType _micType;
         
         [JsonPropertyName("compressor")]
@@ -59,14 +59,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.MicStatus
             set => SetField(ref _micType, value);
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void SetField<T>(ref T field, T value, [CallerMemberName] string? propertyName = null)
+        private void SetField<T>(ref T field, T value, [CallerMemberName] string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return;
             field = value;
