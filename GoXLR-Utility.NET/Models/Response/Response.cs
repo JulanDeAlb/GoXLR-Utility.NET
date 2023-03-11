@@ -18,7 +18,7 @@ namespace GoXLR_Utility.NET.Models.Response
                 }
                 else
                 {
-                    Data = value.Deserialize<DataPayload>(new JsonSerializerOptions { Converters = { new JsonStringEnumConverter() } });
+                    Data = value.Deserialize<DataPayload>(Utility.SerializerOptions);
                 }
             }
         }
