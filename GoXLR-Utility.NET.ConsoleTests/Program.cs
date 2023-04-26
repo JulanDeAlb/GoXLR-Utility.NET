@@ -1,12 +1,19 @@
-﻿namespace GoXLR_Utility.NET.ConsoleTests;
+﻿using GoXLR_Utility.NET.Commands.Mixer.Profile.Normal;
+using GoXLR_Utility.NET.Commands.Mixer.ShutdownCommands;
+using Microsoft.Extensions.Logging;
+
+namespace GoXLR_Utility.NET.ConsoleTests;
 
 public static class Program
 {
-    private static readonly Utility Utility = new();
+    private static Logger _log = new Logger();
+    private static readonly Utility Utility = new(_log);
 
     public static void Main(string[] args)
     {
-        Utility.Connect();
+        var normal = new SetShutdownCommands(new DeleteProfile(""));
+        var list = new SetShutdownCommands(new DeleteProfile(""));
+        //Utility.Connect();
         Console.ReadKey();
         AllEvents(Utility.AvailableSerialNumbers[0]);
         Console.WriteLine("Subscribed to Events");
@@ -16,6 +23,8 @@ public static class Program
     private static void AllEvents(string serialNumber)
     {
         Utility.Status.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #region Events
 
         #region Config
 
@@ -166,6 +175,72 @@ public static class Program
         #region Levels
 
         Utility.Status.Mixers[serialNumber].Levels.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #region Levels.Submix
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+        
+        #region Levels.Submix.Inputs
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+        
+        #region Levels.Submix.Inputs.Chat
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Chat.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Console
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Console.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Game
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Game.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.LineIn
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.LineIn.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Mic
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Mic.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Music
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Music.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Sample
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Sample.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.System
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.System.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+
+        #endregion
+        
+        #region Levels.Submix.Outputs
+
+        Utility.Status.Mixers[serialNumber].Levels.Submix.Outputs.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
+
+        #endregion
 
         #region Levels.Volume
 
@@ -743,6 +818,12 @@ public static class Program
 
         #endregion
 
+        #region Shutdown
+
+        Utility.Status.Mixers[serialNumber].ShutdownCommands.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
+
+        #endregion
+
         #endregion
 
         #region Settings
@@ -774,6 +855,26 @@ public static class Program
 
         Utility.Status.Paths.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
+#endregion
+
         #endregion
+    }
+}
+
+public class Logger : ILogger
+{
+    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+    {
+        Console.WriteLine($"Message: {state} | Exception: {exception}");
+    }
+
+    public bool IsEnabled(LogLevel logLevel)
+    {
+        return false;
+    }
+
+    public IDisposable? BeginScope<TState>(TState state) where TState : notnull
+    {
+        return null;
     }
 }

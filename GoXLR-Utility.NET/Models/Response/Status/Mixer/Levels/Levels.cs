@@ -11,6 +11,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
     {
         private sbyte _bleep;
         private sbyte _deEsser;
+        private Submix.Submix _submix = new Submix.Submix();
+        private bool _submixSupported;
         private Volume _volumes;
         
         [JsonPropertyName("bleep")]
@@ -25,6 +27,28 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
         {
             get => _deEsser;
             set => SetField(ref _deEsser, value);
+        }
+        
+        [JsonPropertyName("submix")]
+        public Submix.Submix Submix
+        {
+            get => _submix;
+            set
+            {
+                SubmixEnabled = value != null;
+                
+                if (SubmixEnabled)
+                    SetField(ref _submix, value);
+            }
+        }
+
+        public bool SubmixEnabled;
+
+        [JsonPropertyName("submix_supported")]
+        public bool SubmixSupported
+        {
+            get => _submixSupported;
+            set => SetField(ref _submixSupported, value);
         }
         
         [JsonPropertyName("volumes")]

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
@@ -21,6 +22,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         private Router.Router _router;
         private Sampler.Sampler _sampler;
         private Settings.Settings _settings;
+        private ObservableCollection<object> _shutdownCommands;
 
         [JsonPropertyName("button_down")]
         public ButtonDown.ButtonDown ButtonDown
@@ -112,6 +114,17 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer
         {
             get => _settings;
             set => SetField(ref _settings, value);
+        }
+
+        /// <summary>
+        /// This is for deserialization use only.
+        /// Use instead <see cref="ShutdownCommands"/>
+        /// </summary>
+        [JsonPropertyName("shutdown_commands")]
+        public ObservableCollection<object> ShutdownCommands
+        {
+            get => _shutdownCommands;
+            set => SetField(ref _shutdownCommands, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

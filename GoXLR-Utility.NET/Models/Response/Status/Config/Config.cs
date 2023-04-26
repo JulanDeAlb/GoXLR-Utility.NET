@@ -11,7 +11,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Config
         private string _daemonVersion;
         private bool _autostartEnabled;
         private bool _showTrayIcon;
-        
+        private bool _textToSpeechEnabled;
+
         [JsonPropertyName("daemon_version")]
         public string DaemonVersion
         {
@@ -31,6 +32,13 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Config
         {
             get => _showTrayIcon;
             set => SetField(ref _showTrayIcon, value);
+        }
+        
+        [JsonPropertyName("tts_enabled")]
+        public bool TextToSpeechEnabled
+        {
+            get => _textToSpeechEnabled;
+            set => SetField(ref _textToSpeechEnabled, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
