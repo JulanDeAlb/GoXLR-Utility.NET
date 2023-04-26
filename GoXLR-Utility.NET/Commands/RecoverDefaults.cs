@@ -3,7 +3,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Paths;
 
 namespace GoXLR_Utility.NET.Commands
 {
-    public class RecoverDefaults : CommandBase
+    public class RecoverDefaults : NormalCommandBase
     {
         /// <summary>
         /// Recover defaults like default Profiles etc.

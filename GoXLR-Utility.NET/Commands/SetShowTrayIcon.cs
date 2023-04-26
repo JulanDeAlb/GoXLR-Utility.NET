@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace GoXLR_Utility.NET.Commands
 {
-    public class SetShowTrayIcon : CommandBase
+    public class SetShowTrayIcon : NormalCommandBase
     {
         /// <summary>
         /// Enable or disable the Tray Icon

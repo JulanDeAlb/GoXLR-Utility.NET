@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace GoXLR_Utility.NET.Commands
 {
-    public class SetTextToSpeechEnabled : CommandBase
+    public class SetTextToSpeechEnabled : NormalCommandBase
     {
         /// <summary>
         /// Enable or disable the Text to Speech.
