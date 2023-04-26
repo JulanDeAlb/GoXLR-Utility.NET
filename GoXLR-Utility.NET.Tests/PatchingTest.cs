@@ -1,6 +1,4 @@
 using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Echo;
@@ -11,6 +9,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Pitch;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Reverb;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Levels.Submix;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus;
@@ -42,7 +41,7 @@ public class PatchingTest
         using var reader2 = new StreamReader(stream2!);
         _patchString = reader2.ReadToEnd();
 
-        using var stream3 = assembly.GetManifestResourceStream("GoXLR_Utility.NET.Tests.EmbeddedResources.Patch.json");
+        using var stream3 = assembly.GetManifestResourceStream("GoXLR_Utility.NET.Tests.EmbeddedResources.SmallPatch.json");
         using var reader3 = new StreamReader(stream3!);
         _smallPatchString = reader3.ReadToEnd();
     }
@@ -64,6 +63,7 @@ public class PatchingTest
         Assert.Equal("1.0.0", _messageHandler.Status.Config.DaemonVersion);
         Assert.False(_messageHandler.Status.Config.AutostartEnabled);
         Assert.False(_messageHandler.Status.Config.ShowTrayIcon);
+        Assert.False(_messageHandler.Status.Config.TextToSpeechEnabled);
 
         #endregion
 
@@ -332,10 +332,92 @@ public class PatchingTest
         #endregion
 
         #region Levels
-
-
+        
         Assert.Equal(-20, _messageHandler.Status.Mixers["SerialNumber"].Levels.Bleep);
         Assert.Equal(60, _messageHandler.Status.Mixers["SerialNumber"].Levels.DeEsser);
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.SubmixSupported);
+        
+        #region Levels.Submix
+        
+        #region Levels.Submix.Inputs
+
+        #region Levels.Submix.Inputs.Chat
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Chat.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Chat.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Chat.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Console
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Console.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Console.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Console.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Game
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Game.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Game.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Game.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.LineIn
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.LineIn.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.LineIn.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.LineIn.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Mic
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Mic.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Mic.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Mic.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Music
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Music.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Music.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Music.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Sample
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Sample.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Sample.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.Sample.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.System
+
+        Assert.False(_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.System.Linked);
+        Assert.Equal(0.0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.System.Ratio);
+        Assert.Equal(0, _messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Inputs.System.Volume);
+
+        #endregion
+
+        #endregion
+        
+        #region Levels.Submix.Outputs
+
+        Assert.Equal(SubmixOutput.B ,_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Outputs.BroadcastMix);
+        Assert.Equal(SubmixOutput.B ,_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Outputs.ChatMic);
+        Assert.Equal(SubmixOutput.B ,_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Outputs.Headphone);
+        Assert.Equal(SubmixOutput.B ,_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Outputs.LineOut);
+        Assert.Equal(SubmixOutput.A ,_messageHandler.Status.Mixers["SerialNumber"].Levels.Submix.Outputs.Sampler);
+
+        #endregion
+
+        #endregion
 
         #region Levels.Volume
 
@@ -1156,6 +1238,21 @@ public class PatchingTest
         Assert.Equal(DisplayMode.Simple, _messageHandler.Status.Mixers["SerialNumber"].Settings.Display.Gate);
 
         #endregion
+
+        #endregion
+
+        #region ShutdownCommands
+        
+        Assert.Equal(
+            "{\"LoadProfileColours\":\"Main\"}",
+            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[0].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+        Assert.Equal(
+            "{\"SaveMicProfile\":[]}",
+            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[1].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+        Assert.Equal(
+            "{\"SaveProfile\":[]}",
+            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[2].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+        
 
         #endregion
 

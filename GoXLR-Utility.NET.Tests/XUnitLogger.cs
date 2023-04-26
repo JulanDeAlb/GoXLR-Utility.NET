@@ -19,11 +19,11 @@ public class XUnitLogger : ILogger
 
     public bool IsEnabled(LogLevel logLevel)
     {
-        throw new NotImplementedException();
+        return false;
     }
 
     public IDisposable BeginScope<TState>(TState state) where TState : notnull
     {
-        throw new NotImplementedException();
+        return null;
     }
 }

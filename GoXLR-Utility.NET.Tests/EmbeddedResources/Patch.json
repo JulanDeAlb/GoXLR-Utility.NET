@@ -18,6 +18,11 @@
         "value": false
       },
       {
+        "op":"replace",
+        "path": "/config/tts_enabled",
+        "value": false
+      },
+      {
         "op":"add",
         "path": "/files/icons/1",
         "value": "phone.png"
@@ -726,6 +731,156 @@
         "op":"replace",
         "path": "/mixers/SerialNumber/levels/deess",
         "value": 60
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix_supported",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Chat/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Chat/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Chat/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Console/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Console/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Console/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Game/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Game/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Game/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/LineIn/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/LineIn/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/LineIn/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Mic/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Mic/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Mic/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Music/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Music/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Music/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Sample/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Sample/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/Sample/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/System/linked",
+        "value": false
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/System/ratio",
+        "value": 0.0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/inputs/System/volume",
+        "value": 0
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/outputs/BroadcastMix",
+        "value": "B"
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/outputs/ChatMic",
+        "value": "B"
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/outputs/Headphone",
+        "value": "B"
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/outputs/LineOut",
+        "value": "B"
+      },
+      {
+        "op":"replace",
+        "path": "/mixers/SerialNumber/levels/submix/outputs/Sampler",
+        "value": "A"
       },
       {
         "op":"replace",
@@ -2278,6 +2433,42 @@
         "op": "replace",
         "path": "/mixers/SerialNumber/settings/vc_mute_also_mute_cm",
         "value": false
+      },
+      {
+        "op": "remove",
+        "path": "/mixers/SerialNumber/shutdown_commands/2"
+      },
+      {
+        "op": "remove",
+        "path": "/mixers/SerialNumber/shutdown_commands/1"
+      },
+      {
+        "op": "remove",
+        "path": "/mixers/SerialNumber/shutdown_commands/0"
+      },
+      {
+        "op": "add",
+        "path": "/mixers/SerialNumber/shutdown_commands/0",
+        "value":
+        {
+          "LoadProfileColours":"Main"
+        }
+      },
+      {
+        "op": "add",
+        "path": "/mixers/SerialNumber/shutdown_commands/1",
+        "value":
+        {
+          "SaveMicProfile":[]
+        }
+      },
+      {
+        "op": "add",
+        "path": "/mixers/SerialNumber/shutdown_commands/2",
+        "value":
+        {
+          "SaveProfile":[]
+        }
       }
     ]
   }

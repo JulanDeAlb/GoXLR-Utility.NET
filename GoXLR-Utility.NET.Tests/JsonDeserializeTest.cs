@@ -11,6 +11,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Pitch;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Reverb;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Levels.Submix;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus;
@@ -59,6 +60,7 @@ public class JsonDeserializeTest
         Assert.Equal("0.9.0", status.Config.DaemonVersion);
         Assert.True(status.Config.AutostartEnabled);
         Assert.True(status.Config.ShowTrayIcon);
+        Assert.True(status.Config.TextToSpeechEnabled);
 
         #endregion
 
@@ -327,10 +329,92 @@ public class JsonDeserializeTest
         #endregion
 
         #region Levels
-
-
+        
         Assert.Equal(-10, status.Mixers["SerialNumber"].Levels.Bleep);
         Assert.Equal(70, status.Mixers["SerialNumber"].Levels.DeEsser);
+        Assert.True(status.Mixers["SerialNumber"].Levels.SubmixSupported);
+        
+        #region Levels.Submix
+        
+        #region Levels.Submix.Inputs
+
+        #region Levels.Submix.Inputs.Chat
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.Chat.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Chat.Ratio);
+        Assert.Equal(164, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Chat.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Console
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.Console.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Console.Ratio);
+        Assert.Equal(70, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Console.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Game
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.Game.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Game.Ratio);
+        Assert.Equal(155, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Game.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.LineIn
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.LineIn.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.LineIn.Ratio);
+        Assert.Equal(128, status.Mixers["SerialNumber"].Levels.Submix.Inputs.LineIn.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Mic
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.Mic.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Mic.Ratio);
+        Assert.Equal(255, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Mic.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Music
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.Music.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Music.Ratio);
+        Assert.Equal(89, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Music.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.Sample
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.Sample.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Sample.Ratio);
+        Assert.Equal(166, status.Mixers["SerialNumber"].Levels.Submix.Inputs.Sample.Volume);
+
+        #endregion
+        
+        #region Levels.Submix.Inputs.System
+
+        Assert.True(status.Mixers["SerialNumber"].Levels.Submix.Inputs.System.Linked);
+        Assert.Equal(1.0, status.Mixers["SerialNumber"].Levels.Submix.Inputs.System.Ratio);
+        Assert.Equal(128, status.Mixers["SerialNumber"].Levels.Submix.Inputs.System.Volume);
+
+        #endregion
+
+        #endregion
+        
+        #region Levels.Submix.Outputs
+
+        Assert.Equal(SubmixOutput.A ,status.Mixers["SerialNumber"].Levels.Submix.Outputs.BroadcastMix);
+        Assert.Equal(SubmixOutput.A ,status.Mixers["SerialNumber"].Levels.Submix.Outputs.ChatMic);
+        Assert.Equal(SubmixOutput.A ,status.Mixers["SerialNumber"].Levels.Submix.Outputs.Headphone);
+        Assert.Equal(SubmixOutput.A ,status.Mixers["SerialNumber"].Levels.Submix.Outputs.LineOut);
+        Assert.Equal(SubmixOutput.B ,status.Mixers["SerialNumber"].Levels.Submix.Outputs.Sampler);
+
+        #endregion
+
+        #endregion
 
         #region Levels.Volume
 
@@ -1132,6 +1216,20 @@ public class JsonDeserializeTest
         Assert.Equal(DisplayMode.Advanced, status.Mixers["SerialNumber"].Settings.Display.Gate);
 
         #endregion
+
+        #endregion
+        
+        #region ShutdownCommands
+
+        Assert.Equal(
+            "{\"SaveProfile\":[]}",
+            status.Mixers["SerialNumber"].ShutdownCommands[0].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+        Assert.Equal(
+            "{\"SaveMicProfile\":[]}",
+            status.Mixers["SerialNumber"].ShutdownCommands[1].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+        Assert.Equal(
+            "{\"LoadProfileColours\":\"Main\"}",
+            status.Mixers["SerialNumber"].ShutdownCommands[2].ToString()?.Replace(" ", "").Replace("\r\n", ""));
 
         #endregion
 

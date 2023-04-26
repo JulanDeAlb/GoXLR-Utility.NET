@@ -42,6 +42,17 @@
               "identifier":"USB\\Anything\\Anything"
             }
           },
+          "shutdown_commands":[
+            {
+              "LoadProfileColours":"Main"
+            },
+            {
+              "SaveMicProfile":[]
+            },
+            {
+              "SaveProfile":[]
+            }
+          ],
           "fader_status":{
             "A":{
               "channel":"Chat",
@@ -155,6 +166,7 @@
             }
           },
           "levels":{
+            "submix_supported":true,
             "volumes":{
               "Mic":255,
               "LineIn":128,
@@ -167,6 +179,57 @@
               "Headphones":204,
               "MicMonitor":204,
               "LineOut":255
+            },
+            "submix":{
+              "inputs":{
+                "Mic":{
+                  "volume":255,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "LineIn":{
+                  "volume":128,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "Console":{
+                  "volume":70,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "System":{
+                  "volume":128,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "Game":{
+                  "volume":155,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "Chat":{
+                  "volume":164,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "Sample":{
+                  "volume":166,
+                  "linked":true,
+                  "ratio":1.0
+                },
+                "Music":{
+                  "volume":89,
+                  "linked":true,
+                  "ratio":1.0
+                }
+              },
+              "outputs":{
+                "Headphones":"B",
+                "BroadcastMix":"B",
+                "ChatMic":"B",
+                "Sampler":"B",
+                "LineOut":"A"
+              }
             },
             "bleep":-10,
             "deess":70
