@@ -126,11 +126,11 @@ namespace GoXLR_Utility.NET
         /// <summary>
         /// Send a Command to the GoXLR Daemon.
         /// </summary>
-        /// <param name="deviceCommand">The Command that should be send.</param>
-        public void SendCommand(CommandBase deviceCommand)
+        /// <param name="normalCommand">The Command that should be send.</param>
+        public void SendCommand(NormalCommandBase normalCommand)
         {
             IncrementId();
-            var commands = deviceCommand.GetJson(_id);
+            var commands = normalCommand.GetJson(_id);
 
             if (commands is null)
                 return;
