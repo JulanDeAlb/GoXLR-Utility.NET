@@ -8,7 +8,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler.Banks.Sample
 {
     public class Sample : INotifyPropertyChanged
     {
-        private string _name = null;
+        private string _name;
         private double _startPct;
         private double _stopPct;
         

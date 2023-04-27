@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.ShutdownCommands
 {
