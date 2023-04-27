@@ -1,5 +1,5 @@
 # GoXLR-Utility.NET
-A .NET Standard 2.1 Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.9
+A .NET Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.11
 
 This project is work in progress.
 
