@@ -1245,14 +1245,22 @@ public class PatchingTest
         
         Assert.Equal(
             "{\"LoadProfileColours\":\"Main\"}",
-            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[0].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[0].ToString()?
+                .Replace(" ", "")
+                .Replace("\n", "")
+                .Replace("\r", ""));
         Assert.Equal(
             "{\"SaveMicProfile\":[]}",
-            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[1].ToString()?.Replace(" ", "").Replace("\r\n", ""));
+            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[1].ToString()?
+                .Replace(" ", "")
+                .Replace("\n", "")
+                .Replace("\r", ""));
         Assert.Equal(
             "{\"SaveProfile\":[]}",
-            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[2].ToString()?.Replace(" ", "").Replace("\r\n", ""));
-        
+            _messageHandler.Status.Mixers["SerialNumber"].ShutdownCommands[2].ToString()?
+                .Replace(" ", "")
+                .Replace("\n", "")
+                .Replace("\r", ""));
 
         #endregion
 
