@@ -35,61 +35,11 @@ GetHttpState
 OpenPath(PathTypes),  
 SetShowTrayIcon(bool),  
 SetAutoStartEnabled(bool),  
-RecoverDefaults(PathTypes)
+RecoverDefaults(PathTypes),  
+SetTextToSpeechEnabled(bool)
 
 # Commands with SerialNumber
 #### The following Commands can be send via ***SendCommand(SerialNumber, new ...)***:
-
-**Fader**  
-SetFader(FaderName, ChannelName),  
-SetFaderMuteFunction(FaderName, MuteFunction)
-
-**Scribble**  
-SetScribbleIcon(FaderName, String),  
-SetScribbleText(FaderName, String),  
-SetScribbleNumber(FaderName, String),  
-SetScribbleInvert(FaderName, bool)
-
-**Levels**  
-SetDeeser(int),  
-SetSwearButtonVolume(int)
-
-**Volumes**  
-SetVolume(ChannelName, int)
-
-**Router**  
-SetRouter(InputDevice, OutputDevice, bool)
-
-**Cough Button**  
-SetCoughMuteFunction(MuteFunction),  
-SetCoughIsHold(bool)
-
-**Mic Settings**  
-SetMicrophoneType(MicrophoneType),  
-SetMicrophoneGain(MicrophoneType, int)
-
-**EQ Settings**  
-SetEqMiniGain(MiniEqFrequencies, int),  
-SetEqMiniFreq(MiniEqFrequencies, int),  
-SetEqGain(EqFrequencies, int),  
-SetEqFreq(EqFrequencies, int)
-
-**Gate Settings**  
-SetGateThreshold(int),  
-SetGateAttenuation(int),  
-SetGateAttack(GateTimes),  
-SetGateRelease(GateTimes),  
-SetGateActive(bool)
-
-**Compressor**  
-SetCompressorThreshold(int),  
-SetCompressorRatio(CompressorRatio),  
-SetCompressorAttack(CompressorAttackTime),  
-SetCompressorReleaseTime(CompressorReleaseTime),  
-SetCompressorMakeupGain(int)
-
-**Display Mode (Mic)**  
-SetElementDisplayMode(DisplayComponent, DisplayMode)
 
 **Colours**  
 SetFaderDisplayStyle(FaderName, FaderDisplayStyle),  
@@ -105,7 +55,21 @@ SetButtonGroupOffStyle(ButtonGroups, LightingOffStyle),
 SetSimpleColour(SimpleLighting, String),  
 SetEncoderColour(EncoderEnum, String, String, String),  
 SetSampleColour(SamplerEnum, String, String, String),  
-SetSampleOffStyle(SamplerEnum, LightingOffStyle),
+SetSampleOffStyle(SamplerEnum, LightingOffStyle)
+
+**Compressor**  
+SetCompressorThreshold(int),  
+SetCompressorRatio(CompressorRatio),  
+SetCompressorAttack(CompressorAttackTime),  
+SetCompressorReleaseTime(CompressorReleaseTime),  
+SetCompressorMakeupGain(int)
+
+**Cough Button**  
+SetCoughMuteFunction(MuteFunction),  
+SetCoughIsHold(bool)
+
+**Display Mode (Mic)**  
+SetElementDisplayMode(DisplayComponent, DisplayMode)
 
 **Effects**  
 LoadEffectPreset(String),  
@@ -149,7 +113,7 @@ SetMegaphonePostGain(int),
 
 SetRobotStyle(RobotStyle),  
 SetRobotGain(RobotRange, int),  
-SetRobotFreq(RobotRange, int),   (Needs check)
+SetRobotFreq(RobotRange, int),   (Needs check)  
 SetRobotWidth(RobotRange, int),  
 SetRobotWaveform(int),  
 SetRobotPulseWidth(int),  
@@ -162,6 +126,41 @@ SetHardTuneRate(int),
 SetHardTuneWindow(int),  
 SetHardTuneSource(HardTuneSource)
 
+**EQ Settings**  
+SetEqMiniGain(MiniEqFrequencies, int),  
+SetEqMiniFreq(MiniEqFrequencies, int),  
+SetEqGain(EqFrequencies, int),  
+SetEqFreq(EqFrequencies, int)
+
+**Fader**  
+SetFader(FaderName, ChannelName),  
+SetFaderMuteFunction(FaderName, MuteFunction)
+
+**Gate Settings**  
+SetGateThreshold(int),  
+SetGateAttenuation(int),  
+SetGateAttack(GateTimes),  
+SetGateRelease(GateTimes),  
+SetGateActive(bool)
+
+**General Settings**  
+SetMuteHoldDuration(int),  
+SetVCMuteAlsoMuteCM(bool)
+
+**Levels**  
+SetDeeser(int),  
+SetSwearButtonVolume(int)
+
+**Mic Profile**  
+LoadMicProfile(String),  
+SaveMicProfile(),  
+SaveMicProfileAs(String),  
+DeleteMicProfile(String)
+
+**Mic Settings**  
+SetMicrophoneType(MicrophoneType),  
+SetMicrophoneGain(MicrophoneType, int)
+
 **Profile**  
 NewProfile(String),  
 LoadProfile(String),  
@@ -170,15 +169,34 @@ SaveProfile(),
 SaveProfileAs(String),  
 DeleteProfile(String)
 
-**Mic Profile**  
-LoadMicProfile(String),  
-SaveMicProfile(),  
-SaveMicProfileAs(String),  
-DeleteMicProfile(String)
+**Router**  
+SetRouter(InputDevice, OutputDevice, bool)
 
-**General Settings**  
-SetMuteHoldDuration(int),  
-SetVCMuteAlsoMuteCM(bool)
+**Sampler**
+SamplerAdd(Bank, Button, string),  
+SamplerPlayByIndex(Bank, Button, int),  
+SamplerRemoveByIndex(Bank, Button, int),  
+SetSamplerFunction(Bank, Button, PlaybackMode),  
+SetSamplerOrder(Bank, Button, Order),  
+SetSampleStartPercent(Bank, Button, int, double),  
+SetSampleStopPercent(Bank, Button, int, double)
+
+**Scribble**  
+SetScribbleIcon(FaderName, String),  
+SetScribbleText(FaderName, String),  
+SetScribbleNumber(FaderName, String),  
+SetScribbleInvert(FaderName, bool)
+
+**Shutdown Commands**  
+ResetShutdownCommands(),  
+SetShutdownCommands(DeviceCommand),  
+SetShutdownCommands(IEnumberable<DeviceCommand>)
+
+**Submix**  
+SetSubMixEnabled(bool)
+SetSubMixLinked(ChannelName, bool)
+SetSubMixOutputMix(ChannelName, SubmixOutput)
+SetSubMixVolume(ChannelName, int)
 
 **These control the current GoXLR 'State'**  
 SetActiveEffectPreset(EffectBankPresets),  
@@ -189,3 +207,6 @@ SetHardTuneEnabled(bool),
 SetFXEnabled(bool),  
 SetFaderMuteState(FaderName, MuteState),  
 SetCoughMuteState(MuteState)
+
+**Volumes**  
+SetVolume(ChannelName, int)
