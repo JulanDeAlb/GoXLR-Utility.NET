@@ -931,8 +931,6 @@ public static class Program
 
         #endregion
 
-        goto HERE; //TODO
-
         #region NormalCommands.SetShowTrayIcon
 
         Utility.SendCommand(new SetShowTrayIcon(false));
@@ -1470,7 +1468,7 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Sampler
-        HERE: //TODO
+
         Utility.SendCommand(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Recording_2022-11-12T081058.wav"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SamplerPlayByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 0));
