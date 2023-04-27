@@ -289,6 +289,9 @@ namespace GoXLR_Utility.NET
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
+                    if (array == null)
+                        break;
+
                     lock (array) //Lock the array to safely edit it
                     {
                         array.RemoveAt(lastIndex);
@@ -297,6 +300,9 @@ namespace GoXLR_Utility.NET
                     break;
 
                 case OpPatchEnum.Add:
+                    if (array == null)
+                        break;
+
                     lock (array)
                     {
                         value = GetListValue(patchCacheItem.PropType, patch.Value);
@@ -310,6 +316,9 @@ namespace GoXLR_Utility.NET
                     break;
 
                 case OpPatchEnum.Replace:
+                    if (array == null)
+                        break;
+
                     lock (array)
                     {
                         value = GetListValue(patchCacheItem.PropType, patch.Value);
@@ -352,6 +361,9 @@ namespace GoXLR_Utility.NET
             switch (patch.Op)
             {
                 case OpPatchEnum.Remove:
+                    if (dictionary == null)
+                        break;
+
                     lock (dictionary)
                     {
                         dictionary.Remove(filePath);
@@ -359,6 +371,9 @@ namespace GoXLR_Utility.NET
                     break;
                     
                 case OpPatchEnum.Add:
+                    if (dictionary == null)
+                        break;
+
                     lock (dictionary)
                     {
                         dictionary.Add(filePath, value);
@@ -366,6 +381,9 @@ namespace GoXLR_Utility.NET
                     break;
                         
                 case OpPatchEnum.Replace:
+                    if (dictionary == null)
+                        break;
+
                     lock (dictionary)
                     {
                         dictionary[filePath] = value;
