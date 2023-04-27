@@ -221,7 +221,7 @@ namespace GoXLR_Utility.NET
         /// </summary>
         private void OnWsMessage(object sender, MessageEventArgs message)
         {
-            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message from Utility received.");
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message from Utility received: {message}", message.Data);
             _messageHandler.HandleMessage(message.Data);
         }
 

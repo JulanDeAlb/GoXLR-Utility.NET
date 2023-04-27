@@ -14,7 +14,7 @@ public class XUnitLogger : ILogger
 
     public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
     {
-        _output.WriteLine($"Message: {state} | Exception: {exception}");
+        _output.WriteLine(exception != null ? $"Message: {state} | Exception: {exception}" : $"Message: {state}");
     }
 
     public bool IsEnabled(LogLevel logLevel)
