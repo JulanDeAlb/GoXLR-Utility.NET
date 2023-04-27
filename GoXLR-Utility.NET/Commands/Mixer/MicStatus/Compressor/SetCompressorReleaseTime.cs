@@ -16,10 +16,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
         {
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorReleaseTime"] = new object[]
-                {
-                    timing
-                }
+                ["SetCompressorReleaseTime"] = timing
             };
         }
 
@@ -33,10 +30,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorReleaseTime"] = new object[]
-                {
-                    timing
-                }
+                ["SetCompressorReleaseTime"] = timing
             };
         }
 
@@ -51,10 +45,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorReleaseTime"] = new object[]
-                {
-                    timing
-                }
+                ["SetCompressorReleaseTime"] = timing
             };
         }
     }

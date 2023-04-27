@@ -16,10 +16,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
         {
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorRatio"] = new object[]
-                {
-                    ratio
-                }
+                ["SetCompressorRatio"] = ratio
             };
         }
 
@@ -33,10 +30,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorRatio"] = new object[]
-                {
-                    ratio
-                }
+                ["SetCompressorRatio"] = ratio
             };
         }
 
@@ -51,10 +45,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorRatio"] = new object[]
-                {
-                    ratio
-                }
+                ["SetCompressorRatio"] = ratio
             };
         }
     }

@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Profile.Mic
         {
             Command = new Dictionary<string, object>
             {
-                ["LoadMicProfile"] = new object[]
-                {
-                    name
-                }
+                ["LoadMicProfile"] = name
             };
         }
     }

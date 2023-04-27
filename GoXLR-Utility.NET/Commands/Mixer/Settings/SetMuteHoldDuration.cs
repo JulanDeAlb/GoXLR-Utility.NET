@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Settings
 
             Command = new Dictionary<string, object>
             {
-                ["SetMuteHoldDuration"] = new object[]
-                {
-                    value
-                }
+                ["SetMuteHoldDuration"] = value
             };
         }
     }

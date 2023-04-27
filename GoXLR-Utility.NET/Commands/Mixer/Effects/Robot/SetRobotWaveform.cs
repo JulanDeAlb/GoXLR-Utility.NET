@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotWaveform"] = new
-                {
-                    value
-                }
+                ["SetRobotWaveform"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotWaveform"] = new
-                {
-                    value
-                }
+                ["SetRobotWaveform"] = value
             };
         }
     }

@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.NoiseGate
 
             Command = new Dictionary<string, object>
             {
-                ["SetGateThreshold"] = new object[]
-                {
-                    value
-                }
+                ["SetGateThreshold"] = value
             };
         }
 
@@ -36,10 +33,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.NoiseGate
 
             Command = new Dictionary<string, object>
             {
-                ["SetGateThreshold"] = new object[]
-                {
-                    value
-                }
+                ["SetGateThreshold"] = value
             };
         }
     }

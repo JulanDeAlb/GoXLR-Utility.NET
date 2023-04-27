@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels
             
             Command = new Dictionary<string, object>
             {
-                ["SetDeeser"] = new object[]
-                {
-                    volume
-                }
+                ["SetDeeser"] = volume
             };
         }
         
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels
             
             Command = new Dictionary<string, object>
             {
-                ["SetDeeser"] = new object[]
-                {
-                    volume
-                }
+                ["SetDeeser"] = volume
             };
         }
     }

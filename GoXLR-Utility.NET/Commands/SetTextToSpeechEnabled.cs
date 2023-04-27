@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands
         {
             Command = new Dictionary<string, object>
             {
-                ["SetTTSEnabled"] = new object[]
-                {
-                    enable
-                }
+                ["SetTTSEnabled"] = enable
             };
         }
     }

@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone
 
             Command = new Dictionary<string, object>
             {
-                ["SetMegaphoneAmount"] = new
-                {
-                    value
-                }
+                ["SetMegaphoneAmount"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone
 
             Command = new Dictionary<string, object>
             {
-                ["SetMegaphoneAmount"] = new
-                {
-                    value
-                }
+                ["SetMegaphoneAmount"] = value
             };
         }
     }

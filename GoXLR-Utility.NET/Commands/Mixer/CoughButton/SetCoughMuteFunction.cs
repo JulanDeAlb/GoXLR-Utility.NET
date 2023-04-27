@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.CoughButton
         {
             Command = new Dictionary<string, object>
             {
-                ["SetCoughMuteFunction"] = new object[]
-                {
-                    muteFunction.ToString()
-                }
+                ["SetCoughMuteFunction"] = muteFunction.ToString()
             };
         }
     }

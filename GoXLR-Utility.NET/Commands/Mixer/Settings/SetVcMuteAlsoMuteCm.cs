@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Settings
         {
             Command = new Dictionary<string, object>
             {
-                ["SetVCMuteAlsoMuteCM"] = new object[]
-                {
-                    mute
-                }
+                ["SetVCMuteAlsoMuteCM"] = mute
             };
         }
     }

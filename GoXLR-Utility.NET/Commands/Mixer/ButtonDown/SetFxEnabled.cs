@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.ButtonDown
         {
             Command = new Dictionary<string, object>
             {
-                ["SetFXEnabled"] = new object[]
-                {
-                    isEnabled
-                }
+                ["SetFXEnabled"] = isEnabled
             };
         }
     }

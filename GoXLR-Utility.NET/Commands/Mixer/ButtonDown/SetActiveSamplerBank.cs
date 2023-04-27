@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.ButtonDown
         {
             Command = new Dictionary<string, object>
             {
-                ["SetActiveSamplerBank"] = new object[]
-                {
-                    samplerBank.ToString()
-                }
+                ["SetActiveSamplerBank"] = samplerBank.ToString()
             };
         }
     }

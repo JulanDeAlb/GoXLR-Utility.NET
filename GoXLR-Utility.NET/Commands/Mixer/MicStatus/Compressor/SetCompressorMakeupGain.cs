@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorMakeupGain"] = new object[]
-                {
-                    value
-                }
+                ["SetCompressorMakeupGain"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor
 
             Command = new Dictionary<string, object>
             {
-                ["SetCompressorMakeupGain"] = new object[]
-                {
-                    value
-                }
+                ["SetCompressorMakeupGain"] = value
             };
         }
     }

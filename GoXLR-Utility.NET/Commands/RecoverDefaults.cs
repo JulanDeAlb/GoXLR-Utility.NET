@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using GoXLR_Utility.NET.Enums.Response.Status.Paths;
+using GoXLR_Utility.NET.Enums.Commands;
 
 namespace GoXLR_Utility.NET.Commands
 {
@@ -9,14 +9,11 @@ namespace GoXLR_Utility.NET.Commands
         /// Recover defaults like default Profiles etc.
         /// </summary>
         /// <param name="path">The type to recover the defaults</param>
-        public RecoverDefaults(PathEnum path)
+        public RecoverDefaults(Defaults path)
         {
             Command = new Dictionary<string, object>
             {
-                ["RecoverDefaults"] = new object[]
-                {
-                    path.ToString(),
-                }
+                ["RecoverDefaults"] = path.ToString()
             };
         }
     }

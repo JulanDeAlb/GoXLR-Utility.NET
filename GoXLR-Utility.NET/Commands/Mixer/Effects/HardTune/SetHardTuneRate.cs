@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.HardTune
 
             Command = new Dictionary<string, object>
             {
-                ["SetHardTuneRate"] = new
-                {
-                    value
-                }
+                ["SetHardTuneRate"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.HardTune
 
             Command = new Dictionary<string, object>
             {
-                ["SetHardTuneRate"] = new
-                {
-                    value
-                }
+                ["SetHardTuneRate"] = value
             };
         }
     }

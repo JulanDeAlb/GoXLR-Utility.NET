@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands
         {
             Command = new Dictionary<string, object>
             {
-                ["SetAutoStartEnabled"] = new object[]
-                {
-                    enable
-                }
+                ["SetAutoStartEnabled"] = enable
             };
         }
     }

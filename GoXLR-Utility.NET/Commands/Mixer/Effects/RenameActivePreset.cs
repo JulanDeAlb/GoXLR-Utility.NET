@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects
         {
             Command = new Dictionary<string, object>
             {
-                ["RenameActivePreset"] = new object[]
-                {
-                    preset
-                }
+                ["RenameActivePreset"] = preset
             };
         }
     }

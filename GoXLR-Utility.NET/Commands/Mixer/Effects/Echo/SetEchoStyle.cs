@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Echo
         {
             Command = new Dictionary<string, object>
             {
-                ["SetEchoStyle"] = new object[]
-                {
-                    style.ToString()
-                }
+                ["SetEchoStyle"] = style.ToString()
             };
         }
     }

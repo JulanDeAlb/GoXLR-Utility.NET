@@ -11,19 +11,16 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Simple
         /// </summary>
         /// <param name="simple">The Simple one to change</param>
         /// <param name="colour1">The Colour 1 (#ffffff)</param>
-        /// <param name="colour2">The Colour 2 (#ffffff)</param>
-        public SetSimpleColour(SimpleLighting simple, string colour1, string colour2)
+        public SetSimpleColour(SimpleLighting simple, string colour1)
         {
             colour1 = colour1.Replace("#", "");
-            colour2 = colour2.Replace("#", "");
 
             Command = new Dictionary<string, object>
             {
                 ["SetSimpleColour"] = new object[]
                 {
                     simple.ToString(),
-                    colour1,
-                    colour2
+                    colour1
                 }
             };
         }

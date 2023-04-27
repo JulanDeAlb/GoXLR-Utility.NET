@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus
         {
             Command = new Dictionary<string, object>
             {
-                ["SetMicrophoneType"] = new object[]
-                {
-                    type.ToString()
-                }
+                ["SetMicrophoneType"] = type.ToString()
             };
         }
     }

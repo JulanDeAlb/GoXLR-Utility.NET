@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Gender
         {
             Command = new Dictionary<string, object>
             {
-                ["SetGenderStyle"] = new object []
-                {
-                    style.ToString()
-                }
+                ["SetGenderStyle"] = style.ToString()
             };
         }
     }

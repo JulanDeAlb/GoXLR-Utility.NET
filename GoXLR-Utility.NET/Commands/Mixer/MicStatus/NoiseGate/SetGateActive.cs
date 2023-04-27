@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.NoiseGate
         {
             Command = new Dictionary<string, object>
             {
-                ["SetGateActive"] = new object[]
-                {
-                    active
-                }
+                ["SetGateActive"] = active
             };
         }
     }

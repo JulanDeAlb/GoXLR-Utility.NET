@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.HardTune
         {
             Command = new Dictionary<string, object>
             {
-                ["SetHardTuneSource"] = new object[]
-                {
-                    source.ToString()
-                }
+                ["SetHardTuneSource"] = source.ToString()
             };
         }
     }

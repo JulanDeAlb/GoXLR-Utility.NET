@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels
             
             Command = new Dictionary<string, object>
             {
-                ["SetSwearButtonVolume"] = new object[]
-                {
-                    volume
-                }
+                ["SetSwearButtonVolume"] = volume
             };
         }
         
@@ -36,10 +33,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels
             
             Command = new Dictionary<string, object>
             {
-                ["SetSwearButtonVolume"] = new object[]
-                {
-                    volume
-                }
+                ["SetSwearButtonVolume"] = volume
             };
         }
     }

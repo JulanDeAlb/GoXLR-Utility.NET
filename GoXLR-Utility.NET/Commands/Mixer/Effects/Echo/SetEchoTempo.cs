@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Echo
 
             Command = new Dictionary<string, object>
             {
-                ["SetEchoTempo"] = new object[]
-                {
-                    value
-                }
+                ["SetEchoTempo"] = value
             };
         }
     }

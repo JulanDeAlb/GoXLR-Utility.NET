@@ -20,9 +20,9 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotGain"] = new
+                ["SetRobotGain"] = new object[]
                 {
-                    range,
+                    range.ToString(),
                     value
                 }
             };
@@ -40,9 +40,9 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotGain"] = new
+                ["SetRobotGain"] = new object[]
                 {
-                    range,
+                    range.ToString(),
                     value
                 }
             };

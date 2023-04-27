@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb
         {
             Command = new Dictionary<string, object>
             {
-                ["SetReverbStyle"] = new object[]
-                {
-                    style.ToString()
-                }
+                ["SetReverbStyle"] = style.ToString()
             };
         }
     }

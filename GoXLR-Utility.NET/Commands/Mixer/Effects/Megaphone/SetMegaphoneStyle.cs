@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone
         {
             Command = new Dictionary<string, object>
             {
-                ["SetMegaphoneStyle"] = new object[]
-                {
-                    style.ToString()
-                }
+                ["SetMegaphoneStyle"] = style.ToString()
             };
         }
     }

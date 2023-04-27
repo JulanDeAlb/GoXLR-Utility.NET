@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Pitch
 
             Command = new Dictionary<string, object>
             {
-                ["SetPitchCharacter"] = new
-                {
-                    value
-                }
+                ["SetPitchCharacter"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Pitch
 
             Command = new Dictionary<string, object>
             {
-                ["SetPitchCharacter"] = new
-                {
-                    value
-                }
+                ["SetPitchCharacter"] = value
             };
         }
     }

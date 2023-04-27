@@ -19,7 +19,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus
 
             Command = new Dictionary<string, object>
             {
-                ["SetGateThreshold"] = new object[]
+                ["SetMicrophoneGain"] = new object[]
                 {
                     type.ToString(),
                     gain
@@ -39,7 +39,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus
 
             Command = new Dictionary<string, object>
             {
-                ["SetGateThreshold"] = new object[]
+                ["SetMicrophoneGain"] = new object[]
                 {
                     type.ToString(),
                     gain

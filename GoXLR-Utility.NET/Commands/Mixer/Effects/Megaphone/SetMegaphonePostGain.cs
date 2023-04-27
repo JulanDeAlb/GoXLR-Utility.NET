@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone
 
             Command = new Dictionary<string, object>
             {
-                ["SetMegaphonePostGain"] = new
-                {
-                    value
-                }
+                ["SetMegaphonePostGain"] = value
             };
         }
 
@@ -36,10 +33,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone
 
             Command = new Dictionary<string, object>
             {
-                ["SetMegaphonePostGain"] = new
-                {
-                    value
-                }
+                ["SetMegaphonePostGain"] = value
             };
         }
     }

@@ -19,7 +19,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Router
                 {
                     input.ToString(),
                     output.ToString(),
-                    isEnabled.ToString()
+                    isEnabled
                 }
             };
         }

@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Pitch
         {
             Command = new Dictionary<string, object>
             {
-                ["SetPitchStyle"] = new object[]
-                {
-                    style.ToString()
-                }
+                ["SetPitchStyle"] = style.ToString()
             };
         }
     }

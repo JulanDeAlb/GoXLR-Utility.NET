@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Fader
         {
             Command = new Dictionary<string, object>
             {
-                ["SetAllFaderDisplayStyle"] = new object[]
-                {
-                    displayStyle.ToString()
-                }
+                ["SetAllFaderDisplayStyle"] = displayStyle.ToString()
             };
         }
     }

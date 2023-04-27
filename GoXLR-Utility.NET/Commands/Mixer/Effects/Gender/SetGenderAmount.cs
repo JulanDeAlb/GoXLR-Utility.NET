@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Gender
 
             Command = new Dictionary<string, object>
             {
-                ["SetGenderAmount"] = new object[]
-                {
-                    value
-                }
+                ["SetGenderAmount"] = value
             };
         }
 
@@ -36,10 +33,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Gender
 
             Command = new Dictionary<string, object>
             {
-                ["SetGenderAmount"] = new object[]
-                {
-                    value
-                }
+                ["SetGenderAmount"] = value
             };
         }
     }

@@ -22,10 +22,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb
 
             Command = new Dictionary<string, object>
             {
-                ["SetReverbDecay"] = new
-                {
-                    value
-                }
+                ["SetReverbDecay"] = value
             };
         }
     }

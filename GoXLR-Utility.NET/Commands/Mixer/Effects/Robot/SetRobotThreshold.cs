@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotThreshold"] = new
-                {
-                    value
-                }
+                ["SetRobotThreshold"] = value
             };
         }
 
@@ -36,10 +33,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotThreshold"] = new
-                {
-                    value
-                }
+                ["SetRobotThreshold"] = value
             };
         }
     }

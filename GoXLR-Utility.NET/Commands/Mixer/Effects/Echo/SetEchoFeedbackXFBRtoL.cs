@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Echo
 
             Command = new Dictionary<string, object>
             {
-                ["SetEchoFeedbackXFBRtoL"] = new object[]
-                {
-                    value
-                }
+                ["SetEchoFeedbackXFBRtoL"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Echo
 
             Command = new Dictionary<string, object>
             {
-                ["SetEchoFeedbackXFBRtoL"] = new object[]
-                {
-                    value
-                }
+                ["SetEchoFeedbackXFBRtoL"] = value
             };
         }
     }

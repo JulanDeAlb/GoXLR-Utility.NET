@@ -31,7 +31,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Submix.SubmixOut
             set => SetField(ref _chatMic, value);
         }
         
-        [JsonPropertyName("Headphone")]
+        [JsonPropertyName("Headphones")]
         [JsonConverter(typeof(JsonStringEnumConverter))]
         public SubmixOutput Headphone
         {

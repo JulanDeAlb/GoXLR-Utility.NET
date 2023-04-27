@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
         {
             Command = new Dictionary<string, object>
             {
-                ["SetRobotStyle"] = new object[]
-                {
-                    style.ToString()
-                }
+                ["SetRobotStyle"] = style.ToString()
             };
         }
     }

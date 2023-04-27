@@ -17,7 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels.Submix
                 ["SetSubMixLinked"] = new object[]
                 {
                     channel.ToString(),
-                    enabled.ToString()
+                    enabled
                 }
             };
         }

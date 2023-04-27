@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb
 
             Command = new Dictionary<string, object>
             {
-                ["SetReverbHighFactor"] = new
-                {
-                    value
-                }
+                ["SetReverbHighFactor"] = value
             };
         }
 
@@ -36,10 +33,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb
 
             Command = new Dictionary<string, object>
             {
-                ["SetReverbHighFactor"] = new
-                {
-                    value
-                }
+                ["SetReverbHighFactor"] = value
             };
         }
     }

@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotPulseWidth"] = new
-                {
-                    value
-                }
+                ["SetRobotPulseWidth"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Robot
 
             Command = new Dictionary<string, object>
             {
-                ["SetRobotPulseWidth"] = new
-                {
-                    value
-                }
+                ["SetRobotPulseWidth"] = value
             };
         }
     }

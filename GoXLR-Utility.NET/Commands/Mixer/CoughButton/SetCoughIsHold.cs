@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.CoughButton
         {
             Command = new Dictionary<string, object>
             {
-                ["SetCoughIsHold"] = new object[]
-                {
-                    isHold
-                }
+                ["SetCoughIsHold"] = isHold
             };
         }
     }

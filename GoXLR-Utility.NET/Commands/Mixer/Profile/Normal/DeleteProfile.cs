@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Profile.Normal
         {
             Command = new Dictionary<string, object>
             {
-                ["DeleteProfile"] = new object[]
-                {
-                    name
-                }
+                ["DeleteProfile"] = name
             };
         }
     }

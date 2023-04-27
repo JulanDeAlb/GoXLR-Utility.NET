@@ -15,7 +15,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels.Submix
         {
             Command = new Dictionary<string, object>
             {
-                ["SetSubMixLinked"] = new object[]
+                ["SetSubMixOutputMix"] = new object[]
                 {
                     channel.ToString(),
                     submixChannel.ToString()

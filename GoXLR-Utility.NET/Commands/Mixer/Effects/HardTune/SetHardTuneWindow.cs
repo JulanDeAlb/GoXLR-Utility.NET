@@ -18,10 +18,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.HardTune
 
             Command = new Dictionary<string, object>
             {
-                ["SetHardTuneWindow"] = new
-                {
-                    value
-                }
+                ["SetHardTuneWindow"] = value
             };
         }
     }

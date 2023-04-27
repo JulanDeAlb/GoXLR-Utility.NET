@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Levels.Submix
         {
             Command = new Dictionary<string, object>
             {
-                ["SetSubMixEnabled"] = new object[]
-                {
-                    enabled.ToString()
-                }
+                ["SetSubMixEnabled"] = enabled
             };
         }
     }

@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Profile.Normal
         {
             Command = new Dictionary<string, object>
             {
-                ["NewProfile"] = new object[]
-                {
-                    name
-                }
+                ["NewProfile"] = name
             };
         }
     }

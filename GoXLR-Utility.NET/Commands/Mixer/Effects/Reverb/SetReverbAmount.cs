@@ -17,10 +17,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb
 
             Command = new Dictionary<string, object>
             {
-                ["SetReverbAmount"] = new
-                {
-                    value
-                }
+                ["SetReverbAmount"] = value
             };
         }
 
@@ -35,10 +32,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb
 
             Command = new Dictionary<string, object>
             {
-                ["SetReverbAmount"] = new
-                {
-                    value
-                }
+                ["SetReverbAmount"] = value
             };
         }
     }

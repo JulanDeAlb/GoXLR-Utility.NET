@@ -13,10 +13,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.ButtonDown
         {
             Command = new Dictionary<string, object>
             {
-                ["SetCoughMuteState"] = new object[]
-                {
-                    muteState.ToString()
-                }
+                ["SetCoughMuteState"] = muteState.ToString()
             };
         }
     }

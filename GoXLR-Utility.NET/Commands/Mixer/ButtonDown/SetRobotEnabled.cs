@@ -12,10 +12,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.ButtonDown
         {
             Command = new Dictionary<string, object>
             {
-                ["SetRobotEnabled"] = new object[]
-                {
-                    isEnabled
-                }
+                ["SetRobotEnabled"] = isEnabled
             };
         }
     }
