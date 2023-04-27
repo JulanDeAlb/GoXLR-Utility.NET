@@ -5,6 +5,7 @@ on:
     branches: [ dev ]
 
 env:
+  test_nuget: ${{ contains(toJSON(github.event.commits.*.message), '[test-nuget]') }}
   release_nuget: ${{ contains(toJSON(github.event.commits.*.message), '[nuget]') }}
 
 jobs:
@@ -29,9 +30,11 @@ jobs:
         run: dotnet build -c Release
       - name: Test GoXLR-Utility.NET
         run: dotnet test
-      - name: Pack Preview Release
+      - if: ${{ env.release_nuget == 'true' || env.test_nuget == 'true' }}
+        name: Pack Preview Release
         run: dotnet pack GoXLR-Utility.NET.sln -c Release --output nugets --no-build --include-symbols
-      - name: Pack Preview Release
+      - if: ${{ env.release_nuget == 'true' || env.test_nuget == 'true' }}
+        name: Show Preview Release
         run: ls ./nugets/*.nupkg
       - if: ${{ env.release_nuget == 'true' }}
         name: Push to Nuget
