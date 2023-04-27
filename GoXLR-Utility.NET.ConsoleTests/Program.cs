@@ -60,7 +60,7 @@ namespace GoXLR_Utility.NET.ConsoleTests;
 
 public static class Program
 {
-    private static Logger _log = new Logger();
+    private static Logger _log = new();
     private static readonly Utility Utility = new(_log);
 
     public static void Main(string[] args)
