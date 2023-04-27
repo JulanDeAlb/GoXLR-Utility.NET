@@ -3,9 +3,15 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Sampler
 {
-    public class PlaySampleByIndex : DeviceCommandBase
+    public class SamplerPlayByIndex : DeviceCommandBase
     {
-        public PlaySampleByIndex(SamplerBank bank, BankButtonEnum button, int index)
+        /// <summary>
+        /// Play a Sample on a certain Index.
+        /// </summary>
+        /// <param name="bank">The Bank where the Sample is</param>
+        /// <param name="button">The Button where the Sample is</param>
+        /// <param name="index">The Index to play</param>
+        public SamplerPlayByIndex(SamplerBank bank, BankButtonEnum button, int index)
         {
             Command = new Dictionary<string, object>
             {
