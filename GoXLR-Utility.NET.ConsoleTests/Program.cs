@@ -1,5 +1,60 @@
-﻿using GoXLR_Utility.NET.Commands.Mixer.Profile.Normal;
+﻿using GoXLR_Utility.NET.Commands;
+using GoXLR_Utility.NET.Commands.Mixer.ButtonDown;
+using GoXLR_Utility.NET.Commands.Mixer.CoughButton;
+using GoXLR_Utility.NET.Commands.Mixer.Effects;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.Echo;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.Gender;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.HardTune;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.Megaphone;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.Pitch;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.Reverb;
+using GoXLR_Utility.NET.Commands.Mixer.Effects.Robot;
+using GoXLR_Utility.NET.Commands.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Commands.Mixer.FaderStatus.Scribble;
+using GoXLR_Utility.NET.Commands.Mixer.Levels;
+using GoXLR_Utility.NET.Commands.Mixer.Levels.Submix;
+using GoXLR_Utility.NET.Commands.Mixer.Levels.Volumes;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Button;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Encoder;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Fader;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Sampler;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Simple;
+using GoXLR_Utility.NET.Commands.Mixer.MicStatus;
+using GoXLR_Utility.NET.Commands.Mixer.MicStatus.Compressor;
+using GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser;
+using GoXLR_Utility.NET.Commands.Mixer.MicStatus.NoiseGate;
+using GoXLR_Utility.NET.Commands.Mixer.Profile.Mic;
+using GoXLR_Utility.NET.Commands.Mixer.Profile.Normal;
+using GoXLR_Utility.NET.Commands.Mixer.Router;
+using GoXLR_Utility.NET.Commands.Mixer.Sampler;
+using GoXLR_Utility.NET.Commands.Mixer.Settings;
+using GoXLR_Utility.NET.Commands.Mixer.Settings.Display;
 using GoXLR_Utility.NET.Commands.Mixer.ShutdownCommands;
+using GoXLR_Utility.NET.Enums.Commands;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Common;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Echo;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Gender;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.HardTune;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Megaphone;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Pitch;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Reverb;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Levels.Submix;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Button;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Encoder;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Sampler;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Simple;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.Equaliser;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.MicStatus.EqualiserMini;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Router;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Sampler.Banks;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Settings.Display;
+using GoXLR_Utility.NET.Enums.Response.Status.Paths;
 using Microsoft.Extensions.Logging;
 
 namespace GoXLR_Utility.NET.ConsoleTests;
@@ -11,11 +66,10 @@ public static class Program
 
     public static void Main(string[] args)
     {
-        var normal = new SetShutdownCommands(new DeleteProfile(""));
-        var list = new SetShutdownCommands(new DeleteProfile(""));
-        //Utility.Connect();
+        Utility.Connect();
         Console.ReadKey();
         AllEvents(Utility.AvailableSerialNumbers[0]);
+        AllCommands(Utility.AvailableSerialNumbers[0]);
         Console.WriteLine("Subscribed to Events");
         Console.ReadKey();
     }
@@ -856,6 +910,458 @@ public static class Program
         Utility.Status.Paths.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
 #endregion
+
+        #endregion
+    }
+
+    private static void AllCommands(string serialNumber)
+    {
+        #region NormalCommands
+
+        #region NormalCommands.RecoverDefaults
+
+        Utility.SendCommand(new RecoverDefaults(PathEnum.Icons));
+        Utility.SendCommand(new RecoverDefaults(PathEnum.MicProfiles));
+        Utility.SendCommand(new RecoverDefaults(PathEnum.Presets));
+        Utility.SendCommand(new RecoverDefaults(PathEnum.Profiles));
+        Utility.SendCommand(new RecoverDefaults(PathEnum.Samples));
+
+        #endregion
+
+        #region NormalCommands.SetShowTrayIcon
+
+        Utility.SendCommand(new SetShowTrayIcon(false));
+        Utility.SendCommand(new SetShowTrayIcon(true));
+
+        #endregion
+
+        #region NormalCommands.SetAutoStartEnabled
+
+        Utility.SendCommand(new SetAutoStartEnabled(true));
+        Utility.SendCommand(new SetAutoStartEnabled(false));
+
+        #endregion
+
+        #region NormalCommands.SetTextToSpeechEnabled
+
+        Utility.SendCommand(new SetTextToSpeechEnabled(true));
+        Utility.SendCommand(new SetAutoStartEnabled(false));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Profile.Start
+
+        #region DeviceCommands.Profile.Mic
+
+        Utility.SendCommand(serialNumber, new NewMicProfile("Test"));
+        Utility.SendCommand(serialNumber, new SaveMicProfile());
+        Utility.SendCommand(serialNumber, new SaveMicProfileAs("Test2"));
+
+        #endregion
+
+        #region DeviceCommands.Profile.Normal
+
+        Utility.SendCommand(serialNumber, new NewProfile("Test"));
+        Utility.SendCommand(serialNumber, new SaveProfile());
+        Utility.SendCommand(serialNumber, new SaveProfileAs("Test2"));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands
+
+        #region DeviceCommands.ButtonDown
+
+        #region DeviceCommands.ButtonDown.SetActiveEffectPreset
+
+        Utility.SendCommand(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset1));
+        Utility.SendCommand(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset2));
+        Utility.SendCommand(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset3));
+        Utility.SendCommand(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset4));
+        Utility.SendCommand(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset5));
+        Utility.SendCommand(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset6));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetActiveSamplerBank
+
+        Utility.SendCommand(serialNumber, new SetActiveSamplerBank(SamplerBank.A));
+        Utility.SendCommand(serialNumber, new SetActiveSamplerBank(SamplerBank.B));
+        Utility.SendCommand(serialNumber, new SetActiveSamplerBank(SamplerBank.C));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetCoughMuteState
+
+        Utility.SendCommand(serialNumber, new SetCoughMuteState(MuteState.MutedToX));
+        Utility.SendCommand(serialNumber, new SetCoughMuteState(MuteState.MutedToAll));
+        Utility.SendCommand(serialNumber, new SetCoughMuteState(MuteState.Unmuted));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.A
+
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.A, MuteState.MutedToX));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.A, MuteState.MutedToAll));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.A, MuteState.Unmuted));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.B
+
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.B, MuteState.MutedToX));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.B, MuteState.MutedToAll));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.B, MuteState.Unmuted));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.C
+
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.C, MuteState.MutedToX));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.C, MuteState.MutedToAll));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.C, MuteState.Unmuted));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.D
+
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.D, MuteState.MutedToX));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.D, MuteState.MutedToAll));
+        Utility.SendCommand(serialNumber, new SetFaderMuteState(FaderName.D, MuteState.Unmuted));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFxEnabled
+
+        Utility.SendCommand(serialNumber, new SetFxEnabled(true));
+        Utility.SendCommand(serialNumber, new SetFxEnabled(false));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetHardTuneEnabled
+
+        Utility.SendCommand(serialNumber, new SetHardTuneEnabled(true));
+        Utility.SendCommand(serialNumber, new SetHardTuneEnabled(false));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetMegaphoneEnabled
+
+        Utility.SendCommand(serialNumber, new SetMegaphoneEnabled(true));
+        Utility.SendCommand(serialNumber, new SetMegaphoneEnabled(false));
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetRobotEnabled
+
+        Utility.SendCommand(serialNumber, new SetRobotEnabled(true));
+        Utility.SendCommand(serialNumber, new SetRobotEnabled(false));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.CoughButton
+
+        #region DeviceCommands.CoughButton.SetCoughIsHold
+
+        Utility.SendCommand(serialNumber, new SetCoughIsHold(false));
+        Utility.SendCommand(serialNumber, new SetCoughIsHold(true));
+
+        #endregion
+
+        #region DeviceCommands.CoughButton.SetCoughIsHold
+
+        Utility.SendCommand(serialNumber, new SetCoughMuteFunction(MuteFunction.ToLineOut));
+        Utility.SendCommand(serialNumber, new SetCoughMuteFunction(MuteFunction.ToPhones));
+        Utility.SendCommand(serialNumber, new SetCoughMuteFunction(MuteFunction.ToStream));
+        Utility.SendCommand(serialNumber, new SetCoughMuteFunction(MuteFunction.ToVoiceChat));
+        Utility.SendCommand(serialNumber, new SetCoughMuteFunction(MuteFunction.All));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Effects
+
+        Utility.SendCommand(serialNumber, new LoadEffectPreset("BadMic"));
+        Utility.SendCommand(serialNumber, new RenameActivePreset("BadMic2"));
+        Utility.SendCommand(serialNumber, new RenameActivePreset("BadMic"));
+        Utility.SendCommand(serialNumber, new SaveActivePreset());
+
+        #region DeviceCommands.Effects.Echo
+
+        Utility.SendCommand(serialNumber, new SetEchoAmount(55));
+        Utility.SendCommand(serialNumber, new SetEchoAmount(-1));
+        Utility.SendCommand(serialNumber, new SetEchoAmount(101));
+        Utility.SendCommand(serialNumber, new SetEchoDelayLeft(2500));
+        Utility.SendCommand(serialNumber, new SetEchoDelayRight(2500));
+        Utility.SendCommand(serialNumber, new SetEchoFeedback(100));
+        Utility.SendCommand(serialNumber, new SetEchoFeedbackLeft(100));
+        Utility.SendCommand(serialNumber, new SetEchoFeedbackRight(100));
+        Utility.SendCommand(serialNumber, new SetEchoFeedbackXfbLtoR(100));
+        Utility.SendCommand(serialNumber, new SetEchoFeedbackXfbRtoL(100));
+        Utility.SendCommand(serialNumber, new SetEchoStyle(EchoStyle.ClassicSlap));
+        Utility.SendCommand(serialNumber, new SetEchoTempo(45));
+
+        #endregion
+
+        #region DeviceCommands.Effects.Gender
+
+        Utility.SendCommand(serialNumber, new SetGenderAmount(12));
+        Utility.SendCommand(serialNumber, new SetGenderStyle(GenderStyle.Narrow));
+
+        #endregion
+
+        #region DeviceCommands.Effects.HardTune
+
+        Utility.SendCommand(serialNumber, new SetHardTuneAmount(100));
+        Utility.SendCommand(serialNumber, new SetHardTuneRate(100));
+        Utility.SendCommand(serialNumber, new SetHardTuneSource(HardTuneSource.Game));
+        Utility.SendCommand(serialNumber, new SetHardTuneStyle(HardTuneStyle.Hard));
+        Utility.SendCommand(serialNumber, new SetHardTuneWindow(600));
+
+        #endregion
+
+        #region DeviceCommands.Effects.Megaphone
+
+        Utility.SendCommand(serialNumber, new SetMegaphoneAmount(100));
+        Utility.SendCommand(serialNumber, new SetMegaphonePostGain(20));
+        Utility.SendCommand(serialNumber, new SetMegaphoneStyle(MegaphoneStyle.Megaphone));
+
+        #endregion
+
+        #region DeviceCommands.Effects.Pitch
+
+        Utility.SendCommand(serialNumber, new SetPitchAmount(100));
+        Utility.SendCommand(serialNumber, new SetPitchCharacter(100));
+        Utility.SendCommand(serialNumber, new SetPitchStyle(PitchStyle.Narrow));
+
+        #endregion
+
+        #region DeviceCommands.Effects.Reverb
+
+        Utility.SendCommand(serialNumber, new SetReverbAmount(100));
+        Utility.SendCommand(serialNumber, new SetReverbDecay(2000));
+        Utility.SendCommand(serialNumber, new SetReverbDiffuse(50));
+        Utility.SendCommand(serialNumber, new SetReverbEarlyLevel(0));
+        Utility.SendCommand(serialNumber, new SetReverbHighColour(50));
+        Utility.SendCommand(serialNumber, new SetReverbHighFactor(25));
+        Utility.SendCommand(serialNumber, new SetReverbLowColour(50));
+        Utility.SendCommand(serialNumber, new SetReverbModDepth(25));
+        Utility.SendCommand(serialNumber, new SetReverbModSpeed(25));
+        Utility.SendCommand(serialNumber, new SetReverbPreDelay(100));
+        Utility.SendCommand(serialNumber, new SetReverbStyle(ReverbStyle.Library));
+        Utility.SendCommand(serialNumber, new SetReverbTailLevel(0));
+
+        #endregion
+
+        #region DeviceCommands.Effects.Robot
+
+        Utility.SendCommand(serialNumber, new SetRobotDryMix(0));
+        Utility.SendCommand(serialNumber, new SetRobotFreq(RobotRange.Low, 88));
+        Utility.SendCommand(serialNumber, new SetRobotFreq(RobotRange.Medium, 184));
+        Utility.SendCommand(serialNumber, new SetRobotFreq(RobotRange.High, 240));
+        Utility.SendCommand(serialNumber, new SetRobotGain(RobotRange.Low, 12));
+        Utility.SendCommand(serialNumber, new SetRobotGain(RobotRange.Medium, 12));
+        Utility.SendCommand(serialNumber, new SetRobotGain(RobotRange.High, 12));
+        Utility.SendCommand(serialNumber, new SetRobotPulseWidth(100));
+        Utility.SendCommand(serialNumber, new SetRobotThreshold(0));
+        Utility.SendCommand(serialNumber, new SetRobotWaveform(2));
+        Utility.SendCommand(serialNumber, new SetRobotWidth(RobotRange.Low, 12));
+        Utility.SendCommand(serialNumber, new SetRobotWidth(RobotRange.Medium, 12));
+        Utility.SendCommand(serialNumber, new SetRobotWidth(RobotRange.High, 12));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.FaderStatus
+
+        Utility.SendCommand(serialNumber, new SetFader(FaderName.A, ChannelName.Headphones));
+        Utility.SendCommand(serialNumber, new SetFaderMuteFunction(FaderName.A, MuteFunction.ToPhones));
+
+        #region DeviceCommands.FaderStatus.Scribble
+
+        Utility.SendCommand(serialNumber, new SetScribbleIcon(FaderName.A, "level.png"));
+        Utility.SendCommand(serialNumber, new SetScribbleInvert(FaderName.A, true));
+        Utility.SendCommand(serialNumber, new SetScribbleNumber(FaderName.A, "B"));
+        Utility.SendCommand(serialNumber, new SetScribbleText(FaderName.A, "Text"));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Levels
+
+        Utility.SendCommand(serialNumber, new SetBleep(0));
+        Utility.SendCommand(serialNumber, new SetDeeser(100));
+
+
+        #region DeviceCommands.Submix
+
+        Utility.SendCommand(serialNumber, new SetSubMixEnabled(true));
+        Utility.SendCommand(serialNumber, new SetSubMixLinked(InputDevice.Chat, false));
+        Utility.SendCommand(serialNumber, new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.B));
+        Utility.SendCommand(serialNumber, new SetSubMixVolume(InputDevice.Chat, 10));
+
+        #endregion
+
+        #region DeviceCommands.Volumes
+
+        Utility.SendCommand(serialNumber, new SetVolume(ChannelName.Music, 10));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Lighting
+
+        #region DeviceCommands.Lighting.Button
+
+        Utility.SendCommand(serialNumber, new SetButtonColours(ButtonLight.Bleep, "#404040", "#ffffff"));
+        Utility.SendCommand(serialNumber, new SetButtonGroupColours(ButtonGroups.EffectSelector, "#404040", "#ffffff"));
+        Utility.SendCommand(serialNumber, new SetButtonOffStyle(ButtonLight.Cough, LightingOffStyle.Dimmed));
+        Utility.SendCommand(serialNumber, new SetButtonGroupOffStyle(ButtonGroups.SamplerButtons, LightingOffStyle.Colour2));
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Encoder
+
+        Utility.SendCommand(serialNumber, new SetEncoderColour(EncoderEnum.Echo, "#404040", "#ffffff", "#909090"));
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Fader
+
+        Utility.SendCommand(serialNumber, new SetAllFaderColours("#404040", "#ffffff"));
+        Utility.SendCommand(serialNumber, new SetAllFaderDisplayStyle(FaderDisplayStyle.Gradient));
+        Utility.SendCommand(serialNumber, new SetFaderColours(FaderName.A, "#101010", "#404040"));
+        Utility.SendCommand(serialNumber, new SetFaderDisplayStyle(FaderName.C, FaderDisplayStyle.TwoColour));
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Sampler
+
+        Utility.SendCommand(serialNumber, new SetSampleColour(SamplerEnum.SamplerSelectA, "#404040", "#ffffff", "#909090"));
+        Utility.SendCommand(serialNumber, new SetSampleOffStyle(SamplerEnum.SamplerSelectA, LightingOffStyle.Dimmed));
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Simple
+
+        Utility.SendCommand(serialNumber, new SetSimpleColour(SimpleLighting.Global, "#020202", "#909090"));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.MicStatus
+
+        Utility.SendCommand(serialNumber, new SetMicrophoneGain(MicrophoneType.Dynamic, 40));
+        Utility.SendCommand(serialNumber, new SetMicrophoneType(MicrophoneType.Dynamic));
+
+        #region DeviceCommands.MicStatus.Compressor
+
+        Utility.SendCommand(serialNumber, new SetCompressorAttack(CompAttackTime.Comp35Ms));
+        Utility.SendCommand(serialNumber, new SetCompressorMakeupGain(24));
+        Utility.SendCommand(serialNumber, new SetCompressorRatio(CompRatio.Ratio2To5));
+        Utility.SendCommand(serialNumber, new SetCompressorReleaseTime(CompReleaseTime.Comp55Ms));
+        Utility.SendCommand(serialNumber, new SetCompressorThreshold(0));
+
+        #endregion
+
+        #region DeviceCommands.MicStatus.Equaliser
+
+        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer125Hz, 300));
+        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer1KHz, 2000));
+        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer16KHz, 18000));
+        Utility.SendCommand(serialNumber, new SetEqGain(SimpleEqualiserEnum.Mid, 9));
+        Utility.SendCommand(serialNumber, new SetEqGain(EqualiserEnum.Equalizer16KHz, 9));
+        Utility.SendCommand(serialNumber, new SetEqMiniFrequency(EqualiserMiniEnum.Equalizer90Hz, 300));
+        Utility.SendCommand(serialNumber, new SetEqMiniFrequency(EqualiserMiniEnum.Equalizer500Hz, 2000));
+        Utility.SendCommand(serialNumber, new SetEqMiniFrequency(EqualiserMiniEnum.Equalizer8KHz, 18000));
+        Utility.SendCommand(serialNumber, new SetEqMiniGain(SimpleEqualiserEnum.Mid, 9));
+        Utility.SendCommand(serialNumber, new SetEqMiniGain(EqualiserMiniEnum.Equalizer8KHz, 9));
+
+        #endregion
+
+        #region DeviceCommands.MicStatus.NoiseGate
+
+        Utility.SendCommand(serialNumber, new SetGateActive(true));
+        Utility.SendCommand(serialNumber, new SetGateAttack(GateTiming.Gate110Ms));
+        Utility.SendCommand(serialNumber, new SetGateAttenuation(100));
+        Utility.SendCommand(serialNumber, new SetGateRelease(GateTiming.Gate80Ms));
+        Utility.SendCommand(serialNumber, new SetGateThreshold(0));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Router
+
+        Utility.SendCommand(serialNumber, new SetRouter(InputDevice.Chat, OutputDevice.Headphones, false));
+
+        #endregion
+
+        #region DeviceCommands.Sampler
+
+        Utility.SendCommand(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Recording_2022-11-12T081058.wav"));
+        Utility.SendCommand(serialNumber, new SamplerPlayByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 0));
+        Utility.SendCommand(serialNumber, new SamplerRemoveByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 1));
+        Utility.SendCommand(serialNumber, new SetSamplerFunction(SamplerBank.A, BankButtonEnum.BottomLeft, SamplePlaybackMode.Loop));
+        Utility.SendCommand(serialNumber, new SetSamplerOrder(SamplerBank.A, BankButtonEnum.BottomLeft, SamplePlayOrder.Random));
+        Utility.SendCommand(serialNumber, new SetSampleStartPercent(SamplerBank.A, BankButtonEnum.BottomLeft, 0, 10.0));
+        Utility.SendCommand(serialNumber, new SetSampleStopPercent(SamplerBank.A, BankButtonEnum.BottomLeft, 0, 16.0));
+
+        #endregion
+
+        #region DeviceCommands.Sampler
+
+        Utility.SendCommand(serialNumber, new SetMuteHoldDuration(5000));
+        Utility.SendCommand(serialNumber, new SetVcMuteAlsoMuteCm(true));
+
+        #region DeviceCommands.Sampler.Display
+
+        Utility.SendCommand(serialNumber, new SetDisplayMode(DisplayComponent.Compressor, DisplayMode.Advanced));
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.ShutdownCommands
+
+        Utility.SendCommand(serialNumber, new SetShutdownCommands(new SetBleep(0)));
+        Utility.SendCommand(serialNumber, new ResetShutdownCommands());
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Profile.End
+
+        #region DeviceCommands.Profile.Mic
+
+        Utility.SendCommand(serialNumber, new LoadMicProfile("DEFAULT"));
+        Utility.SendCommand(serialNumber, new DeleteMicProfile("Test"));
+        Utility.SendCommand(serialNumber, new DeleteMicProfile("Test2"));
+
+        #endregion
+
+        #region DeviceCommands.Profile.Normal
+
+        Utility.SendCommand(serialNumber, new LoadProfile("Main"));
+        Utility.SendCommand(serialNumber, new DeleteProfile("Test"));
+        Utility.SendCommand(serialNumber, new DeleteProfile("Test2"));
+
+        #endregion
 
         #endregion
     }
