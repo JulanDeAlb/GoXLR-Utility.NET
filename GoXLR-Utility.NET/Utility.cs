@@ -119,7 +119,7 @@ namespace GoXLR_Utility.NET
 
             foreach (var cmd in commands)
             {
-                Send(cmd);
+                Send(cmd, serialNumber);
             }
         }
 
@@ -170,10 +170,33 @@ namespace GoXLR_Utility.NET
 
             Send(sendCommand[0]);
         }
-        
+
+        /// <summary>
+        /// Send a Simple Command using its Command String and the Parameters
+        /// in case the Command isn't implemented or not working.<br/>
+        /// All Commands can be found <a href="https://github.com/GoXLR-on-Linux/goxlr-utility/blob/main/ipc/src/lib.rs">HERE</a>.
+        /// </summary>
+        /// <param name="commandName">As String<br/>(Example: SetTTSEnabled)</param>
+        /// <param name="parameters">The Parameters<br/>(Example: true)</param>
+        public void SendCommand(string commandName, params object[] parameters)
+        {
+            if (parameters.Length < 1)
+                return;
+
+            var commandParameters = parameters.Length == 1
+                ? parameters[0]
+                : parameters;
+
+            SendCommand(new Dictionary<string, object>
+            {
+                [commandName] = commandParameters
+            });
+        }
+
         /// <summary>
         /// Send a Device Command using its Command String and the Parameters
-        /// in case the Command isn't implemented or not working.
+        /// in case the Command isn't implemented or not working.<br/>
+        /// All Commands can be found <a href="https://github.com/GoXLR-on-Linux/goxlr-utility/blob/main/ipc/src/lib.rs">HERE</a>.
         /// </summary>
         /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
         /// <param name="commandName">As String<br/>(Example: SetVolume)</param>
@@ -187,10 +210,10 @@ namespace GoXLR_Utility.NET
                 ? parameters[0]
                 : parameters;
 
-            SendCommand(serialNumber, new Dictionary<string, object>
+            SendCommand(new Dictionary<string, object>
             {
                 [commandName] = commandParameters
-            });
+            }, serialNumber);
         }
         
         /// <summary>
@@ -256,34 +279,50 @@ namespace GoXLR_Utility.NET
         /// Send the Message via WebSocket
         /// </summary>
         /// <param name="message">Message</param>
-        private void Send(string message)
+        /// <param name="serialNumber">Message</param>
+        private void Send(string message, string serialNumber = null)
         {
-            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", message);
+            var debugMessage = serialNumber != null ? message.Replace(serialNumber, "SerialNumber") : message;
+
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", debugMessage);
             _websocket?.Send(message);
         }
 		
         /// <summary>
         /// Base Class of <see cref="SendCommand(string, string, object[])"/>
         /// </summary>
-        /// <param name="serialNumber">SerialNumber</param>
         /// <param name="command">Command as Object</param>
-        private void SendCommand(string serialNumber, object command)
+        /// <param name="serialNumber">SerialNumber</param>
+        private void SendCommand(object command, string serialNumber = null)
         {
             IncrementId();
-            var finalRequest = new
-            {
-                _id,
-                data = new
+
+            object finalRequest;
+            if (serialNumber != null)
+                finalRequest = new
                 {
-                    Command = new[] {
-                        serialNumber,
-                        command
+                    id = _id,
+                    data = new
+                    {
+                        Command = new[]
+                        {
+                            serialNumber,
+                            command
+                        }
                     }
-                }
-            };
-			
-            var json = JsonSerializer.Serialize(finalRequest, SerializerOptions);
-            _websocket?.Send(json);
+                };
+            else
+                finalRequest = new
+                {
+                    id = _id,
+                    data = command
+                };
+
+            var message = JsonSerializer.Serialize(finalRequest, SerializerOptions);
+            var debugMessage = serialNumber != null ? message.Replace(serialNumber, "SerialNumber") : message;
+
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", debugMessage);
+            _websocket?.Send(message);
         }
     }
 }
