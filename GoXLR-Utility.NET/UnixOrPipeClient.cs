@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
@@ -78,8 +79,7 @@ namespace GoXLR_Utility.NET
             var processes = Process.GetProcessesByName("goxlr-daemon");
             if (processes.Length == 0)
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "GoXLR Utility Daemon not Running.");
-                return null;
+                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "GoXLR Utility Daemon probably not Running.");
             }
 
             var client = new NamedPipeClientStream("@goxlr.socket");
