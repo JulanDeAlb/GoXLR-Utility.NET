@@ -31,6 +31,7 @@ using GoXLR_Utility.NET.Commands.Mixer.Settings;
 using GoXLR_Utility.NET.Commands.Mixer.Settings.Display;
 using GoXLR_Utility.NET.Commands.Mixer.ShutdownCommands;
 using GoXLR_Utility.NET.Enums.Commands;
+using GoXLR_Utility.NET.Enums.Response.Status.Config;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Common;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Echo;
@@ -65,19 +66,12 @@ public static class Program
 
     public static void Main(string[] args)
     {
-        Utility.Connect();
+        Utility.Connect("ws://localhost:14564/api/websocket");
         Console.ReadKey();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new NewProfile("Test"));
-        Task.Delay(200).Wait();
         Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav"));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SamplerPlayByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 0));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new LoadProfile("Main", true));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new DeleteProfile("Test"));
-        //AllCommands(Utility.AvailableSerialNumbers[0]);
-        //Console.ReadKey();
+        Console.ReadKey();
+        AllCommands(Utility.AvailableSerialNumbers[0]);
+        Console.ReadKey();
         //AllEvents(Utility.AvailableSerialNumbers[0]);
         //Console.WriteLine("Subscribed to Events");
         Console.ReadKey();
@@ -602,6 +596,7 @@ public static class Program
         #region Lighting.Sampler
 
         Utility.Status.Mixers[serialNumber].Lighting.Sampler.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+        Utility.Status.Mixers[serialNumber].Lighting.Sampler.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #region Lighting.Sampler.A
 
@@ -716,6 +711,10 @@ public static class Program
         #endregion
 
         #region Sampler
+        
+        Utility.Status.Mixers[serialNumber].Sampler.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+        
+        Utility.Status.Mixers[serialNumber].Sampler.ProcessingState.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
@@ -964,6 +963,24 @@ public static class Program
         Task.Delay(200).Wait();
 
         #endregion
+        
+        #region NormalCommands.SetAllowNetworkAccess
+
+        Utility.SendCommand(new SetAllowNetworkAccess(true));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(new SetAllowNetworkAccess(false));
+        Task.Delay(200).Wait();
+
+        #endregion
+        
+        #region NormalCommands.SetLogLevel
+
+        Utility.SendCommand(new SetLogLevel(LogLevelEnum.Debug));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(new SetLogLevel(LogLevelEnum.Warn));
+        Task.Delay(200).Wait();
+
+        #endregion
 
         #endregion
 
@@ -971,7 +988,6 @@ public static class Program
 
         #region DeviceCommands.Profile.Mic
 
-        BeforeTTS:
         Utility.SendCommand(serialNumber, new NewMicProfile("Test"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SaveMicProfile());
@@ -982,7 +998,7 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Profile.Normal
-NowOverHere:
+
         Utility.SendCommand(serialNumber, new NewProfile("Test"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SaveProfile());
@@ -1331,6 +1347,8 @@ NowOverHere:
 
         #region DeviceCommands.Submix
 
+        Utility.SendCommand(serialNumber, new SetMonitorMix(OutputDevice.BroadcastMix));
+        Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetSubMixEnabled(true));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetSubMixLinked(InputDevice.Chat, false));
@@ -1361,7 +1379,7 @@ NowOverHere:
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetButtonOffStyle(ButtonLight.Cough, LightingOffStyle.Dimmed));
         Task.Delay(200).Wait();
-        Utility.SendCommand(serialNumber, new SetButtonGroupOffStyle(ButtonGroups.SamplerButtons, LightingOffStyle.Colour2));
+        Utility.SendCommand(serialNumber, new SetButtonGroupOffStyle(ButtonGroups.EffectSelector, LightingOffStyle.Colour2));
         Task.Delay(200).Wait();
 
         #endregion
@@ -1428,7 +1446,7 @@ NowOverHere:
 
         #region DeviceCommands.MicStatus.Equaliser
 
-        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer125Hz, 300));
+        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer125Hz, 250));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer1KHz, 2000));
         Task.Delay(200).Wait();
@@ -1492,6 +1510,12 @@ NowOverHere:
         Utility.SendCommand(serialNumber, new SetSampleStartPercent(SamplerBank.A, BankButtonEnum.BottomLeft, 0, 10.0));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetSampleStopPercent(SamplerBank.A, BankButtonEnum.BottomLeft, 0, 16.0));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetSamplerPreBufferDuration(5000));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetSamplerPreBufferDuration(0));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new ClearSampleProcessError());
         Task.Delay(200).Wait();
 
         #endregion

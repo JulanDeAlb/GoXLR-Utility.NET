@@ -566,7 +566,7 @@ public static class Program
 
         #region DeviceCommands.Lighting.Simple
 
-        Utility.SendCommand(serialNumber, new SetSimpleColour(SimpleLighting.Accent, "#BE04FF"));
+        Utility.SendCommand(serialNumber, new SetSimpleColour(SimpleLighting.Global, "#020202"));
         Task.Delay(200).Wait();
 
         #endregion
@@ -597,7 +597,7 @@ public static class Program
 
         #region DeviceCommands.MicStatus.Equaliser
 
-        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer125Hz, 300));
+        Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer125Hz, 250));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer1KHz, 2000));
         Task.Delay(200).Wait();
