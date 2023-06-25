@@ -51,19 +51,19 @@ namespace GoXLR_Utility.NET.Light
         /// Windows Named Pipe to get the WebSocket URL.
         /// </summary>
         /// <returns>True on success</returns>
-        public bool Connect()
-        {
-            var settings = _unixOrPipeClient?.Connect();
-            
-            if (settings == null || !settings.Enabled)
-                return false;
-            
-            InitializeWebSocket(settings.ToWebSocketString());
-            
-            Interlocked.Exchange(ref _id, 0);
-            _websocket?.Connect();
-            return true;
-        }
+        //public bool Connect()
+        //{
+        //    var settings = _unixOrPipeClient?.Connect();
+        //    
+        //    if (settings == null || !settings.Enabled)
+        //        return false;
+        //    
+        //    InitializeWebSocket(settings.ToWebSocketString());
+        //    
+        //    Interlocked.Exchange(ref _id, 0);
+        //    _websocket?.Connect();
+        //    return true;
+        //}
 
         /// <summary>
         /// Connect to the GoXLR Daemon via WebSocket.
@@ -310,15 +310,7 @@ namespace GoXLR_Utility.NET.Light
                                     break;
                                 
                                 default:
-                                    try
-                                    {
-                                        OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = ConvertPath(item.GetPath()), Value = item.ToString()});
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        Console.WriteLine(e);
-                                        throw;
-                                    }
+                                    OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = ConvertPath(item.GetPath()), Value = item.ToString()});
                                     break;
                             }
                         }

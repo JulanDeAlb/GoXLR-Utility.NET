@@ -68,19 +68,19 @@ namespace GoXLR_Utility.NET
         /// Windows Named Pipe to get the WebSocket URL.
         /// </summary>
         /// <returns>True on success</returns>
-        public bool Connect()
-        {
-            var settings = _unixOrPipeClient?.Connect();
-            
-            if (settings == null || !settings.Enabled)
-                return false;
-            
-            InitializeWebSocket(settings.ToWebSocketString());
-            
-            Interlocked.Exchange(ref _id, 0);
-            _websocket?.Connect();
-            return true;
-        }
+        //public bool Connect()
+        //{
+        //    var settings = _unixOrPipeClient?.Connect();
+        //    
+        //    if (settings == null || !settings.Enabled)
+        //        return false;
+        //    
+        //    InitializeWebSocket(settings.ToWebSocketString());
+        //    
+        //    Interlocked.Exchange(ref _id, 0);
+        //    _websocket?.Connect();
+        //    return true;
+        //}
 
         /// <summary>
         /// Connect to the GoXLR Daemon via WebSocket.
@@ -103,7 +103,7 @@ namespace GoXLR_Utility.NET
         {
             _websocket?.Close();
         }
-        
+
         /// <summary>
         /// Send a Command to the GoXLR Daemon.
         /// </summary>
@@ -112,8 +112,9 @@ namespace GoXLR_Utility.NET
         public void SendCommand(string serialNumber, DeviceCommandBase deviceCommand)
         {
             IncrementId();
+            LogCommand(deviceCommand);
             var commands = deviceCommand.GetJson(_id, serialNumber);
-
+            
             if (commands is null)
                 return;
 
@@ -130,6 +131,7 @@ namespace GoXLR_Utility.NET
         public void SendCommand(NormalCommandBase normalCommand)
         {
             IncrementId();
+            LogCommand(normalCommand);
             var commands = normalCommand.GetJson(_id);
 
             if (commands is null)
@@ -214,6 +216,21 @@ namespace GoXLR_Utility.NET
             {
                 [commandName] = commandParameters
             }, serialNumber);
+        }
+        
+        /// <summary>
+        /// Log command info if necessary.
+        /// </summary>
+        /// <param name="command">The Command</param>
+        private void LogCommand(CommandBase command)
+        {
+            if (command.LogInfo is null)
+                return;
+            
+            if (command.LogInfo.IsMinimum)
+                Logger.Log(command.LogInfo.LogLevel, command.LogInfo.EventId, "{cmdName} exceeds min. Value: {minValue}", command.LogInfo.CmdName, command.LogInfo.Value);
+            else
+                Logger.Log(command.LogInfo.LogLevel, command.LogInfo.EventId, "{cmdName} exceeds max. Value: {maxValue}", command.LogInfo.CmdName, command.LogInfo.Value);
         }
         
         /// <summary>
