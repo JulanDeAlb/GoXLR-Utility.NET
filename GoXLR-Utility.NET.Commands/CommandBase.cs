@@ -6,7 +6,7 @@ namespace GoXLR_Utility.NET.Commands
 {
     public class CommandBase
     {
-        internal List<Dictionary<string, object>> CommandList;
+        internal List<object> CommandList;
         internal Dictionary<string, object> Command;
         public object Path;
         public object Object;

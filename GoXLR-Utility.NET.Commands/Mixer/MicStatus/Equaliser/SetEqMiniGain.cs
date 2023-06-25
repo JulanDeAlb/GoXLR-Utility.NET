@@ -47,7 +47,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
                     gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
                     gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
 
-                    CommandList = new List<Dictionary<string, object>>
+                    CommandList = new List<object>
                     {
                         new Dictionary<string, object>
                         {
@@ -72,7 +72,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
                     gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
                     gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
 
-                    CommandList = new List<Dictionary<string, object>>
+                    CommandList = new List<object>
                     {
                         new Dictionary<string, object>
                         {
@@ -97,7 +97,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
                     gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
                     gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
 
-                    CommandList = new List<Dictionary<string, object>>
+                    CommandList = new List<object>
                     {
                         new Dictionary<string, object>
                         {
