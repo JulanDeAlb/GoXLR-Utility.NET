@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Enums.Response.Status.Config;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Config
 {
@@ -12,6 +13,8 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Config
         private bool _autostartEnabled;
         private bool _showTrayIcon;
         private bool _textToSpeechEnabled;
+        private bool _allowNetworkAccess;
+        private LogLevelEnum _logLevel;
 
         [JsonPropertyName("daemon_version")]
         public string DaemonVersion
@@ -39,6 +42,21 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Config
         {
             get => _textToSpeechEnabled;
             set => SetField(ref _textToSpeechEnabled, value);
+        }
+        
+        [JsonPropertyName("allow_network_access")]
+        public bool AllowNetworkAccess
+        {
+            get => _allowNetworkAccess;
+            set => SetField(ref _allowNetworkAccess, value);
+        }
+        
+        [JsonPropertyName("log_level")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public LogLevelEnum LogLevel
+        {
+            get => _logLevel;
+            set => SetField(ref _logLevel, value);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
