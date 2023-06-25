@@ -15,10 +15,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Lighting
 
             Command = new Dictionary<string, object>
             {
-                ["SetGlobalColour"] = new object[]
-                {
-                    colour
-                }
+                ["SetGlobalColour"] = colour
             };
         }
     }
