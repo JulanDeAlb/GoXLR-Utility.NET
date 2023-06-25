@@ -1,5 +1,5 @@
 # GoXLR-Utility.NET
-A .NET Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.11
+A .NET Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.12
 
 This project is work in progress.
 
@@ -36,7 +36,9 @@ OpenPath(PathTypes),
 SetShowTrayIcon(bool),  
 SetAutoStartEnabled(bool),  
 RecoverDefaults(PathTypes),  
-SetTextToSpeechEnabled(bool)
+SetTextToSpeechEnabled(bool),  
+SetAllowNetworkAccess(bool),  
+SetLogLevel(LogLevelEnum)
 
 # Commands with SerialNumber
 #### The following Commands can be send via ***SendCommand(SerialNumber, new ...)***:
@@ -172,12 +174,14 @@ DeleteProfile(String)
 **Router**  
 SetRouter(InputDevice, OutputDevice, bool)
 
-**Sampler**
+**Sampler**  
 SamplerAdd(Bank, Button, string),  
+ClearSampleProcessError(),  
 SamplerPlayByIndex(Bank, Button, int),  
 SamplerRemoveByIndex(Bank, Button, int),  
 SetSamplerFunction(Bank, Button, PlaybackMode),  
 SetSamplerOrder(Bank, Button, Order),  
+SetSamplerPreBufferDuration(int),  
 SetSampleStartPercent(Bank, Button, int, double),  
 SetSampleStopPercent(Bank, Button, int, double)
 
@@ -193,9 +197,9 @@ SetShutdownCommands(DeviceCommand),
 SetShutdownCommands(IEnumberable<DeviceCommand>)
 
 **Submix**  
-SetSubMixEnabled(bool)
-SetSubMixLinked(ChannelName, bool)
-SetSubMixOutputMix(ChannelName, SubmixOutput)
+SetSubMixEnabled(bool),  
+SetSubMixLinked(ChannelName, bool),  
+SetSubMixOutputMix(ChannelName, SubmixOutput),  
 SetSubMixVolume(ChannelName, int)
 
 **These control the current GoXLR 'State'**  
