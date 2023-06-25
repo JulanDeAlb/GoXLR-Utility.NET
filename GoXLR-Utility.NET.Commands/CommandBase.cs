@@ -53,7 +53,10 @@ namespace GoXLR_Utility.NET.Commands
                 };
             } else if (Command != null && serialNumber == null)
             {
-                Object = Command;
+                Object = new
+                {
+                    Daemon = Command
+                };
             }
 
             if (Object == null && returnStrings.Count == 0)
