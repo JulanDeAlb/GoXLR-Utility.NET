@@ -8,11 +8,11 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Sampler
     //Path: mixer/SERIAL-NUMBER/sampler/processing_state/...
     public class ProcessingState : INotifyPropertyChanged
     { 
-        private int _progress;
+        private int? _progress;
         private string _lastError;
 
         [JsonPropertyName("progress")]
-        public int Progress
+        public int? Progress
         {
             get => _progress;
             set => SetField(ref _progress, value);

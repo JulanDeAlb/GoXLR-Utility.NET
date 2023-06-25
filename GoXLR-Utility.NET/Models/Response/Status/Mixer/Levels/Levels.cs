@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Router;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels.Volumes;
 
 namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
@@ -11,6 +12,7 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
     {
         private sbyte _bleep;
         private sbyte _deEsser;
+        private OutputDevice _outputMonitor;
         private Submix.Submix _submix = new Submix.Submix();
         private bool _submixSupported;
         private Volume _volumes;
@@ -27,6 +29,14 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Levels
         {
             get => _deEsser;
             set => SetField(ref _deEsser, value);
+        }
+        
+        [JsonPropertyName("output_monitor")]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
+        public OutputDevice OutputMonitor
+        {
+            get => _outputMonitor;
+            set => SetField(ref _outputMonitor, value);
         }
         
         [JsonPropertyName("submix")]
