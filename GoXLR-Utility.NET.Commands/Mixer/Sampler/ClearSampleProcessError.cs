@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace GoXLR_Utility.NET.Commands.Mixer.Sampler
 {
     public class ClearSampleProcessError : DeviceCommandBase
@@ -7,7 +9,10 @@ namespace GoXLR_Utility.NET.Commands.Mixer.Sampler
         /// </summary>
         public ClearSampleProcessError()
         {
-            Object = "SetSamplerPreBufferDuration";
+            Command = new Dictionary<string, object>
+            {
+                ["ClearSampleProcessError"] = new object[] { }
+            };
         }
     }
 }
