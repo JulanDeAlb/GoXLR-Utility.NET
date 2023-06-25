@@ -208,17 +208,16 @@ namespace GoXLR_Utility.NET
             genericType = default;
             if (!propType.IsGenericType)
                 return GenericTypeEnum.NonGeneric;
+            
+            if (propType == typeof(int?))
+                return GenericTypeEnum.NonGeneric;
 
             genericType = propType.GetGenericTypeDefinition();
             if (genericType == typeof(ObservableCollection<>))
-            {
                 return GenericTypeEnum.List;
-            }
 
             if (genericType == typeof(Dictionary<,>))
-            {
                 return GenericTypeEnum.Dictionary;
-            }
 
             return GenericTypeEnum.Other;
         }
