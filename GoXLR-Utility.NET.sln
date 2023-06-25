@@ -6,6 +6,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.ConsoleTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.Tests", "GoXLR-Utility.NET.Tests\GoXLR-Utility.NET.Tests.csproj", "{C17F4778-20DA-4225-97E5-005154A7A96A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.Light", "GoXLR-Utility.NET.Light\GoXLR-Utility.NET.Light.csproj", "{6956D125-25C5-4F69-9D9B-F94D8A8C0004}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.Light.ConsoleTests", "GoXLR-Utility.NET.Light.ConsoleTests\GoXLR-Utility.NET.Light.ConsoleTests.csproj", "{1527EC66-2DCF-4012-ABE8-A7CEF4F5D0EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.Commands", "GoXLR-Utility.NET.Commands\GoXLR-Utility.NET.Commands.csproj", "{27C33257-D3BD-41F2-B83A-EC15767F1B0A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoXLR-Utility.NET.Enums", "GoXLR-Utility.NET.Enums\GoXLR-Utility.NET.Enums.csproj", "{644D4CE7-DC42-4D3D-984C-A137A9B89B3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +32,21 @@ Global
 		{C17F4778-20DA-4225-97E5-005154A7A96A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C17F4778-20DA-4225-97E5-005154A7A96A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C17F4778-20DA-4225-97E5-005154A7A96A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6956D125-25C5-4F69-9D9B-F94D8A8C0004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6956D125-25C5-4F69-9D9B-F94D8A8C0004}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6956D125-25C5-4F69-9D9B-F94D8A8C0004}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6956D125-25C5-4F69-9D9B-F94D8A8C0004}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1527EC66-2DCF-4012-ABE8-A7CEF4F5D0EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1527EC66-2DCF-4012-ABE8-A7CEF4F5D0EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1527EC66-2DCF-4012-ABE8-A7CEF4F5D0EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1527EC66-2DCF-4012-ABE8-A7CEF4F5D0EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27C33257-D3BD-41F2-B83A-EC15767F1B0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27C33257-D3BD-41F2-B83A-EC15767F1B0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27C33257-D3BD-41F2-B83A-EC15767F1B0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27C33257-D3BD-41F2-B83A-EC15767F1B0A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{644D4CE7-DC42-4D3D-984C-A137A9B89B3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{644D4CE7-DC42-4D3D-984C-A137A9B89B3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{644D4CE7-DC42-4D3D-984C-A137A9B89B3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{644D4CE7-DC42-4D3D-984C-A137A9B89B3B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

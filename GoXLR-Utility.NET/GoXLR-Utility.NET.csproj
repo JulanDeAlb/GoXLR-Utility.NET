@@ -6,15 +6,15 @@
         <LangVersion>7.3</LangVersion>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <Version>0.11.1</Version>
+        <Version>0.12.0-preview0.1</Version>
         <Authors>JulanDeAlb</Authors>
         <Title>GoXLR-Utility.NET</Title>
-        <Description>A Wrapper arount the GoXLR-Utility from 
+        <Description>A Wrapper around the GoXLR-Utility from 
 https://github.com/GoXLR-on-Linux</Description>
         <RepositoryUrl>https://github.com/julandealb/goxlr-utility.net</RepositoryUrl>
         <PackageTags>GoXLR-Utility GoXLR</PackageTags>
-        <AssemblyVersion>0.1.0</AssemblyVersion>
-        <FileVersion>0.1.0</FileVersion>
+        <AssemblyVersion>0.12.0</AssemblyVersion>
+        <FileVersion>0.12.0</FileVersion>
         <NeutralLanguage>en</NeutralLanguage>
         <PackageLicenseFile>LICENSE-3RD-PARTY-MUSIC-TRIBE</PackageLicenseFile>
         <PackageLicenseFile>LICENSE-3RD-PARTY-GOXLR-UTILITY</PackageLicenseFile>
@@ -34,6 +34,11 @@ https://github.com/GoXLR-on-Linux</Description>
         <None Include="../LICENSE-3RD-PARTY-GOXLR-UTILITY" Pack="true" PackagePath="" />
         <None Include="../LICENSE-3RD-PARTY-MUSIC-TRIBE" Pack="true" PackagePath="" />
         <None Include="../README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\GoXLR-Utility.NET.Commands\GoXLR-Utility.NET.Commands.csproj" />
+      <ProjectReference Include="..\GoXLR-Utility.NET.Enums\GoXLR-Utility.NET.Enums.csproj" />
     </ItemGroup>
 
 </Project>
