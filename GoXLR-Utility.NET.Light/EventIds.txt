@@ -1,0 +1,5 @@
+0 - Please Report
+1 - Daemon connectivity
+2 - Message handling
+3 - Daemon Error
+4 - Commands
