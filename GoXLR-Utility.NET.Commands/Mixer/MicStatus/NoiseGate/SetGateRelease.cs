@@ -26,7 +26,7 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.NoiseGate
         /// <param name="timing">The timing as Byte (0 - 44)</param>
         public SetGateRelease(byte timing)
         {
-            timing = timing > MaxValue ? (byte) SetMaxValue(nameof(SetGateAttack), MaxValue) : timing;
+            timing = timing > MaxValue ? (byte) SetMaxValue(nameof(SetGateRelease), MaxValue) : timing;
 
             Command = new Dictionary<string, object>
             {
@@ -40,8 +40,8 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.NoiseGate
         /// <param name="timing">The timing as Int (0-44)</param>
         public SetGateRelease(int timing)
         {
-            timing = timing < MinValue ? SetMinValue(nameof(SetGateAttack), MinValue) : timing;
-            timing = timing > MaxValue ? SetMaxValue(nameof(SetGateAttack), MaxValue) : timing;
+            timing = timing < MinValue ? SetMinValue(nameof(SetGateRelease), MinValue) : timing;
+            timing = timing > MaxValue ? SetMaxValue(nameof(SetGateRelease), MaxValue) : timing;
 
             Command = new Dictionary<string, object>
             {

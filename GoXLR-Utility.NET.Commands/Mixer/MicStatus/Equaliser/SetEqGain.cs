@@ -43,8 +43,8 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
             switch (equaliser)
             {
                 case SimpleEqualiserEnum.Bass:
-                    gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
-                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
+                    gain = gain < MinValue ? SetMinValue(nameof(SetEqGain), MinValue) : gain;
+                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqGain), MaxValue) : gain;
 
                     CommandList = new List<object>
                     {
@@ -84,8 +84,8 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
                     break;
 
                 case SimpleEqualiserEnum.Mid:
-                    gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
-                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
+                    gain = gain < MinValue ? SetMinValue(nameof(SetEqGain), MinValue) : gain;
+                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqGain), MaxValue) : gain;
 
                     CommandList = new List<object>
                     {
@@ -117,8 +117,8 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
                     break;
 
                 case SimpleEqualiserEnum.Treble:
-                    gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
-                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
+                    gain = gain < MinValue ? SetMinValue(nameof(SetEqGain), MinValue) : gain;
+                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqGain), MaxValue) : gain;
 
                     CommandList = new List<object>
                     {

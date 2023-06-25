@@ -44,8 +44,8 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
             switch (equaliser)
             {
                 case SimpleEqualiserEnum.Bass:
-                    gain = gain < MinValue ? SetMinValue(nameof(SetEqFrequency), MinValue) : gain;
-                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqFrequency), MaxValue) : gain;
+                    gain = gain < MinValue ? SetMinValue(nameof(SetEqMiniGain), MinValue) : gain;
+                    gain = gain > MaxValue ? SetMaxValue(nameof(SetEqMiniGain), MaxValue) : gain;
 
                     CommandList = new List<object>
                     {

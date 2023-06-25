@@ -30,33 +30,33 @@ namespace GoXLR_Utility.NET.Commands.Mixer.MicStatus.Equaliser
             switch (equaliser)
             {
                 case EqualiserMiniEnum.Equalizer90Hz:
-                    gain = gain < MinValues[0] ? SetMinValue(nameof(SetEqFrequency), MinValues[0]) : gain;
-                    gain = gain > MaxValues[0] ? SetMaxValue(nameof(SetEqFrequency), MaxValues[0]) : gain;
+                    gain = gain < MinValues[0] ? SetMinValue(nameof(SetEqMiniFrequency), MinValues[0]) : gain;
+                    gain = gain > MaxValues[0] ? SetMaxValue(nameof(SetEqMiniFrequency), MaxValues[0]) : gain;
                     break;
 
                 case EqualiserMiniEnum.Equalizer250Hz:
-                    gain = gain < MinValues[1] ? SetMinValue(nameof(SetEqFrequency), MinValues[1]) : gain;
-                    gain = gain > MaxValues[1] ? SetMaxValue(nameof(SetEqFrequency), MaxValues[1]) : gain;
+                    gain = gain < MinValues[1] ? SetMinValue(nameof(SetEqMiniFrequency), MinValues[1]) : gain;
+                    gain = gain > MaxValues[1] ? SetMaxValue(nameof(SetEqMiniFrequency), MaxValues[1]) : gain;
                     break;
 
                 case EqualiserMiniEnum.Equalizer500Hz:
-                    gain = gain < MinValues[2] ? SetMinValue(nameof(SetEqFrequency), MinValues[2]) : gain;
-                    gain = gain > MaxValues[2] ? SetMaxValue(nameof(SetEqFrequency), MaxValues[2]) : gain;
+                    gain = gain < MinValues[2] ? SetMinValue(nameof(SetEqMiniFrequency), MinValues[2]) : gain;
+                    gain = gain > MaxValues[2] ? SetMaxValue(nameof(SetEqMiniFrequency), MaxValues[2]) : gain;
                     break;
 
                 case EqualiserMiniEnum.Equalizer1KHz:
-                    gain = gain < MinValues[3] ? SetMinValue(nameof(SetEqFrequency), MinValues[3]) : gain;
-                    gain = gain > MaxValues[3] ? SetMaxValue(nameof(SetEqFrequency), MaxValues[3]) : gain;
+                    gain = gain < MinValues[3] ? SetMinValue(nameof(SetEqMiniFrequency), MinValues[3]) : gain;
+                    gain = gain > MaxValues[3] ? SetMaxValue(nameof(SetEqMiniFrequency), MaxValues[3]) : gain;
                     break;
 
                 case EqualiserMiniEnum.Equalizer3KHz:
-                    gain = gain < MinValues[4] ? SetMinValue(nameof(SetEqFrequency), MinValues[4]) : gain;
-                    gain = gain > MaxValues[4] ? SetMaxValue(nameof(SetEqFrequency), MaxValues[4]) : gain;
+                    gain = gain < MinValues[4] ? SetMinValue(nameof(SetEqMiniFrequency), MinValues[4]) : gain;
+                    gain = gain > MaxValues[4] ? SetMaxValue(nameof(SetEqMiniFrequency), MaxValues[4]) : gain;
                     break;
 
                 case EqualiserMiniEnum.Equalizer8KHz:
-                    gain = gain < MinValues[5] ? SetMinValue(nameof(SetEqFrequency), MinValues[5]) : gain;
-                    gain = gain > MaxValues[5] ? SetMaxValue(nameof(SetEqFrequency), MaxValues[5]) : gain;
+                    gain = gain < MinValues[5] ? SetMinValue(nameof(SetEqMiniFrequency), MinValues[5]) : gain;
+                    gain = gain > MaxValues[5] ? SetMaxValue(nameof(SetEqMiniFrequency), MaxValues[5]) : gain;
                     break;
 
                 default:
