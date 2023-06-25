@@ -60,17 +60,26 @@ namespace GoXLR_Utility.NET.ConsoleTests;
 
 public static class Program
 {
-    private static Logger _log = new Logger();
+    private static Logger _log = new();
     private static readonly Utility Utility = new(_log);
 
     public static void Main(string[] args)
     {
         Utility.Connect();
         Console.ReadKey();
-        AllCommands(Utility.AvailableSerialNumbers[0]);
-        Console.ReadKey();
-        AllEvents(Utility.AvailableSerialNumbers[0]);
-        Console.WriteLine("Subscribed to Events");
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new NewProfile("Test"));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav"));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SamplerPlayByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 0));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new LoadProfile("Main", true));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new DeleteProfile("Test"));
+        //AllCommands(Utility.AvailableSerialNumbers[0]);
+        //Console.ReadKey();
+        //AllEvents(Utility.AvailableSerialNumbers[0]);
+        //Console.WriteLine("Subscribed to Events");
         Console.ReadKey();
     }
 
@@ -87,7 +96,7 @@ public static class Program
         #endregion
 
         #region Device
-        
+
         Utility.Status.Mixers[serialNumber].PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #region ButtonDown
@@ -95,24 +104,24 @@ public static class Program
         Utility.Status.Mixers[serialNumber].ButtonDown.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region CoughButton
 
         Utility.Status.Mixers[serialNumber].CoughButton.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Effects
 
         Utility.Status.Mixers[serialNumber].Effects.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         Utility.Status.Mixers[serialNumber].Effects.Current.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
         Utility.Status.Mixers[serialNumber].Effects.PresetNames.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #region Effects.Current
 
         Utility.Status.Mixers[serialNumber].Effects.Current.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         Utility.Status.Mixers[serialNumber].Effects.Current.Echo.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
         Utility.Status.Mixers[serialNumber].Effects.Current.Gender.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
         Utility.Status.Mixers[serialNumber].Effects.Current.HardTune.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -163,7 +172,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Effects.PresetNames
 
         Utility.Status.Mixers[serialNumber].Effects.PresetNames.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -171,7 +180,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region FaderStatus
 
         Utility.Status.Mixers[serialNumber].FaderStatus.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -187,7 +196,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region FaderStatus.FaderB
 
         Utility.Status.Mixers[serialNumber].FaderStatus.FaderB.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -199,7 +208,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region FaderStatus.FaderC
 
         Utility.Status.Mixers[serialNumber].FaderStatus.FaderC.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -211,7 +220,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region FaderStatus.FaderD
 
         Utility.Status.Mixers[serialNumber].FaderStatus.FaderD.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -225,7 +234,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Levels
 
         Utility.Status.Mixers[serialNumber].Levels.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -233,53 +242,53 @@ public static class Program
         #region Levels.Submix
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Levels.Submix.Inputs
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Levels.Submix.Inputs.Chat
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Chat.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.Console
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Console.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.Game
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Game.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.LineIn
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.LineIn.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.Mic
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Mic.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.Music
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Music.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.Sample
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.Sample.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region Levels.Submix.Inputs.System
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Inputs.System.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -287,7 +296,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Levels.Submix.Outputs
 
         Utility.Status.Mixers[serialNumber].Levels.Submix.Outputs.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -303,7 +312,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting
 
         Utility.Status.Mixers[serialNumber].Lighting.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -323,7 +332,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.Cough
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.Cough.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -335,7 +344,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectFx
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectFx.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -347,7 +356,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectHardTune
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectHardTune.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -359,7 +368,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectMegaphone
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectMegaphone.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -371,7 +380,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectRobot
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectRobot.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -383,7 +392,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectSelect1
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectSelect1.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -395,7 +404,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectSelect2
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectSelect2.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -407,7 +416,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectSelect3
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectSelect3.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -419,7 +428,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectSelect4
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectSelect4.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -431,7 +440,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectSelect5
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectSelect5.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -443,7 +452,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.EffectSelect6
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.EffectSelect6.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -455,7 +464,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.Fader1Mute
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.FaderAMute.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -467,7 +476,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.Fader2Mute
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.FaderBMute.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -479,7 +488,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.Fader3Mute
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.FaderCMute.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -491,7 +500,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Lighting.Button.Fader4Mute
 
         Utility.Status.Mixers[serialNumber].Lighting.Button.FaderDMute.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -543,7 +552,7 @@ public static class Program
         #region Lighting.Fader.A
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderA.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Lighting.Fader.A.Colour
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderA.Colour.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -555,7 +564,7 @@ public static class Program
         #region Lighting.Fader.B
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderB.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Lighting.Fader.B.Colour
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderB.Colour.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -567,7 +576,7 @@ public static class Program
         #region Lighting.Fader.C
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderC.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Lighting.Fader.C.Colour
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderC.Colour.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -579,7 +588,7 @@ public static class Program
         #region Lighting.Fader.D
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderD.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Lighting.Fader.D.Colour
 
         Utility.Status.Mixers[serialNumber].Lighting.Fader.FaderD.Colour.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -639,7 +648,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region MicStatus
 
         Utility.Status.Mixers[serialNumber].MicStatus.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -661,7 +670,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region MicStatus.EqualiserMini
 
         Utility.Status.Mixers[serialNumber].MicStatus.EqualiserMini.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -685,7 +694,7 @@ public static class Program
         Utility.Status.Mixers[serialNumber].MicStatus.Compressor.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
 
         #endregion
-        
+
         #region MicStatus.MicGains
 
         Utility.Status.Mixers[serialNumber].MicStatus.MicGains.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -729,7 +738,7 @@ public static class Program
         #region Sampler.A.BottomRight
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankA.BottomRight.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Sampler.A.BottomLeft.Samples
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankA.BottomLeft.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
@@ -741,7 +750,7 @@ public static class Program
         #region Sampler.A.TopLeft
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankA.TopLeft.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Sampler.A.TopLeft.Samples
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankA.TopLeft.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
@@ -763,7 +772,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Sampler.B
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankB.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -783,7 +792,7 @@ public static class Program
         #region Sampler.B.BottomRight
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankB.BottomRight.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Sampler.B.BottomLeft.Samples
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankB.BottomLeft.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
@@ -795,7 +804,7 @@ public static class Program
         #region Sampler.A.TopLeft
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankB.TopLeft.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Sampler.A.TopLeft.Samples
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankB.TopLeft.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
@@ -817,7 +826,7 @@ public static class Program
         #endregion
 
         #endregion
-        
+
         #region Sampler.C
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankC.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
@@ -837,7 +846,7 @@ public static class Program
         #region Sampler.C.BottomRight
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankC.BottomRight.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Sampler.C.BottomLeft.Samples
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankC.BottomLeft.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
@@ -849,7 +858,7 @@ public static class Program
         #region Sampler.C.TopLeft
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankC.TopLeft.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
-        
+
         #region Sampler.C.TopLeft.Samples
 
         Utility.Status.Mixers[serialNumber].Sampler.SamplerBanks.SamplerBankC.TopLeft.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
@@ -902,7 +911,7 @@ public static class Program
         Utility.Status.Files.Presets.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
         Utility.Status.Files.Profiles.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
         //_utility.Status.Files.Samples.CollectionChanged += (sender, args) => Console.WriteLine($"{sender} | {args.Action} | {args.NewItems} | {args.NewStartingIndex} | {args.OldItems} | {args.OldStartingIndex}");
-        
+
         #endregion
 
         #region Path
@@ -951,9 +960,7 @@ public static class Program
 
         #region NormalCommands.SetTextToSpeechEnabled
 
-        Utility.SendCommand(new SetTextToSpeechEnabled(true));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(new SetAutoStartEnabled(false));
+        Utility.SendCommand(new SetTextToSpeechEnabled(false));
         Task.Delay(200).Wait();
 
         #endregion
@@ -964,6 +971,7 @@ public static class Program
 
         #region DeviceCommands.Profile.Mic
 
+        BeforeTTS:
         Utility.SendCommand(serialNumber, new NewMicProfile("Test"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SaveMicProfile());
@@ -974,7 +982,7 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Profile.Normal
-
+NowOverHere:
         Utility.SendCommand(serialNumber, new NewProfile("Test"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SaveProfile());
@@ -1469,7 +1477,9 @@ public static class Program
 
         #region DeviceCommands.Sampler
 
-        Utility.SendCommand(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Recording_2022-11-12T081058.wav"));
+        Utility.SendCommand(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav"));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SamplerPlayByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 0));
         Task.Delay(200).Wait();
@@ -1486,14 +1496,16 @@ public static class Program
 
         #endregion
 
-        #region DeviceCommands.Sampler
+        #region DeviceCommands.Settings
 
         Utility.SendCommand(serialNumber, new SetMuteHoldDuration(5000));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetMuteHoldDuration(1000));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new SetVcMuteAlsoMuteCm(true));
         Task.Delay(200).Wait();
 
-        #region DeviceCommands.Sampler.Display
+        #region DeviceCommands.Settings.Display
 
         Utility.SendCommand(serialNumber, new SetDisplayMode(DisplayComponent.Compressor, DisplayMode.Advanced));
         Task.Delay(200).Wait();
@@ -1517,7 +1529,7 @@ public static class Program
 
         #region DeviceCommands.Profile.Mic
 
-        Utility.SendCommand(serialNumber, new LoadMicProfile("DEFAULT"));
+        Utility.SendCommand(serialNumber, new LoadMicProfile("DEFAULT", true));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new DeleteMicProfile("Test"));
         Task.Delay(200).Wait();
@@ -1528,7 +1540,7 @@ public static class Program
 
         #region DeviceCommands.Profile.Normal
 
-        Utility.SendCommand(serialNumber, new LoadProfile("Main"));
+        Utility.SendCommand(serialNumber, new LoadProfile("Main", true));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new DeleteProfile("Test"));
         Task.Delay(200).Wait();
