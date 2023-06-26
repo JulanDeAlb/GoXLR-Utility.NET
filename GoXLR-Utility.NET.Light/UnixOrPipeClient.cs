@@ -64,12 +64,13 @@ namespace GoXLR_Utility.NET.Light
             }
 
             var responseLength = BitConverter.ToUInt32(responseLengthBytes, 0);
-            var responseBody = reader.ReadChars((int) responseLength);
+            var responseBytes = reader.ReadBytes((int)responseLength);
+            var response = Encoding.UTF8.GetString(responseBytes);
 
             socket.Close();
             networkStream.Close();
 
-            return JsonSerializer.Deserialize<ShortResponse>(new string(responseBody), Utility.SerializerOptions)?.Data.Status.Config.HttpSettings;
+            return JsonSerializer.Deserialize<ShortResponse>(response, Utility.SerializerOptions)?.Status.Config.HttpSettings;
         }
         
         private HttpSettings ConnectPipe()
@@ -115,11 +116,11 @@ namespace GoXLR_Utility.NET.Light
             }
             
             var responseLength = BitConverter.ToUInt32(responseLengthBytes, 0);
-            var responseBody = reader.ReadChars((int)responseLength);
+            var responseBytes = reader.ReadBytes((int)responseLength);
+            var response = Encoding.UTF8.GetString(responseBytes);
 
             client.Close();
-
-            return JsonSerializer.Deserialize<ShortResponse>(new string(responseBody), Utility.SerializerOptions)?.Data.Status.Config.HttpSettings;
+            return JsonSerializer.Deserialize<ShortResponse>(response, Utility.SerializerOptions)?.Status.Config.HttpSettings;
         }
     }
 }

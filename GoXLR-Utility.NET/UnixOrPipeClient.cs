@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.IO.Pipes;
@@ -46,7 +45,7 @@ namespace GoXLR_Utility.NET
             var reader = new BinaryReader(networkStream);
             var writer = new BinaryWriter(networkStream);
 
-            var bytes = Encoding.ASCII.GetBytes("\"GetHttpState\"");
+            var bytes = Encoding.ASCII.GetBytes("\"GetStatus\"");
             var len = BitConverter.GetBytes(bytes.Length);
 
             //LittleEndian check and change
@@ -66,12 +65,13 @@ namespace GoXLR_Utility.NET
             }
 
             var responseLength = BitConverter.ToUInt32(responseLengthBytes, 0);
-            var responseBody = reader.ReadChars((int) responseLength);
+            var responseBytes = reader.ReadBytes((int)responseLength);
+            var response = Encoding.UTF8.GetString(responseBytes);
 
             socket.Close();
             networkStream.Close();
 
-            return JsonSerializer.Deserialize<DataPayload>(new string(responseBody), Utility.SerializerOptions)?.HttpState;
+            return JsonSerializer.Deserialize<ShortResponse>(response, Utility.SerializerOptions)?.Status.Config.HttpSettings;
         }
         
         private HttpSettings ConnectPipe()
@@ -97,7 +97,7 @@ namespace GoXLR_Utility.NET
             var reader = new BinaryReader(client);
             var writer = new BinaryWriter(client);
 
-            var bytes = Encoding.ASCII.GetBytes("\"GetHttpState\"");
+            var bytes = Encoding.ASCII.GetBytes("\"GetStatus\"");
             var len = BitConverter.GetBytes(bytes.Length);
             
             //LittleEndian check and change
@@ -117,11 +117,12 @@ namespace GoXLR_Utility.NET
             }
             
             var responseLength = BitConverter.ToUInt32(responseLengthBytes, 0);
-            var responseBody = reader.ReadChars((int) responseLength);
+            var responseBytes = reader.ReadBytes((int)responseLength);
+            var response = Encoding.UTF8.GetString(responseBytes);
 
             client.Close();
 
-            return JsonSerializer.Deserialize<DataPayload>(new string(responseBody), Utility.SerializerOptions)?.HttpState;
+            return JsonSerializer.Deserialize<ShortResponse>(response, Utility.SerializerOptions)?.Status.Config.HttpSettings;
         }
     }
 }

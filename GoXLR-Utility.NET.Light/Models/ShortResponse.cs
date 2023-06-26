@@ -4,15 +4,6 @@ namespace GoXLR_Utility.NET.Light.Models
 {
     public class ShortResponse
     {
-        [JsonPropertyName("id")]
-        public long Id { get; set; }
-        
-        [JsonPropertyName("data")]
-        public DataPayload Data { get; set; }
-    }
-    
-    public class DataPayload
-    {
         [JsonPropertyName("Status")]
         public Status Status { get; set; }
     }

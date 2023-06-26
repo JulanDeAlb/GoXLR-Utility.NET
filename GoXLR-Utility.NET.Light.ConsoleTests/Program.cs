@@ -62,12 +62,13 @@ namespace GoXLR_Utility.NET.Light.ConsoleTests;
 public static class Program
 {
     private static Logger _log = new();
-    private static readonly Utility Utility = new(_log);
+    private static readonly Utility Utility = new();
 
     public static void Main(string[] args)
     {
-        Utility.Connect("ws://localhost:14564/api/websocket");
-        //Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
+        //Utility.Connect("ws://localhost:14564/api/websocket");
+        Utility.Connect();
+        Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
         Console.ReadKey();
         AllCommands(Utility.AvailableSerialNumbers[0]);
         Console.ReadKey();

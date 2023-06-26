@@ -66,9 +66,8 @@ public static class Program
 
     public static void Main(string[] args)
     {
-        Utility.Connect("ws://localhost:14564/api/websocket");
-        Console.ReadKey();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav"));
+        //Utility.Connect("ws://localhost:14564/api/websocket");
+        Utility.Connect();
         Console.ReadKey();
         AllCommands(Utility.AvailableSerialNumbers[0]);
         Console.ReadKey();
