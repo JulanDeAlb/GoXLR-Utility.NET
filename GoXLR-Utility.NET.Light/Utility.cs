@@ -350,8 +350,9 @@ namespace GoXLR_Utility.NET.Light
         {
             if (path is null)
                 return string.Empty;
-            
-            path = path.Replace("$.data.Status", "");
+
+            path = path.Substring(path.IndexOf('$') + 1);
+            path = path.Replace(".data.Status", "");
             
             var startIndex = path.IndexOf("['", StringComparison.Ordinal);
             var endIndex = path.LastIndexOf("']", StringComparison.Ordinal);
