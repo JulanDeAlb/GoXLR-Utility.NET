@@ -264,7 +264,7 @@ namespace GoXLR_Utility.NET.Light
                         AvailableSerialNumbers = mixer.AsObject().Select(pair => pair.Key).ToList();
                     }
 
-                    TraverseObject(status);
+                    TraverseObject(status, "");
                 }
 
                 if (!data.AsObject().TryGetPropertyValue("Patch", out var patches) && patches is null)
@@ -276,6 +276,21 @@ namespace GoXLR_Utility.NET.Light
                 
                 foreach (var patch in patchArray.Deserialize<Patch[]>(SerializerOptions))
                 {
+                    var pathSplit = patch.Path.Split('/');
+                    if (pathSplit.Length == 3 && pathSplit[1].Equals("mixers"))
+                    {
+                        if (patch.Value is null && AvailableSerialNumbers.Contains(pathSplit[2]))
+                        {
+                            AvailableSerialNumbers.Remove(pathSplit[2]);
+                        }
+                        else if (patch.Value != null && !AvailableSerialNumbers.Contains(pathSplit[2]))
+                        {
+                            AvailableSerialNumbers.Add(pathSplit[2]);
+                            TraverseObject(patch.Value, $"/mixers/{pathSplit[2]}");
+                            return;
+                        }
+                    }
+                    
                     OnPatch?.Invoke(this, patch);
                 }
             }
@@ -290,14 +305,15 @@ namespace GoXLR_Utility.NET.Light
         /// send Patches for it.
         /// </summary>
         /// <param name="jObject">The object to traverse trough</param>
-        private void TraverseObject(JsonNode jObject)
+        /// <param name="prefix">Optional Path Prefix</param>
+        private void TraverseObject(JsonNode jObject, string prefix)
         {
             foreach (var property in jObject.AsObject())
             {
                 switch (property.Value)
                 {
                     case JsonObject jObj:
-                        TraverseObject(jObj);
+                        TraverseObject(jObj, prefix);
                         break;
                     
                     case JsonArray jArray:
@@ -306,11 +322,11 @@ namespace GoXLR_Utility.NET.Light
                             switch (item)
                             {
                                 case JsonObject jObj:
-                                    TraverseObject(jObj);
+                                    TraverseObject(jObj, prefix);
                                     break;
                                 
                                 default:
-                                    OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = ConvertPath(item.GetPath()), Value = item.ToString()});
+                                    OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(item.GetPath()), Value = item.ToString()});
                                     break;
                             }
                         }
@@ -319,7 +335,7 @@ namespace GoXLR_Utility.NET.Light
                     default:
                         var value = property.Value?.AsValue();
                         if (value != null)
-                            OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = ConvertPath(property.Value?.GetPath()), Value = property.Value?.AsValue()});
+                            OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(property.Value?.GetPath()), Value = property.Value?.AsValue()});
                         break;
                 }
             }
