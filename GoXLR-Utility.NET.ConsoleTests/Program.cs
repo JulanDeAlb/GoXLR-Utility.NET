@@ -68,11 +68,13 @@ public static class Program
     {
         //Utility.Connect("ws://localhost:14564/api/websocket");
         Utility.Connect();
+        //Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
+        Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
         Console.ReadKey();
-        AllCommands(Utility.AvailableSerialNumbers[0]);
-        Console.ReadKey();
-        //AllEvents(Utility.AvailableSerialNumbers[0]);
-        //Console.WriteLine("Subscribed to Events");
+        Task.Run(async () =>
+        {
+            await AllCommandsAsync(Utility.AvailableSerialNumbers[0]);
+        });
         Console.ReadKey();
     }
 
@@ -1568,6 +1570,660 @@ public static class Program
         Utility.SendCommand(serialNumber, new DeleteProfile("Test"));
         Task.Delay(200).Wait();
         Utility.SendCommand(serialNumber, new DeleteProfile("Test2"));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+    }
+    
+    private static async Task AllCommandsAsync(string serialNumber)
+    {
+        #region NormalCommands
+
+        #region NormalCommands.RecoverDefaults
+
+        Console.WriteLine(await Utility.SendCommandAsync(new RecoverDefaults(Defaults.Icons)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new RecoverDefaults(Defaults.MicProfiles)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new RecoverDefaults(Defaults.Presets)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new RecoverDefaults(Defaults.Profiles)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region NormalCommands.SetShowTrayIcon
+
+        Console.WriteLine(await Utility.SendCommandAsync(new SetShowTrayIcon(false)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new SetShowTrayIcon(true)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region NormalCommands.SetAutoStartEnabled
+
+        Console.WriteLine(await Utility.SendCommandAsync(new SetAutoStartEnabled(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new SetAutoStartEnabled(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region NormalCommands.SetTextToSpeechEnabled
+
+        Console.WriteLine(await Utility.SendCommandAsync(new SetTextToSpeechEnabled(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+        
+        #region NormalCommands.SetAllowNetworkAccess
+
+        Console.WriteLine(await Utility.SendCommandAsync(new SetAllowNetworkAccess(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new SetAllowNetworkAccess(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+        
+        #region NormalCommands.SetLogLevel
+
+        Console.WriteLine(await Utility.SendCommandAsync(new SetLogLevel(LogLevelEnum.Debug)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(new SetLogLevel(LogLevelEnum.Warn)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Profile.Start
+
+        #region DeviceCommands.Profile.Mic
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new NewMicProfile("Test")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SaveMicProfile()));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SaveMicProfileAs("Test2")));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Profile.Normal
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new NewProfile("Test")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SaveProfile()));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SaveProfileAs("Test2")));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands
+
+        #region DeviceCommands.ButtonDown
+
+        #region DeviceCommands.ButtonDown.SetActiveEffectPreset
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset1)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset2)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset3)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset4)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset5)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveEffectPreset(EffectBankPresets.Preset6)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetActiveSamplerBank
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveSamplerBank(SamplerBank.A)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveSamplerBank(SamplerBank.B)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetActiveSamplerBank(SamplerBank.C)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetCoughMuteState
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteState(MuteState.MutedToX)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteState(MuteState.MutedToAll)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteState(MuteState.Unmuted)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.A
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.A, MuteState.MutedToX)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.A, MuteState.MutedToAll)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.A, MuteState.Unmuted)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.B
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.B, MuteState.MutedToX)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.B, MuteState.MutedToAll)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.B, MuteState.Unmuted)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.C
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.C, MuteState.MutedToX)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.C, MuteState.MutedToAll)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.C, MuteState.Unmuted)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFaderMuteState.D
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.D, MuteState.MutedToX)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.D, MuteState.MutedToAll)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteState(FaderName.D, MuteState.Unmuted)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetFxEnabled
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFxEnabled(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFxEnabled(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetHardTuneEnabled
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneEnabled(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneEnabled(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetMegaphoneEnabled
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMegaphoneEnabled(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMegaphoneEnabled(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.ButtonDown.SetRobotEnabled
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotEnabled(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotEnabled(false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.CoughButton
+
+        #region DeviceCommands.CoughButton.SetCoughIsHold
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughIsHold(false)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughIsHold(true)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.CoughButton.SetCoughIsHold
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteFunction(MuteFunction.ToLineOut)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteFunction(MuteFunction.ToPhones)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteFunction(MuteFunction.ToStream)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteFunction(MuteFunction.ToVoiceChat)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCoughMuteFunction(MuteFunction.All)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Effects
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new LoadEffectPreset("BadMic")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new RenameActivePreset("BadMic2")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new RenameActivePreset("BadMic")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SaveActivePreset()));
+        Task.Delay(200).Wait();
+
+        #region DeviceCommands.Effects.Echo
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoAmount(55)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoAmount(-1)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoAmount(101)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoDelayLeft(2500)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoDelayRight(2500)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoFeedback(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoFeedbackLeft(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoFeedbackRight(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoFeedbackXfbLtoR(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoFeedbackXfbRtoL(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoStyle(EchoStyle.ClassicSlap)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEchoTempo(45)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Effects.Gender
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGenderAmount(12)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGenderStyle(GenderStyle.Narrow)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Effects.HardTune
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneAmount(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneRate(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneSource(HardTuneSource.Game)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneStyle(HardTuneStyle.Hard)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetHardTuneWindow(600)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Effects.Megaphone
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMegaphoneAmount(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMegaphonePostGain(20)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMegaphoneStyle(MegaphoneStyle.Megaphone)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Effects.Pitch
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetPitchAmount(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetPitchCharacter(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetPitchStyle(PitchStyle.Narrow)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Effects.Reverb
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbAmount(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbDecay(2000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbDiffuse(50)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbEarlyLevel(0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbHighColour(50)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbHighFactor(25)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbLowColour(50)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbModDepth(25)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbModSpeed(25)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbPreDelay(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbStyle(ReverbStyle.Library)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetReverbTailLevel(0)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Effects.Robot
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotDryMix(0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotFreq(RobotRange.Low, 88)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotFreq(RobotRange.Medium, 184)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotFreq(RobotRange.High, 240)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotGain(RobotRange.Low, 12)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotGain(RobotRange.Medium, 12)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotGain(RobotRange.High, 12)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotPulseWidth(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotThreshold(0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotWaveform(2)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotWidth(RobotRange.Low, 12)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotWidth(RobotRange.Medium, 12)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRobotWidth(RobotRange.High, 12)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.FaderStatus
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFader(FaderName.A, ChannelName.Headphones)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderMuteFunction(FaderName.A, MuteFunction.ToPhones)));
+        Task.Delay(200).Wait();
+
+        #region DeviceCommands.FaderStatus.Scribble
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetScribbleIcon(FaderName.A, "level.png")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetScribbleInvert(FaderName.A, true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetScribbleNumber(FaderName.A, "B")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetScribbleText(FaderName.A, "Text")));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Levels
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetBleep(0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetDeeser(100)));
+        Task.Delay(200).Wait();
+
+
+        #region DeviceCommands.Submix
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMonitorMix(OutputDevice.BroadcastMix)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSubMixEnabled(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSubMixLinked(InputDevice.Chat, false)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.B)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSubMixVolume(InputDevice.Chat, 10)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Volumes
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetVolume(ChannelName.Music, 10)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Lighting
+
+        #region DeviceCommands.Lighting.Button
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetButtonColours(ButtonLight.Bleep, "#404040", "#ffffff")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetButtonGroupColours(ButtonGroups.EffectSelector, "#404040", "#ffffff")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetButtonOffStyle(ButtonLight.Cough, LightingOffStyle.Dimmed)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetButtonGroupOffStyle(ButtonGroups.EffectSelector, LightingOffStyle.Colour2)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Encoder
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEncoderColour(EncoderEnum.Echo, "#404040", "#ffffff", "#909090")));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Fader
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAllFaderColours("#404040", "#ffffff")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAllFaderDisplayStyle(FaderDisplayStyle.Gradient)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderColours(FaderName.A, "#101010", "#404040")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetFaderDisplayStyle(FaderName.C, FaderDisplayStyle.TwoColour)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Sampler
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSampleColour(SamplerEnum.SamplerSelectA, "#404040", "#ffffff", "#909090")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSampleOffStyle(SamplerEnum.SamplerSelectA, LightingOffStyle.Dimmed)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Lighting.Simple
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSimpleColour(SimpleLighting.Global, "#020202")));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.MicStatus
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMicrophoneGain(MicrophoneType.Dynamic, 40)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMicrophoneType(MicrophoneType.Dynamic)));
+        Task.Delay(200).Wait();
+
+        #region DeviceCommands.MicStatus.Compressor
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCompressorAttack(CompAttackTime.Comp35Ms)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCompressorMakeupGain(24)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCompressorRatio(CompRatio.Ratio2To5)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCompressorReleaseTime(CompReleaseTime.Comp55Ms)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetCompressorThreshold(0)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.MicStatus.Equaliser
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer125Hz, 250)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer1KHz, 2000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqFrequency(EqualiserEnum.Equalizer16KHz, 18000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqGain(SimpleEqualiserEnum.Mid, 9)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqGain(EqualiserEnum.Equalizer16KHz, 9)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqMiniFrequency(EqualiserMiniEnum.Equalizer90Hz, 300)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqMiniFrequency(EqualiserMiniEnum.Equalizer500Hz, 2000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqMiniFrequency(EqualiserMiniEnum.Equalizer8KHz, 18000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqMiniGain(SimpleEqualiserEnum.Mid, 9)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetEqMiniGain(EqualiserMiniEnum.Equalizer8KHz, 9)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.MicStatus.NoiseGate
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGateActive(true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGateAttack(GateTiming.Gate110Ms)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGateAttenuation(100)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGateRelease(GateTiming.Gate80Ms)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetGateThreshold(0)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Router
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetRouter(InputDevice.Chat, OutputDevice.Headphones, false)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Sampler
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SamplerAdd(SamplerBank.A, BankButtonEnum.BottomLeft, "Test.wav")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SamplerPlayByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SamplerRemoveByIndex(SamplerBank.A, BankButtonEnum.BottomLeft, 1)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSamplerFunction(SamplerBank.A, BankButtonEnum.BottomLeft, SamplePlaybackMode.Loop)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSamplerOrder(SamplerBank.A, BankButtonEnum.BottomLeft, SamplePlayOrder.Random)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSampleStartPercent(SamplerBank.A, BankButtonEnum.BottomLeft, 0, 10.0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSampleStopPercent(SamplerBank.A, BankButtonEnum.BottomLeft, 0, 16.0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSamplerPreBufferDuration(5000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetSamplerPreBufferDuration(0)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new ClearSampleProcessError()));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Settings
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMuteHoldDuration(5000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetMuteHoldDuration(1000)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetVcMuteAlsoMuteCm(true)));
+        Task.Delay(200).Wait();
+
+        #region DeviceCommands.Settings.Display
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetDisplayMode(DisplayComponent.Compressor, DisplayMode.Advanced)));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.ShutdownCommands
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetShutdownCommands(new SetBleep(0))));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new ResetShutdownCommands()));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #endregion
+
+        #region DeviceCommands.Profile.End
+
+        #region DeviceCommands.Profile.Mic
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new LoadMicProfile("DEFAULT", true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new DeleteMicProfile("Test")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new DeleteMicProfile("Test2")));
+        Task.Delay(200).Wait();
+
+        #endregion
+
+        #region DeviceCommands.Profile.Normal
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new LoadProfile("Main", true)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new DeleteProfile("Test")));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new DeleteProfile("Test2")));
         Task.Delay(200).Wait();
 
         #endregion
