@@ -51,19 +51,19 @@ namespace GoXLR_Utility.NET.Light
         /// Windows Named Pipe to get the WebSocket URL.
         /// </summary>
         /// <returns>True on success</returns>
-        //public bool Connect()
-        //{
-        //    var settings = _unixOrPipeClient?.Connect();
-        //    
-        //    if (settings == null || !settings.Enabled)
-        //        return false;
-        //    
-        //    InitializeWebSocket(settings.ToWebSocketString());
-        //    
-        //    Interlocked.Exchange(ref _id, 0);
-        //    _websocket?.Connect();
-        //    return true;
-        //}
+        public bool Connect()
+        {
+            var settings = _unixOrPipeClient?.Connect();
+            
+            if (settings == null || !settings.Enabled)
+                return false;
+            
+            InitializeWebSocket(settings.ToWebSocketString());
+            
+            Interlocked.Exchange(ref _id, 0);
+            _websocket?.Connect();
+            return true;
+        }
 
         /// <summary>
         /// Connect to the GoXLR Daemon via WebSocket.
@@ -273,7 +273,7 @@ namespace GoXLR_Utility.NET.Light
                 var patchArray = patches?.AsArray();
                 if (patchArray is null)
                     return;
-                
+
                 foreach (var patch in patchArray.Deserialize<Patch[]>(SerializerOptions))
                 {
                     var pathSplit = patch.Path.Split('/');
@@ -286,7 +286,7 @@ namespace GoXLR_Utility.NET.Light
                         else if (patch.Value != null && !AvailableSerialNumbers.Contains(pathSplit[2]))
                         {
                             AvailableSerialNumbers.Add(pathSplit[2]);
-                            TraverseObject(patch.Value, $"/mixers/{pathSplit[2]}");
+                            TraverseObject(patch.Node, $"/mixers/{pathSplit[2]}");
                             return;
                         }
                     }
