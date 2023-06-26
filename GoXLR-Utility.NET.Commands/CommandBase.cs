@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using System.Threading;
 using Microsoft.Extensions.Logging;
 
 namespace GoXLR_Utility.NET.Commands
@@ -12,7 +14,7 @@ namespace GoXLR_Utility.NET.Commands
         public object Object;
         public LogInfo LogInfo;
 
-        public List<string> GetJson(long id, string serialNumber = null)
+        public List<string> GetJson(ref long id, string serialNumber = null)
         {
             var returnStrings = new List<string>();
 
@@ -28,6 +30,7 @@ namespace GoXLR_Utility.NET.Commands
                 };
             } else if (CommandList != null && serialNumber != null)
             {
+                IncrementId(ref id);
                 foreach (var command in CommandList)
                 {
                     var dataObject = new
@@ -59,17 +62,20 @@ namespace GoXLR_Utility.NET.Commands
                 };
             }
 
-            if (Object == null && returnStrings.Count == 0)
-                return null;
-
-            if (Object != null)
+            switch (Object)
             {
-                returnStrings.Add(JsonSerializer.Serialize(new
-                {
-                    id,
-                    data = Object
-                }));
+                case null when returnStrings.Count == 0:
+                    return null;
+                case null:
+                    return returnStrings;
             }
+
+            IncrementId(ref id);
+            returnStrings.Add(JsonSerializer.Serialize(new
+            {
+                id,
+                data = Object
+            }));
 
             return returnStrings;
         }
@@ -84,6 +90,17 @@ namespace GoXLR_Utility.NET.Commands
         {
             LogInfo = new LogInfo(LogLevel.Debug, new EventId(5, "Commands"), false, cmdName, value.ToString());
             return value;
+        }
+        
+        /// <summary>
+        /// Increment the ID
+        /// </summary>
+        private void IncrementId(ref long id)
+        {
+            if (id == long.MaxValue)
+                Interlocked.Exchange(ref id, 0);
+            else 
+                Interlocked.Increment(ref id);
         }
     }
 }

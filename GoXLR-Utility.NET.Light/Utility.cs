@@ -5,13 +5,14 @@ using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using System.Threading;
+using System.Threading.Tasks;
 using GoXLR_Utility.NET.Commands;
 using GoXLR_Utility.NET.Enums.Commands;
 using GoXLR_Utility.NET.Enums.Response;
 using GoXLR_Utility.NET.Enums.Response.Status.Paths;
+using GoXLR_Utility.NET.Light.Extensions;
 using GoXLR_Utility.NET.Light.Models;
 using Microsoft.Extensions.Logging;
-using WebSocketSharp;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace GoXLR_Utility.NET.Light
@@ -20,7 +21,7 @@ namespace GoXLR_Utility.NET.Light
     {
         private static long _id;
         private static UnixOrPipeClient _unixOrPipeClient;
-        private static WebSocket _websocket;
+        private static WebSockets _websocket;
         
         internal static readonly JsonSerializerOptions SerializerOptions = new JsonSerializerOptions
         {
@@ -29,7 +30,9 @@ namespace GoXLR_Utility.NET.Light
 
         internal static ILogger Logger;
 
+        public event EventHandler OnConnected;
         public event EventHandler<Patch> OnPatch;
+        public event EventHandler OnDisconnected;
 
         /// <summary>
         /// A List of available SerialNumbers
@@ -61,8 +64,25 @@ namespace GoXLR_Utility.NET.Light
             InitializeWebSocket(settings.ToWebSocketString());
             
             Interlocked.Exchange(ref _id, 0);
-            _websocket?.Connect();
-            return true;
+            return _websocket.ConnectAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Connect to the GoXLR Daemon via WebSocket while using the
+        /// Windows Named Pipe to get the WebSocket URL.
+        /// </summary>
+        /// <returns>True on success</returns>
+        public async Task<bool> ConnectAsync()
+        {
+            var settings = _unixOrPipeClient?.Connect();
+            
+            if (settings == null || !settings.Enabled)
+                return false;
+            
+            InitializeWebSocket(settings.ToWebSocketString());
+            
+            Interlocked.Exchange(ref _id, 0);
+            return await _websocket.ConnectAsync();
         }
 
         /// <summary>
@@ -75,8 +95,20 @@ namespace GoXLR_Utility.NET.Light
             InitializeWebSocket(url);
             
             Interlocked.Exchange(ref _id, 0);
-            _websocket?.Connect();
-            return true;
+            return _websocket.ConnectAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Connect to the GoXLR Daemon via WebSocket.
+        /// </summary>
+        /// <param name="url">The URL to connect to</param>
+        /// <returns>True on success</returns>
+        public async Task<bool> ConnectAsync(string url)
+        {
+            InitializeWebSocket(url);
+            
+            Interlocked.Exchange(ref _id, 0);
+            return await _websocket.ConnectAsync();
         }
 
         /// <summary>
@@ -84,7 +116,40 @@ namespace GoXLR_Utility.NET.Light
         /// </summary>
         public void Disconnect()
         {
-            _websocket?.Close();
+            _websocket.DisconnectAsync().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Disconnect from the GoXLR Daemon WebSocket
+        /// </summary>
+        public async void DisconnectAsync()
+        {
+            await _websocket.DisconnectAsync();
+        }
+
+        /// <summary>
+        /// Send a Command to the GoXLR Daemon.
+        /// </summary>
+        /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
+        /// <param name="deviceCommand">The Command that should be send.</param>
+        public async ValueTask<bool> SendCommandAsync(string serialNumber, DeviceCommandBase deviceCommand)
+        {
+            LogCommand(deviceCommand);
+            var commands = deviceCommand.GetJson(ref _id, serialNumber);
+            
+            if (commands is null)
+                return false;
+
+            var allValid = true;
+            foreach (var cmd in commands)
+            {
+                var result = await SendAsync(_id, cmd, serialNumber);
+                
+                if (!result)
+                    allValid = false;
+            }
+
+            return allValid;
         }
 
         /// <summary>
@@ -94,17 +159,31 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="deviceCommand">The Command that should be send.</param>
         public void SendCommand(string serialNumber, DeviceCommandBase deviceCommand)
         {
-            IncrementId();
-            LogCommand(deviceCommand);
-            var commands = deviceCommand.GetJson(_id, serialNumber);
-            
-            if (commands is null)
-                return;
+            SendCommandAsync(serialNumber, deviceCommand).StepOver(exception => throw exception);
+        }
 
+        /// <summary>
+        /// Send a Command to the GoXLR Daemon.
+        /// </summary>
+        /// <param name="normalCommand">The Command that should be send.</param>
+        public async ValueTask<bool> SendCommandAsync(NormalCommandBase normalCommand)
+        {
+            LogCommand(normalCommand);
+            var commands = normalCommand.GetJson(ref _id);
+
+            if (commands is null)
+                return false;
+
+            var allValid = true;
             foreach (var cmd in commands)
             {
-                Send(cmd, serialNumber);
+                var result = await SendAsync(_id, cmd);
+                
+                if (!result)
+                    allValid = false;
             }
+
+            return allValid;
         }
 
         /// <summary>
@@ -113,17 +192,20 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="normalCommand">The Command that should be send.</param>
         public void SendCommand(NormalCommandBase normalCommand)
         {
-            IncrementId();
-            LogCommand(normalCommand);
-            var commands = normalCommand.GetJson(_id);
+            SendCommandAsync(normalCommand).StepOver(exception => throw exception);
+        }
 
-            if (commands is null)
-                return;
+        /// <summary>
+        /// Send the GoXLR Daemon a Command to open a Path in File Explorer
+        /// </summary>
+        /// <param name="path">The Path which should be opened</param>
+        public async ValueTask<bool> OpenPathAsync(PathEnum path)
+        {
+            var command = new CommandBase { Path = path.ToString() }.GetJson(ref _id);
+            if (command == null)
+                return false;
 
-            foreach (var cmd in commands)
-            {
-                Send(cmd);
-            }
+            return await SendAsync(_id, command[0]);
         }
 
         /// <summary>
@@ -132,13 +214,20 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="path">The Path which should be opened</param>
         public void OpenPath(PathEnum path)
         {
-            IncrementId();
+            OpenPathAsync(path).StepOver(exception => throw exception);
+        }
 
-            var command = new CommandBase { Path = path.ToString() }.GetJson(_id);
-            if (command == null)
-                return;
+        /// <summary>
+        /// Send a Command to the GoXLR Daemon which doesnt require a Device/SerialNumber.
+        /// </summary>
+        /// <param name="command">The Command to send</param>
+        public async ValueTask<bool> SendSimpleCommandAsync(SimpleCommand command)
+        {
+            var sendCommand = new DeviceCommandBase { Object = command.ToString() }.GetJson(ref _id);
+            if (sendCommand == null)
+                return false;
 
-            Send(command[0]);
+            return await SendAsync(_id, sendCommand[0]);
         }
 
         /// <summary>
@@ -147,13 +236,29 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="command">The Command to send</param>
         public void SendSimpleCommand(SimpleCommand command)
         {
-            IncrementId();
+            SendSimpleCommandAsync(command).StepOver(exception => throw exception);
+        }
 
-            var sendCommand = new DeviceCommandBase { Object = command.ToString() }.GetJson(_id);
-            if (sendCommand == null)
-                return;
+        /// <summary>
+        /// Send a Simple Command using its Command String and the Parameters
+        /// in case the Command isn't implemented or not working.<br/>
+        /// All Commands can be found <a href="https://github.com/GoXLR-on-Linux/goxlr-utility/blob/main/ipc/src/lib.rs">HERE</a>.
+        /// </summary>
+        /// <param name="commandName">As String<br/>(Example: SetTTSEnabled)</param>
+        /// <param name="parameters">The Parameters<br/>(Example: true)</param>
+        public async ValueTask<bool> SendCommandAsync(string commandName, params object[] parameters)
+        {
+            if (parameters.Length < 1)
+                return false;
 
-            Send(sendCommand[0]);
+            var commandParameters = parameters.Length == 1
+                ? parameters[0]
+                : parameters;
+
+            return await SendCommandAsync(new Dictionary<string, object>
+            {
+                [commandName] = commandParameters
+            });
         }
 
         /// <summary>
@@ -165,17 +270,30 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="parameters">The Parameters<br/>(Example: true)</param>
         public void SendCommand(string commandName, params object[] parameters)
         {
+            SendCommandAsync(commandName, parameters).StepOver(exception => throw exception);
+        }
+
+        /// <summary>
+        /// Send a Device Command using its Command String and the Parameters
+        /// in case the Command isn't implemented or not working.<br/>
+        /// All Commands can be found <a href="https://github.com/GoXLR-on-Linux/goxlr-utility/blob/main/ipc/src/lib.rs">HERE</a>.
+        /// </summary>
+        /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
+        /// <param name="commandName">As String<br/>(Example: SetVolume)</param>
+        /// <param name="parameters">The Parameters<br/>(Example: "Game", 255)</param>
+        public async ValueTask<bool> SendCommandAsync(string serialNumber, string commandName, params object[] parameters)
+        {
             if (parameters.Length < 1)
-                return;
+                return false;
 
             var commandParameters = parameters.Length == 1
                 ? parameters[0]
                 : parameters;
 
-            SendCommand(new Dictionary<string, object>
+            return await SendCommandAsync(new Dictionary<string, object>
             {
                 [commandName] = commandParameters
-            });
+            }, serialNumber);
         }
 
         /// <summary>
@@ -188,17 +306,7 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="parameters">The Parameters<br/>(Example: "Game", 255)</param>
         public void SendCommand(string serialNumber, string commandName, params object[] parameters)
         {
-            if (parameters.Length < 1)
-                return;
-
-            var commandParameters = parameters.Length == 1
-                ? parameters[0]
-                : parameters;
-
-            SendCommand(new Dictionary<string, object>
-            {
-                [commandName] = commandParameters
-            }, serialNumber);
+            SendCommandAsync(serialNumber, commandName, parameters).StepOver(exception => throw exception);
         }
         
         /// <summary>
@@ -211,9 +319,9 @@ namespace GoXLR_Utility.NET.Light
                 return;
             
             if (command.LogInfo.IsMinimum)
-                Logger.Log(command.LogInfo.LogLevel, command.LogInfo.EventId, "{cmdName} exceeds min. Value: {minValue}", command.LogInfo.CmdName, command.LogInfo.Value);
+                Logger?.Log(command.LogInfo.LogLevel, command.LogInfo.EventId, "{cmdName} exceeds min. Value: {minValue}", command.LogInfo.CmdName, command.LogInfo.Value);
             else
-                Logger.Log(command.LogInfo.LogLevel, command.LogInfo.EventId, "{cmdName} exceeds max. Value: {maxValue}", command.LogInfo.CmdName, command.LogInfo.Value);
+                Logger?.Log(command.LogInfo.LogLevel, command.LogInfo.EventId, "{cmdName} exceeds max. Value: {maxValue}", command.LogInfo.CmdName, command.LogInfo.Value);
         }
         
         /// <summary>
@@ -222,33 +330,35 @@ namespace GoXLR_Utility.NET.Light
         /// <param name="url">URL to connect to</param>
         private void InitializeWebSocket(string url)
         {
-            _websocket = new WebSocket(url);
+            _websocket = new WebSockets();
+            _websocket.Initialize(url);
             
-            _websocket.OnOpen += OnWsConnected;
+            _websocket.OnConnected += OnWsConnected;
             _websocket.OnMessage += OnWsMessage;
-            _websocket.OnClose += OnWsDisconnected;
+            _websocket.OnDisconnected += OnWsDisconnected;
             _websocket.OnError += OnWsError;
         }
 
         /// <summary>
         /// WebSocket OnConnected Event
         /// </summary>
-        private void OnWsConnected(object sender, EventArgs eventArgs)
+        private void OnWsConnected(object sender, string s)
         {
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Connected to Utility.");
+            OnConnected?.Invoke(this, null);
             SendSimpleCommand(SimpleCommand.GetStatus);
         }
         
         /// <summary>
         /// WebSocket OnMessage Event
         /// </summary>
-        private void OnWsMessage(object sender, MessageEventArgs message)
+        private void OnWsMessage(object sender, string message)
         {
-            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message from Utility received: {message}", message.Data);
+            Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message from Utility received: {message}", message);
 
             try
             {
-                var json = JsonSerializer.Deserialize<JsonObject>(message.Data);
+                var json = JsonSerializer.Deserialize<JsonObject>(message);
 
                 if (!json.TryGetPropertyValue("data", out var data) || data is null)
                     return;
@@ -374,17 +484,18 @@ namespace GoXLR_Utility.NET.Light
         /// <summary>
         /// WebSocket OnDisconnected Event
         /// </summary>
-        private static void OnWsDisconnected(object sender, CloseEventArgs closeEventArgs)
+        private void OnWsDisconnected(object sender, string s)
         {
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Disconnected from Utility.");
+            OnDisconnected?.Invoke(this, null);
         }
 
         /// <summary>
         /// WebSocket OnError Event
         /// </summary>
-        private static void OnWsError(object sender, ErrorEventArgs e)
+        private static void OnWsError(object sender, ErrorEventArgs data)
         {
-            Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), e.Exception, "Error occured on the Websocket.");
+            Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), data.Exception, "Error occured on the Websocket.");
         }
         
         /// <summary>
@@ -401,22 +512,23 @@ namespace GoXLR_Utility.NET.Light
         /// <summary>
         /// Send the Message via WebSocket
         /// </summary>
+        /// <param name="id">ID</param>
         /// <param name="message">Message</param>
         /// <param name="serialNumber">Message</param>
-        private void Send(string message, string serialNumber = null)
+        private async Task<bool> SendAsync(long id, string message, string serialNumber = null)
         {
             var debugMessage = serialNumber != null ? message.Replace(serialNumber, "SerialNumber") : message;
 
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", debugMessage);
-            _websocket?.Send(message);
+            return await _websocket.SendAsync(id, message);
         }
 		
         /// <summary>
-        /// Base Class of <see cref="SendCommand(string, string, object[])"/>
+        /// Base Class of <see cref="SendCommandAsync(string, string, object[])"/>
         /// </summary>
         /// <param name="command">Command as Object</param>
         /// <param name="serialNumber">SerialNumber</param>
-        private void SendCommand(object command, string serialNumber = null)
+        private async Task<bool> SendCommandAsync(object command, string serialNumber = null)
         {
             IncrementId();
 
@@ -445,7 +557,7 @@ namespace GoXLR_Utility.NET.Light
             var debugMessage = serialNumber != null ? message.Replace(serialNumber, "SerialNumber") : message;
 
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Message got send to Utility: {message}", debugMessage);
-            _websocket?.Send(message);
+            return await _websocket.SendAsync(_id, message);
         }
     }
 }
