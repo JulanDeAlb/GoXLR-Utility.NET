@@ -14,24 +14,27 @@ namespace GoXLR_Utility.NET.Light.Models
         public OpPatchEnum Op { get; set; }
 
         [JsonPropertyName("path")]
-        public string Path { get; set; }
-
+        public string Path { get; set; } 
+        
+        /// <summary>
+        /// This Value is a JsonNode
+        /// </summary>
         [JsonPropertyName("value")]
-        public JsonNode Node
+        public JsonNode JsonNode
         {
             internal get => _node;
             set
             {
                 _node = value;
-                Value = _node.Deserialize<object>();
+                Value = _node.Deserialize<JsonElement>();
             }
         }
 
-        public object Value { get; set; }
+        public JsonElement Value { get; set; } 
 
         public override string ToString()
         {
-            return $"Op: {Op.ToString()} | Value: {Value} | Path: {Path}";
+            return $"Op: {Op.ToString()} | Path: {Path} | Value: {Value}";
         }
     }
 }

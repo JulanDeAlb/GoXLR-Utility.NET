@@ -377,7 +377,7 @@ namespace GoXLR_Utility.NET.Light
 
                 if (data.ToJsonString().Equals("\"Ok\"", StringComparison.OrdinalIgnoreCase))
                     return;
-                
+
                 if (data.AsObject().TryGetPropertyValue("Status", out var status) && status != null)
                 {
                     var mixer = status["mixers"];
@@ -413,14 +413,14 @@ namespace GoXLR_Utility.NET.Light
                     var pathSplit = patch.Path.Split('/');
                     if (pathSplit.Length == 3 && pathSplit[1].Equals("mixers"))
                     {
-                        if (patch.Value is null && AvailableSerialNumbers.Contains(pathSplit[2]))
+                        if (patch.JsonNode is null && AvailableSerialNumbers.Contains(pathSplit[2]))
                         {
                             AvailableSerialNumbers.Remove(pathSplit[2]);
                         }
-                        else if (patch.Value != null && !AvailableSerialNumbers.Contains(pathSplit[2]))
+                        else if (patch.JsonNode != null && !AvailableSerialNumbers.Contains(pathSplit[2]))
                         {
                             AvailableSerialNumbers.Add(pathSplit[2]);
-                            TraverseObject(patch.Node, $"/mixers/{pathSplit[2]}");
+                            TraverseObject(patch.JsonNode, $"/mixers/{pathSplit[2]}");
                             return;
                         }
                     }
@@ -460,7 +460,7 @@ namespace GoXLR_Utility.NET.Light
                                     break;
                                 
                                 default:
-                                    OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(item.GetPath()), Value = item.ToString()});
+                                    OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(item.GetPath()), JsonNode = item});
                                     break;
                             }
                         }
@@ -469,7 +469,7 @@ namespace GoXLR_Utility.NET.Light
                     default:
                         var value = property.Value?.AsValue();
                         if (value != null)
-                            OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(property.Value?.GetPath()), Value = property.Value?.AsValue()});
+                            OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(property.Value?.GetPath()), JsonNode = property.Value});
                         break;
                 }
             }
