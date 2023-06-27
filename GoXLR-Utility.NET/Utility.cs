@@ -9,6 +9,7 @@ using GoXLR_Utility.NET.Commands;
 using GoXLR_Utility.NET.Enums.Commands;
 using GoXLR_Utility.NET.Enums.Response.Status.Paths;
 using GoXLR_Utility.NET.Extensions;
+using GoXLR_Utility.NET.Light;
 using GoXLR_Utility.NET.Models.Response.HttpSettings;
 using GoXLR_Utility.NET.Models.Response.Status;
 using GoXLR_Utility.NET.Models.Response.Status.Config;
@@ -34,9 +35,23 @@ namespace GoXLR_Utility.NET
         };
 
         internal static ILogger Logger;
+
+        public bool IsConnected;
         
+        /// <summary>
+        /// Event that gets fired when it successfully connected.
+        /// </summary>
         public event EventHandler OnConnected;
+        
+        /// <summary>
+        /// Event that gets fired when it successfully disconnected.
+        /// </summary>
         public event EventHandler OnDisconnected;
+        
+        /// <summary>
+        /// Event that gets fired when an error occured.
+        /// </summary>
+        public event EventHandler<ErrorEventArgs> OnError;
 
         /// <summary>
         /// The Daemon Status including:
@@ -82,7 +97,8 @@ namespace GoXLR_Utility.NET
             InitializeWebSocket(settings.ToWebSocketString());
             
             Interlocked.Exchange(ref _id, 0);
-            return _websocket.ConnectAsync().GetAwaiter().GetResult();
+            IsConnected = _websocket.ConnectAsync().GetAwaiter().GetResult();
+            return IsConnected;
         }
 
         /// <summary>
@@ -100,7 +116,8 @@ namespace GoXLR_Utility.NET
             InitializeWebSocket(settings.ToWebSocketString());
             
             Interlocked.Exchange(ref _id, 0);
-            return await _websocket.ConnectAsync();
+            IsConnected = await _websocket.ConnectAsync();
+            return IsConnected;
         }
 
         /// <summary>
@@ -113,7 +130,8 @@ namespace GoXLR_Utility.NET
             InitializeWebSocket(url);
             
             Interlocked.Exchange(ref _id, 0);
-            return _websocket.ConnectAsync().GetAwaiter().GetResult();
+            IsConnected = _websocket.ConnectAsync().GetAwaiter().GetResult();
+            return IsConnected;
         }
 
         /// <summary>
@@ -126,7 +144,8 @@ namespace GoXLR_Utility.NET
             InitializeWebSocket(url);
             
             Interlocked.Exchange(ref _id, 0);
-            return await _websocket.ConnectAsync();
+            IsConnected = await _websocket.ConnectAsync();
+            return IsConnected;
         }
 
         /// <summary>
@@ -135,14 +154,16 @@ namespace GoXLR_Utility.NET
         public void Disconnect()
         {
             _websocket.DisconnectAsync().GetAwaiter().GetResult();
+            IsConnected = false;
         }
 
         /// <summary>
         /// Disconnect from the GoXLR Daemon WebSocket
         /// </summary>
-        public async void DisconnectAsync()
+        public async Task DisconnectAsync()
         {
             await _websocket.DisconnectAsync();
+            IsConnected = false;
         }
 
         /// <summary>
@@ -388,9 +409,10 @@ namespace GoXLR_Utility.NET
         /// <summary>
         /// WebSocket OnError Event
         /// </summary>
-        private static void OnWsError(object sender, ErrorEventArgs data)
+        private void OnWsError(object sender, ErrorEventArgs data)
         {
             Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), data.Exception, "Error occured on the Websocket.");
+            OnError?.Invoke(sender, data);
         }
         
         /// <summary>
