@@ -74,7 +74,7 @@ public static class Program
         Console.ReadKey();
         Task.Run(async () =>
         {
-            //await AllCommandsAsync(Utility.AvailableSerialNumbers[0]);
+            await AllCommandsAsync(Utility.AvailableSerialNumbers[0]);
         });
         Console.ReadKey();
     }
