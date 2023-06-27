@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Simple;
-using Microsoft.Extensions.Logging;
 
 namespace GoXLR_Utility.NET.Commands.Mixer.Lighting.Simple
 {

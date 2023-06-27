@@ -16,7 +16,6 @@ using GoXLR_Utility.NET.Models.Response.Status.Files;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer;
 using GoXLR_Utility.NET.Models.Response.Status.Paths;
 using Microsoft.Extensions.Logging;
-using WebSocketSharp;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace GoXLR_Utility.NET
