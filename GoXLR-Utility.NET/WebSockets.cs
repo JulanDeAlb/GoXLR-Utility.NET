@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace GoXLR_Utility.NET
+namespace GoXLR_Utility.NET.Light
 {
     public class WebSockets : IDisposable
     {
@@ -39,8 +39,9 @@ namespace GoXLR_Utility.NET
 
         public async Task DisconnectAsync()
         {
-            await _ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "Disconnect", _cTokenSource.Token);
+            //await _ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
             Dispose();
+            OnDisconnected?.Invoke(this, null);
         }
 
         public async Task<bool> SendAsync(long id, string message)
@@ -174,10 +175,19 @@ namespace GoXLR_Utility.NET
 
         public void Dispose()
         {
+            _cTokenSource.Cancel();
+            var success = Task.WaitAll(new[]{_receiveMessageTask, _connectionTask}, TimeSpan.FromSeconds(5));
+            if (!success)
+            {
+                OnError?.Invoke(this, new ErrorEventArgs("Critical Error disposing Tasks", null));
+                Console.WriteLine("Critical Error disposing Tasks");
+                return;
+            }
+            
+            _cTokenSource?.Dispose();
             _ws?.Dispose();
             _receiveMessageTask?.Dispose();
             _connectionTask?.Dispose();
-            _cTokenSource?.Dispose();
         }
     }
 
