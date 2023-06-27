@@ -8,7 +8,7 @@ namespace GoXLR_Utility.NET.Enums.Response.Status.Mixer.Router
         LineIn,
         Microphone,
         Music,
-        Sampler,
+        Samples,
         System
     }
 }
