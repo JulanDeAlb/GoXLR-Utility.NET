@@ -72,11 +72,11 @@ public static class Program
         Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
         Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
         Console.ReadKey();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new RecoverDefaults(Defaults.Profiles));
+        Utility.SendCommand(new RecoverDefaults(Defaults.Profiles));
         Console.ReadKey();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new RecoverDefaults(Defaults.Profiles));
+        Utility.SendCommand(new RecoverDefaults(Defaults.Profiles));
         Console.ReadKey();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new RecoverDefaults(Defaults.Profiles));
+        AllCommands(Utility.AvailableSerialNumbers[0]);
         Console.ReadKey();
     }
 
