@@ -68,7 +68,8 @@ public static class Program
     {
         //Utility.Connect("ws://localhost:14564/api/websocket");
         Utility.Connect();
-        //Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
+        Utility.AvailableSerialNumbers.CollectionChanged += (_, serial) => Console.WriteLine("SerialChanged");
+        Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
         Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
         Console.ReadKey();
         Task.Run(async () =>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Nodes;
@@ -30,14 +31,25 @@ namespace GoXLR_Utility.NET.Light
 
         internal static ILogger Logger;
 
+        /// <summary>
+        /// Event that gets fired when it successfully connected.
+        /// </summary>
         public event EventHandler OnConnected;
+        
+        /// <summary>
+        /// Event that gets fired when a patch occured.
+        /// </summary>
         public event EventHandler<Patch> OnPatch;
+        
+        /// <summary>
+        /// Event that gets fired when it successfully disconnected.
+        /// </summary>
         public event EventHandler OnDisconnected;
 
         /// <summary>
-        /// A List of available SerialNumbers
+        /// An Observable Collection of available SerialNumbers
         /// </summary>
-        public List<string> AvailableSerialNumbers { get; private set; }
+        public ObservableCollection<string> AvailableSerialNumbers { get; private set; }
 
         /// <summary>
         /// Initialize a new Utility Client.
@@ -45,7 +57,7 @@ namespace GoXLR_Utility.NET.Light
         public Utility(ILogger logger = null)
         {
             Logger = logger;
-            AvailableSerialNumbers = new List<string>();
+            AvailableSerialNumbers = new ObservableCollection<string>();
             _unixOrPipeClient = new UnixOrPipeClient();
         }
 
@@ -371,7 +383,19 @@ namespace GoXLR_Utility.NET.Light
                     var mixer = status["mixers"];
                     if (mixer != null)
                     {
-                        AvailableSerialNumbers = mixer.AsObject().Select(pair => pair.Key).ToList();
+                        var serialNumbers = mixer.AsObject().Select(pair => pair.Key).ToList();
+
+                        foreach (var serialNumber in AvailableSerialNumbers)
+                        {
+                            if (!serialNumbers.Contains(serialNumber))
+                                AvailableSerialNumbers.Remove(serialNumber);
+                        }
+
+                        foreach (var serialNumber in serialNumbers)
+                        {
+                            if (!AvailableSerialNumbers.Contains(serialNumber))
+                                AvailableSerialNumbers.Add(serialNumber);
+                        }
                     }
 
                     TraverseObject(status, "");
