@@ -4,8 +4,9 @@ using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GoXLR_Utility.NET.Core.Extensions;
 
-namespace GoXLR_Utility.NET.Light
+namespace GoXLR_Utility.NET.Core
 {
     public class WebSockets : IDisposable
     {
@@ -37,7 +38,7 @@ namespace GoXLR_Utility.NET.Light
             return _ws.State == WebSocketState.Open;
         }
 
-        public async Task DisconnectAsync()
+        public void DisconnectAsync()
         {
             //await _ws.CloseAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None);
             Dispose();
@@ -162,7 +163,7 @@ namespace GoXLR_Utility.NET.Light
                         }
                         break;
                     case WebSocketMessageType.Close:
-                        await DisconnectAsync();
+                        Task.Run(DisconnectAsync).StepOver();
                         break;
                     case WebSocketMessageType.Binary:
                         OnError?.Invoke(this, new ErrorEventArgs("Received Binary from WebSocket, couldn't be processed", new ArgumentOutOfRangeException()));

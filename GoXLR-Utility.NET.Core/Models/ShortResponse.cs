@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace GoXLR_Utility.NET.Light.Models
+namespace GoXLR_Utility.NET.Core.Models
 {
     public class ShortResponse
     {

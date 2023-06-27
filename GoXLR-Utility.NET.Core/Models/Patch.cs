@@ -3,7 +3,7 @@ using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 using GoXLR_Utility.NET.Enums.Response;
 
-namespace GoXLR_Utility.NET.Light.Models
+namespace GoXLR_Utility.NET.Core.Models
 {
     public class Patch
     {
@@ -22,7 +22,7 @@ namespace GoXLR_Utility.NET.Light.Models
         [JsonPropertyName("value")]
         public JsonNode JsonNode
         {
-            internal get => _node;
+            get => _node;
             set
             {
                 _node = value;

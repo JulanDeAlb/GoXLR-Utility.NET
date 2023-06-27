@@ -1,9 +1,10 @@
 using System;
 using System.Threading.Tasks;
 
-namespace GoXLR_Utility.NET.Extensions
+namespace GoXLR_Utility.NET.Core.Extensions
 {
     public static class TaskExtension {
+        
         public static async void StepOver(this ValueTask valueTask, Action<Exception> @catch = null)
         {
             if (valueTask.IsCompleted)

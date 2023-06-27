@@ -6,10 +6,10 @@ using System.Net.Sockets;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
-using GoXLR_Utility.NET.Light.Models;
+using GoXLR_Utility.NET.Core.Models;
 using Microsoft.Extensions.Logging;
 
-namespace GoXLR_Utility.NET.Light
+namespace GoXLR_Utility.NET.Core
 {
     public class UnixOrPipeClient
     {
@@ -20,7 +20,7 @@ namespace GoXLR_Utility.NET.Light
 
         private HttpSettings ConnectUnix()
         {
-            Utility.Logger?.Log(LogLevel.Information, new EventId(0, "Please Report"), "I dont know if {methode} works", nameof(ConnectUnix));
+            UtilityBase.Logger?.Log(LogLevel.Information, new EventId(0, "Please Report"), "I dont know if {methode} works", nameof(ConnectUnix));
             var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
 
             try
@@ -36,7 +36,7 @@ namespace GoXLR_Utility.NET.Light
                 if (e.GetType() == typeof(NotSupportedException))
                     throw;
 
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), e, "Unable to connect to the GoXLR Pipe using Unix.");
+                UtilityBase.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), e, "Unable to connect to the GoXLR Pipe using Unix.");
                 return null;
             }
 
@@ -70,7 +70,7 @@ namespace GoXLR_Utility.NET.Light
             socket.Close();
             networkStream.Close();
 
-            return JsonSerializer.Deserialize<ShortResponse>(response, Utility.SerializerOptions)?.Status.Config.HttpSettings;
+            return JsonSerializer.Deserialize<ShortResponse>(response, UtilityBase.SerializerOptions)?.Status.Config.HttpSettings;
         }
         
         private HttpSettings ConnectPipe()
@@ -78,7 +78,7 @@ namespace GoXLR_Utility.NET.Light
             var processes = Process.GetProcessesByName("goxlr-daemon");
             if (processes.Length == 0)
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "GoXLR Utility Daemon probably not Running.");
+                UtilityBase.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "GoXLR Utility Daemon probably not Running.");
             }
 
             var client = new NamedPipeClientStream("@goxlr.socket");
@@ -89,7 +89,7 @@ namespace GoXLR_Utility.NET.Light
             }
             catch
             {
-                Utility.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe using Pipe.");
+                UtilityBase.Logger?.Log(LogLevel.Error, new EventId(1, "Daemon connectivity"), "Unable to connect to the GoXLR Pipe using Pipe.");
                 return null;
             }
 
@@ -120,7 +120,7 @@ namespace GoXLR_Utility.NET.Light
             var response = Encoding.UTF8.GetString(responseBytes);
 
             client.Close();
-            return JsonSerializer.Deserialize<ShortResponse>(response, Utility.SerializerOptions)?.Status.Config.HttpSettings;
+            return JsonSerializer.Deserialize<ShortResponse>(response, UtilityBase.SerializerOptions)?.Status.Config.HttpSettings;
         }
     }
 }

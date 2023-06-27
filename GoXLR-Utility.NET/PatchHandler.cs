@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Core;
 using GoXLR_Utility.NET.Enums;
 using GoXLR_Utility.NET.Enums.Response;
 using GoXLR_Utility.NET.Models;
@@ -28,7 +29,7 @@ namespace GoXLR_Utility.NET
         /// <param name="logger">Optional Logger primary for Tests.</param>
         public PatchHandler(ILogger logger = null)
         {
-            _logger = logger ?? Utility.Logger;
+            _logger = logger ?? UtilityBase.Logger;
         }
         
         /// <summary>
@@ -261,7 +262,7 @@ namespace GoXLR_Utility.NET
             try
             {
                 if (patchCacheItem.PropType != null)
-                    value = patch.Value.Deserialize(patchCacheItem.PropType, Utility.SerializerOptions);
+                    value = patch.Value.Deserialize(patchCacheItem.PropType, UtilityBase.SerializerOptions);
             }
             catch
             {
@@ -417,7 +418,7 @@ namespace GoXLR_Utility.NET
             switch (patch.Op)
             {
                 case OpPatchEnum.Add:
-                    var value = patch.Value.Deserialize<Device>(Utility.SerializerOptions);
+                    var value = patch.Value.Deserialize<Device>(UtilityBase.SerializerOptions);
                     lock (dictionary)
                     {
                         dictionary.Add(patchCacheItem.SerialNumber, value);
@@ -452,7 +453,7 @@ namespace GoXLR_Utility.NET
             if (genArg is null)
                 throw new ArgumentNullException($"ElementType of {type} is null");
 
-            return value.Deserialize(genArg, Utility.SerializerOptions);
+            return value.Deserialize(genArg, UtilityBase.SerializerOptions);
         }
 
         /// <summary>
