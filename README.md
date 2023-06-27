@@ -1,6 +1,8 @@
 # GoXLR-Utility.NET
 A .NET Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.12
 
+**Use 'GoXLR-Utility.NET.Light' for a lightweight variant**
+
 This project is work in progress.
 
 If you are on a Linux machine and the Connect() does not work, please use: Connect("ws://localhost:14564/api/websocket").
