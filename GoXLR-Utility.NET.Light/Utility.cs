@@ -481,6 +481,7 @@ namespace GoXLR_Utility.NET.Light
                     
                     default:
                         var value = property.Value?.AsValue();
+
                         if (value != null)
                             OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(property.Value?.GetPath()), JsonNode = property.Value});
                         break;
@@ -502,19 +503,24 @@ namespace GoXLR_Utility.NET.Light
             path = path.Replace(".data.Status", "");
             
             var startIndex = path.IndexOf("['", StringComparison.Ordinal);
-            var endIndex = path.LastIndexOf("']", StringComparison.Ordinal);
+            var endIndex = path.LastIndexOf("']", StringComparison.Ordinal) + 2;
+            var prefix = "";
+            var substring = "";
             if (startIndex != -1 && endIndex != -1)
             {
-                var prefix = path.Substring(0, startIndex).Replace(".", "/");
+                prefix = path.Substring(0, startIndex).Replace(".", "/");
                 var suffix = path.Substring(endIndex).Replace(".", "/");
-                var substring = path.Substring(startIndex, endIndex - startIndex);
-                path = prefix + substring + suffix;
+                substring = path.Substring(startIndex, endIndex - startIndex);
+                substring = substring.Replace("['", "\\\\").Replace("']", "");
+                substring += suffix;
             }
             else
             {
-                path = path.Replace(".", "/");
+                prefix = path.Replace(".", "/");
             }
 
+            prefix = prefix.Replace("[", "/").Replace("]", "");
+            path = prefix + substring;
             return path;
         }
 
