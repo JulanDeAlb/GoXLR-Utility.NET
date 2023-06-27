@@ -27,14 +27,17 @@ namespace GoXLR_Utility.NET.Light.Models
             {
                 _node = value;
                 Value = _node.Deserialize<JsonElement>();
+                HasValue = Value.ValueKind != JsonValueKind.Undefined;
             }
         }
 
-        public JsonElement Value { get; set; } 
+        public JsonElement Value { get; private set; }
+
+        public bool HasValue { get; private set; }
 
         public override string ToString()
         {
-            return $"Op: {Op.ToString()} | Path: {Path} | Value: {Value}";
+            return $"Op: {Op.ToString()} | Path: {Path} | Value: {Value} | HasValue: {HasValue}";
         }
     }
 }

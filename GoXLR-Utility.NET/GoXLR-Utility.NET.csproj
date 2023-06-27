@@ -6,7 +6,7 @@
         <LangVersion>7.3</LangVersion>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <Version>0.12.0-preview0.7</Version>
+        <Version>0.12.0-preview0.8</Version>
         <Authors>JulanDeAlb</Authors>
         <Title>GoXLR-Utility.NET</Title>
         <Description>A Wrapper around the GoXLR-Utility from 
