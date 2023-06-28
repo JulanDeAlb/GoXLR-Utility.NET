@@ -14,7 +14,7 @@ namespace GoXLR_Utility.NET.Core
 {
     public abstract class UtilityBase
     {
-        private static long _id;
+        private static uint _id;
         private static UnixOrPipeClient _unixOrPipeClient;
         private static WebSockets _websocket;
 
@@ -68,8 +68,8 @@ namespace GoXLR_Utility.NET.Core
                 return false;
             
             InitializeWebSocket(settings.ToWebSocketString());
-            
-            Interlocked.Exchange(ref _id, 0);
+
+            _id = 0;
             IsConnected = _websocket.ConnectAsync().GetAwaiter().GetResult();
             return IsConnected;
         }
@@ -88,7 +88,7 @@ namespace GoXLR_Utility.NET.Core
             
             InitializeWebSocket(settings.ToWebSocketString());
             
-            Interlocked.Exchange(ref _id, 0);
+            _id = 0;
             IsConnected = await _websocket.ConnectAsync();
             return IsConnected;
         }
@@ -101,8 +101,8 @@ namespace GoXLR_Utility.NET.Core
         public bool Connect(string url)
         {
             InitializeWebSocket(url);
-            
-            Interlocked.Exchange(ref _id, 0);
+
+            _id = 0;
             IsConnected = _websocket.ConnectAsync().GetAwaiter().GetResult();
             return IsConnected;
         }
@@ -116,7 +116,7 @@ namespace GoXLR_Utility.NET.Core
         {
             InitializeWebSocket(url);
             
-            Interlocked.Exchange(ref _id, 0);
+            _id = 0;
             IsConnected = await _websocket.ConnectAsync();
             return IsConnected;
         }
@@ -439,10 +439,10 @@ namespace GoXLR_Utility.NET.Core
         /// </summary>
         private void IncrementId()
         {
-            if (_id == long.MaxValue)
-                Interlocked.Exchange(ref _id, 0);
-            else 
-                Interlocked.Increment(ref _id);
+            if (_id == uint.MaxValue)
+                _id = 0;
+            else
+                _id++;
         }
     }
 }

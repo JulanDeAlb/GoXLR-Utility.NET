@@ -13,7 +13,7 @@ namespace GoXLR_Utility.NET.Commands
         public object Object;
         public LogInfo LogInfo;
 
-        public List<string> GetJson(ref long id, string serialNumber = null)
+        public List<string> GetJson(ref uint id, string serialNumber = null)
         {
             var returnStrings = new List<string>();
 
@@ -34,7 +34,7 @@ namespace GoXLR_Utility.NET.Commands
                 {
                     var dataObject = new
                     {
-                        Command = new object[]
+                        Command = new[]
                         {
                             serialNumber,
                             command
@@ -94,12 +94,12 @@ namespace GoXLR_Utility.NET.Commands
         /// <summary>
         /// Increment the ID
         /// </summary>
-        private void IncrementId(ref long id)
+        private void IncrementId(ref uint id)
         {
-            if (id == long.MaxValue)
-                Interlocked.Exchange(ref id, 0);
-            else 
-                Interlocked.Increment(ref id);
+            if (id == uint.MaxValue)
+                id = 0;
+            else
+                id++;
         }
     }
 }
