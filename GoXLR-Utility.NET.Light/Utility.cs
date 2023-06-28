@@ -89,7 +89,13 @@ namespace GoXLR_Utility.NET.Light
                             return;
                         }
                     }
-                    
+
+                    if (patch.Value.ValueKind == JsonValueKind.Object)
+                    {
+                        TraverseObject(patch.JsonNode, $"/mixers/{pathSplit[2]}");
+                        return;
+                    }
+
                     OnPatch?.Invoke(this, patch);
                 }
             }
