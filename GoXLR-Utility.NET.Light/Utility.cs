@@ -140,10 +140,15 @@ namespace GoXLR_Utility.NET.Light
                         break;
 
                     default:
-                        var value = property.Value?.AsValue();
-
-                        if (value != null)
-                            OnPatch?.Invoke(this, new Patch { Op = OpPatchEnum.Replace, Path = prefix + ConvertPath(property.Value?.GetPath()), JsonNode = property.Value});
+                        OnPatch?.Invoke(this,
+                            new Patch
+                            {
+                                Op = OpPatchEnum.Replace,
+                                Path = prefix + ConvertPath(property.Value is null
+                                    ? $"{jObject.GetPath()}.{property.Key}"
+                                    : property.Value?.GetPath()),
+                                JsonNode = property.Value
+                            });
                         break;
                 }
             }
