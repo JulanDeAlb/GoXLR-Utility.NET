@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
 using System.Text.Json.Nodes;
 using GoXLR_Utility.NET.Core;
@@ -85,14 +87,14 @@ namespace GoXLR_Utility.NET.Light
                         else if (patch.JsonNode != null && !AvailableSerialNumbers.Contains(pathSplit[2]))
                         {
                             AvailableSerialNumbers.Add(pathSplit[2]);
-                            TraverseObject(patch.JsonNode, $"/mixers/{pathSplit[2]}");
+                            TraverseObject(patch.JsonNode, patch.Path);
                             return;
                         }
                     }
 
                     if (patch.Value.ValueKind == JsonValueKind.Object)
                     {
-                        TraverseObject(patch.JsonNode, $"/mixers/{pathSplit[2]}");
+                        TraverseObject(patch.JsonNode, patch.Path);
                         return;
                     }
 
@@ -136,7 +138,7 @@ namespace GoXLR_Utility.NET.Light
                             }
                         }
                         break;
-                    
+
                     default:
                         var value = property.Value?.AsValue();
 
