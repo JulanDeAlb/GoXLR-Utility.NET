@@ -6,7 +6,7 @@ namespace GoXLR_Utility.NET.Models.Response
     public class Response
     {
         [JsonPropertyName("id")]
-        public long Id { get; set; }
+        public ulong Id { get; set; }
         
         [JsonPropertyName("data")]
         public JsonElement JsonElement {
