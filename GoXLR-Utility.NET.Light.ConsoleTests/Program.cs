@@ -1,4 +1,5 @@
-﻿using GoXLR_Utility.NET.Commands;
+﻿using System.Text.Json;
+using GoXLR_Utility.NET.Commands;
 using GoXLR_Utility.NET.Commands.Mixer.ButtonDown;
 using GoXLR_Utility.NET.Commands.Mixer.CoughButton;
 using GoXLR_Utility.NET.Commands.Mixer.Effects;
@@ -62,20 +63,37 @@ namespace GoXLR_Utility.NET.Light.ConsoleTests;
 public static class Program
 {
     private static Logger _log = new();
-    private static readonly Utility Utility = new(_log);
+    private static readonly Utility Utility = new();
 
     public static void Main(string[] args)
     {
         //Utility.Connect("ws://localhost:14564/api/websocket");
         Utility.Connect();
         //Utility.AvailableSerialNumbers.CollectionChanged += (_, serial) => Console.WriteLine("SerialChanged");
-        //Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
-        //Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
-        //Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
+        Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
+        Utility.OnPatch += (_, patch) =>
+        {
+            var path = $"/mixers/{Utility.AvailableSerialNumbers[0]}/levels/submix";
+
+            if (!patch.Path.Contains(path) || patch.Path.Contains(path + "_"))
+                return;
+
+            path += "/outputs/";
+            if (!patch.Path.Contains(path) && patch.Value.ValueKind != JsonValueKind.Null)
+            {
+                var jsonObject = patch.JsonNode.AsObject();
+            }
+        };
+        Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
+        Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
         Console.ReadKey();
-        Utility.SendCommand(new RecoverDefaults(Defaults.Profiles));
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.A));
         Console.ReadKey();
-        Utility.SendCommand(new RecoverDefaults(Defaults.Profiles));
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.B));
+        Console.ReadKey();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.A));
+        Console.ReadKey();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.B));
         Console.ReadKey();
         AllCommands(Utility.AvailableSerialNumbers[0]);
         Console.ReadKey();
