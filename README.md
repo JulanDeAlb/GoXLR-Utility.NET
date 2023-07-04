@@ -1,5 +1,5 @@
 # GoXLR-Utility.NET
-A .NET Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.12
+A .NET Wrapper around the [GoXLR-Utility](https://github.com/GoXLR-on-Linux) V0.12 available as pre-release Nuget
 
 **Use 'GoXLR-Utility.NET.Light' for a lightweight variant**
 
@@ -21,7 +21,7 @@ This project is also not supported by, or affiliated in any way with, TC-Helicon
 please refer to their website.
 
 # Simple Commands
-#### The following Commands can be send via ***SendSimpleCommand(...)***:
+#### The following Commands can be send via ***SendCommand(SimpleCommand. ...)***:
 
 Ping,  
 OpenUi,  
@@ -30,6 +30,11 @@ StopDaemon,
 GetHttpState
 
 **Example: SendSimpleCommand(SimpleCommand.Ping)**
+
+# Send custom Commands
+#### The custom Commands can be send, in case a command is not implemented yet, via:
+***SendCustomCommand(string commandName, params object[] parameters)***  
+***SendCustomCommand(string serialNumber, string commandName, params object[] parameters)***
 
 # Commands without SerialNumber
 #### The following Commands can be send via ***SendCommand(new ...)***:
