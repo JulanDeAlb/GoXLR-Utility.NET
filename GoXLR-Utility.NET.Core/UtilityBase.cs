@@ -154,7 +154,7 @@ namespace GoXLR_Utility.NET.Core
         {
             Logger?.Log(LogLevel.Debug, new EventId(1, "Daemon connectivity"), "Connected to Utility.");
             OnConnected?.Invoke(this, message);
-            SendSimpleCommand(SimpleCommand.GetStatus);
+            SendCommand(SimpleCommand.GetStatus);
         }
 
         /// <summary>
@@ -278,7 +278,7 @@ namespace GoXLR_Utility.NET.Core
         /// Send a Command to the GoXLR Daemon which doesnt require a Device/SerialNumber.
         /// </summary>
         /// <param name="command">The Command to send</param>
-        public async ValueTask<bool> SendSimpleCommandAsync(SimpleCommand command)
+        public async ValueTask<bool> SendCommandAsync(SimpleCommand command)
         {
             var sendCommand = new DeviceCommandBase { Object = command.ToString() }.GetJson(ref _id);
             if (sendCommand == null)
@@ -291,9 +291,9 @@ namespace GoXLR_Utility.NET.Core
         /// Send a Command to the GoXLR Daemon which doesnt require a Device/SerialNumber.
         /// </summary>
         /// <param name="command">The Command to send</param>
-        public void SendSimpleCommand(SimpleCommand command)
+        public void SendCommand(SimpleCommand command)
         {
-            SendSimpleCommandAsync(command).StepOver(exception => throw exception);
+            SendCommandAsync(command).StepOver(exception => throw exception);
         }
 
         /// <summary>
@@ -303,7 +303,7 @@ namespace GoXLR_Utility.NET.Core
         /// </summary>
         /// <param name="commandName">As String<br/>(Example: SetTTSEnabled)</param>
         /// <param name="parameters">The Parameters<br/>(Example: true)</param>
-        public async ValueTask<bool> SendCommandAsync(string commandName, params object[] parameters)
+        public async ValueTask<bool> SendCustomCommandAsync(string commandName, params object[] parameters)
         {
             if (parameters.Length < 1)
                 return false;
@@ -325,9 +325,9 @@ namespace GoXLR_Utility.NET.Core
         /// </summary>
         /// <param name="commandName">As String<br/>(Example: SetTTSEnabled)</param>
         /// <param name="parameters">The Parameters<br/>(Example: true)</param>
-        public void SendCommand(string commandName, params object[] parameters)
+        public void SendCustomCommand(string commandName, params object[] parameters)
         {
-            SendCommandAsync(commandName, parameters).StepOver(exception => throw exception);
+            SendCustomCommandAsync(commandName, parameters).StepOver(exception => throw exception);
         }
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace GoXLR_Utility.NET.Core
         /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
         /// <param name="commandName">As String<br/>(Example: SetVolume)</param>
         /// <param name="parameters">The Parameters<br/>(Example: "Game", 255)</param>
-        public async ValueTask<bool> SendCommandAsync(string serialNumber, string commandName, params object[] parameters)
+        public async ValueTask<bool> SendCustomCommandAsync(string serialNumber, string commandName, params object[] parameters)
         {
             if (parameters.Length < 1)
                 return false;
@@ -361,9 +361,9 @@ namespace GoXLR_Utility.NET.Core
         /// <param name="serialNumber">SerialNumber on which the Command should be applied.</param>
         /// <param name="commandName">As String<br/>(Example: SetVolume)</param>
         /// <param name="parameters">The Parameters<br/>(Example: "Game", 255)</param>
-        public void SendCommand(string serialNumber, string commandName, params object[] parameters)
+        public void SendCustomCommand(string serialNumber, string commandName, params object[] parameters)
         {
-            SendCommandAsync(serialNumber, commandName, parameters).StepOver(exception => throw exception);
+            SendCustomCommandAsync(serialNumber, commandName, parameters).StepOver(exception => throw exception);
         }
         
         /// <summary>
@@ -396,7 +396,7 @@ namespace GoXLR_Utility.NET.Core
         }
 		
         /// <summary>
-        /// Base Class of <see cref="SendCommandAsync(string, string, object[])"/>
+        /// Base Class of <see cref="SendCustomCommandAsync(string,string,object[])"/>
         /// </summary>
         /// <param name="command">Command as Object</param>
         /// <param name="serialNumber">SerialNumber</param>
