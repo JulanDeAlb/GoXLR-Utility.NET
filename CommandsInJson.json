@@ -87,7 +87,7 @@
   {"id":131,"data":{"Command":["SerialNumber",{"SetButtonGroupOffStyle":["EffectSelector","Colour2"]}]}},
   {"id":132,"data":{"Command":["SerialNumber",{"SetEncoderColour":["Echo","404040","ffffff","909090"]}]}},
   {"id":133,"data":{"Command":["SerialNumber",{"SetAllFaderColours":["404040","ffffff"]}]}},
-  {"id":134,"data":{"Command":["SerialNumber",{"SetAllFaderDisplayStyle":"Gradient"}]}} ers/D/style","value":"Gradient"}]}},
+  {"id":134,"data":{"Command":["SerialNumber",{"SetAllFaderDisplayStyle":"Gradient"}]}},
   {"id":135,"data":{"Command":["SerialNumber",{"SetFaderColours":["A","101010","404040"]}]}},
   {"id":136,"data":{"Command":["SerialNumber",{"SetFaderDisplayStyle":["C","TwoColour"]}]}},
   {"id":137,"data":{"Command":["SerialNumber",{"SetSampleColour":["SamplerSelectA","404040","ffffff","909090"]}]}},
