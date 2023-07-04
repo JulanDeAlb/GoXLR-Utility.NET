@@ -56,6 +56,11 @@ SetFaderColours(FaderName, String, String),
 SetAllFaderColours(String, String),  
 SetAllFaderDisplayStyle(FaderDisplayStyle),
 
+SetAnimationMode(AnimationMode),  
+SetAnimationMod1(int),  
+SetAnimationMod2(int),  
+SetAnimationWaterfall(WaterfallDirection),  
+
 SetButtonColours(ButtonLight, String, String),  
 SetButtonOffStyle(ButtonLight, LightingOffStyle),  
 SetButtonGroupColours(ButtonGroups, String, String),  
