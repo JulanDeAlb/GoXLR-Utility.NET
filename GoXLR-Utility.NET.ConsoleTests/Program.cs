@@ -14,6 +14,7 @@ using GoXLR_Utility.NET.Commands.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Commands.Mixer.Levels;
 using GoXLR_Utility.NET.Commands.Mixer.Levels.Submix;
 using GoXLR_Utility.NET.Commands.Mixer.Levels.Volumes;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Animations;
 using GoXLR_Utility.NET.Commands.Mixer.Lighting.Button;
 using GoXLR_Utility.NET.Commands.Mixer.Lighting.Encoder;
 using GoXLR_Utility.NET.Commands.Mixer.Lighting.Fader;
@@ -44,6 +45,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Levels.Submix;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Animatins;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Button;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Encoder;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
@@ -72,11 +74,7 @@ public static class Program
         Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
         Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
         Console.ReadKey();
-        Utility.SendCommand(new RecoverDefaults(Defaults.Profiles));
-        Console.ReadKey();
-        Utility.SendCommand(new RecoverDefaults(Defaults.Profiles));
-        Console.ReadKey();
-        AllCommands(Utility.AvailableSerialNumbers[0]);
+        AllCommandsAsync(Utility.AvailableSerialNumbers[0]).Wait();
         Console.ReadKey();
     }
 
@@ -313,6 +311,12 @@ public static class Program
         #region Lighting
 
         Utility.Status.Mixers[serialNumber].Lighting.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #region Lightning.Animation
+
+        Utility.Status.Mixers[serialNumber].Lighting.Animation.PropertyChanged += (sender, args) => Console.WriteLine($"{sender} | {args.PropertyName}");
+
+        #endregion
 
         #region Lighting.Button
 
@@ -1373,6 +1377,19 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Lighting
+        
+        #region DeviceCommands.Lighting.Animation
+
+        Utility.SendCommand(serialNumber, new SetAnimationMode(AnimationMode.RainbowBright));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetAnimationMod1(20));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetAnimationMod2(30));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetAnimationWaterfall(WaterfallDirection.Off));
+        Task.Delay(200).Wait();
+
+        #endregion
 
         #region DeviceCommands.Lighting.Button
 
@@ -2027,6 +2044,19 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Lighting
+
+        #region DeviceCommands.Lighting.Animation
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationMode(AnimationMode.RainbowBright)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationMod1(20)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationMod2(30)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationWaterfall(WaterfallDirection.Off)));
+        Task.Delay(200).Wait();
+
+        #endregion
 
         #region DeviceCommands.Lighting.Button
 

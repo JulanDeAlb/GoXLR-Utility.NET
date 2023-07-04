@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text.Json.Serialization;
+using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Animations;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Buttons;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Encoders;
 using GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting.Faders;
@@ -13,11 +14,19 @@ namespace GoXLR_Utility.NET.Models.Response.Status.Mixer.Lighting
     //Path: mixer/SERIAL-NUMBER/lighting/...
     public class Lighting : INotifyPropertyChanged
     {
+        private AnimationLight _animation;
         private ButtonLight _button;
         private EncoderLight _encoder;
         private FaderLight _fader;
         private SamplerLight _sampler;
         private SimpleLight _simple;
+        
+        [JsonPropertyName("animation")]
+        public AnimationLight Animation
+        {
+            get => _animation;
+            set => SetField(ref _animation, value);
+        }
         
         [JsonPropertyName("buttons")]
         public ButtonLight Button

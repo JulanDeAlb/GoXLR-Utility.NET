@@ -15,6 +15,7 @@ using GoXLR_Utility.NET.Commands.Mixer.FaderStatus.Scribble;
 using GoXLR_Utility.NET.Commands.Mixer.Levels;
 using GoXLR_Utility.NET.Commands.Mixer.Levels.Submix;
 using GoXLR_Utility.NET.Commands.Mixer.Levels.Volumes;
+using GoXLR_Utility.NET.Commands.Mixer.Lighting.Animations;
 using GoXLR_Utility.NET.Commands.Mixer.Lighting.Button;
 using GoXLR_Utility.NET.Commands.Mixer.Lighting.Encoder;
 using GoXLR_Utility.NET.Commands.Mixer.Lighting.Fader;
@@ -45,6 +46,7 @@ using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Effects.Current.Robot;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.FaderStatus;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Levels.Submix;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting;
+using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Animatins;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Button;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Encoder;
 using GoXLR_Utility.NET.Enums.Response.Status.Mixer.Lighting.Fader;
@@ -69,18 +71,19 @@ public static class Program
     {
         //Utility.Connect("ws://localhost:14564/api/websocket");
         Utility.Connect();
-        //Utility.AvailableSerialNumbers.CollectionChanged += (_, serial) => Console.WriteLine("SerialChanged");
-        //Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
-        //Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
-        //Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
-        //Console.ReadKey();
-        //Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.A));
-        //Console.ReadKey();
-        //Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.B));
-        //Console.ReadKey();
-        //Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.A));
-        //Console.ReadKey();
-        //Utility.SendCommand(Utility.AvailableSerialNumbers[0] ,new SetSubMixOutputMix(OutputDevice.Headphones, SubmixOutput.B));
+        Utility.AvailableSerialNumbers.CollectionChanged += (_, serial) => Console.WriteLine("SerialChanged");
+        Utility.OnPatch += (_, patch) => Console.WriteLine(patch.ToString());
+        Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
+        Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
+        Console.ReadKey();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationMode(AnimationMode.RainbowBright));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationMod1(20));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationMod2(30));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationWaterfall(WaterfallDirection.Off));
+        Task.Delay(200).Wait();
         Console.ReadKey();
         AllCommands(Utility.AvailableSerialNumbers[0]);
         Console.ReadKey();
@@ -534,6 +537,19 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Lighting
+
+        #region DeviceCommands.Lighting.Animation
+
+        Utility.SendCommand(serialNumber, new SetAnimationMode(AnimationMode.RainbowBright));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetAnimationMod1(20));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetAnimationMod2(30));
+        Task.Delay(200).Wait();
+        Utility.SendCommand(serialNumber, new SetAnimationWaterfall(WaterfallDirection.Off));
+        Task.Delay(200).Wait();
+
+        #endregion
 
         #region DeviceCommands.Lighting.Button
 
@@ -1188,6 +1204,19 @@ public static class Program
         #endregion
 
         #region DeviceCommands.Lighting
+        
+        #region DeviceCommands.Lighting.Animation
+
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationMode(AnimationMode.RainbowBright)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationMod1(20)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationMod2(30)));
+        Task.Delay(200).Wait();
+        Console.WriteLine(await Utility.SendCommandAsync(serialNumber, new SetAnimationWaterfall(WaterfallDirection.Off)));
+        Task.Delay(200).Wait();
+
+        #endregion
 
         #region DeviceCommands.Lighting.Button
 
