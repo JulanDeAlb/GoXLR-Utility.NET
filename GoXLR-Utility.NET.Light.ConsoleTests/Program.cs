@@ -65,7 +65,7 @@ namespace GoXLR_Utility.NET.Light.ConsoleTests;
 public static class Program
 {
     private static Logger _log = new();
-    private static readonly Utility Utility = new(_log);
+    public static readonly Utility Utility = new(_log);
 
     public static void Main(string[] args)
     {
@@ -76,17 +76,9 @@ public static class Program
         Utility.OnConnected += (_, patch) => Console.WriteLine("Connected");
         Utility.OnDisconnected += (_, patch) => Console.WriteLine("Disconnected");
         Console.ReadKey();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationMode(AnimationMode.RainbowBright));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationMod1(20));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationMod2(30));
-        Task.Delay(200).Wait();
-        Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetAnimationWaterfall(WaterfallDirection.Off));
-        Task.Delay(200).Wait();
-        Console.ReadKey();
-        AllCommands(Utility.AvailableSerialNumbers[0]);
-        Console.ReadKey();
+        //Utility.SendCommand(Utility.AvailableSerialNumbers[0], new SetActiveEffectPreset(EffectBankPresets.Preset1));
+        //AllCommands(Utility.AvailableSerialNumbers[0]);
+        //Console.ReadKey();
     }
 
     private static void AllCommands(string serialNumber)
